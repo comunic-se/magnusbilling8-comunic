@@ -40,6 +40,8 @@
  *
  * Teste sem gravar nem enviar nada:
  *   php /var/www/html/mbilling/cron.php RecurringCredit dryrun
+ * Recarga na hora, em qualquer dia (faz o backup e a recarga, envia os e-mails):
+ *   php /var/www/html/mbilling/cron.php RecurringCredit agora
  */
 class RecurringCreditCommand extends ConsoleCommand
 {
@@ -51,6 +53,9 @@ class RecurringCreditCommand extends ConsoleCommand
     {
         $mode   = isset($args[0]) ? strtolower($args[0]) : 'refill';
         $dryRun = $mode === 'dryrun';
+        // "agora": backup + recarga na hora, em qualquer dia do mes (teste ou recarga manual).
+        // Continua uma vez por mes por usuario (marca [RC-AAAAMM]) e so para ativos com plano.
+        $force  = $mode === 'agora';
 
         // garante as traducoes (pt_BR) nas descricoes das recargas geradas pelo cron
         $localeDir = dirname(__FILE__) . '/../../resources/locale/php';
@@ -65,7 +70,7 @@ class RecurringCreditCommand extends ConsoleCommand
         $day       = isset($this->global['recurring_credit_day']) ? (int) $this->global['recurring_credit_day'] : 20;
         $this->day = $day < 1 || $day > 28 ? 20 : $day;
         // dryrun funciona em qualquer dia (previsao do ciclo do mes); backup/recarga so a partir do dia
-        if ((int) date('j') < $this->day && ! $dryRun) {
+        if ((int) date('j') < $this->day && ! $dryRun && ! $force) {
             $this->log('day ' . date('j') . ' < configured day ' . $this->day . ', nothing to do', $dryRun);
             return;
         }

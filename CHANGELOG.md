@@ -6,6 +6,9 @@ migration instructions remain authoritative for deployment.
 
 ## Comunic 1.2 (2026-10-02)
 
+- `RecurringCredit agora`: faz o backup e a recarga na hora, em qualquer dia do mes (teste ou recarga manual),
+  sem mudar o "Dia da recarga". Continua uma vez por mes por usuario e so para ativos com plano.
+
 - Regras do 55 no dialplan (`_ZZXXXXXXXX` e `_0ZZXXXXXXXX` no `[billing]` do `extensions_magnus.conf`): o `saude.sh`
   confere se estao no arquivo e carregadas no Asterisk; o `aplicar.sh` (e o vigia, a cada 5 min) recoloca se uma
   atualizacao do MagnusBilling apagar, faz `dialplan reload` e manda alerta.
