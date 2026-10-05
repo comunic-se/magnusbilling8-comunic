@@ -48,6 +48,7 @@ class RecurringCreditCommand extends ConsoleCommand
     private $global = [];
     private $day    = 20;
     private $dir;
+    private $verbose = false; // modo "agora": mostra o andamento na tela
 
     public function run($args)
     {
@@ -56,6 +57,7 @@ class RecurringCreditCommand extends ConsoleCommand
         // "agora": backup + recarga na hora, em qualquer dia do mes (teste ou recarga manual).
         // Continua uma vez por mes por usuario (marca [RC-AAAAMM]) e so para ativos com plano.
         $force  = $mode === 'agora';
+        $this->verbose = $force;
 
         // garante as traducoes (pt_BR) nas descricoes das recargas geradas pelo cron
         $localeDir = dirname(__FILE__) . '/../../resources/locale/php';
@@ -442,7 +444,7 @@ class RecurringCreditCommand extends ConsoleCommand
 
     private function log($message, $echo = false)
     {
-        if ($echo) {
+        if ($echo || $this->verbose) {
             echo $message . "\n";
         }
         MagnusLog::writeLog(LOGFILE, ' line:' . __LINE__ . ' ' . $message);
