@@ -232,5 +232,18 @@ de `build_rag_indexes.py` e gere os índices de novo.
 
 ## Comparação entre o GitHub e a pasta local
 
-A pasta `C:\Users\Pedro Lucena\Documents\Comunic\magnus billing 8 custom` não pôde ser
-lida nesta sessão: a conexão com o computador falhou. A comparação fica pendente.
+Comparada em 13/11/2026 a pasta `C:\Users\Pedro Lucena\Documents\Comunic\magnus billing 8 custom`
+com o GitHub (`main`, commit `8341e78`):
+
+- a pasta é um clone git no mesmo commit `8341e78` (branch `main`);
+- os 14.377 arquivos versionados existem nos dois lados, com os mesmos tamanhos;
+- 432 arquivos-chave (`comunic/`, `custom/`, código PHP da customização, AGI, traduções,
+  scripts e documentação) têm conteúdo idêntico (mesmo hash git);
+- a pasta tem 32 arquivos a mais, fora do git e ignorados pelo `.gitignore`: o
+  `MagnusBilling 8 original.zip` (124 MB), testes JS de `classic/test/`, exemplos
+  `bootstrap.js/css` do Ext JS e `protected/runtime/.htaccess`. Nenhum deles faz parte da
+  customização;
+- o remoto `origin` da pasta ainda aponta para `https://github.com/77uccena/mb8.git`.
+  Troque com `git remote set-url origin https://github.com/comunic-se/magnusbilling8-comunic.git`.
+
+A pasta `magnusbilling-source` não pôde ser montada e não foi comparada.
