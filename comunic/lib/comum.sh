@@ -93,9 +93,16 @@ regras55_no_arquivo() {  # 0 = as duas regras estao no arquivo
     done <<< "$REGRAS_55"
 }
 regras55_carregadas() {  # 0 = o Asterisk carregou as duas (ou o Asterisk esta parado)
-    systemctl is-active -q asterisk 2>/dev/null || return 0
-    local D; D=$(asterisk -rx "dialplan show billing" 2>/dev/null)
-    echo "$D" | grep -q "'_ZZXXXXXXXX'" && echo "$D" | grep -q "'_0ZZXXXXXXXX'"
+    # Tenta 3 vezes com 5 s de intervalo: com o console do Asterisk ocupado, o "asterisk -rx"
+    # pode voltar vazio e gerar alerta falso (ex.: vigia de 13/11/2026 01:48).
+    local D T
+    for T in 1 2 3; do
+        systemctl is-active -q asterisk 2>/dev/null || return 0
+        D=$(timeout 15 asterisk -rx "dialplan show billing" 2>/dev/null)
+        echo "$D" | grep -q "'_ZZXXXXXXXX'" && echo "$D" | grep -q "'_0ZZXXXXXXXX'" && return 0
+        [ $T -lt 3 ] && sleep 5
+    done
+    return 1
 }
 garantir_regras55() {  # coloca as regras no fim do contexto [billing] se faltarem; 0 = ok
     [ -f "$EXT_MAGNUS" ] || return 1
