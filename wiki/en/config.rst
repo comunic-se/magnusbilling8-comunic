@@ -1,54 +1,56 @@
 .. _config:
 
-Configuration
-=============
+Configuração
+============
 
-MagnusBilling configuration is split between panel records, application files,
-and Asterisk files. Identify which layer owns a setting before changing it.
+A configuração do MagnusBilling se divide entre registros do painel, arquivos da
+aplicação e arquivos do Asterisk. Identifique qual camada é dona de uma configuração
+antes de alterá-la.
 
-Panel configuration
--------------------
+Configuração no painel
+----------------------
 
-Use the **Configuration** module for supported global options exposed by
-MagnusBilling. Review a field's contextual help before saving an unfamiliar
-value. Changes can affect billing, authentication, email, campaigns, and call
-processing.
+Use o módulo **Configuração** para as opções globais suportadas que o MagnusBilling
+expõe. Leia a ajuda contextual do campo antes de gravar um valor que você não
+conhece. As mudanças podem afetar tarifação, autenticação, e-mail, campanhas e
+processamento de chamadas.
 
-Application configuration
+Configuração da aplicação
 -------------------------
 
-The main application entrypoints are:
+Os principais pontos de entrada da aplicação são:
 
-* ``protected/config/main.php`` for the web application;
-* ``protected/config/cron.php`` for scheduled and console commands;
-* ``/etc/asterisk/res_config_mysql.conf`` for the database connection used by
-  the installed system.
+* ``protected/config/main.php`` para a aplicação web;
+* ``protected/config/cron.php`` para os comandos agendados e de console;
+* ``/etc/asterisk/res_config_mysql.conf`` para a conexão com o banco usada pelo
+  sistema instalado.
 
-Do not place credentials in public documentation, issue reports, or screenshots.
-Back up files before changing them and preserve their owner and permissions.
+Não coloque credenciais em documentação pública, relatos de issue ou capturas de
+tela. Faça backup dos arquivos antes de alterá-los e preserve o dono e as permissões.
 
-Asterisk 20 and PJSIP
----------------------
+Asterisk 20 e PJSIP
+-------------------
 
-New MBilling 8 installations use PJSIP. The installer creates the main
-``pjsip.conf`` and includes MagnusBilling-managed configuration files such as:
+As instalações novas do MBilling 8 usam PJSIP. O instalador cria o ``pjsip.conf``
+principal e inclui arquivos de configuração gerenciados pelo MagnusBilling, como:
 
-* ``/etc/asterisk/pjsip_magnus.conf`` for server and trunk configuration;
-* ``/etc/asterisk/pjsip_magnus_user.conf`` for customer endpoints.
+* ``/etc/asterisk/pjsip_magnus.conf`` para a configuração de servidores e troncos;
+* ``/etc/asterisk/pjsip_magnus_user.conf`` para os endpoints dos clientes.
 
-Some files are regenerated from panel data. Prefer changing the corresponding
-MagnusBilling record instead of editing a generated endpoint directly. Manual
-changes to generated files can be replaced by a later save or update.
+Alguns arquivos são gerados de novo a partir dos dados do painel. Prefira alterar o
+registro correspondente no MagnusBilling a editar direto um endpoint gerado.
+Mudanças manuais nos arquivos gerados podem ser substituídas num próximo salvamento
+ou atualização.
 
-Safe change procedure
----------------------
+Procedimento seguro de mudança
+------------------------------
 
-1. Back up the database and ``/etc/asterisk``.
-2. Record the original value and the reason for the change.
-3. Change one layer at a time.
-4. Reload or restart only the affected service.
-5. Test login, inbound calls, outbound calls, billing, and scheduled jobs as
-   appropriate.
-6. Check application and Asterisk logs before moving production traffic.
+1. Faça backup do banco e do ``/etc/asterisk``.
+2. Anote o valor original e o motivo da mudança.
+3. Mude uma camada de cada vez.
+4. Recarregue ou reinicie só o serviço afetado.
+5. Teste o login, as chamadas recebidas, as chamadas feitas, a tarifação e as tarefas
+   agendadas, conforme o caso.
+6. Confira os logs da aplicação e do Asterisk antes de passar o tráfego de produção.
 
-For SIP migration considerations, see :doc:`What's new in MBilling 8 <whats_new_mb8>`.
+Para as considerações sobre a migração do SIP, veja :doc:`Novidades do MBilling 8 <whats_new_mb8>`.

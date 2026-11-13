@@ -2,50 +2,47 @@
 Backup
 ******
 
-It`s always a good idea to have a backup.
+É sempre bom ter um backup.
 
-The standard backup intentionally excludes data from several large historical
-tables. This keeps routine backups manageable, but it also means that a standard
-backup is not a complete migration backup.
+O backup padrão deixa de fora, de propósito, os dados de várias tabelas grandes de
+histórico. Isso mantém os backups de rotina num tamanho administrável, mas também
+significa que o backup padrão não é um backup completo para migração.
 
 .. warning::
 
-   Do not use only the Backup menu or the ``Backup`` console command when
-   migrating from MagnusBilling 7 to MagnusBilling 8. Follow the
-   :doc:`MagnusBilling 7 migration guide <migrate_from_mb7>` and create a full
-   database dump if historical CDR data must be preserved.
+   Não use só o menu Backup ou o comando de console ``Backup`` ao migrar do
+   MagnusBilling 7 para o MagnusBilling 8. Siga o
+   :doc:`guia de migração do MagnusBilling 7 <migrate_from_mb7>` e faça um dump
+   completo do banco se o histórico de CDR precisar ser preservado.
 
-Manual Backup
+Backup manual
 ^^^^^^^^^^^^^
 
-The project already has a script to do backups of the Databank and Asterisk files.
-In the installation is already added an script in the Linux crontab to perform one backup per day. Default is set to 02:00 am.
+O projeto já tem um script para fazer backup do banco de dados e dos arquivos do Asterisk.
+A instalação já coloca um script no crontab do Linux que faz um backup por dia. O padrão é às 02:00.
 
-Manually
+Manualmente
 ^^^^^^^^^^^
 
-Execute this command in SHELL of your server..
+Rode este comando no SHELL do servidor:
 php /var/www/html/mbilling/cron.php Backup
 
 Crontab
 ^^^^^^^
 
-Setting up crontab -e
- 
+Editando com crontab -e
+
 ::
 
  crontab -e
 
-Search the line below and change the time as you see fit, or only comment in the line with ; to not make automated backups.
+Procure a linha abaixo e mude o horário como preferir, ou comente a linha para não fazer backups automáticos.
 
 ::
 
  0 2 * * * php /var/www/html/mbilling/cron.php Backup
- 
-Backup Menu
+
+Menu Backup
 ^^^^^^^^^^^
 
-It`s possible to view, download and delete backups via the Backup menu as well. The menu is located in the settings.
-
-
-
+Também é possível ver, baixar e apagar backups pelo menu Backup, que fica em Configurações.

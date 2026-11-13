@@ -3,28 +3,29 @@
 Directmedia
 ===========
 
-In Asterisk, SIP signaling to establish a call always passes through the
-Asterisk server. After the call is established, the RTP audio can also pass
-through Asterisk or can flow directly between the endpoints in the call.
+No Asterisk, a sinalização SIP para estabelecer uma chamada sempre passa pelo
+servidor Asterisk. Depois que a chamada é estabelecida, o áudio RTP pode continuar
+passando pelo Asterisk ou ir direto entre as pontas da chamada.
 
-Both options have advantages and disadvantages.
+As duas opções têm vantagens e desvantagens.
 
-* When RTP flows directly between endpoints, Asterisk does not need to process
-  that audio traffic. This can reduce server load when there are many
-  simultaneous calls.
+* Quando o RTP vai direto entre as pontas, o Asterisk não precisa processar esse
+  tráfego de áudio. Isso pode reduzir a carga do servidor quando há muitas chamadas
+  simultâneas.
 
-* When RTP flows directly between endpoints, Asterisk cannot detect in-call
-  feature codes after the call is established. Features that depend on DTMF or
-  dialed codes, such as transfers, forwarding, do not disturb, and call
-  recording control, may not work as expected.
+* Quando o RTP vai direto entre as pontas, o Asterisk não consegue detectar códigos
+  de função digitados durante a chamada. Funções que dependem de DTMF ou de códigos
+  discados, como transferências, desvios, não perturbe e controle de gravação,
+  podem não funcionar como esperado.
 
-Therefore, if call transfers or other features that depend on in-call codes
-must work, the voice traffic must pass through Asterisk.
+Por isso, se transferências ou outras funções que dependem de códigos digitados
+durante a chamada precisarem funcionar, o tráfego de voz precisa passar pelo
+Asterisk.
 
-This behavior is controlled by the ``directmedia`` option in the SIP
-configuration. With ``directmedia=yes``, RTP can flow directly between the
-endpoints. With ``directmedia=no``, RTP remains bridged through Asterisk.
+Esse comportamento é controlado pela opção ``directmedia`` da configuração SIP. Com
+``directmedia=yes``, o RTP pode ir direto entre as pontas. Com ``directmedia=no``, o
+RTP continua passando pelo Asterisk.
 
-In MagnusBilling, this option is important when analyzing online calls,
-re-invites, audio IPs, call recording, transfers, and other features that
-depend on Asterisk staying in the media path.
+No MagnusBilling, esta opção é importante ao analisar chamadas online, re-invites,
+IPs de áudio, gravação de chamadas, transferências e outras funções que dependem de
+o Asterisk ficar no caminho da mídia.
