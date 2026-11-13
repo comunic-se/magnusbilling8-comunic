@@ -1,126 +1,126 @@
 .. _offer:
 
-Free Packages
-==============
+Pacotes gratuitos
+=================
 
-What is free packages?
-++++++++++++++++++++++
+O que são pacotes gratuitos?
+++++++++++++++++++++++++++++
 
-Free packages are for giving customers a number of calls at no charge, for a monthly fee or with no cost whatsoever.
+Pacotes gratuitos servem para dar aos clientes uma quantidade de chamadas sem custo, por uma mensalidade ou sem custo nenhum.
 
-How to configure?
-++++++++++++++++++
+Como configurar?
+++++++++++++++++
 
-The configuration of the free packages needs several steps.
+A configuração dos pacotes gratuitos tem várias etapas.
 
-1 - Create the package.
+1 - Crie o pacote.
 
-	See the list of descriptions for each field:
+	Veja a descrição de cada campo:
 
-	* :ref:`offer-label` 
-	* :ref:`offer-packagetype` 
-	* :ref:`offer-freetimetocall` 
-	* :ref:`offer-billingtype` 
+	* :ref:`offer-label`
+	* :ref:`offer-packagetype`
+	* :ref:`offer-freetimetocall`
+	* :ref:`offer-billingtype`
 	* :ref:`offer-price`
 
 
-2 - Select the tariffs that you want to include in the packages.
+2 - Selecione as tarifas que quer incluir nos pacotes.
 
-	It's necessary to inform which prefixes will be included in the free packages. To do this, go to the tariffs menu in the tariffs submenu, click on the tariff you want to include in the packages and put the option "Include in free packages" instead.
-
-
-3 - Activate the free packages for users.
-	Go to the Customers menu, users submenu, click on the customer who wants to activate the package, and select the option "Activate free package" the package you want to activate for the customer.
+	É preciso informar quais prefixos entram nos pacotes gratuitos. Para isso, vá ao menu Tarifas, submenu Tarifas, clique na tarifa que quer incluir nos pacotes e marque a opção "Incluir nos pacotes gratuitos".
 
 
-How it works?
+3 - Ative os pacotes gratuitos para os usuários.
+	Vá ao menu Clientes, submenu Usuários, clique no cliente em que quer ativar o pacote e, na opção "Ativar pacote gratuito", selecione o pacote que quer ativar para ele.
+
+
+Como funciona?
 ++++++++++++++
 
-We will use the following example:
+Vamos usar este exemplo:
 
-A free package called SPAIN FIXED was created, with 6000 free seconds, that is 100 minutes, charging monthly and with the price of  USD 5,00.
+Foi criado um pacote gratuito chamado ESPANHA FIXO, com 6000 segundos grátis, ou seja, 100 minutos, cobrança mensal e preço de USD 5,00.
 
-It was configured to include in the free packages the Spain fixed tariffs, of the Gold plan.
+Ele foi configurado para incluir nos pacotes gratuitos as tarifas de fixo da Espanha do plano Gold.
 
-And the free package was activated on the 24315 user, and this customer was placed on the Gold plan.
+O pacote gratuito foi ativado no usuário 24315, e esse cliente foi colocado no plano Gold.
 
-And we left this client 24315 with a balance of USD 10.00.
-
-
-Process performed by the system.
-
-Customer 24315 calls the number 551140040001, the system will check the customer's plan, and will soon search for the most appropriate rate for the number dialed, in this case it will be the rate 55114, São Paulo Prefix.
-
-Now it will check if this tariff has the option "Include in free packages", if it does, and in our example it does, MagnusBilling will check if the customer has already used 100 minutes from the day of activation, considering if the type of charging is monthly or week, in our example it is monthly. If the 100 minutes have not yet been used, the system will allow the customer to call even if the customer's balance is 0. And if the customer has a balance, the call will be free.
-
-If the tariff is included in the packages, but the customer has already exceeded the package limit, MagnusBilling will only allow the call if the customer has credit.
-
-Continuing with our example, if the customer dials any other number that does not start with 55114, he can only call if he has credit. In our Gold plan, we only select the precise 55114 prefix to include in the packages.
+E deixamos o cliente 24315 com saldo de USD 10,00.
 
 
+Processo feito pelo sistema:
 
-How is the monthly fee charged?
-+++++++++++++++++++++++++++++++
+O cliente 24315 liga para o número 551140040001; o sistema confere o plano do cliente e procura a tarifa mais adequada ao número discado, neste caso a tarifa 55114, prefixo de São Paulo.
 
-Using the same example as before, and that the plan was activated on the 15th, the system will automatically charge the customer for the value of the package, in this example USD 5.00 from the customer's credit every 15th.
+Depois confere se essa tarifa tem a opção "Incluir nos pacotes gratuitos". Se tiver, como no nosso exemplo, o MagnusBilling confere se o cliente já usou os 100 minutos desde o dia da ativação, conforme a cobrança seja mensal ou semanal (no exemplo, mensal). Se os 100 minutos ainda não foram usados, o sistema deixa o cliente ligar mesmo com saldo 0. E, se o cliente tiver saldo, a chamada sai de graça.
 
-There is an option in the settings submenu settings menu called "Notification of Offer Packages", by default it is 5 days. This means that 5 days before the expiration date of the plan, MagnusBilling will try to charge the value of the package, in our example it would be on the 10th.
+Se a tarifa estiver incluída nos pacotes mas o cliente já tiver passado do limite do pacote, o MagnusBilling só libera a chamada se o cliente tiver crédito.
 
-If the customer does not have enough credit for MagnusBilling to discount the USD 5.00, an "plan_unpaid" email will be sent.
-
-Magnusbilling will try to charge the value of the free package until it succeeds , or until the package expires..
-
-If the customer places credit, or already has enough credit for payment, MagnusBilling will mark the plan as paid for another month, and create a refill in the plan price, and will send the "plan_paid" email.
-
-If it arrives on the 16th and the customer still does not have enough credit for the payment, the plan will be deactivated in the user's account, and an "plan_released" email will be sent.
-
-
-The emails can be found, and edited, in the settings menu submenu email templates.
-
-
-Where to see the consumption of each customer?
-++++++++++++++++++++++++++++++++++++++++++++++
-
-All calls made using a package will be added to the tariff menu submenu package report.
+Continuando o exemplo, se o cliente discar qualquer outro número que não comece com 55114, só consegue ligar se tiver crédito. No nosso plano Gold, só o prefixo 55114 foi incluído nos pacotes.
 
 
 
-OBS:
-* It is not possible to activate more than one package per customer.
-* It is not possible to create combined packages, for example, 100 minutes for fixed, and 50 minutes for mobile.
-* Calls made using packages will always be rounded up to minutes, regardless of the minimum time and block of tariff time.
+Como a mensalidade é cobrada?
++++++++++++++++++++++++++++++
+
+Usando o mesmo exemplo, e supondo que o plano foi ativado no dia 15, o sistema cobra automaticamente do crédito do cliente o valor do pacote, neste exemplo USD 5,00, todo dia 15.
+
+No menu Configurações, submenu Configuração, há uma opção chamada "Notificação dos pacotes de oferta", que por padrão é 5 dias. Isso significa que, 5 dias antes do vencimento do plano, o MagnusBilling tenta cobrar o valor do pacote; no nosso exemplo, seria no dia 10.
+
+Se o cliente não tiver crédito suficiente para o MagnusBilling descontar os USD 5,00, é enviado o e-mail "plan_unpaid".
+
+O MagnusBilling tenta cobrar o valor do pacote gratuito até conseguir ou até o pacote vencer.
+
+Se o cliente colocar crédito, ou já tiver crédito suficiente para o pagamento, o MagnusBilling marca o plano como pago por mais um mês, cria uma recarga no valor do plano e envia o e-mail "plan_paid".
+
+Se chegar o dia 16 e o cliente ainda não tiver crédito suficiente, o plano é desativado na conta do usuário e é enviado o e-mail "plan_released".
+
+
+Os e-mails podem ser encontrados e editados no menu Configurações, submenu Modelos de e-mail.
+
+
+Onde ver o consumo de cada cliente?
++++++++++++++++++++++++++++++++++++
+
+Todas as chamadas feitas usando um pacote entram no menu Tarifas, submenu Relatório de pacotes.
+
+
+
+OBS.:
+* Não é possível ativar mais de um pacote por cliente.
+* Não é possível criar pacotes combinados, por exemplo, 100 minutos para fixo e 50 minutos para celular.
+* As chamadas feitas usando pacotes são sempre arredondadas para cima em minutos, qualquer que seja o tempo mínimo e o bloco de tempo da tarifa.
 
 
 
 
 
-Example image
-+++++++++++++++++
+Imagens de exemplo
+++++++++++++++++++
 
 
-See some images of the configuration of our example.
+Veja algumas imagens da configuração do nosso exemplo.
 
 
-The free package.
+O pacote gratuito.
 
 .. image :: img / package.png
 
-Tariffs.
+Tarifas.
 
 .. image :: img / Bundle-Rates.png
 
-Show the Include in free packages column.
+Mostrar a coluna "Incluir nos pacotes gratuitos".
 
 .. image :: img / package-column-hidden.png
 
-User activation
+Ativação no usuário
 
 .. image :: img / package-user.png
 
-Report
+Relatório
 
 .. image :: img / package-relatorio.png
 
-Email Templates
+Modelos de e-mail
 
 .. image :: img / packages-emails.png
