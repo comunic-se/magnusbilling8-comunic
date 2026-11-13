@@ -1,77 +1,77 @@
-Troubleshooting calls with no audio
-===================================
+Solução de problemas: chamadas sem áudio
+========================================
 
-When the call connects but no sound/audio passes, in most cases the issue is related to **RTP/NAT/firewall configuration**, not the billing itself.
+Quando a chamada conecta mas o som/áudio não passa, na maioria dos casos o problema está na **configuração de RTP/NAT/firewall**, e não na tarifação.
 
-Please check the following:
+Confira o seguinte:
 
-1. **Open the RTP ports on the server firewall**
-   MagnusBilling by default has these ports open, but if you have a custom firewall configuration, please make sure the following ports are open:
+1. **Libere as portas RTP no firewall do servidor**
+   O MagnusBilling já vem com essas portas liberadas, mas se você tem uma configuração de firewall própria, confirme que estas portas estão abertas:
 
 ```bash
 10000:60000/udp
 ```
 
-Check if they are open in your firewall, cloud provider firewall, router, or security group.
+Confira se estão abertas no firewall do servidor, no firewall do provedor de nuvem, no roteador ou no security group.
 
-2. **Check Asterisk NAT settings**
+2. **Confira as configurações de NAT do Asterisk**
 
-Edit:
+Edite:
 
 ```bash
 /etc/asterisk/sip.conf
 ```
 
-Confirm that the server has the correct public IP configured, for example:
+Confirme que o servidor está com o IP público correto, por exemplo:
 
 
-* externip=YOUR_SERVER_PUBLIC_IP
-* localnet=YOUR_LOCAL_NETWORK/NETMASK
+* externip=IP_PUBLICO_DO_SERVIDOR
+* localnet=SUA_REDE_LOCAL/MASCARA
 * nat=force_rport,comedia
 
 
-Then reload Asterisk:
+Depois recarregue o Asterisk:
 
 ```bash
 asterisk -rx "sip reload"
 ```
 
-3. **Check if RTP packets are arriving**
+3. **Confira se os pacotes RTP estão chegando**
 
-Run this command during a test call:
+Rode este comando durante uma chamada de teste:
 
 ```bash
 tcpdump -n udp portrange 10000-60000
 ```
 
-If you do not see RTP packets, the audio is being blocked before reaching the server.
+Se não aparecerem pacotes RTP, o áudio está sendo bloqueado antes de chegar ao servidor.
 
-4. **Disable direct media if needed**
+4. **Desative a mídia direta, se for preciso**
 
-If direct media is enabled, audio may try to pass directly between caller and provider, causing one-way audio or no audio depending on NAT.
+Com a mídia direta ativada, o áudio pode tentar passar direto entre quem liga e o provedor, causando áudio de um lado só ou nenhum áudio, dependendo do NAT.
 
-In MagnusBilling / Asterisk options, test with **directmedia disabled**.
+Nas opções do MagnusBilling / Asterisk, teste com **directmedia desativado**.
 
-Documentation:
+Documentação:
 https://wiki.magnusbilling.org/en/source/get_started/first_call.html#directmedia
 
-5. **Test with another provider or SIP account**
+5. **Teste com outro provedor ou outra conta SIP**
 
-This helps confirm if the problem is on:
+Isso ajuda a confirmar se o problema está:
 
-* the customer device/softphone,
-* the provider trunk,
-* firewall/NAT,
-* or server configuration.
+* no aparelho/softphone do cliente,
+* no tronco do provedor,
+* no firewall/NAT,
+* ou na configuração do servidor.
 
-Useful documentation:
+Documentação útil:
 https://wiki.magnusbilling.org/en/source/get_started/first_call.html
 https://wiki.magnusbilling.org/en/source/get_started/quick_install.html
 
-If after checking this the issue continues, please send us:
+Se depois dessas conferências o problema continuar, envie para nós:
 
-* one example call date/time,
-* caller number,
-* destination number,
-* provider used,
-* and whether the issue is no audio both ways or only one-way audio.
+* a data/hora de uma chamada de exemplo,
+* o número de quem ligou,
+* o número de destino,
+* o provedor usado,
+* e se falta áudio nos dois sentidos ou só num sentido.
