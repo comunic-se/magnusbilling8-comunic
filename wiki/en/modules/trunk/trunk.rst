@@ -1,40 +1,40 @@
 
 .. _trunk-id-provider:
 
-Provider
+Provedor
 --------
 
-| Provider which the trunk belongs.
+| Provedor ao qual o tronco pertence.
 
 
 
 
 .. _trunk-trunkcode:
 
-Name
+Nome
 ----
 
-| Trunk name, must be unique.
+| Nome do tronco; precisa ser único.
 
 
 
 
 .. _trunk-user:
 
-Username
---------
+Usuário
+-------
 
-| Only used if the authentication is via username and password.
+| Usado só se a autenticação for por usuário e senha.
 
 
 
 
 .. _trunk-secret:
 
-Password
---------
+Senha
+-----
 
-| Only used if the authentication is via username and password.
+| Usada só se a autenticação for por usuário e senha.
 
 
 
@@ -44,27 +44,27 @@ Password
 Host
 ----
 
-| IP or Trunk domain.
+| IP ou domínio do tronco.
 
 
 
 
 .. _trunk-trunkprefix:
 
-Add prefix
-----------
+Adicionar prefixo
+-----------------
 
-| Add a prefix to send to your trunk.
+| Acrescenta um prefixo ao número enviado ao tronco.
 
 
 
 
 .. _trunk-removeprefix:
 
-Remove prefix
--------------
+Remover prefixo
+---------------
 
-| Remove a prefix to send to your trunk.
+| Remove um prefixo do número enviado ao tronco.
 
 
 
@@ -74,17 +74,17 @@ Remove prefix
 Codec
 -----
 
-| Select the codecs that are allowed in this trunk.
+| Selecione os codecs permitidos neste tronco.
 
 
 
 
 .. _trunk-providertech:
 
-Provider tech
--------------
+Tecnologia do provedor
+----------------------
 
-| You need install appropriate driver to use card like DGV extra Dongle.
+| É preciso instalar o driver adequado para usar placas como DGV ou extra Dongle.
 
 
 
@@ -94,53 +94,53 @@ Provider tech
 Status
 ------
 
-| If the trunk is inactive, Magnusbilling will sent the call to the backup trunk.
+| Se o tronco estiver inativo, o MagnusBilling manda a chamada para o tronco reserva.
 
 
 
 
 .. _trunk-allow-error:
 
-Go to backup if 404
--------------------
+Ir para o reserva se 404
+------------------------
 
-| Send call to the next trunk if receive error 404.
+| Manda a chamada para o próximo tronco se receber o erro 404.
 
 
 
 
 .. _trunk-register:
 
-Register trunk
---------------
+Registrar tronco
+----------------
 
-| Only active this if the trunk is authenticated via username and password.
+| Ative só se o tronco autenticar por usuário e senha.
 
 
 
 
 .. _trunk-register-string:
 
-Register string
----------------
+String de registro
+------------------
 
-| <user>:<password>@<host>/contact.
-| "user" is the user ID for this SIP server (ex 2345).
-| "password" is the user password
-| "host" is the SIP server domain or host name.
-| "port" send an solicitation of the register to this host port. Standard for 5060
-| "contact" is the extension of Asterisk contact. Example 1234 is set in the contact header of the SIP register message. The contact ramal is used by the SIP server remotely when it's needed to send one call to Asterisk.
-|     
+| <usuario>:<senha>@<host>/contato.
+| "usuario" é o ID do usuário neste servidor SIP (ex.: 2345).
+| "senha" é a senha do usuário.
+| "host" é o domínio ou o nome do servidor SIP.
+| "porta" é a porta do host para onde o pedido de registro é enviado. O padrão é 5060.
+| "contato" é o ramal de contato do Asterisk. Ex.: 1234 vai no cabeçalho Contact da mensagem SIP REGISTER. O servidor SIP remoto usa esse ramal quando precisa mandar uma chamada ao Asterisk.
+|
 
 
 
 
 .. _trunk-cnl:
 
-Enable CNL
+Ativar CNL
 ----------
 
-| Enable CNL lookup on this trunk to apply Brazilian numbering and routing information.
+| Ativa a consulta de CNL neste tronco para aplicar as informações de numeração e roteamento brasileiras.
 
 
 
@@ -150,7 +150,7 @@ Enable CNL
 Fromuser
 --------
 
-| Some providers require this value for authentication, especially when the trunk authenticates by username and password. Leave it blank to send the SIP user's CallerID in the From header.
+| Alguns provedores exigem este valor para autenticar, principalmente quando o tronco autentica por usuário e senha. Deixe em branco para enviar o CallerID do usuário SIP no cabeçalho From.
 
 
 
@@ -160,27 +160,27 @@ Fromuser
 Fromdomain
 ----------
 
-| Domain used in the From header of SIP messages when MagnusBilling acts as a SIP UAC client.
+| Domínio usado no cabeçalho From das mensagens SIP quando o MagnusBilling age como cliente SIP (UAC).
 
 
 
 
 .. _trunk-block-cid:
 
-Block CID REGEX
----------------
+Bloquear CID por REGEX
+----------------------
 
-| Regular expression used to block calls by CallerID before sending them through this trunk.
+| Expressão regular usada para bloquear chamadas pelo CallerID antes de mandá-las por este tronco.
 
 
 
 
 .. _trunk-context:
 
-Context
--------
+Contexto
+--------
 
-| Only change this if you know what you are doing.
+| Só altere se souber o que está fazendo.
 
 
 
@@ -190,7 +190,7 @@ Context
 Dtmfmode
 --------
 
-| DTMF mode used by this trunk. You can see more details at the link `https://www.voip-info.org/asterisk-dtmf/.  <https://www.voip-info.org/asterisk-dtmf/.>`_.
+| Modo DTMF usado por este tronco. Veja mais detalhes no link `https://www.voip-info.org/asterisk-dtmf/.  <https://www.voip-info.org/asterisk-dtmf/.>`_.
 
 
 
@@ -200,17 +200,17 @@ Dtmfmode
 Insecure
 --------
 
-| Asterisk insecure option used for this trunk. You can see more details at the link `https://www.voip-info.org/asterisk-sip-insecure/.  <https://www.voip-info.org/asterisk-sip-insecure/.>`_.
+| Opção insecure do Asterisk usada neste tronco. Veja mais detalhes no link `https://www.voip-info.org/asterisk-sip-insecure/.  <https://www.voip-info.org/asterisk-sip-insecure/.>`_.
 
 
 
 
 .. _trunk-maxuse:
 
-Max use
--------
+Uso máximo
+----------
 
-| Maximum simultaneous calls for this trunk.
+| Máximo de chamadas simultâneas neste tronco.
 
 
 
@@ -220,7 +220,7 @@ Max use
 NAT
 ---
 
-| NAT setting used by this trunk. You can see more details at the link `https://www.voip-info.org/asterisk-sip-nat/.  <https://www.voip-info.org/asterisk-sip-nat/.>`_.
+| Configuração de NAT usada por este tronco. Veja mais detalhes no link `https://www.voip-info.org/asterisk-sip-nat/.  <https://www.voip-info.org/asterisk-sip-nat/.>`_.
 
 
 
@@ -230,7 +230,7 @@ NAT
 Directmedia
 -----------
 
-| If enabled, Asterisk tries to send RTP media directly between the client and the provider. Direct media must also be supported by the trunk. You can see more details at the link `https://www.voip-info.org/asterisk-sip-canreinvite/.  <https://www.voip-info.org/asterisk-sip-canreinvite/.>`_.
+| Se ativado, o Asterisk tenta mandar a mídia RTP direto entre o cliente e o provedor. O tronco também precisa aceitar mídia direta. Veja mais detalhes no link `https://www.voip-info.org/asterisk-sip-canreinvite/.  <https://www.voip-info.org/asterisk-sip-canreinvite/.>`_.
 
 
 
@@ -240,27 +240,27 @@ Directmedia
 Qualify
 -------
 
-| Sends SIP OPTIONS packets to verify whether the trunk is online.
-| Syntax:
-|     
+| Envia pacotes SIP OPTIONS para conferir se o tronco está online.
+| Sintaxe:
+|
 | qualify = xxx \| no \| yes
-|             
-| XXX is the number of milliseconds used as the timeout. If the value is "yes", Asterisk uses the time configured in sip.conf. The common default is 2 seconds.
-|         
-| When qualify is enabled, Asterisk sends OPTIONS packets regularly to verify whether the trunk is still online.
-| If the trunk does not answer within the configured time, Asterisk considers it offline for future calls.
-|         
-| This status can be verified with the "sip show peer XXXX" command. Asterisk only shows qualify status when the peer has qualify enabled.
+|
+| XXX é o número de milissegundos usado como tempo limite. Se o valor for "yes", o Asterisk usa o tempo configurado no sip.conf. O padrão comum é 2 segundos.
+|
+| Com o qualify ativado, o Asterisk envia pacotes OPTIONS regularmente para conferir se o tronco continua online.
+| Se o tronco não responder no tempo configurado, o Asterisk o considera offline para as próximas chamadas.
+|
+| Esse status pode ser conferido com o comando "sip show peer XXXX". O Asterisk só mostra o status do qualify quando o peer tem qualify ativado.
 
 
 
 
 .. _trunk-type:
 
-Type
+Tipo
 ----
 
-| Default type is "friend", which allows the trunk to make and receive calls. You can see more details at the link `https://www.voip-info.org/asterisk-sip-type/.  <https://www.voip-info.org/asterisk-sip-type/.>`_.
+| O tipo padrão é "friend", que permite ao tronco fazer e receber chamadas. Veja mais detalhes no link `https://www.voip-info.org/asterisk-sip-type/.  <https://www.voip-info.org/asterisk-sip-type/.>`_.
 
 
 
@@ -270,7 +270,7 @@ Type
 Disallow
 --------
 
-| Codecs disabled for this trunk. Use "all" to disable all codecs, then enable only the codecs selected in the Allow field.
+| Codecs desativados neste tronco. Use "all" para desativar todos e depois ativar só os codecs selecionados no campo Allow.
 
 
 
@@ -280,10 +280,10 @@ Disallow
 Sendrpid
 --------
 
-| Defines whether MagnusBilling sends the Remote-Party-ID SIP header.
-| The default is "no".
-|     
-| This field is frequently used by VoIP wholesalers providers to supply the callers identity, independently of the privacy settings (From SIP header).    
+| Define se o MagnusBilling envia o cabeçalho SIP Remote-Party-ID.
+| O padrão é "no".
+|
+| Este campo é muito usado por provedores VoIP de atacado para informar a identidade de quem liga, independentemente das configurações de privacidade (cabeçalho SIP From).
 
 
 
@@ -293,56 +293,56 @@ Sendrpid
 Addparameter
 ------------
 
-| These parameters will be added in the final AGI command - Dial command, where is in the ajust settings menu.
-| By default the DIAL command is:
-| ,60,L(%timeout%:61000:30000) 
-| 
-| Let's say that you wanted to add an MACRO in the trunk, therefore in this field you will add the parameter, set it up M(macro_name) and create your MACRO in the Asterisk extensions.
-|     
+| Estes parâmetros são acrescentados ao comando AGI final (comando Dial), definido no menu de ajustes.
+| Por padrão, o comando DIAL é:
+| ,60,L(%timeout%:61000:30000)
+|
+| Se você quiser acrescentar uma MACRO ao tronco, coloque aqui o parâmetro M(nome_da_macro) e crie a MACRO nas extensions do Asterisk.
+|
 
 
 
 
 .. _trunk-port:
 
-Port
-----
+Porta
+-----
 
-| If you want to use a different port than 5060, you will need open the IPTABLES port.
+| Para usar uma porta diferente da 5060, é preciso liberar a porta no IPTABLES.
 
 
 
 
 .. _trunk-link-sms:
 
-Link SMS
---------
+Link do SMS
+-----------
 
-| URL to send SMS. Replace the number variable to %number% and text per %text%. EXAMPLE. Your SMS URL is http://trunkWebSite.com/sendsms.php?user=magnus&pass=billing&number=XXXXXX&sms_text=SSSSSSSSSSS. replace XXXXXX per %number and SSSSSSSSSSS per %text% 
+| URL para envio de SMS. Troque o número por %number% e o texto por %text%. EXEMPLO: se a sua URL de SMS for http://trunkWebSite.com/sendsms.php?user=magnus&pass=billing&number=XXXXXX&sms_text=SSSSSSSSSSS, troque XXXXXX por %number% e SSSSSSSSSSS por %text%.
 
 
 
 
 .. _trunk-sms-res:
 
-SMS match result
-----------------
+Resultado esperado do SMS
+-------------------------
 
-| Leave it blank to not wait the provider answer. Or write the text that needs to consist in the providers answer to be considered SENT.
+| Deixe em branco para não esperar a resposta do provedor. Ou escreva o texto que precisa constar na resposta do provedor para o SMS ser considerado ENVIADO.
 
 
 
 
 .. _trunk-sip-config:
 
-Parameters
+Parâmetros
 ----------
 
-| Valid format of Asterisk sip.conf, one option per line.
-| Example, let's say that you need to put the useragent parameter, so put it in this field:
-|     
+| Formato válido do sip.conf do Asterisk, uma opção por linha.
+| Exemplo: se precisar colocar o parâmetro useragent, coloque neste campo:
+|
 | useragent=my agent
-| 
+|
 | .
 
 
@@ -350,20 +350,20 @@ Parameters
 
 .. _trunk-cid-add:
 
-CID Add prefix
---------------
+Adicionar prefixo ao CID
+------------------------
 
-| Prefix added to the CallerID before the call is sent to this trunk.
+| Prefixo acrescentado ao CallerID antes de a chamada ser enviada a este tronco.
 
 
 
 
 .. _trunk-cid-remove:
 
-CID Remove prefix
------------------
+Remover prefixo do CID
+----------------------
 
-| Prefix removed from the CallerID before the call is sent to this trunk.
+| Prefixo removido do CallerID antes de a chamada ser enviada a este tronco.
 
 
 
