@@ -1,10 +1,10 @@
 
 .. _gAuthenticator-username:
 
-Username
---------
+Usuário
+-------
 
-| The user that wants to activate TOKEN
+| Usuário que quer ativar o TOKEN.
 
 
 
@@ -14,38 +14,35 @@ Username
 Status
 ------
 
-| After activating the TOKEN for the user, login will be only possible using the generated TOKEN by the Google Authenticator app.
-| After activating the TOKEN, in the next user login will be requested to scan the QR CODE as shown in the image below
+| Depois de ativar o TOKEN para o usuário, o login só é possível com o TOKEN gerado pelo app Google Authenticator.
+| Com o TOKEN ativado, no próximo login o usuário precisa escanear o QR CODE, como na imagem abaixo.
 
 .. image:: ../../img/token.png
-   :scale: 100% 
+   :scale: 100%
 
-| To scan the code will be necessary to install the Google Authenticator app, this app will be available to download in the app store for iOS and Android.
-| 
-| It's important to save the manual code shown in the image, in case if you ever need to activate the token in another phone the code will be necessary.
-| 
-| 
-| With the token of Google Authenticator will be only possible to login into the panel or deactivate the token function
+| Para escanear o código é preciso instalar o app Google Authenticator, disponível nas lojas de aplicativos do iOS e do Android.
+|
+| É importante guardar o código manual mostrado na imagem: ele será necessário se você precisar ativar o token em outro celular.
+|
+|
+| Com o token do Google Authenticator, só é possível entrar no painel ou desativar a função de token.
 
 
 
 
 .. _gAuthenticator-code:
 
-Code
-----
+Código
+------
 
-| The code will be necessary to deactivate the TOKEN. In case if you don't have the code anymore, will be necessary to deactivate via the database.
+| O código é necessário para desativar o TOKEN. Se você não tiver mais o código, será preciso desativar pelo banco de dados.
 
 
 
 
 .. _gAuthenticator-google-authenticator-key:
 
-Google authenticator key
-------------------------
+Chave do Google Authenticator
+-----------------------------
 
-| This KEY will be necessary to activate the TOKEN in a different phone
-
-
-
+| Esta CHAVE é necessária para ativar o TOKEN em outro celular.

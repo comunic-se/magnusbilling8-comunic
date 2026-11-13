@@ -1,60 +1,60 @@
 
 .. _phoneNumber-id-phonebook:
 
-Phonebook
----------
+Agenda
+------
 
-| Phonebook that this number belongs to.
+| Agenda à qual este número pertence.
 
 
 
 
 .. _phoneNumber-number:
 
-Number
+Número
 ------
 
-| Number to send calls/sms. Always need to be used in the E164 format.
+| Número para enviar chamadas/SMS. Sempre no formato E164.
 
 
 
 
 .. _phoneNumber-name:
 
-Name
+Nome
 ----
 
-| Number owner name, used for TTS or SMS
+| Nome do dono do número, usado em TTS ou SMS.
 
 
 
 
 .. _phoneNumber-doc:
 
-DOC
----
+Documento
+---------
 
-| Customer document or tax ID associated with this phone number.
+| Documento do cliente (CPF/CNPJ ou equivalente) associado a este número.
 
 
 
 
 .. _phoneNumber-city:
 
-City
-----
+Cidade
+------
 
-| Client city, not required field.
+| Cidade do cliente; campo não obrigatório.
 
 
 
 
 .. _phoneNumber-email:
 
-Email
------
+E-mail
+------
 
-| Customer email address associated with this phone number.
+| Endereço de e-mail do cliente associado a este número.
 
 
 
@@ -64,23 +64,23 @@ Email
 Status
 ------
 
-| MagnusBilling will only try to send when the status is active
-| When the call is sent to your provider, the number stays with pending status.
-| If the call is completed, the status switches to sent.
-| Otherwise will stay pending, this means that your trunk rejected the call and completed it self for some reason.
-| If is activated in the campaign the "blocked numbers" option, if the number is registered in the "calls & SMS" menu, "restricted numbers" submenu, blocked status.
-| You can use the button "process" to reactivate the numbers with pending status.
+| O MagnusBilling só tenta enviar quando o status é ativo.
+| Quando a chamada é enviada ao provedor, o número fica com status pendente.
+| Se a chamada for completada, o status muda para enviado.
+| Caso contrário, continua pendente, o que significa que o tronco recusou a chamada ou a encerrou por algum motivo.
+| Se a opção "números bloqueados" estiver ativada na campanha e o número estiver cadastrado no menu "Chamadas e SMS", submenu "Números restritos", o status fica bloqueado.
+| Use o botão "processar" para reativar os números com status pendente.
 
 
 
 
 .. _phoneNumber-info:
 
-Description
------------
+Descrição
+---------
 
-| Phonebook description, personal control only
-| When used for survey, will be saved here what the number that the client typed.
+| Descrição na agenda, apenas para controle interno.
+| Quando usado em pesquisa, guarda aqui o número que o cliente digitou.
 
 
 
