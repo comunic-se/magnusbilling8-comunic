@@ -1,193 +1,192 @@
-Call diagnostics
-================
+Diagnóstico de chamadas
+=======================
 
-The call diagnostic tools let an administrator verify outbound routing for a
-SIP account and inbound routing for a DID without placing a real call.
-Both actions are added to their module form toolbar through the
-``extraButtons`` convention.
+As ferramentas de diagnóstico de chamadas permitem ao administrador conferir o
+roteamento de saída de uma conta SIP e o roteamento de entrada de um DID sem fazer
+uma chamada real. As duas ações ficam na barra de ferramentas do formulário de cada
+módulo, pela convenção ``extraButtons``.
 
-Access
+Acesso
 ------
 
-This feature is available exclusively to administrators. MagnusBilling hides
-the diagnostic actions from other users and the backend rejects direct
-requests made without an administrator session.
+Esta função está disponível só para administradores. O MagnusBilling esconde as
+ações de diagnóstico dos outros usuários, e o backend recusa pedidos diretos feitos
+sem uma sessão de administrador.
 
-The database update from ``8.0.0.4`` to ``8.0.0.5`` in
-``protected/commands/UpdateMysqlCommand.php`` creates the hidden
-``callDiagnostic`` module and grants read access to the default administrator
-group. No separate SQL script is required.
+A atualização do banco de ``8.0.0.4`` para ``8.0.0.5`` em
+``protected/commands/UpdateMysqlCommand.php`` cria o módulo oculto
+``callDiagnostic`` e dá permissão de leitura ao grupo de administradores padrão. Não
+é preciso rodar um script SQL separado.
 
-The database update from ``8.0.0.5`` to ``8.0.0.6`` normalizes existing
-fixed-IP accounts without a password and regenerates the PJSIP user
-configuration. Accounts configured for authentication exclusively by IP use
-``identify/match`` with ``identify_by=ip`` and do not receive an inbound
-``auth=`` association. No manual edit of the generated PJSIP file is required.
+A atualização do banco de ``8.0.0.5`` para ``8.0.0.6`` normaliza as contas de IP fixo
+sem senha e gera de novo a configuração PJSIP dos usuários. As contas configuradas
+para autenticar só por IP usam ``identify/match`` com ``identify_by=ip`` e não
+recebem associação ``auth=`` de entrada. Não é preciso editar manualmente o arquivo
+PJSIP gerado.
 
-The system update from ``8.0.0.6`` to ``8.0.0.7`` adds
-``noload => res_pjsip_endpoint_identifier_anonymous.so`` to Asterisk's
-``modules.conf``. This prevents an unidentified INVITE from reaching the
-billing AGI through a ``PJSIP/anonymous-*`` channel. Restart Asterisk after
-the update, at a controlled time, to activate the module change.
+A atualização do sistema de ``8.0.0.6`` para ``8.0.0.7`` acrescenta
+``noload => res_pjsip_endpoint_identifier_anonymous.so`` ao ``modules.conf`` do
+Asterisk. Isso impede que um INVITE não identificado chegue ao AGI de tarifação por
+um canal ``PJSIP/anonymous-*``. Reinicie o Asterisk depois da atualização, num
+horário controlado, para ativar a mudança de módulo.
 
 Check User
 ----------
 
-#. Open **Users > SIP Users**.
-#. Select exactly one SIP account.
-#. Click **Check User**.
-#. Enter the destination number.
-#. Click **Run diagnostic**.
+#. Abra **Usuários > Usuários SIP**.
+#. Selecione exatamente uma conta SIP.
+#. Clique em **Check User**.
+#. Informe o número de destino.
+#. Clique em **Rodar diagnóstico**.
 
-The CallerID is filled from the selected SIP account and can be changed before
-running the diagnostic. The check always uses the current date and time.
+O CallerID vem preenchido da conta SIP selecionada e pode ser mudado antes de rodar
+o diagnóstico. A conferência sempre usa a data e a hora atuais.
 
-The result is produced by the same AGI routing code used for a real call. The
-AGI runs in a protected dry-run context and follows number normalization,
-restrictions, portability, tariff, credit, trunk group and trunk selection.
-It stops on entry to ``Magnus::run_dial()`` and does not place the call.
+O resultado é produzido pelo mesmo código de roteamento do AGI usado numa chamada
+real. O AGI roda num contexto protegido de simulação (dry-run) e segue a
+normalização do número, as restrições, a portabilidade, a tarifa, o crédito, o grupo
+de troncos e a escolha do tronco. Ele para ao entrar em ``Magnus::run_dial()`` e não
+faz a chamada.
 
-All database activity performed while evaluating the route is enclosed in a
-transaction and rolled back before the result is returned. Asterisk commands
-such as ``Dial``, ``Queue``, audio playback and channel operations are
-ignored in dry-run mode and are never sent to Asterisk.
+Toda a atividade no banco feita durante a avaliação da rota fica dentro de uma
+transação, desfeita antes de o resultado ser devolvido. Comandos do Asterisk como
+``Dial``, ``Queue``, reprodução de áudio e operações de canal são ignorados no modo de
+simulação e nunca são enviados ao Asterisk.
 
-When a tariff is selected, the result identifies the plan, rate per minute,
-connection charge, initial block and billing block. If a package offer applies,
-the price is shown as zero and the package is identified. The result also
-identifies Techprefix-based authentication or plan selection, the normalized
-number, trunk group, selected trunk and the number that would be sent to the
-trunk.
+Quando uma tarifa é escolhida, o resultado identifica o plano, a tarifa por minuto,
+a taxa de conexão, o bloco inicial e o bloco de cobrança. Se um pacote de oferta se
+aplicar, o preço aparece como zero e o pacote é identificado. O resultado também
+identifica a autenticação ou a escolha de plano por Techprefix, o número
+normalizado, o grupo de troncos, o tronco escolhido e o número que seria enviado ao
+tronco.
 
 Check REGISTER
 --------------
 
-The **Check REGISTER** button is displayed beside **Run diagnostic** in the
-Check User window. It reads a bounded recent portion of
-``/var/log/asterisk/messages`` and correlates the selected SIP account with
-the latest REGISTER event and source IP. The result distinguishes invalid
-credentials, an endpoint that is not loaded, an address rejected by access
-rules, the normal authentication challenge, and a successful contact update.
+O botão **Check REGISTER** aparece ao lado de **Rodar diagnóstico** na janela Check
+User. Ele lê um trecho recente e limitado do ``/var/log/asterisk/messages`` e
+relaciona a conta SIP selecionada ao último evento REGISTER e ao IP de origem. O
+resultado diferencia credenciais inválidas, endpoint não carregado, endereço recusado
+pelas regras de acesso, o desafio normal de autenticação e uma atualização de
+contato bem-sucedida.
 
-For each source IP found, the diagnostic checks active block records in
-``pkg_firewall`` (including IPv4 CIDR entries) and the live Fail2Ban jail
-status. It never removes a block. Confirm that an address belongs to the
-customer before using the normal firewall administration tools to unban it.
+Para cada IP de origem encontrado, o diagnóstico confere os bloqueios ativos na
+``pkg_firewall`` (incluindo faixas CIDR IPv4) e o status atual das jails do Fail2Ban.
+Ele nunca remove um bloqueio. Confirme que o endereço pertence ao cliente antes de
+usar as ferramentas normais de administração do firewall para desbloqueá-lo.
 
-The web service needs read access to the Asterisk messages log. Live Fail2Ban
-verification uses the read-only commands ``fail2ban-client status`` and
-``fail2ban-client status JAIL`` with a short timeout. If either source is not
-readable, that check is marked inconclusive instead of guessing the cause.
-Raw log lines, passwords and authentication payloads are not returned to the
-browser.
+O serviço web precisa de permissão de leitura no log de mensagens do Asterisk. A
+conferência do Fail2Ban em tempo real usa os comandos somente leitura
+``fail2ban-client status`` e ``fail2ban-client status JAIL``, com tempo limite curto.
+Se alguma das fontes não puder ser lida, essa conferência é marcada como
+inconclusiva, em vez de adivinhar a causa. Linhas brutas do log, senhas e dados de
+autenticação não são devolvidos ao navegador.
 
-The same on-demand check reads only the selected account sections from
-``/etc/asterisk/pjsip_magnus_user.conf``. It validates the generated AOR,
-endpoint, auth and identify objects against the database account, including
-context, ``aors``, ``identify_by``, authentication username, password presence,
-``max_contacts`` and codecs. Password values are replaced before any result is
-constructed. It also queries the endpoint and AOR currently loaded in Asterisk
-to distinguish a stale reload from a generation error and to report whether a
-contact currently exists.
+A mesma conferência sob demanda lê só as seções da conta selecionada em
+``/etc/asterisk/pjsip_magnus_user.conf``. Ela valida os objetos AOR, endpoint, auth e
+identify gerados contra a conta no banco, incluindo contexto, ``aors``,
+``identify_by``, usuário de autenticação, presença de senha, ``max_contacts`` e
+codecs. Os valores de senha são substituídos antes de montar qualquer resultado. Ela
+também consulta o endpoint e o AOR carregados no momento no Asterisk, para diferenciar
+um reload pendente de um erro de geração e informar se existe um contato agora.
 
-After the first REGISTER analysis, **Capture SIP packets** starts the existing
-SipTrace worker for the selected account and the UDP bind port configured in
-``pjsip.conf``. After confirmation, the administrator has 120 seconds to ask
-the customer to register the device. The window polls the capture and explains
-the live REGISTER exchange: no packet reached the server, 401 challenge not
-answered, authenticated request rejected, endpoint not found, forbidden,
-interval too brief, no Asterisk response, or successful 200 OK.
+Depois da primeira análise do REGISTER, **Capturar pacotes SIP** inicia o processo
+SipTrace existente para a conta selecionada e para a porta UDP configurada no
+``pjsip.conf``. Depois da confirmação, o administrador tem 120 segundos para pedir ao
+cliente que registre o aparelho. A janela acompanha a captura e explica a troca de
+REGISTER ao vivo: nenhum pacote chegou ao servidor, desafio 401 sem resposta, pedido
+autenticado recusado, endpoint não encontrado, proibido, intervalo curto demais, sem
+resposta do Asterisk ou 200 OK com sucesso.
 
-Capture analysis starts at the file offset recorded for that request and
-correlates packets by Call-ID. Endpoint identity is matched exactly in SIP
-headers, so an ngrep textual match for ``test12323`` is never attributed to
-``test1``. Similar names are reported explicitly as a different username.
-Authorization and digest response values are never returned to the browser.
+A análise da captura começa na posição do arquivo gravada para aquele pedido e
+relaciona os pacotes pelo Call-ID. A identidade do endpoint é comparada exatamente
+nos cabeçalhos SIP, então uma ocorrência textual do ngrep para ``test12323`` nunca é
+atribuída a ``test1``. Nomes parecidos aparecem explicitamente como um usuário
+diferente. Os valores de Authorization e da resposta digest nunca são devolvidos ao
+navegador.
 
 Check DID
 ---------
 
-#. Open **DIDs**.
-#. Select exactly one DID.
-#. Click **Check DID**.
-#. Optionally enter the originating CallerID.
-#. Click **Run diagnostic**.
+#. Abra **DIDs**.
+#. Selecione exatamente um DID.
+#. Clique em **Check DID**.
+#. Se quiser, informe o CallerID de origem.
+#. Clique em **Rodar diagnóstico**.
 
-The selected DID number is passed to the same ``mbilling.php`` entry point used
-by Asterisk. Therefore DID normalization, special-number handling and
-destination priority always follow the installed AGI code. Changes made to
-the routing rules under ``resources/asterisk`` automatically apply to future
-diagnostics.
+O número do DID selecionado é passado ao mesmo ponto de entrada ``mbilling.php`` usado
+pelo Asterisk. Por isso, a normalização do DID, o tratamento de números especiais e
+a prioridade dos destinos sempre seguem o código AGI instalado. Mudanças nas regras
+de roteamento em ``resources/asterisk`` passam a valer automaticamente nos próximos
+diagnósticos.
 
-The DID diagnostic identifies the configured destination type using the same
-labels as the destination form. Depending on the selected route, it validates
-DID blocking expressions and prices, linked users, SIP accounts and SIP groups,
-IVR schedules, holidays, options and audio compatibility, Queue existence and
-members, multiple-IP destinations, and the other conditions reached by the
-production AGI flow. Missing required routing data is blocking. A missing
-optional IVR audio or a Queue without agents is reported as a warning when the
-production route can still continue.
+O diagnóstico de DID identifica o tipo de destino configurado com os mesmos nomes do
+formulário de destino. Conforme a rota escolhida, ele valida as expressões de
+bloqueio e os preços do DID, os usuários vinculados, as contas SIP e os grupos SIP,
+os horários, feriados, opções e compatibilidade de áudio das URAs, a existência e os
+membros das filas, os destinos com vários IPs e as demais condições alcançadas pelo
+fluxo do AGI de produção. A falta de dados de roteamento obrigatórios é bloqueante. A
+falta de um áudio opcional da URA ou uma fila sem agentes aparece como aviso quando a
+rota de produção ainda consegue continuar.
 
-Reading the result
-------------------
+Lendo o resultado
+-----------------
 
-Each step is marked as passed, warning, failed or inconclusive. The diagnostic
-stops at the first blocking error and includes a recommended action. The
-displayed text can be selected and copied, including only part of a message.
+Cada etapa é marcada como aprovada, aviso, falha ou inconclusiva. O diagnóstico para
+no primeiro erro bloqueante e traz uma ação recomendada. O texto mostrado pode ser
+selecionado e copiado, inclusive só um trecho de uma mensagem.
 
-Messages follow the language selected in the active MagnusBilling session.
-Displayed monetary values use the session currency. Technical details are
-available only to administrators and are formatted for readability without
-exposing credentials.
+As mensagens seguem o idioma escolhido na sessão ativa do MagnusBilling. Os valores
+monetários usam a moeda da sessão. Os detalhes técnicos estão disponíveis só para
+administradores e são formatados para leitura, sem expor credenciais.
 
-If the isolated AGI process itself fails, the result identifies the failure
-before showing any route summary. The administrator sees a stable failure
-code, a plain-language explanation, the recommended action, the process exit
-code, JSON parsing errors, permission checks and bounded process output. Empty
-route details are not displayed when routing was never evaluated.
+Se o próprio processo AGI isolado falhar, o resultado identifica a falha antes de
+mostrar qualquer resumo da rota. O administrador vê um código de falha estável, uma
+explicação em linguagem simples, a ação recomendada, o código de saída do processo,
+erros de leitura do JSON, conferências de permissão e a saída limitada do processo.
+Detalhes vazios da rota não são mostrados quando o roteamento nem chegou a ser
+avaliado.
 
-The diagnostic ID is logged with the classified failure and safe execution
-metadata. The administrator can send the ID together with the selectable
-technical evidence to support without requiring direct server access.
+O ID do diagnóstico é registrado em log junto com a falha classificada e metadados
+seguros da execução. O administrador pode mandar o ID com a evidência técnica
+selecionável para o suporte, sem precisar de acesso direto ao servidor.
 
-AGI logging
+Logs do AGI
 -----------
 
-Routing decisions use stable messages in the following format::
+As decisões de roteamento usam mensagens estáveis neste formato::
 
     [MBilling][Component][EVENT_CODE] Human-readable message | key=value
 
-New operational messages follow the Asterisk AGI verbosity range:
+As novas mensagens operacionais seguem a faixa de verbosidade do AGI do Asterisk:
 
-* level 1: a blocking validation error;
-* level 2: a warning or skipped route candidate;
-* level 3: a routing decision;
-* level 4: useful processing context.
+* nível 1: erro de validação bloqueante;
+* nível 2: aviso ou candidato de rota ignorado;
+* nível 3: decisão de roteamento;
+* nível 4: contexto útil do processamento.
 
-The standard Asterisk verbosity level 5 displays all operational events.
-Database queries and internal dumps remain at level 25 and are shown only when
-explicit extended debugging is enabled. The diagnostic interface consumes the
-stable event code and structured context instead of interpreting free-form log
-sentences.
+O nível de verbosidade padrão 5 do Asterisk mostra todos os eventos operacionais.
+Consultas ao banco e dumps internos continuam no nível 25 e só aparecem quando a
+depuração estendida é ativada explicitamente. A interface de diagnóstico usa o código
+de evento estável e o contexto estruturado, em vez de interpretar frases livres do log.
 
-Security and implementation notes
----------------------------------
+Notas de segurança e implementação
+----------------------------------
 
-Diagnostic endpoints accept only ``POST`` requests, apply a per-session rate
-limit and return JSON. Detailed routing information is exposed only inside an
-authenticated administrator session. The web service starts the AGI process
-with validated arguments, an execution timeout and an output-size limit.
-Every user-facing backend message uses ``Yii::t('zii', ...)`` and its
-translation keys are maintained in ``resources/locale/php/LANG/zii.php``.
+Os endpoints de diagnóstico aceitam só requisições ``POST``, aplicam um limite de
+frequência por sessão e devolvem JSON. As informações detalhadas de roteamento só
+aparecem dentro de uma sessão autenticada de administrador. O serviço web inicia o
+processo AGI com argumentos validados, tempo limite de execução e limite de tamanho
+da saída. Todas as mensagens do backend para o usuário usam ``Yii::t('zii', ...)``, e
+as chaves de tradução ficam em ``resources/locale/php/IDIOMA/zii.php``.
 
-The AGI emits exactly one line prefixed by ``MBILLING_RESULT``. Result
-serialization substitutes invalid UTF-8 safely and falls back to a minimal
-valid error contract if JSON encoding still fails. The web parser records
-bounded, credential-redacted evidence for malformed payloads, including byte
-length, JSON error, invalid-byte detection, extra output and construction
-stage.
+O AGI emite exatamente uma linha começando com ``MBILLING_RESULT``. A serialização do
+resultado substitui com segurança o UTF-8 inválido e, se a codificação JSON ainda
+falhar, devolve um contrato de erro mínimo e válido. O leitor web registra evidências
+limitadas e sem credenciais para conteúdos malformados, incluindo o tamanho em bytes,
+o erro do JSON, a detecção de bytes inválidos, a saída extra e a etapa de montagem.
 
-The main implementation files are:
+Os principais arquivos da implementação são:
 
 * ``protected/components/CallDiagnosticService.php``;
 * ``protected/components/SipRegisterDiagnosticService.php``;
@@ -195,5 +194,5 @@ The main implementation files are:
 * ``classic/src/view/callDiagnostic/Window.js``;
 * ``classic/src/view/sip/Form.js``;
 * ``classic/src/view/did/Form.js``;
-* ``resources/asterisk/mbilling.php`` and the ``*Agi.php`` classes reached by
-  the production route.
+* ``resources/asterisk/mbilling.php`` e as classes ``*Agi.php`` alcançadas pela rota de
+  produção.
