@@ -6,7 +6,7 @@
 > do banco de produção e atualização: **[comunic/README.md](comunic/README.md)**.
 >
 > ```bash
-> git clone git@github.com:77uccena/mb8.git /opt/mb8-comunic
+> git clone git@github.com:comunic-se/magnusbilling8-comunic.git /opt/mb8-comunic
 > cd /opt/mb8-comunic && bash comunic/instalar.sh --fuso America/Sao_Paulo
 > ```
 

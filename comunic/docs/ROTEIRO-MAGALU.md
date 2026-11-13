@@ -34,12 +34,12 @@ O resto (CDRs, outros provedores/troncos, servidores, etc.) **não vem** e apare
    ssh-keygen -t ed25519 -N "" -C "mb8-magalu" -f /root/.ssh/id_ed25519
    cat /root/.ssh/id_ed25519.pub
    ```
-   GitHub: `77uccena/mb8` > Settings > Deploy keys > Add deploy key, título "Magalu produção",
-   **sem** "Allow write access". Depois `ssh -T git@github.com` deve responder "Hi 77uccena/mb8!".
+   GitHub: `comunic-se/magnusbilling8-comunic` > Settings > Deploy keys > Add deploy key, título "Magalu produção",
+   **sem** "Allow write access". Depois `ssh -T git@github.com` deve responder "Hi comunic-se/magnusbilling8-comunic!".
 3. Instalar (30 a 60 min):
    ```bash
    apt update && apt install -y git
-   git clone git@github.com:77uccena/mb8.git /opt/mb8-comunic
+   git clone git@github.com:comunic-se/magnusbilling8-comunic.git /opt/mb8-comunic
    cd /opt/mb8-comunic
    bash comunic/instalar.sh --fuso America/Sao_Paulo   # o MESMO fuso do MB7 (timedatectl no MB7)
    reboot

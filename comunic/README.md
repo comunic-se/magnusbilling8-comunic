@@ -55,7 +55,7 @@ Debian 11, 12 ou 13 mínimo (só "Servidor SSH" e "Utilitários standard"), como
 
 ```bash
 apt update && apt install -y git
-git clone git@github.com:77uccena/mb8.git /opt/mb8-comunic
+git clone git@github.com:comunic-se/magnusbilling8-comunic.git /opt/mb8-comunic
 cd /opt/mb8-comunic
 bash comunic/instalar.sh --fuso America/Sao_Paulo   # use o MESMO fuso da produção atual
 reboot
@@ -64,7 +64,7 @@ reboot
 O `instalar.sh` roda o instalador oficial (`script/install.sh`, 30 a 60 min), aplica as
 customizações e **não** reinicia sozinho. No fim o painel abre com `root` / `magnus` e banco vazio.
 
-> Repositório privado (`77uccena/mb8`): o servidor clona com uma **deploy key** somente leitura.
+> Repositório privado (`comunic-se/magnusbilling8-comunic`): o servidor clona com uma **deploy key** somente leitura.
 > Uma vez por servidor, como root:
 > ```bash
 > ssh-keygen -t ed25519 -N "" -C "mb8-$(hostname)" -f /root/.ssh/id_ed25519

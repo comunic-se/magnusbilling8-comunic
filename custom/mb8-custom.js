@@ -455,17 +455,25 @@
                         planned: t('Forecast'),
                         skipped: t('Not refilled')
                     };
+                // nome e usuario vem do cadastro: sempre codificados, para que um nome com
+                // HTML/script nao seja executado no navegador do administrador
+                var text = function (value) {
+                    return Ext.String.htmlEncode(value == null ? '' : String(value));
+                };
                 me.columns = [{
                     header: t('Customer'),
                     dataIndex: 'customer',
+                    renderer: text,
                     flex: 4
                 }, {
                     header: t('Username'),
                     dataIndex: 'username',
+                    renderer: text,
                     flex: 2
                 }, {
                     header: t('Plan type'),
                     dataIndex: 'plan_type_label',
+                    renderer: text,
                     flex: 2
                 }, {
                     header: t('Recurring value'),
@@ -508,7 +516,7 @@
                     header: t('Status'),
                     dataIndex: 'status',
                     renderer: function (value) {
-                        return statusLabels[value] || value;
+                        return statusLabels[value] || text(value);
                     },
                     flex: 2
                 }];

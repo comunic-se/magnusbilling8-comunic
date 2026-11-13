@@ -25,6 +25,7 @@
 #                  Asterisk desligado, crons de envio desligados. NADA sai da maquina.
 #
 set -u
+set -o pipefail   # falha no mariadb-dump nao pode ser escondida pelo gzip
 MB=/var/www/html/mbilling
 COM="$(cd "$(dirname "$0")" && pwd)"
 DUMP="${1:-}"
@@ -42,7 +43,8 @@ if [[ "$DUMP" == *.gz ]]; then
 else
     LER() { cat "$DUMP"; }
 fi
-LER | head -c 2000000 | grep -q 'CREATE TABLE `pkg_user`\|CREATE TABLE `pkg_configuration`\|pkg_' \
+# o "|| true" evita que o SIGPIPE do head (normal aqui) conte como erro com o pipefail
+{ LER | head -c 2000000 || true; } | grep -q 'CREATE TABLE `pkg_user`\|CREATE TABLE `pkg_configuration`\|pkg_' \
     || { echo "O arquivo nao parece um dump do MagnusBilling."; exit 1; }
 
 ATUAL=$(mariadb mbilling -N -e "SELECT COUNT(*) FROM pkg_user" 2>/dev/null || echo 0)
@@ -64,7 +66,8 @@ read -r -p "Digite o nome deste servidor ($(hostname)) para continuar: " OK
 BKP=/root/mb8-antes-importacao-$(date +%Y%m%d-%H%M%S)
 mkdir -p "$BKP"
 echo "== 1/7 Backup do banco atual em $BKP"
-mariadb-dump --single-transaction --routines --triggers mbilling | gzip > "$BKP/mbilling.sql.gz"
+mariadb-dump --single-transaction --routines --triggers mbilling | gzip > "$BKP/mbilling.sql.gz" \
+    || { echo "ERRO no backup do banco atual. Nada foi feito."; exit 1; }
 crontab -l > "$BKP/crontab-root.txt" 2>/dev/null
 cp -p /etc/asterisk/pjsip_magnus*.conf "$BKP/" 2>/dev/null
 

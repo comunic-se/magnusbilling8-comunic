@@ -16,6 +16,7 @@
 # No --modelo, o valor recorrente vem sugerido: saldo anterior + ultimo "Ajuste de Saldo" manual.
 #
 set -u
+set -o pipefail   # falha no mariadb-dump nao pode ser escondida pelo gzip
 MODELO=/root/planos-clientes.csv
 [ "$(id -u)" = "0" ] || { echo "Rode como root."; exit 1; }
 q() { mariadb mbilling -N -B -e "$1"; }
