@@ -1,40 +1,40 @@
 
 .. _queue-id-user:
 
-Username
---------
+Usuário
+-------
 
-| User that owns the queue. 
+| Usuário dono da fila.
 
 
 
 
 .. _queue-name:
 
-Name
+Nome
 ----
 
-| Queue name.
+| Nome da fila.
 
 
 
 
 .. _queue-language:
 
-Language
---------
+Idioma
+------
 
-| Queue language.
+| Idioma da fila.
 
 
 
 
 .. _queue-strategy:
 
-Strategy
---------
+Estratégia
+----------
 
-| Queue strategy.
+| Estratégia da fila.
 
 
 
@@ -44,157 +44,157 @@ Strategy
 Ringinuse
 ---------
 
-| Call or not the agents of the queue that are in call.
+| Chamar ou não os agentes da fila que já estão em ligação.
 
 
 
 
 .. _queue-timeout:
 
-Ring for
---------
+Tocar por
+---------
 
-| How long the phone will ring until timeout
+| Por quanto tempo o telefone toca até desistir.
 
 
 
 
 .. _queue-retry:
 
-Time for another agent
-----------------------
+Tempo para outro agente
+-----------------------
 
-| The amount of time in seconds that will retry the call.
+| Tempo em segundos até tentar a chamada de novo.
 
 
 
 
 .. _queue-wrapuptime:
 
-Time for another call
----------------------
+Tempo para outra chamada
+------------------------
 
-| Time in seconds until the agent can receive another call.
+| Tempo em segundos até o agente poder receber outra chamada.
 
 
 
 
 .. _queue-weight:
 
-Weight
-------
+Peso
+----
 
-| Queue Priority.
+| Prioridade da fila.
 
 
 
 
 .. _queue-periodic-announce:
 
-Periodic announce
+Anúncio periódico
 -----------------
 
-| A set of periodic announcements can be created by separating each announcements to reproduce whit commas. E.g.: queue-periodic-announce,your-call-is-important,please-wait. This data need to be in /var/lib/asterisk/sounds/ directory.
+| É possível criar um conjunto de anúncios periódicos separando por vírgulas os anúncios a tocar. Ex.: queue-periodic-announce,your-call-is-important,please-wait. Os arquivos precisam estar no diretório /var/lib/asterisk/sounds/.
 
 
 
 
 .. _queue-periodic-announce-frequency:
 
-Frequency
----------
+Frequência
+----------
 
-| How often to make a periodic announcement.
+| De quanto em quanto tempo tocar o anúncio periódico.
 
 
 
 
 .. _queue-announce-position:
 
-Announce position
------------------
+Anunciar posição
+----------------
 
-| Informs the postition in the queue.
+| Informa a posição na fila.
 
 
 
 
 .. _queue-announce-holdtime:
 
-Announce holdtime
------------------
+Anunciar tempo de espera
+------------------------
 
-| Should we include an estimated hold time in the position announcements?
+| Incluir o tempo de espera estimado nos anúncios de posição?
 
 
 
 
 .. _queue-announce-frequency:
 
-Announce frequency
-------------------
+Frequência do anúncio
+---------------------
 
-| How often to announce queue position and/or estimated holdtime to caller 0=off
+| De quanto em quanto tempo anunciar a posição na fila e/ou o tempo de espera estimado a quem ligou. 0 = desligado.
 
 
 
 
 .. _queue-joinempty:
 
-Join empty
-----------
+Entrar com fila vazia
+---------------------
 
-| Allow calls when there is no one to answer the call.
+| Aceita chamadas quando não há ninguém para atender.
 
 
 
 
 .. _queue-leavewhenempty:
 
-Leave when empty
-----------------
+Sair quando vazia
+-----------------
 
-| Hang the calls in queue when there's no one to answer.
+| Desliga as chamadas na fila quando não há ninguém para atender.
 
 
 
 
 .. _queue-max-wait-time:
 
-Max wait time
--------------
+Tempo máximo de espera
+----------------------
 
-| Maximum wait time on the queue
+| Tempo máximo de espera na fila.
 
 
 
 
 .. _queue-max-wait-time-action:
 
-Max wait time action
---------------------
+Ação no tempo máximo de espera
+------------------------------
 
-| SipAccount, IVR, QUEUE or LOCAL channel to send the caller if the maximum wait time is reached. Use: SIP/sip_account, QUEUE/queue_name, IVR/ivr_name OR LOCAL/extension@context.
+| Conta SIP, URA, FILA ou canal LOCAL para onde mandar quem ligou se o tempo máximo de espera for atingido. Use: SIP/conta_sip, QUEUE/nome_da_fila, IVR/nome_da_ura ou LOCAL/ramal@contexto.
 
 
 
 
 .. _queue-ring-or-moh:
 
-Ring or playing MOH
--------------------
+Toque ou música de espera
+-------------------------
 
-| Play waiting music or tone when the client is in the queue.
+| Tocar música de espera ou tom de chamada enquanto o cliente está na fila.
 
 
 
 
 .. _queue-musiconhold:
 
-Audio musiconhold
------------------
+Áudio da música de espera
+-------------------------
 
-| Import one waiting music to this queue.
+| Importa uma música de espera para esta fila.
 
 
 

@@ -1,96 +1,96 @@
 
 .. _offer-label:
 
-Name
+Nome
 ----
 
-| Free package name
+| Nome do pacote gratuito.
 
 
 
 
 .. _offer-packagetype:
 
-Package type
-------------
+Tipo de pacote
+--------------
 
-| Type of package, there's 3 types. Unlimited calls, free calls or free seconds. 
+| Tipo de pacote. Há 3 tipos: chamadas ilimitadas, chamadas grátis ou segundos grátis.
 
 
 
 
 .. _offer-freetimetocall:
 
-Free time to call
------------------
+Tempo grátis para ligar
+-----------------------
 
-| In this field is where the package available quantity configuration will occur.
-| Example:
-| \* Unlimited calls: In this option the field is blank, because will be allowed to call without any control.
-| \* Free calls: Configure the amount of free calls that you want to give.
-| \* Free seconds: Configure the amount of seconds that you want to allow the client to call.
+| Neste campo se configura a quantidade disponível no pacote.
+| Exemplo:
+| \* Chamadas ilimitadas: o campo fica em branco, porque o cliente pode ligar sem controle.
+| \* Chamadas grátis: informe a quantidade de chamadas grátis que quer dar.
+| \* Segundos grátis: informe a quantidade de segundos que o cliente pode usar.
 
 
 
 
 .. _offer-billingtype:
 
-Billing type
-------------
+Tipo de cobrança
+----------------
 
-| This is the period that the package will be calculated.
-|  Look the description:
-| \* Monthly: The system will verify the day of the plan activation + 30 days that the client reached the package limit.
-| \* Weekly: The system will verify the day of the plan activation + 7 days that the client reached the package limit.
+| Período usado para calcular o pacote.
+|  Veja a descrição:
+| \* Mensal: o sistema confere, a partir do dia da ativação do plano + 30 dias, se o cliente atingiu o limite do pacote.
+| \* Semanal: o sistema confere, a partir do dia da ativação do plano + 7 dias, se o cliente atingiu o limite do pacote.
 
 
 
 
 .. _offer-price:
 
-Price
+Preço
 -----
 
-| Price that will be charged monthly to the client.
-| If on the expiry day the client don't have the sufficient funds to pay the package MagnusBilling will automatically cancel the package.
-|     
-| In the settings menu, ajusts, exist one option named Package Offer Notification, this value means how many days are left until the expiration of the package, the system will try to charge the subscription, if the client don't have the balance, MagnusBilling will send an email to the client informing the lack of funds.
-| 
-| The email can be edited in the menu, Email models , type, plan_unpaid, Expiry of Monthly Plan Notice subject.
-| 
-| To send emails it's necessary the configuration of SMTP in the SMTP menu.
-| 
-| To learn how free packages works: https://wiki.magnusbilling.org/en/source/offer.html.
+| Preço cobrado mensalmente do cliente.
+| Se no dia do vencimento o cliente não tiver saldo suficiente para pagar o pacote, o MagnusBilling cancela o pacote automaticamente.
+|
+| No menu Configurações, Ajustes, há a opção Package Offer Notification: é quantos dias antes do vencimento do pacote o sistema tenta cobrar a assinatura; se o cliente não tiver saldo, o MagnusBilling manda um e-mail avisando a falta de saldo.
+|
+| O e-mail pode ser editado no menu Modelos de e-mail, tipo plan_unpaid, assunto "Aviso de vencimento do plano mensal".
+|
+| Para enviar e-mails é preciso configurar o SMTP no menu SMTP.
+|
+| Para entender como funcionam os pacotes gratuitos: https://wiki.magnusbilling.org/en/source/offer.html.
 
 
 
 
 .. _offer-initblock:
 
-Initial block
+Bloco inicial
 -------------
 
-| Minimum time in seconds to sell. This value will subscribe the tariffs of the client's plan.
+| Tempo mínimo em segundos para vender. Este valor substitui as tarifas do plano do cliente.
 
 
 
 
 .. _offer-billingblock:
 
-Billing block
--------------
+Bloco de cobrança
+-----------------
 
-| This defines how the time is incremented after the minimum. This value will subscribe the tariffs of the client's plan.
+| Define como o tempo é incrementado depois do mínimo. Este valor substitui as tarifas do plano do cliente.
 
 
 
 
 .. _offer-minimal-time-charge:
 
-Minimum time to charge
-----------------------
+Tempo mínimo de cobrança
+------------------------
 
-| Minimun time to tariff. If it's set to 3, will only tariff calls when the time is equal or more than 3 seconds.
+| Tempo mínimo para tarifar. Se estiver em 3, só são tarifadas as chamadas com 3 segundos ou mais.
 
 
 
