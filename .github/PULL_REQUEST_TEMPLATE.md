@@ -1,28 +1,28 @@
-## Problem
+## Problema
 
-<!-- What operator or developer problem does this solve? Link the issue. -->
+<!-- Que problema do operador ou do desenvolvedor isto resolve? Vincule a issue. -->
 
-## Solution
+## Solução
 
-<!-- Describe the focused change and important design decisions. -->
+<!-- Descreva a mudança focada e as decisões de projeto importantes. -->
 
-## Risk and compatibility
+## Risco e compatibilidade
 
-<!-- Cover billing, database, API, security, installer, and PJSIP/Asterisk impact. -->
+<!-- Cubra o impacto em tarifação, banco, API, segurança, instalador e PJSIP/Asterisk. -->
 
-## Verification
+## Verificação
 
-<!-- List automated tests and manual checks with exact commands or steps. -->
+<!-- Liste os testes automáticos e as conferências manuais, com os comandos ou passos exatos. -->
 
-## Deployment and rollback
+## Implantação e retorno
 
-<!-- State "Not required" or document configuration, migration, and rollback. -->
+<!-- Escreva "Não necessário" ou documente configuração, migração e como voltar. -->
 
-## Checklist
+## Lista de conferência
 
-- [ ] I removed secrets, customer data, and unrelated changes.
-- [ ] I added or updated tests for changed behavior.
-- [ ] I added translations for new user-facing text.
-- [ ] I updated documentation and the changelog where appropriate.
-- [ ] I described tests that were not available in my environment.
-- [ ] I reviewed the contribution and security policies.
+- [ ] Removi segredos, dados de clientes e mudanças sem relação.
+- [ ] Acrescentei ou atualizei testes para o comportamento alterado.
+- [ ] Acrescentei traduções para os textos novos exibidos ao usuário.
+- [ ] Atualizei a documentação e o histórico de mudanças quando apropriado.
+- [ ] Descrevi os testes que não estavam disponíveis no meu ambiente.
+- [ ] Revisei as políticas de contribuição e de segurança.

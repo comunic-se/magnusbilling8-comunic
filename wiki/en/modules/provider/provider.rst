@@ -1,40 +1,40 @@
 
 .. _provider-provider-name:
 
-Name
+Nome
 ----
 
-| Provider name
+| Nome do provedor.
 
 
 
 
 .. _provider-credit:
 
-Credit
-------
+Crédito
+-------
 
-| The amount of credit you have in your provider's account. This field is optional.
+| Valor de crédito que você tem na conta do provedor. Este campo é opcional.
 
 
 
 
 .. _provider-credit-control:
 
-Credit control
---------------
+Controle de crédito
+-------------------
 
-| If you set to YES and your provider credit is < 0, all trunks from this provider will be deactivated.
+| Se estiver em SIM e o crédito do provedor ficar < 0, todos os troncos deste provedor serão desativados.
 
 
 
 
 .. _provider-description:
 
-Description
------------
+Descrição
+---------
 
-| Description to the calendar, only for self control.
+| Descrição, apenas para controle interno.
 
 
 

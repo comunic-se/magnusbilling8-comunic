@@ -1,10 +1,7 @@
 
 .. _callShopCdr-id-user:
 
-Username
---------
+Usuário
+-------
 
-| User.
-
-
-
+| Usuário.

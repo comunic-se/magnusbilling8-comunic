@@ -1,78 +1,74 @@
-Secure ATA provisioning
-=======================
+Provisionamento seguro de ATA
+=============================
 
-MagnusBilling ATA profiles contain SIP, web-administration, and user
-credentials. A MAC address identifies an ATA but does not authenticate it.
-For this reason, MagnusBilling 8 database version 8.0.0.8 no longer serves a
-profile from the old ``?mac=$MAC`` URL.
+Os perfis de ATA do MagnusBilling contêm credenciais SIP, de administração web e de
+usuário. O endereço MAC identifica um ATA, mas não o autentica. Por isso, a partir
+da versão 8.0.0.8 do banco, o MagnusBilling 8 não entrega mais o perfil pela URL
+antiga ``?mac=$MAC``.
 
-Every ATA now requires a separate random provisioning token. MagnusBilling
-stores only its SHA-256 hash. The clear token appears only in the provisioning
-URL immediately after it is created or rotated.
+Agora cada ATA exige um token de provisionamento aleatório próprio. O MagnusBilling
+guarda só o hash SHA-256 dele. O token em texto aparece só na URL de
+provisionamento, logo depois de ser criado ou trocado.
 
-Create or rotate a token
-------------------------
+Criar ou trocar o token
+-----------------------
 
-1. Open **Clients > ATA Linksys** and select exactly one ATA.
-2. Select **Rotate provisioning token** and confirm the operation.
-3. Copy the complete URL from the one-time dialog. It has this format::
+1. Abra **Clientes > ATA Linksys** e selecione exatamente um ATA.
+2. Selecione **Trocar o token de provisionamento** e confirme.
+3. Copie a URL completa da janela que aparece uma única vez. Ela tem este formato::
 
-      https://billing.example.com/mbilling/index.php/ata?mac=AABBCCDDEEFF&token=64-lowercase-hexadecimal-characters
+      https://billing.example.com/mbilling/index.php/ata?mac=AABBCCDDEEFF&token=64-caracteres-hexadecimais-minusculos
 
-4. In the Linksys/Cisco ATA web interface, open **Provisioning** and replace
-   **Profile Rule** with that complete URL.
-5. Save and resync the ATA. Confirm that it downloads its profile through
-   HTTPS.
+4. Na interface web do ATA Linksys/Cisco, abra **Provisioning** e substitua o
+   **Profile Rule** por essa URL completa.
+5. Grave e sincronize o ATA. Confirme que ele baixa o perfil por HTTPS.
 
-The global **Server IP** setting must contain the public hostname (and an
-optional port) used by the ATA. Token rotation fails closed if this setting is
-empty or is not a valid host.
+A configuração global **Server IP** precisa ter o nome público do servidor (e,
+opcionalmente, a porta) usado pelo ATA. A troca do token falha de forma segura se
+essa configuração estiver vazia ou não for um host válido.
 
-The token cannot be recovered from MagnusBilling. Rotating it immediately
-invalidates the previous URL. If the one-time dialog is closed before the URL
-is copied, rotate the token again.
+Não é possível recuperar o token pelo MagnusBilling. Trocá-lo invalida na hora a URL
+anterior. Se a janela for fechada antes de copiar a URL, troque o token de novo.
 
-Upgrade impact for existing ATAs
---------------------------------
+Impacto da atualização nos ATAs existentes
+------------------------------------------
 
-The 8.0.0.8 database migration deliberately leaves existing token hashes
-empty. Existing ATAs keep their last applied SIP configuration, but the old
-MAC-only URL can no longer download a new profile. Each ATA must be migrated
-manually using the rotation procedure above.
+A migração do banco 8.0.0.8 deixa de propósito os hashes de token vazios. Os ATAs
+existentes mantêm a última configuração SIP aplicada, mas a URL antiga, só com o MAC,
+não consegue mais baixar um perfil novo. Cada ATA precisa ser migrado manualmente
+com o procedimento de troca acima.
 
-Plan a maintenance window and migrate devices in controlled batches:
+Planeje uma janela de manutenção e migre os aparelhos em lotes controlados:
 
-1. Update MagnusBilling and verify that the database version is 8.0.0.8 or
-   newer.
-2. Rotate the token for one ATA.
-3. Update its Profile Rule, resync it, and place a test call.
-4. Continue with the next ATA only after the previous device is verified.
+1. Atualize o MagnusBilling e confira se a versão do banco é 8.0.0.8 ou mais nova.
+2. Troque o token de um ATA.
+3. Atualize o Profile Rule dele, sincronize e faça uma chamada de teste.
+4. Só passe para o próximo ATA depois de conferir o anterior.
 
-Do not temporarily restore MAC-only provisioning. It exposes every credential
-in the profile to anyone who can guess or obtain the MAC address.
+Não volte temporariamente ao provisionamento só com o MAC. Isso expõe todas as
+credenciais do perfil a qualquer pessoa que adivinhe ou descubra o endereço MAC.
 
-Operational security
---------------------
+Segurança operacional
+---------------------
 
-* Serve both the administration panel and ``/mbilling/index.php/ata`` only
-  through HTTPS with a valid certificate. Token rotation and provisioning are
-  rejected over HTTP, and the generated Profile Rule always uses HTTPS.
-* Treat the complete URL as a password. Do not send it through tickets, chat,
-  email, or screenshots unless those systems are approved for secrets.
-* HTTP access logs commonly record query strings. Configure the reverse proxy
-  and web server to redact the ``token`` parameter or to omit query strings
-  from logs for the ATA route. Restrict and rotate existing logs that may
-  contain provisioning URLs.
-* Rotate the token after personnel changes, suspected disclosure, device
-  replacement, or accidental logging.
-* A generic HTTP 404 response is expected for HTTP requests and for missing,
-  malformed, unknown, or expired credentials. This avoids sending credentials
-  without TLS and avoids revealing whether a MAC address exists.
+* Sirva o painel de administração e o ``/mbilling/index.php/ata`` só por HTTPS, com
+  certificado válido. A troca do token e o provisionamento são recusados por HTTP, e
+  o Profile Rule gerado sempre usa HTTPS.
+* Trate a URL completa como uma senha. Não a envie por chamados, chat, e-mail ou
+  capturas de tela, a menos que esses sistemas sejam aprovados para segredos.
+* Os logs de acesso HTTP costumam registrar a query string. Configure o proxy reverso
+  e o servidor web para ocultar o parâmetro ``token`` ou para não registrar a query
+  string na rota do ATA. Restrinja e renove os logs existentes que possam conter URLs
+  de provisionamento.
+* Troque o token depois de mudanças de pessoal, suspeita de vazamento, troca de
+  aparelho ou registro acidental em log.
+* Uma resposta HTTP 404 genérica é esperada para requisições por HTTP e para
+  credenciais ausentes, malformadas, desconhecidas ou vencidas. Isso evita mandar
+  credenciais sem TLS e evita revelar se um endereço MAC existe.
 
-Emergency rollback
-------------------
+Retorno de emergência
+---------------------
 
-If a migrated ATA fails, restore its configuration locally on that device or
-rotate a new token and apply the new URL. Do not roll back to the legacy
-MAC-only endpoint. Database backups do not contain the clear token and cannot
-recover a lost provisioning URL.
+Se um ATA migrado falhar, restaure a configuração localmente nesse aparelho ou troque
+o token e aplique a URL nova. Não volte ao endpoint legado só com MAC. Os backups do
+banco não têm o token em texto e não recuperam uma URL de provisionamento perdida.

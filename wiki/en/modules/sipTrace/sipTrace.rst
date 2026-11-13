@@ -4,7 +4,4 @@
 head
 ----
 
-| SIP message body.
-
-
-
+| Corpo da mensagem SIP.

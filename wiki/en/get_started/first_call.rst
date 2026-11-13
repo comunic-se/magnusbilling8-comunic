@@ -1,92 +1,92 @@
-Making your first call
-======================
+Fazendo a primeira chamada
+==========================
 
-This guide creates a customer, SIP endpoint, plan, provider route, tariff, and
-initial balance for a controlled test call.
+Este guia cria um cliente, um endpoint SIP, um plano, uma rota de provedor, uma
+tarifa e um saldo inicial para uma chamada de teste controlada.
 
-Before you begin
+Antes de começar
 ----------------
 
-Confirm that the installation checks in :doc:`Installation <quick_install>`
-pass and that you have valid trunk credentials from a voice provider. Use a
-test destination that you are authorized to call.
+Confirme que as conferências de :doc:`Instalação <quick_install>` passaram e que
+você tem credenciais válidas de tronco de um provedor de voz. Use um destino de
+teste para o qual você tenha autorização para ligar.
 
-1. Create a customer and plan
+1. Crie um cliente e um plano
 -----------------------------
 
-Sign in to MagnusBilling and open **Customers > Users > New**. Create the
-customer and select the customer group.
+Entre no MagnusBilling e abra **Clientes > Usuários > Novo**. Crie o cliente e
+selecione o grupo de clientes.
 
 .. image:: ../img/users_img.png
    :scale: 80%
-   :alt: MagnusBilling Users menu
+   :alt: Menu Usuários do MagnusBilling
 
 .. image:: ../img/users_newimg.png
    :scale: 80%
-   :alt: Creating a MagnusBilling user
+   :alt: Criando um usuário no MagnusBilling
 
-Open **Rates > Plans > New** and create a plan. Return to the user form and
-assign that plan to the customer.
+Abra **Tarifas > Planos > Novo** e crie um plano. Volte ao formulário do usuário e
+associe esse plano ao cliente.
 
 .. image:: ../img/user_clientimg.png
    :scale: 80%
-   :alt: Selecting the customer group
+   :alt: Selecionando o grupo de clientes
 
 .. image:: ../img/user_selectplan2.png
    :scale: 80%
-   :alt: Assigning a plan to a user
+   :alt: Associando um plano a um usuário
 
-MagnusBilling normally creates a SIP account for the new customer. Open the
-SIP Users module and record the generated username and password.
+O MagnusBilling normalmente cria uma conta SIP para o cliente novo. Abra o módulo
+Usuários SIP e anote o usuário e a senha gerados.
 
-2. Register the SIP endpoint
-----------------------------
+2. Registre o endpoint SIP
+--------------------------
 
-Configure a SIP client with the generated credentials. Use the MagnusBilling
-server IP address as the domain. New MBilling 8 installations use PJSIP and
-listen on UDP port ``5060`` by default unless the administrator changed the
-transport configuration.
+Configure um cliente SIP com as credenciais geradas. Use o IP do servidor
+MagnusBilling como domínio. As instalações novas do MBilling 8 usam PJSIP e escutam
+na porta UDP ``5060`` por padrão, a menos que o administrador tenha mudado a
+configuração de transporte.
 
 .. image:: ../img/zoiper_config.png
    :scale: 80%
-   :alt: Example SIP client configuration
+   :alt: Exemplo de configuração de cliente SIP
 
-Confirm the endpoint status in the panel and with the Asterisk PJSIP commands
-available on the server. Do not continue until registration succeeds.
+Confirme o status do endpoint no painel e com os comandos PJSIP do Asterisk no
+servidor. Não continue até o registro dar certo.
 
-3. Configure the provider route
+3. Configure a rota do provedor
 -------------------------------
 
-1. Open **Routes > Providers** and create the provider record.
-2. Create a trunk with the PJSIP credentials and routing information supplied
-   by the provider.
-3. Create a trunk group and add the trunk in the desired routing order.
+1. Abra **Rotas > Provedores** e crie o registro do provedor.
+2. Crie um tronco com as credenciais PJSIP e as informações de roteamento
+   fornecidas pelo provedor.
+3. Crie um grupo de troncos e acrescente o tronco na ordem de roteamento desejada.
 
-Do not copy a legacy ``chan_sip`` peer unchanged. Translate the provider
-settings into PJSIP transport, endpoint, authentication, AOR, identification,
-codec, and registration settings as required.
+Não copie um peer legado do ``chan_sip`` sem mudanças. Traduza as configurações do
+provedor para transporte, endpoint, autenticação, AOR, identificação, codec e
+registro do PJSIP, conforme for preciso.
 
-4. Configure destination pricing
---------------------------------
+4. Configure o preço dos destinos
+---------------------------------
 
-Create the destination prefix and tariff under **Rates**, then associate the
-tariff with the customer's plan and the correct trunk group. Review the
-:doc:`Tariff selection <../find_rate>` and :doc:`Price calculation <../price_calculation>` guides before using production rates.
+Crie o prefixo de destino e a tarifa em **Tarifas** e depois associe a tarifa ao
+plano do cliente e ao grupo de troncos correto. Leia os guias
+:doc:`Seleção de tarifa <../find_rate>` e :doc:`Cálculo do preço <../price_calculation>` antes de usar tarifas de produção.
 
-5. Add test credit and call
----------------------------
+5. Coloque crédito de teste e ligue
+-----------------------------------
 
-Open **Billing > Refills** and add a small test balance to the customer. Place
-a call from the registered endpoint and verify:
+Abra **Faturamento > Recargas** e coloque um pequeno saldo de teste no cliente.
+Faça uma chamada a partir do endpoint registrado e confira se:
 
-* the expected trunk is selected;
-* two-way audio and DTMF work;
-* the call appears in Calls Online while active;
-* the completed CDR contains the expected destination, duration, buy price,
-  sell price, and hangup cause;
-* the customer balance changes by the expected amount.
+* o tronco esperado foi escolhido;
+* o áudio nos dois sentidos e o DTMF funcionam;
+* a chamada aparece em Chamadas online enquanto está ativa;
+* o CDR concluído tem o destino, a duração, o preço de compra, o preço de venda e
+  a causa de desligamento esperados;
+* o saldo do cliente mudou no valor esperado.
 
-If registration succeeds but the call fails, investigate authentication,
-number formatting, tariff matching, trunk routing, provider responses, and
-firewall/NAT separately. For audio problems, see the
-:doc:`no-audio troubleshooting guide <../admin_guide/troubleshooting_no_audio>`.
+Se o registro der certo mas a chamada falhar, investigue separadamente a
+autenticação, o formato do número, a escolha da tarifa, o roteamento do tronco, as
+respostas do provedor e o firewall/NAT. Para problemas de áudio, veja o
+:doc:`guia de solução de problemas de áudio <../admin_guide/troubleshooting_no_audio>`.

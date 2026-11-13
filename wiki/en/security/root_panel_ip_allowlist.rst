@@ -1,64 +1,63 @@
-Restrict panel login by SSH IP authorization
-============================================
+Restringir o login no painel por IP autorizado via SSH
+======================================================
 
-MagnusBilling can restrict web-panel login for any user to IP
-addresses authorized from an SSH session. The allowlist is stored outside the
-web document root and outside MariaDB, under
+O MagnusBilling pode restringir o login no painel web de qualquer usuário aos
+endereços IP autorizados a partir de uma sessão SSH. A lista de IPs permitidos fica
+fora da raiz de documentos web e fora do MariaDB, em
 ``/etc/magnusbilling/panel-ip-access``.
 
-Activate the restriction
-------------------------
+Ativar a restrição
+------------------
 
-Connect by SSH from the same public IP used by the browser and run::
+Conecte-se por SSH a partir do mesmo IP público usado pelo navegador e rode::
 
    addmyip root
 
-The command obtains the client address from the SSH connection itself. It does
-not accept an IP supplied on the command line. The first successful execution
-creates a user-specific allowlist and activates the restriction for that user.
-Existing users remain unrestricted until this command is run for their exact
-username.
+O comando obtém o endereço do cliente a partir da própria conexão SSH. Ele não
+aceita um IP informado na linha de comando. A primeira execução bem-sucedida cria
+uma lista de IPs própria do usuário e ativa a restrição para ele. Os usuários
+existentes continuam sem restrição até este comando ser rodado com o nome exato
+de cada um.
 
-The command also removes the SSH client IP from ``pkg_firewall`` and ``pkg_log``
-and then inserts it into ``pkg_firewall`` with action ``5`` (``IgnoreIP``).
-These database operations run in one transaction; if they fail, the external
-panel allowlist is not changed.
+O comando também remove o IP do cliente SSH da ``pkg_firewall`` e da ``pkg_log`` e
+depois o insere na ``pkg_firewall`` com a ação ``5`` (``IgnoreIP``). Essas operações
+no banco rodam numa transação; se falharem, a lista de IPs do painel não é alterada.
 
-Any panel username can be used, for example::
+Qualquer usuário do painel pode ser usado, por exemplo::
 
    addmyip administrator
    addmyip "support manager"
 
-Each username has an independent allowlist. Usernames are represented by a
-SHA-256 identifier in the storage directory so special characters cannot be
-interpreted as filesystem paths.
+Cada usuário tem uma lista independente. Os usuários são representados por um
+identificador SHA-256 no diretório de armazenamento, para que caracteres especiais
+não sejam interpretados como caminhos de arquivo.
 
-Remove the current IP
----------------------
+Remover o IP atual
+------------------
 
-From the SSH session whose address should be removed, run::
+A partir da sessão SSH cujo endereço deve ser removido, rode::
 
    delmyip root
 
-The restriction remains active even when the last address is removed. In that
-case no web-panel IP can log in as that user until ``addmyip USERNAME`` is run
-from SSH or all restrictions are released.
+A restrição continua ativa mesmo quando o último endereço é removido. Nesse caso,
+nenhum IP consegue entrar no painel web com esse usuário até que ``addmyip USUARIO``
+seja rodado pelo SSH ou todas as restrições sejam liberadas.
 
-Disable all IP restrictions
----------------------------
+Desativar todas as restrições por IP
+------------------------------------
 
-Run::
+Rode::
 
    releaseAll
 
-This removes all panel allowlist files and makes every user unrestricted again.
-All three commands require ``root`` privileges.
+Isso remove todos os arquivos de lista de IPs do painel e deixa todos os usuários
+sem restrição de novo. Os três comandos exigem privilégios de ``root``.
 
-Reverse proxies and VPNs
-------------------------
+Proxies reversos e VPNs
+-----------------------
 
-The web login compares Apache's trusted client address (``REMOTE_ADDR``) with
-the SSH client address. If a reverse proxy, CDN, NAT gateway, or VPN makes the
-two addresses different, configure Apache ``mod_remoteip`` with only the
-trusted proxy ranges or connect to SSH through the same egress path. Do not
-trust arbitrary ``X-Forwarded-For`` headers.
+O login web compara o endereço confiável do cliente no Apache (``REMOTE_ADDR``) com o
+endereço do cliente SSH. Se um proxy reverso, CDN, gateway NAT ou VPN fizer os dois
+endereços serem diferentes, configure o ``mod_remoteip`` do Apache só com as faixas
+de proxy confiáveis, ou conecte-se ao SSH pelo mesmo caminho de saída. Não confie em
+cabeçalhos ``X-Forwarded-For`` arbitrários.

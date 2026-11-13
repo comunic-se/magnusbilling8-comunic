@@ -1,10 +1,10 @@
 
 .. _sipuras-nserie:
 
-Serial
-------
+Número de série
+---------------
 
-| LinkSys serial number
+| Número de série do LinkSys.
 
 
 
@@ -14,27 +14,27 @@ Serial
 MAC
 ---
 
-| LinkSys MAC address
+| Endereço MAC do LinkSys.
 
 
 
 
 .. _sipuras-senha-user:
 
-User password
--------------
+Senha do usuário
+----------------
 
-| Username to login in LinkSys settings
+| Usuário para entrar nas configurações do LinkSys.
 
 
 
 
 .. _sipuras-senha-admin:
 
-Admin password
---------------
+Senha do administrador
+----------------------
 
-| Password to login in LinkSys settings
+| Senha para entrar nas configurações do LinkSys.
 
 
 
@@ -44,7 +44,7 @@ Admin password
 Antireset
 ---------
 
-| Be cautious.\*73738# command prevents resetting LinkSys.
+| Cuidado: o comando \*73738# impede o reset do LinkSys.
 
 
 
@@ -54,17 +54,17 @@ Antireset
 Enable_Web_Server
 -----------------
 
-| Beware! If deactivated, will not be able to login in the Linksys settings.
+| Atenção! Se desativado, não será possível entrar nas configurações do Linksys.
 
 
 
 
 .. _sipuras-Dial-Tone:
 
-Dial Tone
----------
+Tom de discagem
+---------------
 
-| Dial tone cadence configured for the Linksys/Sipura device profile.
+| Cadência do tom de discagem configurada no perfil do aparelho Linksys/Sipura.
 
 
 
@@ -81,20 +81,20 @@ Proxy
 
 .. _sipuras-User-ID-1:
 
-Username
---------
+Usuário
+-------
 
-| SIP user username that will be used in ATA line 1.
+| Usuário SIP usado na linha 1 do ATA.
 
 
 
 
 .. _sipuras-Password-1:
 
-Password
---------
+Senha
+-----
 
-| SIP user password
+| Senha do usuário SIP.
 
 
 
@@ -104,7 +104,7 @@ Password
 Use_Pref_Codec
 --------------
 
-| Only use the preferred CODEC
+| Usar só o CODEC preferido.
 
 
 
@@ -114,27 +114,27 @@ Use_Pref_Codec
 Codec
 -----
 
-| Set the preferred CODEC
+| Define o CODEC preferido.
 
 
 
 
 .. _sipuras-Register-Expires-1:
 
-Register expires
-----------------
+Validade do registro
+--------------------
 
-| Interval in seconds that LinkSys will send a REGISTER to your server. Useful to avoid a loss of connection when you receive a call.
+| Intervalo em segundos em que o LinkSys manda um REGISTER ao servidor. Ajuda a não perder a conexão ao receber chamadas.
 
 
 
 
 .. _sipuras-Dial-Plan-1:
 
-Dial plan
----------
+Plano de discagem
+-----------------
 
-| Read LinkSys documentation
+| Veja a documentação do LinkSys.
 
 
 
@@ -144,7 +144,7 @@ Dial plan
 NAT Mapping
 -----------
 
-| It's recommended to activate this option if ATA is behind NAT.
+| Recomenda-se ativar esta opção se o ATA estiver atrás de NAT.
 
 
 
@@ -154,7 +154,7 @@ NAT Mapping
 NAT keep alive
 --------------
 
-| It's recommended to activate this option if ATA is behind NAT.
+| Recomenda-se ativar esta opção se o ATA estiver atrás de NAT.
 
 
 
@@ -171,20 +171,20 @@ Proxy
 
 .. _sipuras-User-ID-2:
 
-Username
---------
+Usuário
+-------
 
-| SIP user username that will be used in ATA line 1.
+| Usuário SIP usado na linha 2 do ATA.
 
 
 
 
 .. _sipuras-Password-2:
 
-Password
---------
+Senha
+-----
 
-| VOIP account password.
+| Senha da conta VoIP.
 
 
 
@@ -194,7 +194,7 @@ Password
 Use_Pref_Codec
 --------------
 
-| Only use preferred codec.
+| Usar só o codec preferido.
 
 
 
@@ -204,27 +204,27 @@ Use_Pref_Codec
 Codec
 -----
 
-| Settings of preferred codec.
+| Configuração do codec preferido.
 
 
 
 
 .. _sipuras-Register-Expires-2:
 
-Register expires
-----------------
+Validade do registro
+--------------------
 
-| Time in seconds that Linksys sends "REGISTER" to the server. If it's going to get calls in this line, it's better set it up between 120 and 480 seconds.
+| Tempo em segundos em que o Linksys manda "REGISTER" ao servidor. Se esta linha for receber chamadas, é melhor usar entre 120 e 480 segundos.
 
 
 
 
 .. _sipuras-Dial-Plan-2:
 
-Dial plan
----------
+Plano de discagem
+-----------------
 
-| Read linksys documentation
+| Veja a documentação do Linksys.
 
 
 
@@ -234,7 +234,7 @@ Dial plan
 NAT Mapping
 -----------
 
-| It's recommended to activate this option if ATA is behind NAT.
+| Recomenda-se ativar esta opção se o ATA estiver atrás de NAT.
 
 
 
@@ -244,27 +244,27 @@ NAT Mapping
 NAT keep alive
 --------------
 
-| It's recommended to activate this option if ATA is behind NAT.
+| Recomenda-se ativar esta opção se o ATA estiver atrás de NAT.
 
 
 
 
 .. _sipuras-STUN-Enable:
 
-Enable STUN
+Ativar STUN
 -----------
 
-| Activate STUN server.
+| Ativa o servidor STUN.
 
 
 
 
 .. _sipuras-STUN-Test-Enable:
 
-STUN Test
----------
+Teste de STUN
+-------------
 
-| Validate STUN server periodically..
+| Valida o servidor STUN periodicamente.
 
 
 
@@ -274,17 +274,17 @@ STUN Test
 Substitute VIA Addr
 -------------------
 
-| Replace public IP in the VIA.
+| Substitui pelo IP público no VIA.
 
 
 
 
 .. _sipuras-STUN-Server:
 
-STUN Server
------------
+Servidor STUN
+-------------
 
-| STUN server domain.
+| Domínio do servidor STUN.
 
 
 

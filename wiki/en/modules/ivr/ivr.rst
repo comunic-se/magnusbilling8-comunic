@@ -1,50 +1,50 @@
 
 .. _ivr-name:
 
-Name
+Nome
 ----
 
-| Name of the IVR
+| Nome da URA.
 
 
 
 
 .. _ivr-id-user:
 
-Username
---------
+Usuário
+-------
 
-| User who owns the IVR
+| Usuário dono da URA.
 
 
 
 
 .. _ivr-monFriStart:
 
-MonFri intervals
-----------------
+Intervalos de segunda a sexta
+-----------------------------
 
-| Weekly interval of attendance, can be configured with multiples shifts.
-| Example:
-| Supposing that the attendance hours are 08h to 12h and 14h to 19h. In this case the rule would be
-| 
+| Horário de atendimento durante a semana; pode ter vários turnos.
+| Exemplo:
+| Se o atendimento for das 08h às 12h e das 14h às 19h, a regra fica assim:
+|
 | 08:00-12:00\|14:00-19:00
-| 
-| 
+|
+|
 
 
 
 
 .. _ivr-satStart:
 
-Saturday intervals
-------------------
+Intervalos de sábado
+--------------------
 
-| Interval of attendance in saturdays, can be configured with multiple shifts
-| Example:
-| 
-| Supposing that the attendance hours in the saturdays are 08h to 13h. In this case the rule would be
-|     
+| Horário de atendimento aos sábados; pode ter vários turnos.
+| Exemplo:
+|
+| Se o atendimento aos sábados for das 08h às 13h, a regra fica assim:
+|
 | 08:00-13:00
 
 
@@ -52,287 +52,287 @@ Saturday intervals
 
 .. _ivr-sunStart:
 
-Sunday intervals
-----------------
+Intervalos de domingo
+---------------------
 
-| Interval of attendance in sundays, can be configured with multiple shifts
-| Example:
-|     
-| Supposing that there is no attendance hours in the sundays. In this case the rule would be
-|     
+| Horário de atendimento aos domingos; pode ter vários turnos.
+| Exemplo:
+|
+| Se não houver atendimento aos domingos, a regra fica assim:
+|
 | 00:00-00:00
-|     
-| 
+|
+|
 
 
 
 
 .. _ivr-use-holidays:
 
-Use holidays
-------------
+Usar feriados
+-------------
 
-| If this option is activated then the system will check if there is a holiday registered for the day, if so, then the audio, not working, will be played.
+| Com esta opção ativada, o sistema confere se há feriado cadastrado para o dia; se houver, toca o áudio de fora do expediente.
 
 
 
 
 .. _ivr-workaudio:
 
-Work audio
-----------
+Áudio do expediente
+-------------------
 
-| Audio to play in the attendance hours.
+| Áudio tocado no horário de atendimento.
 
 
 
 
 .. _ivr-noworkaudio:
 
-Out work audio
---------------
+Áudio fora do expediente
+------------------------
 
-| Audio to play when it's not attendance hours
+| Áudio tocado fora do horário de atendimento.
 
 
 
 
 .. _ivr-option-0:
 
-Option 0
---------
+Opção 0
+-------
 
-| Select the destination if the option 0 is pressed. Let it in blank if don't want any action
+| Selecione o destino quando a opção 0 for digitada. Deixe em branco se não quiser nenhuma ação.
 
 
 
 
 .. _ivr-option-1:
 
-Option 1
---------
+Opção 1
+-------
 
-| Select the destination if the option 1 is pressed. Let it in blank if don't want any action
+| Selecione o destino quando a opção 1 for digitada. Deixe em branco se não quiser nenhuma ação.
 
 
 
 
 .. _ivr-option-2:
 
-Option 2
---------
+Opção 2
+-------
 
-| Select the destination if the option 2 is pressed. Let it in blank if don't want any action
+| Selecione o destino quando a opção 2 for digitada. Deixe em branco se não quiser nenhuma ação.
 
 
 
 
 .. _ivr-option-3:
 
-Option 3
---------
+Opção 3
+-------
 
-| Select the destination if the option 3 is pressed. Let it in blank if don't want any action
+| Selecione o destino quando a opção 3 for digitada. Deixe em branco se não quiser nenhuma ação.
 
 
 
 
 .. _ivr-option-4:
 
-Option 4
---------
+Opção 4
+-------
 
-| Select the destination if the option 4 is pressed. Let it in blank if don't want any action
+| Selecione o destino quando a opção 4 for digitada. Deixe em branco se não quiser nenhuma ação.
 
 
 
 
 .. _ivr-option-5:
 
-Option 5
---------
+Opção 5
+-------
 
-| Select the destination if the option 5 is pressed. Let it in blank if don't want any action
+| Selecione o destino quando a opção 5 for digitada. Deixe em branco se não quiser nenhuma ação.
 
 
 
 
 .. _ivr-option-6:
 
-Option 6
---------
+Opção 6
+-------
 
-| Select the destination if the option 6 is pressed. Let it in blank if don't want any action
+| Selecione o destino quando a opção 6 for digitada. Deixe em branco se não quiser nenhuma ação.
 
 
 
 
 .. _ivr-option-7:
 
-Option 7
---------
+Opção 7
+-------
 
-| Select the destination if the option 7 is pressed. Let it in blank if don't want any action
+| Selecione o destino quando a opção 7 for digitada. Deixe em branco se não quiser nenhuma ação.
 
 
 
 
 .. _ivr-option-8:
 
-Option 8
---------
+Opção 8
+-------
 
-| Select the destination if the option 8 is pressed. Let it in blank if don't want any action
+| Selecione o destino quando a opção 8 for digitada. Deixe em branco se não quiser nenhuma ação.
 
 
 
 
 .. _ivr-option-9:
 
-Option 9
---------
+Opção 9
+-------
 
-| Select the destination if the option  is pressed. Let it in blank if don't want any action
+| Selecione o destino quando a opção 9 for digitada. Deixe em branco se não quiser nenhuma ação.
 
 
 
 
 .. _ivr-option-10:
 
-Default option
---------------
+Opção padrão
+------------
 
-| Select the destination if none of the options was selected.
+| Selecione o destino quando nenhuma das opções for escolhida.
 
 
 
 
 .. _ivr-direct-extension:
 
-Enable known SIP user
----------------------
+Ativar usuário SIP conhecido
+----------------------------
 
-| Activating this option will be able to type an SIP user to call it directly.
+| Com esta opção ativada, é possível digitar um usuário SIP para ligar direto para ele.
 
 
 
 
 .. _ivr-option-out-0:
 
-Option 0
---------
+Opção 0
+-------
 
-| Select the destinationif the option 0 is pressed. Let it in blank if don't want any action
+| Selecione o destino quando a opção 0 for digitada. Deixe em branco se não quiser nenhuma ação.
 
 
 
 
 .. _ivr-option-out-1:
 
-Option 1
---------
+Opção 1
+-------
 
-| Select the destination if the option 1 is pressed. Let it in blank if don't want any action
+| Selecione o destino quando a opção 1 for digitada. Deixe em branco se não quiser nenhuma ação.
 
 
 
 
 .. _ivr-option-out-2:
 
-Option 2
---------
+Opção 2
+-------
 
-| Select the destination if the option 2 is pressed. Let it in blank if don't want any action
+| Selecione o destino quando a opção 2 for digitada. Deixe em branco se não quiser nenhuma ação.
 
 
 
 
 .. _ivr-option-out-3:
 
-Option 3
---------
+Opção 3
+-------
 
-| Select the destination if the option 3 is pressed. Let it in blank if don't want any action
+| Selecione o destino quando a opção 3 for digitada. Deixe em branco se não quiser nenhuma ação.
 
 
 
 
 .. _ivr-option-out-4:
 
-Option 4
---------
+Opção 4
+-------
 
-| Select the destination if the option 4 is pressed. Let it in blank if don't want any action
+| Selecione o destino quando a opção 4 for digitada. Deixe em branco se não quiser nenhuma ação.
 
 
 
 
 .. _ivr-option-out-5:
 
-Option 5
---------
+Opção 5
+-------
 
-| Select the destination if the option 5 is pressed. Let it in blank if don't want any action
+| Selecione o destino quando a opção 5 for digitada. Deixe em branco se não quiser nenhuma ação.
 
 
 
 
 .. _ivr-option-out-6:
 
-Option 6
---------
+Opção 6
+-------
 
-| Select the destination if the option 6 is pressed. Let it in blank if don't want any action
+| Selecione o destino quando a opção 6 for digitada. Deixe em branco se não quiser nenhuma ação.
 
 
 
 
 .. _ivr-option-out-7:
 
-Option 7
---------
+Opção 7
+-------
 
-| Select the destination if the option 7 is pressed. Let it in blank if don't want any action
+| Selecione o destino quando a opção 7 for digitada. Deixe em branco se não quiser nenhuma ação.
 
 
 
 
 .. _ivr-option-out-8:
 
-Option 8
---------
+Opção 8
+-------
 
-| Select the destination if the option 8 is pressed. Let it in blank if don't want any action
+| Selecione o destino quando a opção 8 for digitada. Deixe em branco se não quiser nenhuma ação.
 
 
 
 
 .. _ivr-option-out-9:
 
-Option 9
---------
+Opção 9
+-------
 
-| Select the destination if the option 9 is pressed. Let it in blank if don't want any action
+| Selecione o destino quando a opção 9 for digitada. Deixe em branco se não quiser nenhuma ação.
 
 
 
 
 .. _ivr-option-out-10:
 
-Default option
---------------
+Opção padrão
+------------
 
-| Select the destination if none of the options was selected.
+| Selecione o destino quando nenhuma das opções for escolhida.
 
 
 
 
 .. _ivr-type-1:
 
-Type
+Tipo
 ----
 
-| Destination type used when the caller presses this IVR option.
+| Tipo de destino usado quando quem ligou digita esta opção da URA.
 
 
 

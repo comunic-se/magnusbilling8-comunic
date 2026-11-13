@@ -1,80 +1,80 @@
 
 .. _servicesUse-id-user:
 
-Username
---------
+Usuário
+-------
 
-| User that owns the service.
+| Usuário dono do serviço.
 
 
 
 
 .. _servicesUse-id-services:
 
-Service
+Serviço
 -------
 
-| Service.
+| Serviço.
 
 
 
 
 .. _servicesUse-price:
 
-Price
+Preço
 -----
 
-| Service price.
+| Preço do serviço.
 
 
 
 
 .. _servicesUse-method:
 
-Payment methods
----------------
+Formas de pagamento
+-------------------
 
-| Payment method.
+| Forma de pagamento.
 
 
 
 
 .. _servicesUse-month-payed:
 
-Month payed
+Meses pagos
 -----------
 
-| Number of months paid for this service subscription.
+| Número de meses pagos nesta assinatura do serviço.
 
 
 
 
 .. _servicesUse-reservationdate:
 
-Reservation date
-----------------
+Data da reserva
+---------------
 
-| Day of service activation.
+| Dia de ativação do serviço.
 
 
 
 
 .. _servicesUse-termination-date:
 
-Termination date
-----------------
+Data de término
+---------------
 
-| Date when this service subscription ends or was canceled.
+| Data em que esta assinatura do serviço termina ou foi cancelada.
 
 
 
 
 .. _servicesUse-contract-period:
 
-End of minimum contract period
-------------------------------
+Fim do período mínimo de contrato
+---------------------------------
 
-| Minimum contract end date for this service subscription.
+| Data de término do contrato mínimo desta assinatura do serviço.
 
 
 

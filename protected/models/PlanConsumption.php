@@ -245,6 +245,17 @@ class PlanConsumption extends Model
         return preg_replace('/(,\d{2}\d*?)0+$/', '$1', $s);
     }
 
+    /**
+     * Texto vindo do cadastro (nome, usuario, grupo) em celula de CSV: se comecar com
+     * = + - @ TAB ou CR, o Excel trataria como formula. Um apostrofo na frente impede isso.
+     * Usar SOMENTE em colunas de texto (valores negativos tambem comecam com "-").
+     */
+    public static function csvText($value)
+    {
+        $value = (string) $value;
+        return ($value !== '' && strpos("=+-@\t\r", $value[0]) !== false) ? "'" . $value : $value;
+    }
+
     private static function csvLine(array $cols)
     {
         foreach ($cols as $k => $c) {
@@ -267,7 +278,7 @@ class PlanConsumption extends Model
         $csv = "\xEF\xBB\xBF" . self::csvLine(self::ROUTINE_HEADER);
         foreach ($rows as $r) {
             $csv .= self::csvLine([
-                $r['customer'], $r['plan_type_label'], $m($r['recurring_value']),
+                self::csvText($r['customer']), $r['plan_type_label'], $m($r['recurring_value']),
                 $m($r['consumption']), $m($r['refill']), $m($r['amount_due']),
             ]);
         }

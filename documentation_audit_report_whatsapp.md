@@ -1,31 +1,31 @@
-# WhatsApp campaign documentation audit
+# Auditoria da documentação de campanhas no WhatsApp
 
-Date: 2026-07-13
+Data: 2026-07-13
 
-## Scope
+## Escopo
 
-User-facing documentation for configuring and operating WhatsApp campaigns in MagnusBilling 8, including Meta credentials, templates, campaign execution, inbound replies, platform conditions, and responsibility boundaries.
+Documentação para usuários sobre a configuração e a operação de campanhas no WhatsApp no MagnusBilling 8, incluindo credenciais da Meta, modelos, execução de campanhas, respostas recebidas, condições da plataforma e limites de responsabilidade.
 
-## Current state
+## Situação atual
 
-- The durable field-help sources are `resources/help/help_en.js` and `resources/help/help_pt_BR.js`.
-- The generated English campaign field page exists at `wiki/en/modules/campaign/campaign.rst`.
-- The existing campaign help describes only Voice and SMS. It does not describe the WhatsApp campaign type or its template fields.
-- The Wiki has no end-to-end guide for Meta app creation, Cloud API credentials, webhook configuration, approved templates, campaign creation, inbound replies, or operational responsibility.
-- `wiki/generate.php` still contains MBilling_7-specific absolute paths and database settings, so it is unsafe to run unchanged from this MBilling_8 checkout.
+- As fontes permanentes da ajuda de campo são `resources/help/help_en.js` e `resources/help/help_pt_BR.js`.
+- A página de campos de campanha gerada existe em `wiki/en/modules/campaign/campaign.rst`.
+- A ajuda de campanha existente descreve só Voz e SMS. Ela não descreve o tipo de campanha WhatsApp nem os campos de modelo.
+- A wiki não tinha um guia completo para criar o app na Meta, obter credenciais da Cloud API, configurar o webhook, usar modelos aprovados, criar campanhas, receber respostas e entender a responsabilidade operacional.
+- O `wiki/generate.php` ainda contém caminhos absolutos e configurações de banco específicos do MBilling_7, então não é seguro rodá-lo sem mudanças a partir deste checkout do MBilling_8.
 
-## Documentation changes required
+## Mudanças necessárias na documentação
 
-1. Add durable English and Brazilian Portuguese help for the WhatsApp campaign type, template name, and template language.
-2. Add a standalone end-to-end WhatsApp campaign guide in English and Brazilian Portuguese.
-3. Link both guides from the corresponding Wiki indexes.
-4. State clearly that MagnusBilling only integrates with Meta's WhatsApp Business Platform and is not the message sender or messaging provider.
-5. State that the user is responsible for Meta account approval, recipient consent, templates, content, audience, legal compliance, charges, quality rating, blocks, and account restrictions.
-6. Cite official Meta resources for setup and policy details that can change over time.
+1. Acrescentar ajuda permanente em inglês e em português do Brasil para o tipo de campanha WhatsApp, o nome do modelo e o idioma do modelo.
+2. Acrescentar um guia completo e independente de campanha WhatsApp em inglês e em português do Brasil.
+3. Ligar os dois guias a partir dos índices correspondentes da wiki.
+4. Deixar claro que o MagnusBilling apenas se integra à WhatsApp Business Platform da Meta e não é o remetente nem o provedor das mensagens.
+5. Deixar claro que o usuário é responsável pela aprovação da conta na Meta, pelo consentimento dos destinatários, pelos modelos, pelo conteúdo, pelo público, pelo cumprimento da lei, pelas cobranças, pela classificação de qualidade, pelos bloqueios e pelas restrições da conta.
+6. Citar os recursos oficiais da Meta para os detalhes de configuração e de política que podem mudar com o tempo.
 
-## Validation approach
+## Forma de validação
 
-- Do not run the legacy generator until its hard-coded MBilling_7 paths are migrated.
-- Validate RST references and structure locally.
-- Validate JavaScript help-file syntax locally.
-- Do not use real credentials or contact Meta during documentation validation.
+- Não rodar o gerador legado até que os caminhos fixos do MBilling_7 sejam migrados.
+- Validar localmente as referências e a estrutura do RST.
+- Validar localmente a sintaxe dos arquivos de ajuda em JavaScript.
+- Não usar credenciais reais nem contatar a Meta durante a validação da documentação.

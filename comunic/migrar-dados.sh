@@ -39,6 +39,7 @@
 #   --provedores "A,B,C"     troca a lista de provedores (nomes como no painel)
 #
 set -u
+set -o pipefail   # falha no mariadb-dump nao pode ser escondida pelo gzip
 COM="$(cd "$(dirname "$0")" && pwd)"
 . "$COM/lib/comum.sh"
 
@@ -213,7 +214,7 @@ r "Planos ja preenchidos neste servidor antes da migracao: ${NPLANOS:-0}; com pl
 q "DROP TABLE IF EXISTS mbilling._mig_planos"
 
 echo "== 6/8 Customizacoes e opcoes"
-(cd "$MB" && php cron.php PlanConsumptionSetup) | sed 's/^/   /' || falhou "PlanConsumptionSetup"
+(cd "$MB" && php cron.php PlanConsumptionSetup) | sed 's/^/   /'; [ "${PIPESTATUS[0]}" = "0" ] || falhou "PlanConsumptionSetup"
 if [ $TESTE -eq 1 ]; then
     mariadb mbilling <<'SQL'
 UPDATE pkg_smtp SET host='127.0.0.1', port='1025', username='mb8-vm@teste.local', password='teste', encryption='null';

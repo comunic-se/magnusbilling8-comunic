@@ -1,95 +1,95 @@
 
 .. _servers-name:
 
-Name
+Nome
 ----
 
-| Server name.
+| Nome do servidor.
 
 
 
 
 .. _servers-host:
 
-Server IP
----------
+IP do servidor
+--------------
 
-| Server IP. You can see more details at the link `https://magnussolution.com/br/servicos/auto-desempenho/servidor-slave.html.  <https://magnussolution.com/br/servicos/auto-desempenho/servidor-slave.html.>`_.
+| IP do servidor. Veja mais detalhes no link `https://magnussolution.com/br/servicos/auto-desempenho/servidor-slave.html.  <https://magnussolution.com/br/servicos/auto-desempenho/servidor-slave.html.>`_.
 
 
 
 
 .. _servers-public-ip:
 
-Public IP
----------
+IP público
+----------
 
-| Public IP.
+| IP público.
 
 
 
 
 .. _servers-username:
 
-Username
---------
+Usuário
+-------
 
-| User to connect to the server.
+| Usuário para conectar ao servidor.
 
 
 
 
 .. _servers-password:
 
-Password
---------
+Senha
+-----
 
-| Password to connect to the server.
+| Senha para conectar ao servidor.
 
 
 
 
 .. _servers-port:
 
-Port
-----
+Porta
+-----
 
-| Port to connect to the server.
+| Porta para conectar ao servidor.
 
 
 
 
 .. _servers-sip-port:
 
-SIPport
--------
+Porta SIP
+---------
 
-| SIP port that the server will use.
+| Porta SIP que o servidor vai usar.
 
 
 
 
 .. _servers-type:
 
-Type
+Tipo
 ----
 
-| Server type.
+| Tipo de servidor.
 
 
 
 
 .. _servers-weight:
 
-Weight
-------
+Peso
+----
 
-| This option is to balance the calls by weight.
-| Example.
-|     
-| Let's say there's 1 MagnusBilling server and 3 slave servers, and you want to send the double of calls to each slave, proporcionaly to the MagnusBilling server. Then just set the MagnusBilling server to weight 1, and for the slave servers weight 2.
-| 
-| 
+| Esta opção distribui as chamadas por peso.
+| Exemplo.
+|
+| Digamos que haja 1 servidor MagnusBilling e 3 servidores slave, e você queira mandar o dobro de chamadas para cada slave em relação ao servidor MagnusBilling. Basta colocar peso 1 no servidor MagnusBilling e peso 2 nos servidores slave.
+|
+|
 
 
 
@@ -99,7 +99,7 @@ Weight
 Status
 ------
 
-| The proxy will only send calls to active servers and with weight higher than 0.
+| O proxy só manda chamadas para servidores ativos e com peso maior que 0.
 
 
 
@@ -109,17 +109,17 @@ Status
 id_server
 ---------
 
-| Identifier of the MagnusBilling server used by this record.
+| Identificador do servidor MagnusBilling usado por este registro.
 
 
 
 
 .. _servers-description:
 
-Description
------------
+Descrição
+---------
 
-| Used for internal control.
+| Usado para controle interno.
 
 
 

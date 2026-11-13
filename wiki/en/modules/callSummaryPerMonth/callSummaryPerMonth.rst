@@ -1,51 +1,51 @@
 
 .. _callSummaryPerMonth-sumsessiontime:
 
-Duration
---------
+Duração
+-------
 
-| Sum of call minutes.
-| It is possible to use filters, such as recent months. This summary only shows data that matches the selected filters.
+| Soma dos minutos das chamadas.
+| É possível usar filtros, como os últimos meses. Este resumo mostra só os dados que atendem aos filtros selecionados.
 
 
 
 
 .. _callSummaryPerMonth-sumsessionbill:
 
-Sell price
-----------
+Preço de venda
+--------------
 
-| Sum of the sell price.
+| Soma do preço de venda.
 
 
 
 
 .. _callSummaryPerMonth-sumbuycost:
 
-Buy price
----------
+Preço de compra
+---------------
 
-| Sum of the buy cost.
+| Soma do custo de compra.
 
 
 
 
 .. _callSummaryPerMonth-sumlucro:
 
-Markup
-------
+Lucro
+-----
 
-| Sum of the earnings.
+| Soma dos ganhos.
 
 
 
 
 .. _callSummaryPerMonth-sumnbcall:
 
-Total calls
------------
+Total de chamadas
+-----------------
 
-| Total of calls.
+| Total de chamadas.
 
 
 

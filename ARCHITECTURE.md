@@ -1,136 +1,137 @@
-# Architecture
+# Arquitetura
 
-## System context
+## Contexto do sistema
 
-MagnusBilling is a PHP web application coupled to a telephony runtime. The web
-panel and API manage commercial and technical configuration; scheduled
-commands maintain operational state; Asterisk executes calls; AGI applies
-routing and billing logic; MariaDB is the shared system of record.
+O MagnusBilling é uma aplicação web em PHP acoplada a um ambiente de telefonia. O
+painel web e a API gerenciam a configuração comercial e técnica; comandos agendados
+mantêm o estado operacional; o Asterisk executa as chamadas; o AGI aplica a lógica de
+roteamento e tarifação; e o MariaDB é o registro oficial compartilhado.
 
-## Main components
+## Componentes principais
 
-### Web client
+### Cliente web
 
-The Ext JS 6 application lives primarily in `app/`, with toolkit-specific code
-under `classic/` and `modern/`. It communicates with Yii controllers over HTTP.
-Generated bundles and framework sources are checked into this repository, so a
-frontend change may affect both source and build artifacts.
+A aplicação Ext JS 6 fica principalmente em `app/`, com o código específico de cada
+toolkit em `classic/` e `modern/`. Ela se comunica com os controllers Yii por HTTP. Os
+pacotes compilados e o código do framework estão versionados neste repositório, então
+uma mudança no frontend pode afetar tanto o código-fonte quanto os arquivos gerados.
 
-### Web and API backend
+### Backend web e API
 
-`index.php` boots the Yii 1 application using `protected/config/main.php`.
-Controllers in `protected/controllers/` handle panel and API requests. Models
-in `protected/models/` map the domain to MariaDB. Reusable operational logic
-belongs in `protected/components/` rather than in controllers.
+O `index.php` inicia a aplicação Yii 1 usando `protected/config/main.php`. Os
+controllers em `protected/controllers/` atendem as requisições do painel e da API. Os
+models em `protected/models/` mapeiam o domínio para o MariaDB. A lógica operacional
+reutilizável deve ficar em `protected/components/`, e não nos controllers.
 
-CSRF and cookie validation are enabled by the main web configuration. New
-endpoints must also enforce authentication, authorization, input validation,
-and safe output handling appropriate to their callers.
+A validação de CSRF e de cookies está ligada na configuração web principal. Endpoints
+novos também precisam aplicar autenticação, autorização, validação de entrada e
+tratamento seguro da saída, de acordo com quem os chama.
 
-### Console and scheduling
+### Console e agendamento
 
-`cron.php` starts the Yii console application configured by
-`protected/config/cron.php`. Commands under `protected/commands/` run periodic
-work, database updates, report generation, and operational maintenance.
-Commands must be safe under retry and must log enough context to diagnose
-partial failure.
+O `cron.php` inicia a aplicação de console Yii configurada em
+`protected/config/cron.php`. Os comandos em `protected/commands/` executam tarefas
+periódicas, atualizações do banco, geração de relatórios e manutenção operacional. Os
+comandos precisam ser seguros quando executados de novo e registrar contexto suficiente
+para diagnosticar uma falha parcial.
 
-### Telephony runtime
+### Ambiente de telefonia
 
-New installations use Asterisk 20 and PJSIP. Files under
-`resources/asterisk/` implement AGI call processing and supporting telephony
-logic. Backend components communicate with Asterisk through AMI and regenerate
-or reload configuration where required.
+As instalações novas usam Asterisk 20 e PJSIP. Os arquivos em `resources/asterisk/`
+implementam o processamento de chamadas via AGI e a lógica de telefonia de apoio. Os
+componentes do backend se comunicam com o Asterisk por AMI e geram ou recarregam a
+configuração quando necessário.
 
-Treat calls from PHP to the shell, Asterisk CLI, AMI, and AGI as trust
-boundaries. Validate identifiers and never interpolate untrusted input into a
-command.
+Trate as chamadas do PHP para o shell, a CLI do Asterisk, o AMI e o AGI como limites de
+confiança. Valide os identificadores e nunca coloque entrada não confiável dentro de um
+comando.
 
-### Persistence
+### Persistência
 
-MariaDB stores configuration, balances, rates, and call records.
-`script/database.sql` contains the installation baseline; update behavior is
-implemented through the application's database update command.
+O MariaDB guarda configurações, saldos, tarifas e registros de chamadas. O
+`script/database.sql` contém a base da instalação; as atualizações são feitas pelo
+comando de atualização do banco da aplicação.
 
-The Yii configurations read database credentials from
-`/etc/asterisk/res_config_mysql.conf`. Credentials and production configuration
-must remain outside the repository.
+As configurações do Yii leem as credenciais do banco em
+`/etc/asterisk/res_config_mysql.conf`. Credenciais e configurações de produção devem
+ficar fora do repositório.
 
-## Request and call flows
+## Fluxos de requisição e de chamada
 
-### Administrative request
+### Requisição administrativa
 
 ```text
-Browser
+Navegador
   -> Apache/PHP
   -> index.php
-  -> Yii controller
-  -> model/component
-  -> MariaDB and, when required, Asterisk AMI
-  -> JSON/HTML response
+  -> controller Yii
+  -> model/componente
+  -> MariaDB e, quando necessário, AMI do Asterisk
+  -> resposta JSON/HTML
 ```
 
-### Call processing
+### Processamento de chamadas
 
 ```text
-SIP device or carrier
+Aparelho SIP ou operadora
   -> Asterisk 20 / PJSIP
   -> dialplan
-  -> MagnusBilling AGI
-  -> routing and rating data in MariaDB
-  -> selected trunk/provider
-  -> CDR, balance, and reporting updates
+  -> AGI do MagnusBilling
+  -> dados de roteamento e tarifa no MariaDB
+  -> tronco/provedor escolhido
+  -> atualização de CDR, saldo e relatórios
 ```
 
-### Scheduled processing
+### Processamento agendado
 
 ```text
-system scheduler
+agendador do sistema
   -> cron.php
-  -> Yii console command
-  -> domain component/model
-  -> MariaDB, filesystem, external service, or Asterisk
+  -> comando de console Yii
+  -> componente/model do domínio
+  -> MariaDB, sistema de arquivos, serviço externo ou Asterisk
 ```
 
-## External boundaries
+## Limites externos
 
-MagnusBilling can communicate with payment gateways, email and messaging
-providers, DID services, WHMCS, and other APIs. Each integration must define:
+O MagnusBilling pode se comunicar com gateways de pagamento, provedores de e-mail e de
+mensagens, serviços de DID, WHMCS e outras APIs. Cada integração precisa definir:
 
-- where credentials are configured;
-- timeouts and retry behavior;
-- signature or webhook verification;
-- idempotency behavior for financial operations;
-- redaction of secrets and personal data from logs;
-- a clear failure response for operators.
+- onde as credenciais são configuradas;
+- tempos limite e comportamento de nova tentativa;
+- verificação de assinatura ou de webhook;
+- idempotência das operações financeiras;
+- remoção de segredos e dados pessoais dos logs;
+- uma resposta de falha clara para os operadores.
 
-## High-risk changes
+## Mudanças de alto risco
 
-Changes in these areas require additional review and production-like
-verification:
+Mudanças nestas áreas exigem revisão adicional e verificação num ambiente parecido
+com o de produção:
 
-- rate matching, call duration, rounding, balance, refill, and invoice logic;
-- database schema or update commands;
-- authentication, permissions, API exposure, and webhook validation;
-- installer, firewall, Fail2ban, Apache, MariaDB, or Asterisk configuration;
-- PJSIP endpoint, trunk, route, dialplan, AMI, or AGI behavior;
-- payment callbacks and any operation that may be repeated.
+- busca de tarifa, duração da chamada, arredondamento, saldo, recarga e faturamento;
+- esquema do banco ou comandos de atualização;
+- autenticação, permissões, exposição da API e validação de webhooks;
+- configuração do instalador, firewall, Fail2ban, Apache, MariaDB ou Asterisk;
+- comportamento de endpoints PJSIP, troncos, rotas, dialplan, AMI ou AGI;
+- retornos de pagamento e qualquer operação que possa ser repetida.
 
-## Design guidance
+## Orientações de projeto
 
-- Keep controllers thin and move reusable behavior into components.
-- Keep persistence rules in models or explicit domain services.
-- Make financial and webhook operations idempotent where possible.
-- Bound network and Asterisk operations with timeouts.
-- Return stable machine-readable result codes and actionable human messages.
-- Add translations for all new user-facing strings.
-- Add a focused regression test for every fixed defect.
-- Document operational or compatibility changes in the same pull request.
+- Mantenha os controllers enxutos e leve o comportamento reutilizável para componentes.
+- Mantenha as regras de persistência nos models ou em serviços de domínio explícitos.
+- Torne as operações financeiras e de webhook idempotentes sempre que possível.
+- Limite as operações de rede e do Asterisk com tempos limite.
+- Devolva códigos de resultado estáveis, legíveis por máquina, e mensagens úteis para
+  pessoas.
+- Acrescente traduções para todos os textos novos exibidos ao usuário.
+- Acrescente um teste de regressão focado para cada defeito corrigido.
+- Documente as mudanças operacionais ou de compatibilidade no mesmo pull request.
 
-## Deployment assumptions
+## Premissas de implantação
 
-The supported installer owns significant system configuration. A production
-deployment therefore spans the repository plus Apache, PHP, MariaDB, Asterisk,
-PJSIP, cron, firewall, and Fail2ban state. Repository-only tests cannot prove a
-complete deployment; release validation must include an isolated server and a
-realistic inbound and outbound call path.
+O instalador suportado controla boa parte da configuração do sistema. Uma implantação
+de produção abrange, portanto, o repositório e também o estado do Apache, PHP, MariaDB,
+Asterisk, PJSIP, cron, firewall e Fail2ban. Testes apenas no repositório não comprovam
+uma implantação completa; a validação de uma versão precisa incluir um servidor isolado
+e um caminho real de chamada de entrada e de saída.

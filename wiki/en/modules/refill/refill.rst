@@ -1,70 +1,70 @@
 
 .. _refill-id-user:
 
-Username
---------
+Usuário
+-------
 
-| User that will be realized the refill.
+| Usuário que receberá a recarga.
 
 
 
 
 .. _refill-credit:
 
-Credit
-------
+Crédito
+-------
 
-| Refill amount. Can be a positive or negative value, if the value is negative will remove from the total amount of credit of the client.
+| Valor da recarga. Pode ser positivo ou negativo; se for negativo, o valor é retirado do crédito total do cliente.
 
 
 
 
 .. _refill-description:
 
-Description
------------
+Descrição
+---------
 
-| Description to the calendar, only for self control.
+| Descrição, apenas para controle interno.
 
 
 
 
 .. _refill-payment:
 
-Add payment
------------
+Adicionar pagamento
+-------------------
 
-| This setting is only to your control, the credit will be released to the user anyway if set to Payment NO
+| Esta configuração serve apenas para o seu controle; o crédito é liberado ao usuário mesmo com Pagamento em NÃO.
 
 
 
 
 .. _refill-date:
 
-Date
+Data
 ----
 
-| Date when the refill, payment, or credit adjustment was registered.
+| Data em que a recarga, o pagamento ou o ajuste de crédito foi registrado.
 
 
 
 
 .. _refill-invoice-number:
 
-Invoice number
---------------
+Número da nota fiscal
+---------------------
 
-| Invoice number.
+| Número da nota fiscal.
 
 
 
 
 .. _refill-image:
 
-Payment receipt
----------------
+Comprovante de pagamento
+------------------------
 
-| Payment receipt image attached to this refill.
+| Imagem do comprovante de pagamento anexada a esta recarga.
 
 
 

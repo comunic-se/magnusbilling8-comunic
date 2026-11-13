@@ -1,85 +1,82 @@
-STIR/SHAKEN on the OpenSIPS 3.6 proxy
-=====================================
+STIR/SHAKEN no proxy OpenSIPS 3.6
+=================================
 
-This guide explains how to enable STIR/SHAKEN signing and verification on the
-OpenSIPS 3.6 proxy used by MagnusBilling 8.
+Este guia explica como ativar a assinatura e a verificação STIR/SHAKEN no proxy
+OpenSIPS 3.6 usado pelo MagnusBilling 8.
 
-The integration does not change master/slave routing or dispatcher selection.
-The private header sent to MagnusBilling slaves remains exactly::
+A integração não muda o roteamento master/slave nem a escolha do dispatcher. O
+cabeçalho privado enviado aos slaves do MagnusBilling continua exatamente assim::
 
    P-CallerID: display-name|number
 
-Existing slave dialplans can continue reading it with::
+Os dialplans dos slaves existentes podem continuar lendo esse cabeçalho com::
 
    Set(CALLERID(name)=${CUT(PJSIP_HEADER(read,P-CallerID),|,1)})
    Set(CALLERID(num)=${CUT(PJSIP_HEADER(read,P-CallerID),|,2)})
 
-Requirements
-------------
+Requisitos
+----------
 
-Production signing requires the following material from an approved
-STIR/SHAKEN authority:
+A assinatura em produção exige este material de uma autoridade STIR/SHAKEN aprovada:
 
-* a valid STI X.509 certificate in PEM format;
-* the matching private key in PEM format;
-* a stable public HTTPS URL (``x5u``) that serves the STI certificate; and
-* an attestation policy appropriate for the authenticated caller.
+* um certificado STI X.509 válido em formato PEM;
+* a chave privada correspondente em formato PEM;
+* uma URL HTTPS pública e estável (``x5u``) que sirva o certificado STI; e
+* uma política de atestação adequada a quem liga, depois de autenticado.
 
-Do not use a self-signed certificate in production. Never publish the private
-key. The server clock must be synchronized with NTP because the configured
-authentication and verification freshness window is 60 seconds.
+Não use certificado autoassinado em produção. Nunca publique a chave privada. O
+relógio do servidor precisa estar sincronizado por NTP, porque a janela de validade
+configurada para autenticação e verificação é de 60 segundos.
 
-Publish the certificate
------------------------
+Publique o certificado
+----------------------
 
-Publish only the certificate at a stable HTTPS location, for example::
+Publique só o certificado num endereço HTTPS estável, por exemplo::
 
    https://certificates.example.com/stir/certificate.pem
 
-The URL must use a valid TLS certificate, return HTTP 200, and serve the STI
-certificate as PEM. Test it before installation::
+A URL precisa usar um certificado TLS válido, devolver HTTP 200 e servir o
+certificado STI em PEM. Teste antes da instalação::
 
    curl --fail --show-error --location \
      https://certificates.example.com/stir/certificate.pem
 
-Inspect the published certificate::
+Inspecione o certificado publicado::
 
    curl --fail --silent \
      https://certificates.example.com/stir/certificate.pem \
      | openssl x509 -noout -subject -issuer -dates
 
-Choose the attestation
-----------------------
+Escolha a atestação
+-------------------
 
-Use the strongest attestation that the authentication and Caller ID
-authorization process can truthfully support:
+Use a atestação mais forte que o processo de autenticação e de autorização do
+Caller ID consiga sustentar com verdade:
 
 ``A``
-   The customer is authenticated and is authorized to use the presented
-   calling number.
+   O cliente está autenticado e autorizado a usar o número apresentado.
 
 ``B``
-   The customer is authenticated, but authorization for that particular
-   calling number has not been fully established.
+   O cliente está autenticado, mas a autorização para aquele número específico não
+   foi totalmente comprovada.
 
 ``C``
-   The call arrived through a gateway and the originating caller cannot be
-   authenticated.
+   A chamada chegou por um gateway e não é possível autenticar quem originou.
 
-Do not assign ``A`` to all traffic unless MagnusBilling or an upstream system
-has verified that each subscriber owns or controls the presented number. The
-installer defaults to ``C``.
+Não atribua ``A`` a todo o tráfego, a menos que o MagnusBilling ou um sistema
+anterior tenha comprovado que cada assinante é dono ou controla o número
+apresentado. O padrão do instalador é ``C``.
 
-New proxy installation
-----------------------
+Instalação de um proxy novo
+---------------------------
 
-Validate the local files first::
+Valide primeiro os arquivos locais::
 
    openssl x509 -in /root/stir/certificate.pem \
      -noout -subject -issuer -dates
    openssl pkey -in /root/stir/private-key.pem -check -noout
 
-Run the installer with the signing material in environment variables::
+Rode o instalador com o material de assinatura em variáveis de ambiente::
 
    sudo env \
      STIR_SHAKEN_CERT_PATH=/root/stir/certificate.pem \
@@ -89,8 +86,8 @@ Run the installer with the signing material in environment variables::
      STIR_SHAKEN_VERIFY_REJECT=0 \
      ./script/installOpenSips-3.6.sh PUBLIC_IP MAGNUSBILLING_IP
 
-When the bind/local address differs from the advertised public address, pass
-it as the third argument::
+Quando o endereço local (bind) for diferente do endereço público anunciado, passe-o
+como terceiro argumento::
 
    sudo env \
      STIR_SHAKEN_CERT_PATH=/root/stir/certificate.pem \
@@ -100,36 +97,36 @@ it as the third argument::
      STIR_SHAKEN_VERIFY_REJECT=0 \
      ./script/installOpenSips-3.6.sh PUBLIC_IP MAGNUSBILLING_IP LOCAL_IP
 
-The installer performs these actions:
+O instalador faz o seguinte:
 
-#. Installs the OpenSIPS STIR/SHAKEN and HTTP modules.
-#. Creates ``/etc/opensips/stir-shaken``.
-#. Installs the certificate, private key, and trusted CA list.
-#. Creates ``stir_shaken_config`` in the ``opensips`` database.
-#. Enables signing only after MySQL successfully loads the certificate and
-   private key.
-#. Enables verification in monitor-only mode by default.
+#. Instala os módulos STIR/SHAKEN e HTTP do OpenSIPS.
+#. Cria ``/etc/opensips/stir-shaken``.
+#. Instala o certificado, a chave privada e a lista de CAs confiáveis.
+#. Cria a ``stir_shaken_config`` no banco ``opensips``.
+#. Ativa a assinatura só depois de o MySQL carregar com sucesso o certificado e a
+   chave privada.
+#. Ativa a verificação em modo só de monitoramento, por padrão.
 
-If ``STIR_SHAKEN_CERT_PATH``, ``STIR_SHAKEN_KEY_PATH``, and
-``STIR_SHAKEN_X5U`` are omitted, installation continues with signing disabled.
+Se ``STIR_SHAKEN_CERT_PATH``, ``STIR_SHAKEN_KEY_PATH`` e ``STIR_SHAKEN_X5U`` não forem
+informados, a instalação continua com a assinatura desativada.
 
-Upgrade an existing proxy
--------------------------
+Atualizar um proxy existente
+----------------------------
 
-Install the modules::
+Instale os módulos::
 
    sudo apt update
    sudo apt install -y opensips-stir-shaken-module opensips-http-modules
 
-Deploy the updated configuration::
+Implante a configuração atualizada::
 
    sudo cp script/opensips-3.6.cfg /etc/opensips/opensips.cfg
 
-If the file was copied directly from a source checkout, replace the installer
-markers ``MYSQLUSER:MYSQLPASS``, ``MYIP``, ``LOCALIP``, and ``MASTERIP`` with
-the values for that proxy.
+Se o arquivo foi copiado direto do código-fonte, troque os marcadores do instalador
+``MYSQLUSER:MYSQLPASS``, ``MYIP``, ``LOCALIP`` e ``MASTERIP`` pelos valores daquele
+proxy.
 
-Create the certificate directory and initial trust list::
+Crie o diretório do certificado e a lista de confiança inicial::
 
    sudo install -d -o opensips -g opensips -m 0755 \
      /etc/opensips/stir-shaken
@@ -139,8 +136,8 @@ Create the certificate directory and initial trust list::
      /etc/opensips/stir-shaken/ca-list.pem
    sudo chmod 0640 /etc/opensips/stir-shaken/ca-list.pem
 
-Open the database client with ``mysql -u root -p opensips`` and create the
-configuration table::
+Abra o cliente do banco com ``mysql -u root -p opensips`` e crie a tabela de
+configuração::
 
    CREATE TABLE IF NOT EXISTS stir_shaken_config (
        id TINYINT UNSIGNED NOT NULL PRIMARY KEY,
@@ -157,14 +154,14 @@ configuration table::
 
    INSERT IGNORE INTO stir_shaken_config (id) VALUES (1);
 
-Temporarily make the files readable by the MySQL process::
+Deixe temporariamente os arquivos legíveis para o processo do MySQL::
 
    sudo install -o root -g mysql -m 0640 /root/stir/certificate.pem \
      /etc/opensips/stir-shaken/certificate.pem
    sudo install -o root -g mysql -m 0640 /root/stir/private-key.pem \
      /etc/opensips/stir-shaken/private-key.pem
 
-Load the material without pasting or printing the private key::
+Carregue o material sem colar nem imprimir a chave privada::
 
    SET @stir_cert =
        LOAD_FILE('/etc/opensips/stir-shaken/certificate.pem');
@@ -182,7 +179,7 @@ Load the material without pasting or printing the private key::
        private_key = @stir_key
    WHERE id = 1;
 
-Restore restrictive ownership and permissions::
+Restaure o dono e as permissões restritivas::
 
    sudo chown opensips:opensips \
      /etc/opensips/stir-shaken/certificate.pem \
@@ -191,7 +188,7 @@ Restore restrictive ownership and permissions::
      /etc/opensips/stir-shaken/certificate.pem \
      /etc/opensips/stir-shaken/private-key.pem
 
-Confirm that the content was loaded without displaying it::
+Confirme que o conteúdo foi carregado, sem mostrá-lo::
 
    SELECT id, sign_enabled, verify_enabled, verify_reject,
           attestation, x5u,
@@ -201,45 +198,45 @@ Confirm that the content was loaded without displaying it::
    FROM stir_shaken_config
    WHERE id = 1;
 
-Verification policy
--------------------
+Política de verificação
+-----------------------
 
-The default policy is::
+A política padrão é::
 
    verify_enabled = 1
    verify_reject  = 0
 
-This is monitor-only mode. Valid and invalid identities are logged and passed
-to MagnusBilling as verification metadata, but STIR/SHAKEN failures do not
-reject calls.
+É o modo só de monitoramento. Identidades válidas e inválidas são registradas em
+log e repassadas ao MagnusBilling como metadados de verificação, mas falhas de
+STIR/SHAKEN não recusam chamadas.
 
-After monitoring interoperability with every provider, strict rejection can
-be enabled::
+Depois de acompanhar a interoperabilidade com cada provedor, a recusa estrita pode
+ser ativada::
 
    UPDATE stir_shaken_config
    SET verify_enabled = 1, verify_reject = 1
    WHERE id = 1;
 
-Return to monitor-only mode with::
+Volte ao modo só de monitoramento com::
 
    UPDATE stir_shaken_config
    SET verify_reject = 0
    WHERE id = 1;
 
-Disable verification with::
+Desative a verificação com::
 
    UPDATE stir_shaken_config
    SET verify_enabled = 0
    WHERE id = 1;
 
-Calls without an ``Identity`` header continue normally. With
-``verify_reject=1``, a call that supplies an invalid Identity, unreachable
-certificate, or invalid signature is rejected.
+Chamadas sem o cabeçalho ``Identity`` continuam normalmente. Com
+``verify_reject=1``, uma chamada que traga Identity inválido, certificado
+inacessível ou assinatura inválida é recusada.
 
-Signing policy
---------------
+Política de assinatura
+----------------------
 
-Enable signing only when all required values exist::
+Ative a assinatura só quando todos os valores obrigatórios existirem::
 
    UPDATE stir_shaken_config
    SET sign_enabled = 1
@@ -248,30 +245,30 @@ Enable signing only when all required values exist::
      AND private_key IS NOT NULL
      AND x5u LIKE 'https://%';
 
-Disable signing without deleting credentials::
+Desative a assinatura sem apagar as credenciais::
 
    UPDATE stir_shaken_config
    SET sign_enabled = 0
    WHERE id = 1;
 
-Change the attestation, when justified by the authorization policy::
+Mude a atestação, quando a política de autorização justificar::
 
    UPDATE stir_shaken_config
    SET attestation = 'B'
    WHERE id = 1;
 
-New calls read these database values immediately; a restart is not required
-for policy changes.
+As chamadas novas leem esses valores do banco na hora; não é preciso reiniciar para
+mudanças de política.
 
-Trusted certification authorities
----------------------------------
+Autoridades certificadoras confiáveis
+-------------------------------------
 
-The verifier reads trusted authorities from::
+O verificador lê as autoridades confiáveis de::
 
    /etc/opensips/stir-shaken/ca-list.pem
 
-If the STI authority is not in the system CA bundle, append the CA chain
-supplied by the authority::
+Se a autoridade STI não estiver no pacote de CAs do sistema, acrescente a cadeia de
+CA fornecida pela autoridade::
 
    sudo sh -c 'cat /root/stir/sti-ca-chain.pem >> \
      /etc/opensips/stir-shaken/ca-list.pem'
@@ -279,139 +276,138 @@ supplied by the authority::
      /etc/opensips/stir-shaken/ca-list.pem
    sudo chmod 0640 /etc/opensips/stir-shaken/ca-list.pem
 
-Reload the trust list::
+Recarregue a lista de confiança::
 
    sudo opensips-cli -x mi stir_shaken_ca_reload
 
-Some package revisions expose the newer MI command name::
+Algumas revisões do pacote usam o nome mais novo do comando MI::
 
    sudo opensips-cli -x mi stir_shaken:ca_reload
 
-Validate and restart OpenSIPS
------------------------------
+Valide e reinicie o OpenSIPS
+----------------------------
 
-Validate the configuration before restarting::
+Valide a configuração antes de reiniciar::
 
    sudo /sbin/opensips -C /etc/opensips/opensips.cfg
 
-Then restart and inspect the service::
+Depois reinicie e inspecione o serviço::
 
    sudo systemctl restart opensips
    sudo systemctl status opensips --no-pager
    sudo opensips-cli -x mi which | grep -i stir
 
-Test calls
-----------
+Chamadas de teste
+-----------------
 
-Place an outbound call and inspect the relayed INVITE with ``sudo sngrep``.
-An authenticated call should include headers similar to::
+Faça uma chamada de saída e inspecione o INVITE repassado com ``sudo sngrep``. Uma
+chamada autenticada deve ter cabeçalhos parecidos com::
 
    Date: ...
    Identity: ...;info=<https://.../certificate.pem>;alg=ES256;ppt=shaken
    P-CallerID: display-name|number
 
-Dispatcher selection and the chosen master or slave remain unchanged.
+A escolha do dispatcher e o master ou slave escolhido continuam iguais.
 
-For an inbound call containing ``Identity``, the proxy adds one of these
-internal status headers::
+Numa chamada de entrada com ``Identity``, o proxy acrescenta um destes cabeçalhos
+internos de status::
 
    P-STIR-Verification: passed;attest=A
    P-STIR-Verification: failed;reason=verification-failed
 
-Inspect STIR/SHAKEN log events with::
+Inspecione os eventos de log do STIR/SHAKEN com::
 
    sudo grep '|STIR|' /var/log/opensips.log
 
-Typical success messages contain::
+As mensagens típicas de sucesso contêm::
 
    STIR|signed caller=... destination=... attest=A
    STIR|verified caller=... destination=... attest=A
 
-Certificate renewal
--------------------
+Renovação do certificado
+------------------------
 
-Before expiration:
+Antes do vencimento:
 
-#. Publish the new certificate at the ``x5u`` URL.
-#. Install the new certificate and private key on the proxy.
-#. Update ``certificate``, ``private_key``, and, if needed, ``x5u`` in the
-   database.
-#. Validate an outbound call.
-#. Keep the old certificate available long enough for in-progress calls and
-   remote verifier caches.
+#. Publique o certificado novo na URL ``x5u``.
+#. Instale o certificado e a chave privada novos no proxy.
+#. Atualize ``certificate``, ``private_key`` e, se preciso, ``x5u`` no banco.
+#. Valide uma chamada de saída.
+#. Mantenha o certificado antigo disponível por tempo suficiente para as chamadas em
+   andamento e os caches dos verificadores remotos.
 
-Plan rotation before expiration because remote verifiers may cache the old
-certificate served by an existing ``x5u`` URL.
+Planeje a troca antes do vencimento, porque verificadores remotos podem guardar em
+cache o certificado antigo servido por uma URL ``x5u`` existente.
 
-Troubleshooting
----------------
+Solução de problemas
+--------------------
 
-No Identity header on outbound calls
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Sem cabeçalho Identity nas chamadas de saída
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Check the active values::
+Confira os valores ativos::
 
    SELECT sign_enabled, attestation, x5u,
           LENGTH(certificate), LENGTH(private_key)
    FROM stir_shaken_config
    WHERE id = 1;
 
-The originating and destination identities must also be valid telephone
-numbers. The module does not sign identities it cannot parse as telephone
-numbers.
+As identidades de origem e de destino também precisam ser números de telefone
+válidos. O módulo não assina identidades que não consegue interpretar como números
+de telefone.
 
 ``certificate-unavailable``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Test the URL from the proxy::
+Teste a URL a partir do proxy::
 
    curl --fail --verbose \
      https://certificates.example.com/stir/certificate.pem
 
-Check DNS, firewall rules, TLS validation, HTTP 200, and response size.
+Confira o DNS, as regras de firewall, a validação TLS, o HTTP 200 e o tamanho da resposta.
 
-Date or freshness failure
-~~~~~~~~~~~~~~~~~~~~~~~~~
+Falha de data ou de validade
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Check and enable time synchronization::
+Confira e ative a sincronização de horário::
 
    timedatectl status
    sudo timedatectl set-ntp true
 
-Untrusted certificate
-~~~~~~~~~~~~~~~~~~~~~
+Certificado não confiável
+~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Ensure the STI authority chain is present in ``ca-list.pem`` and reload the
-CA list. Do not disable TLS peer or hostname verification to bypass the error.
+Confirme que a cadeia da autoridade STI está no ``ca-list.pem`` e recarregue a lista
+de CAs. Não desative a verificação TLS do par ou do nome do host para contornar o erro.
 
-MySQL ``LOAD_FILE`` returns NULL
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+O ``LOAD_FILE`` do MySQL devolve NULL
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Inspect the server restriction::
+Inspecione a restrição do servidor::
 
    SHOW VARIABLES LIKE 'secure_file_priv';
 
-Also verify that the ``mysql`` process can traverse the directory and read the
-files temporarily. Restore ownership to ``opensips:opensips`` and mode
-``0640`` after loading them.
+Confira também se o processo ``mysql`` consegue percorrer o diretório e ler os
+arquivos temporariamente. Depois de carregar, devolva o dono para
+``opensips:opensips`` e o modo ``0640``.
 
-Security checklist
+Lista de segurança
 ------------------
 
-* Never publish, transmit in SIP, or log the private key.
-* Restrict database access to ``stir_shaken_config``.
-* Accept only HTTPS ``x5u`` URLs.
-* Keep TLS peer and hostname validation enabled.
-* Use attestation ``A`` only after Caller ID authorization.
-* Start with ``verify_reject=0`` and monitor providers before blocking calls.
-* Rotate the STI certificate before expiration.
+* Nunca publique, transmita por SIP nem registre em log a chave privada.
+* Restrinja o acesso ao banco na ``stir_shaken_config``.
+* Aceite só URLs ``x5u`` em HTTPS.
+* Mantenha ativada a validação TLS do par e do nome do host.
+* Use a atestação ``A`` só depois de autorizar o Caller ID.
+* Comece com ``verify_reject=0`` e acompanhe os provedores antes de bloquear chamadas.
+* Troque o certificado STI antes do vencimento.
 
-References
-----------
+Referências
+-----------
 
-* `OpenSIPS 3.6 STIR/SHAKEN module
+* `Módulo STIR/SHAKEN do OpenSIPS 3.6
   <https://docs.opensips.org/manual/3-6/modules/stir_shaken/>`_
-* `OpenSIPS 3.6 REST client module
+* `Módulo cliente REST do OpenSIPS 3.6
   <https://docs.opensips.org/modules/3-6/rest_client/>`_
 * `RFC 8224 <https://www.rfc-editor.org/rfc/rfc8224>`_
 * `RFC 8588 <https://www.rfc-editor.org/rfc/rfc8588>`_

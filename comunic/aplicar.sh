@@ -36,7 +36,7 @@ diga() { [ $SILENCIOSO -eq 1 ] || echo "$@"; }
 if [ ! -f "$MB/index.html" ] || [ ! -f "$MB/cron.php" ]; then
     echo "MagnusBilling nao encontrado em $MB. Rode antes o comunic/instalar.sh."; exit 1
 fi
-case "$REPO" in $MB|$MB/*) echo "O repositorio nao pode ficar dentro de $MB."; exit 1 ;; esac
+case "$REPO" in "$MB"|"$MB"/*) echo "O repositorio nao pode ficar dentro de $MB."; exit 1 ;; esac
 for F in MANIFEST originais.sha256 traducoes/mesclar.php compat.sh saude.sh vigia.sh; do
     [ -f "$COM/$F" ] || { echo "Arquivo do repositorio ausente: comunic/$F"; exit 1; }
 done
@@ -64,7 +64,11 @@ if [ $RC -eq 1 ]; then
 fi
 
 diga "== 2/7 Backup"
-BKP=/root/mb8-custom-backup-$(date +%Y%m%d-%H%M%S)
+# as execucoes automaticas (vigia/atualizacao) usam outro prefixo, para que um vigia
+# em falha repetida nao apague os backups feitos nas execucoes manuais
+PREFIXO=/root/mb8-custom-backup-
+[ $SILENCIOSO -eq 1 ] && PREFIXO=/root/mb8-custom-backup-auto-
+BKP=$PREFIXO$(date +%Y%m%d-%H%M%S)
 mkdir -p "$BKP"
 for ARQ in $LISTA index.html resources/locale/pt_BR.js resources/locale/php/pt_BR/zii.php \
            $(awk '{print $2}' "$COM/originais.sha256"); do
@@ -75,7 +79,11 @@ mariadb-dump --single-transaction mbilling pkg_user pkg_module pkg_group_module 
     > "$BKP/tabelas.sql" 2>/dev/null
 diga "   $BKP"
 # guarda so os 10 backups mais recentes deste tipo
-ls -1dt /root/mb8-custom-backup-* 2>/dev/null | tail -n +11 | xargs -r rm -rf
+if [ $SILENCIOSO -eq 1 ]; then
+    ls -1dt /root/mb8-custom-backup-auto-* 2>/dev/null | tail -n +11 | xargs -r rm -rf
+else
+    ls -1dt /root/mb8-custom-backup-* 2>/dev/null | grep -v -- '-auto-' | tail -n +11 | xargs -r rm -rf
+fi
 
 diga "== 3/7 Arquivos oficiais alterados pela versao antiga (v11)"
 DEVOLVIDOS=0
@@ -132,9 +140,21 @@ diga "== 6/7 Banco e crontab"
 # horario de Brasilia -> fuso do servidor
 hora_local() { date -d "TZ=\"America/Sao_Paulo\" $1" '+%-M %-H'; }
 # mantem o modo da conferencia semanal se alguem trocou para --auto
+# le o crontab UMA vez; se a leitura falhar por outro motivo que nao "sem crontab",
+# para aqui: regravar a partir de uma leitura vazia apagaria as rotinas oficiais
+CRON_ATUAL=$(crontab -l 2>&1); RCC=$?
+if [ $RCC -ne 0 ]; then
+    if echo "$CRON_ATUAL" | grep -qi 'no crontab'; then
+        CRON_ATUAL=""
+    else
+        echo "   ERRO: nao consegui ler o crontab do root ($CRON_ATUAL). Crontab NAO alterado."
+        registrar ERRO "aplicar.sh: falha ao ler o crontab"
+        exit 1
+    fi
+fi
 MODO_VER=--verificar
-crontab -l 2>/dev/null | grep '# comunic-verificar$' | grep -q -- '--auto' && MODO_VER=--auto
-NOVO=$(crontab -l 2>/dev/null \
+printf '%s\n' "$CRON_ATUAL" | grep '# comunic-verificar$' | grep -q -- '--auto' && MODO_VER=--auto
+NOVO=$(printf '%s\n' "$CRON_ATUAL" \
     | sed -E 's@^([^#].*protected/commands/update\.sh.*)$@#COMUNIC-atualizacao-manual# \1@' \
     | grep -v '# comunic-vigia$' | grep -v '# comunic-verificar$')
 NOVO="$NOVO

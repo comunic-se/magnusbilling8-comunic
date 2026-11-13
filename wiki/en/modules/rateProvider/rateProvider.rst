@@ -1,60 +1,60 @@
 
 .. _rateProvider-id-provider:
 
-Provider name
--------------
+Nome do provedor
+----------------
 
-| Provider.
+| Provedor.
 
 
 
 
 .. _rateProvider-id-prefix:
 
-Destination
------------
+Destino
+-------
 
-| Prefix.
+| Prefixo.
 
 
 
 
 .. _rateProvider-buyrate:
 
-Buy price
----------
+Preço de compra
+---------------
 
-| Paid amount per min to the provider.
+| Valor pago por minuto ao provedor.
 
 
 
 
 .. _rateProvider-buyrateinitblock:
 
-Buy price initblock
--------------------
+Bloco inicial de compra
+-----------------------
 
-| Minimum time in seconds to tariff. Ex: if it's set to 30, any calll that lasts less than 30 seconds will be charged 30 seconds.
+| Tempo mínimo em segundos para tarifar. Ex.: se estiver em 30, qualquer chamada com menos de 30 segundos é cobrada como 30 segundos.
 
 
 
 
 .. _rateProvider-buyrateincrement:
 
-Buy price increment
--------------------
+Incremento de compra
+--------------------
 
-| Time period that will be charged after minimun time. Ex: if it's set to 6, this means that will always round up to 6 seconds, therefore, a call that lasted 32 seconds will be charged 36 seconds.
+| Período cobrado depois do tempo mínimo. Ex.: se estiver em 6, o tempo é sempre arredondado para cima em blocos de 6 segundos; uma chamada de 32 segundos é cobrada como 36 segundos.
 
 
 
 
 .. _rateProvider-minimal-time-buy:
 
-Minimum time to buy
--------------------
+Tempo mínimo de compra
+----------------------
 
-| Minimum time to tarrif. Ex: If is set to 3, will only tariff calls that lasted 3 or more seconds.
+| Tempo mínimo para tarifar. Ex.: se estiver em 3, só são tarifadas as chamadas com 3 segundos ou mais.
 
 
 

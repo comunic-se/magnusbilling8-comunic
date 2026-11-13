@@ -1,32 +1,32 @@
 .. _tts:
 
-TTS configuration
-=================
+Configuração de TTS
+===================
 
-MagnusBilling can generate campaign audio from text. This page describes the
-ElevenLabs API integration and the legacy URL-based providers.
+O MagnusBilling pode gerar o áudio das campanhas a partir de texto. Esta página
+descreve a integração com a API da ElevenLabs e os provedores legados por URL.
 
-Use automated calls only for contacts who have consented to receive them.
-Follow the privacy, telemarketing, opt-out, and telecommunications rules that
-apply in the sender's and recipient's jurisdictions.
+Use chamadas automáticas só para contatos que consentiram em recebê-las. Siga as
+regras de privacidade, telemarketing, descadastro e telecomunicações que valem nas
+jurisdições de quem envia e de quem recebe.
 
 ElevenLabs
 ----------
 
-Requirements
-~~~~~~~~~~~~
+Requisitos
+~~~~~~~~~~
 
-The server needs outbound HTTPS access, the PHP cURL and iconv extensions, and
-``mpg123``. The ElevenLabs account must have an API key and an available voice.
+O servidor precisa de acesso HTTPS de saída, das extensões cURL e iconv do PHP e do
+``mpg123``. A conta da ElevenLabs precisa ter uma chave de API e uma voz disponível.
 
-Keep the API key outside the web root. Never place it in a campaign field,
-source file, database setting, screenshot, ticket, or log.
+Mantenha a chave de API fora da raiz web. Nunca a coloque num campo de campanha,
+arquivo de código, configuração no banco, captura de tela, chamado ou log.
 
-Server configuration
-~~~~~~~~~~~~~~~~~~~~
+Configuração do servidor
+~~~~~~~~~~~~~~~~~~~~~~~~
 
-Copy ``resources/elevenlabs/elevenlabs.conf.example`` to
-``/etc/asterisk/elevenlabs.conf`` and edit the copy:
+Copie ``resources/elevenlabs/elevenlabs.conf.example`` para
+``/etc/asterisk/elevenlabs.conf`` e edite a cópia:
 
 .. code-block:: ini
 
@@ -36,111 +36,110 @@ Copy ``resources/elevenlabs/elevenlabs.conf.example`` to
    model_id = "eleven_multilingual_v2"
    output_format = "mp3_44100_128"
 
-Protect the configuration so only the administrator and Asterisk can read it:
+Proteja a configuração para que só o administrador e o Asterisk possam lê-la:
 
 .. code-block:: console
 
    chown root:asterisk /etc/asterisk/elevenlabs.conf
    chmod 0640 /etc/asterisk/elevenlabs.conf
 
-The default path can be changed with the ``ELEVENLABS_CONFIG`` environment
-variable.
+O caminho padrão pode ser mudado com a variável de ambiente ``ELEVENLABS_CONFIG``.
 
-In **Settings > Configuration**, set **TTS URL** to:
+Em **Configurações > Configuração**, coloque em **TTS URL**:
 
 .. code-block:: text
 
    elevenlabs
 
-Campaign fields
-~~~~~~~~~~~~~~~
+Campos da campanha
+~~~~~~~~~~~~~~~~~~
 
-Both ``tts_audio`` and ``tts_audio2`` accept ``%name%``. MagnusBilling replaces
-it with the name stored for that contact in **Phone Numbers** before requesting
-and caching the audio.
+Tanto ``tts_audio`` quanto ``tts_audio2`` aceitam ``%name%``. O MagnusBilling troca
+pelo nome guardado para aquele contato em **Números** antes de pedir e guardar em
+cache o áudio.
 
-Example:
+Exemplo:
 
 .. code-block:: text
 
    tts_audio:
-   Hello %name%. We have important information for you.
+   Olá %name%. Temos uma informação importante para você.
 
    tts_audio2:
-   To receive the link by SMS, press 2.
+   Para receber o link por SMS, digite 2.
 
-When two prompts are configured, the second starts immediately after the first.
-A digit pressed during the first prompt is preserved and the second prompt is
-skipped. When either text contains ``%name%``, MagnusBilling does not play the
-legacy standalone name prompt, which avoids speaking the name twice.
+Quando há duas mensagens configuradas, a segunda começa logo depois da primeira. Um
+dígito digitado durante a primeira é preservado e a segunda é pulada. Quando algum
+dos textos tem ``%name%``, o MagnusBilling não toca a mensagem legada só com o nome,
+o que evita falar o nome duas vezes.
 
-To override the configured model and voice for one text, use:
+Para trocar o modelo e a voz configurados num único texto, use:
 
 .. code-block:: text
 
-   MODEL_ID|VOICE_ID|Text to synthesize
+   MODEL_ID|VOICE_ID|Texto a sintetizar
 
-Audio processing and cache
-~~~~~~~~~~~~~~~~~~~~~~~~~~
+Processamento do áudio e cache
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-MagnusBilling converts the ElevenLabs response to an 8 kHz, 16-bit, mono WAV
-file for Asterisk. Files are cached as ``/tmp/tts_audio_<hash>.wav``.
+O MagnusBilling converte a resposta da ElevenLabs num arquivo WAV mono de 8 kHz e
+16 bits para o Asterisk. Os arquivos ficam em cache como ``/tmp/tts_audio_<hash>.wav``.
 
-The cache key includes the provider, voice, model, output format, and
-personalized text. A file lock prevents concurrent requests from generating
-and charging for the same audio twice. Invalid Windows-1252 input is normalized
-to UTF-8 before the JSON request is sent.
+A chave do cache inclui o provedor, a voz, o modelo, o formato de saída e o texto
+personalizado. Uma trava de arquivo impede que requisições simultâneas gerem (e
+cobrem) o mesmo áudio duas vezes. Entradas em Windows-1252 inválidas são convertidas
+para UTF-8 antes de a requisição JSON ser enviada.
 
-Testing and troubleshooting
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Testes e solução de problemas
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Leave only a test contact active before starting a test campaign. Monitor the
-Asterisk console:
+Deixe só um contato de teste ativo antes de iniciar uma campanha de teste.
+Acompanhe o console do Asterisk:
 
 .. code-block:: console
 
    asterisk -rvvvvv
 
-Verify generated files when diagnosing audio:
+Confira os arquivos gerados ao diagnosticar o áudio:
 
 .. code-block:: console
 
    file /tmp/tts_audio_*.wav
 
 ``ElevenLabs TTS request failed``
-   Check the API key, voice ID, model, account quota, DNS, and outbound HTTPS.
+   Confira a chave de API, o ID da voz, o modelo, a cota da conta, o DNS e o HTTPS
+   de saída.
 
-The first prompt plays but the second is silent
-   Confirm that ``tts_audio2`` is populated, ``mpg123`` is installed, and the
-   Asterisk console has no ``ElevenLabs TTS error`` or conversion error.
+A primeira mensagem toca, mas a segunda fica muda
+   Confirme que o ``tts_audio2`` está preenchido, que o ``mpg123`` está instalado e
+   que o console do Asterisk não mostra ``ElevenLabs TTS error`` nem erro de conversão.
 
-Accented names fail or generate no audio
-   Update MagnusBilling to the version containing the UTF-8 normalization
-   support and regenerate the affected cache file.
+Nomes com acento falham ou não geram áudio
+   Atualize o MagnusBilling para a versão com a normalização para UTF-8 e gere de
+   novo o arquivo de cache afetado.
 
-Legacy URL-based providers
+Provedores legados por URL
 --------------------------
 
-For URL-based providers, the **TTS URL** setting may contain ``$name``.
-MagnusBilling replaces it with the URL-encoded text. Provider credentials and
-options must be replaced with values from the provider account.
+Nos provedores por URL, a configuração **TTS URL** pode ter ``$name``. O
+MagnusBilling troca pelo texto codificado para URL. As credenciais e opções do
+provedor precisam ser trocadas pelos valores da sua conta no provedor.
 
 Vocalware
 ~~~~~~~~~
 
-Example configured for Brazilian Portuguese:
+Exemplo configurado para português do Brasil:
 
 .. code-block:: text
 
    https://www.vocalware.com/tts/gen.php?EID=3&LID=6&VID=1&TXT=$name&EXT=mp3&FX_TYPE=&FX_LEVEL=&ACC=YOUR_ACC&API=YOUR_API&SESSION=&HTTP_ERR=&CS=&SECRET=YOUR_SECRET
 
-In this example, ``EID=3`` is the engine, ``LID=6`` is Portuguese, and
-``VID=1`` selects the voice.
+Neste exemplo, ``EID=3`` é o motor, ``LID=6`` é o português e ``VID=1`` escolhe a voz.
 
 VoiceRSS
 ~~~~~~~~
 
-Example configured for Brazilian Portuguese and Asterisk-compatible output:
+Exemplo configurado para português do Brasil e saída compatível com o Asterisk:
 
 .. code-block:: text
 
@@ -149,24 +148,24 @@ Example configured for Brazilian Portuguese and Asterisk-compatible output:
 Google
 ~~~~~~
 
-The legacy Google URL format is:
+O formato legado da URL do Google é:
 
 .. code-block:: text
 
    https://translate.google.com/translate_tts?ie=UTF-8&q=$name&tl=pt-BR&total=1&idx=0&textlen=5&client=tw-ob&tk=$token
 
-Third-party interfaces, prices, limits, and terms can change. Review the
-provider's current documentation before using any legacy URL in production.
+Interfaces, preços, limites e termos de terceiros podem mudar. Leia a documentação
+atual do provedor antes de usar qualquer URL legada em produção.
 
-Security and costs
+Segurança e custos
 ------------------
 
-TTS services can charge per request or character. Review usage and billing,
-restrict access to configuration files, and rotate any credential that was
-shared in chat, email, terminal history, or a support ticket.
+Serviços de TTS podem cobrar por requisição ou por caractere. Acompanhe o uso e a
+cobrança, restrinja o acesso aos arquivos de configuração e troque qualquer
+credencial compartilhada em chat, e-mail, histórico do terminal ou chamado de suporte.
 
-Provider references:
+Referências dos provedores:
 
-* `ElevenLabs API documentation <https://elevenlabs.io/docs/api-reference/>`_
+* `Documentação da API da ElevenLabs <https://elevenlabs.io/docs/api-reference/>`_
 * `Vocalware <https://www.vocalware.com/>`_
 * `VoiceRSS <https://www.voicerss.org/>`_

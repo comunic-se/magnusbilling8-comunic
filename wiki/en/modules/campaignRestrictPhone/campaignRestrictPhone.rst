@@ -1,20 +1,17 @@
 
 .. _campaignRestrictPhone-number:
 
-Number
+Número
 ------
 
-| Number that should be blocked. The blocked numbers option must be enabled in the campaign.
+| Número que deve ser bloqueado. A opção de números bloqueados precisa estar ativada na campanha.
 
 
 
 
 .. _campaignRestrictPhone-description:
 
-Description
------------
+Descrição
+---------
 
-| Optional note explaining why this number is restricted for the campaign.
-
-
-
+| Observação opcional explicando por que este número está restrito na campanha.

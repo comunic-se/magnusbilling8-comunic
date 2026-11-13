@@ -1,30 +1,27 @@
 
 .. _userHistory-id-user:
 
-Username
---------
+Usuário
+-------
 
-| User related to this history record.
+| Usuário relacionado a este registro do histórico.
 
 
 
 
 .. _userHistory-date:
 
-Date
+Data
 ----
 
-| Date and time when this history record was created.
+| Data e hora em que este registro do histórico foi criado.
 
 
 
 
 .. _userHistory-description:
 
-description
------------
+Descrição
+---------
 
-| Description of the action or change recorded in the user history.
-
-
-
+| Descrição da ação ou da mudança registrada no histórico do usuário.

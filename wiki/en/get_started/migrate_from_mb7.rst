@@ -1,77 +1,84 @@
-Migrating from MagnusBilling 7
-==============================
+Migração a partir do MagnusBilling 7
+====================================
 
-Purpose and supported path
---------------------------
+Finalidade e caminho suportado
+------------------------------
 
-This document describes the supported migration from MagnusBilling 7 to
-MagnusBilling 8. It applies to MagnusBilling 7 installations on Debian and to
-legacy installations on CentOS 7.
+Este documento descreve a migração suportada do MagnusBilling 7 para o
+MagnusBilling 8. Vale para instalações do MagnusBilling 7 no Debian e para
+instalações legadas no CentOS 7.
 
-This is a side-by-side migration to a new server. It is not an in-place
-upgrade.
+É uma migração lado a lado para um servidor novo. Não é uma atualização no mesmo
+servidor.
 
-The major platform changes are:
+As principais mudanças de plataforma são:
 
-* Asterisk 13 is replaced by Asterisk 20.
-* ``chan_sip`` is replaced by PJSIP.
-* MagnusBilling 8 is installed on a new Debian server.
-* Customers with the private ``app_mbilling`` add-on must request an MB8
-  compatible reinstallation from MagnusSolution.
+* o Asterisk 13 é substituído pelo Asterisk 20;
+* o ``chan_sip`` é substituído pelo PJSIP;
+* o MagnusBilling 8 é instalado num servidor Debian novo;
+* os clientes com o complemento privado ``app_mbilling`` precisam pedir à
+  MagnusSolution uma reinstalação compatível com o MB8.
+
+.. note::
+
+   Nos servidores Comunic, a importação do banco e a migração seletiva são feitas
+   pelos scripts ``comunic/importar-banco.sh`` e ``comunic/migrar-dados.sh``, que
+   seguem este procedimento e acrescentam backup, conferências e as customizações
+   (veja ``comunic/README.md`` e ``comunic/docs/ROTEIRO-MAGALU.md``).
 
 .. warning::
 
-   Never run the MagnusBilling 8 installer over the production MagnusBilling 7
-   server. Never copy the old Asterisk binaries, modules, complete
-   ``/etc/asterisk`` directory, or MagnusBilling 7 web application into the new
-   server.
+   Nunca rode o instalador do MagnusBilling 8 sobre o servidor de produção do
+   MagnusBilling 7. Nunca copie para o servidor novo os binários e módulos antigos
+   do Asterisk, o diretório ``/etc/asterisk`` inteiro ou a aplicação web do
+   MagnusBilling 7.
 
-Migration overview
-------------------
+Visão geral da migração
+-----------------------
 
-#. Inventory and update the MagnusBilling 7 installation.
-#. Install and verify MagnusBilling 8 on a new Debian server.
-#. Rehearse the complete migration before the maintenance window.
-#. Freeze writes on MagnusBilling 7 and create a final full database dump.
-#. Restore the dump on MagnusBilling 8 and run ``UpdateMysql``.
-#. Review every trunk and endpoint after the conversion to PJSIP.
-#. Arrange the private ``app_mbilling`` reinstallation when it is contracted.
-#. Run the acceptance tests and move production traffic.
-#. Keep the old server stopped and intact during the rollback period.
+#. Levante e atualize a instalação do MagnusBilling 7.
+#. Instale e confira o MagnusBilling 8 num servidor Debian novo.
+#. Ensaie a migração completa antes da janela de manutenção.
+#. Congele as gravações no MagnusBilling 7 e faça um dump completo final do banco.
+#. Restaure o dump no MagnusBilling 8 e rode o ``UpdateMysql``.
+#. Revise cada tronco e cada endpoint depois da conversão para PJSIP.
+#. Combine a reinstalação do ``app_mbilling`` privado, se ele for contratado.
+#. Rode os testes de aceitação e passe o tráfego de produção.
+#. Mantenha o servidor antigo parado e intacto durante o período de retorno.
 
-Before the migration
---------------------
+Antes da migração
+-----------------
 
-Record the following information before changing either server:
+Anote estas informações antes de mexer em qualquer um dos servidores:
 
-* MagnusBilling version and operating system version;
-* public and private IP addresses, DNS records, NAT, and firewall rules;
-* SIP trunks, provider registrations, IP authentication, codecs, and DTMF;
-* DIDs, queues, IVRs, campaigns, and custom dialplan;
-* recordings, music on hold, prompts, certificates, and custom scripts;
-* cron jobs and external integrations;
-* whether ``app_mbilling`` is installed;
-* current record counts, important balances, and sample call costs.
+* versão do MagnusBilling e do sistema operacional;
+* IPs públicos e privados, registros DNS, NAT e regras de firewall;
+* troncos SIP, registros nos provedores, autenticação por IP, codecs e DTMF;
+* DIDs, filas, URAs, campanhas e dialplan personalizado;
+* gravações, música de espera, áudios, certificados e scripts próprios;
+* tarefas do cron e integrações externas;
+* se o ``app_mbilling`` está instalado;
+* quantidades atuais de registros, saldos importantes e custos de chamadas de
+  exemplo.
 
-Lower relevant DNS TTL values 24 to 48 hours before the cutover. Define the
-acceptance criteria, maintenance window, and rollback decision deadline.
+Diminua o TTL dos registros DNS relevantes 24 a 48 horas antes da virada. Defina os
+critérios de aceitação, a janela de manutenção e o prazo para decidir voltar.
 
-Prepare the new server
-----------------------
+Prepare o servidor novo
+-----------------------
 
-Install MagnusBilling 8 on a new minimal Debian server:
+Instale o MagnusBilling 8 num servidor Debian mínimo novo:
 
 ::
 
    curl -O https://raw.githubusercontent.com/magnussolution/magnusbilling/source/script/install.sh
    bash install.sh
 
-For a staged migration, the repository also includes
-``script/updateV7_to_V8.sh``. It can be run on a clean Debian server
-before the web application is installed. The script compiles Asterisk 20 with
-PJSIP, disables ``chan_sip`` in the generated baseline, creates the MagnusBilling
-include files, and leaves the database connection file for the MagnusBilling 8
-installer to create:
+Para uma migração em etapas, o repositório também traz o
+``script/updateV7_to_V8.sh``. Ele pode ser rodado num servidor Debian limpo antes de
+instalar a aplicação web. O script compila o Asterisk 20 com PJSIP, desativa o
+``chan_sip`` na configuração base gerada, cria os arquivos de include do MagnusBilling
+e deixa o arquivo de conexão com o banco para o instalador do MagnusBilling 8 criar:
 
 ::
 
@@ -79,38 +86,37 @@ installer to create:
    chmod 750 updateV7_to_V8.sh
    sudo ./updateV7_to_V8.sh --configure-firewall
 
-If ``/etc/asterisk`` already contains files, the script automatically archives
-the old directory under ``/root/asterisk-config-before-mb8-*.tar.gz`` and
-creates a clean PJSIP configuration; it does not import the old ``sip.conf``
-or ``chan_sip`` modules. The old ``--allow-existing`` option is accepted for
-backward compatibility but is no longer required.
-For the normal clean installation, running ``script/install.sh`` remains the
-shortest path because it installs the web application and Asterisk together.
+Se o ``/etc/asterisk`` já tiver arquivos, o script arquiva automaticamente o
+diretório antigo em ``/root/asterisk-config-before-mb8-*.tar.gz`` e cria uma
+configuração PJSIP limpa; ele não importa o ``sip.conf`` antigo nem os módulos do
+``chan_sip``. A opção antiga ``--allow-existing`` continua aceita por compatibilidade,
+mas não é mais necessária.
+Na instalação limpa normal, rodar o ``script/install.sh`` continua sendo o caminho
+mais curto, porque instala a aplicação web e o Asterisk juntos.
 
-Verify the clean installation before importing any version 7 data:
+Confira a instalação limpa antes de importar qualquer dado da versão 7:
 
-* the web panel opens and the administrator can sign in;
-* MariaDB and Apache are running;
-* ``asterisk -rx "core show version"`` reports Asterisk 20;
-* PJSIP loads without configuration errors;
-* scheduled MagnusBilling tasks are installed;
-* the firewall permits only the services required by the deployment.
+* o painel web abre e o administrador consegue entrar;
+* o MariaDB e o Apache estão rodando;
+* ``asterisk -rx "core show version"`` informa o Asterisk 20;
+* o PJSIP carrega sem erros de configuração;
+* as tarefas agendadas do MagnusBilling estão instaladas;
+* o firewall libera só os serviços necessários.
 
-Keep the database configuration created by MagnusBilling 8 at
-``/etc/asterisk/res_config_mysql.conf``. The MariaDB application user and its
-grants remain on the new server when the clean ``mbilling`` database is
-replaced.
+Mantenha a configuração do banco criada pelo MagnusBilling 8 em
+``/etc/asterisk/res_config_mysql.conf``. O usuário da aplicação no MariaDB e as
+permissões dele continuam no servidor novo quando o banco ``mbilling`` limpo é
+substituído.
 
-Create a full version 7 backup
-------------------------------
+Faça um backup completo da versão 7
+-----------------------------------
 
-The regular Backup menu and ``Backup`` command omit data from some large
-historical tables. They are useful for routine recovery but must not be the
-only backup used for a full migration.
+O menu Backup comum e o comando ``Backup`` deixam de fora os dados de algumas tabelas
+grandes de histórico. Eles servem para a recuperação de rotina, mas não podem ser o
+único backup usado numa migração completa.
 
-Read the database connection from
-``/etc/asterisk/res_config_mysql.conf`` on the version 7 server and create a
-complete logical dump with triggers:
+Leia a conexão com o banco em ``/etc/asterisk/res_config_mysql.conf`` no servidor da
+versão 7 e faça um dump lógico completo, com triggers:
 
 ::
 
@@ -125,7 +131,7 @@ complete logical dump with triggers:
      --default-character-set=utf8 \
      mbilling > /root/mbilling7-full.sql
 
-Compress the dump and create a checksum:
+Comprima o dump e gere um checksum:
 
 ::
 
@@ -133,56 +139,56 @@ Compress the dump and create a checksum:
    sha256sum /root/mbilling7-full.sql.gz \
      > /root/mbilling7-full.sql.gz.sha256
 
-The repository also provides ``doc/migrate7_8.sh`` to create and restore a
-validated migration dump. Run ``doc/migrate7_8.sh help`` before using it.
+O repositório também traz o ``doc/migrate7_8.sh`` para criar e restaurar um dump de
+migração validado. Rode ``doc/migrate7_8.sh help`` antes de usá-lo.
 
-Copy recordings, prompts, music on hold, certificates, and other customer
-files separately. Archive ``/etc/asterisk`` for reference only. Do not restore
-the complete old directory on the new server.
+Copie à parte as gravações, áudios, músicas de espera, certificados e outros
+arquivos dos clientes. Arquive o ``/etc/asterisk`` só para consulta. Não restaure o
+diretório antigo inteiro no servidor novo.
 
-Rehearsal
----------
+Ensaio
+------
 
-Perform at least one rehearsal with a recent production backup. Record the
-time required for transfer, restore, database migration, PJSIP review, and
-acceptance tests.
+Faça pelo menos um ensaio com um backup recente da produção. Anote o tempo gasto na
+transferência, na restauração, na migração do banco, na revisão do PJSIP e nos
+testes de aceitação.
 
-The rehearsal must include the same database size and optional modules used in
-production. Resolve all SQL and PJSIP errors before scheduling the final
-cutover.
+O ensaio precisa ter o mesmo tamanho de banco e os mesmos módulos opcionais usados na
+produção. Resolva todos os erros de SQL e de PJSIP antes de agendar a virada final.
 
-Final backup and write freeze
------------------------------
+Backup final e congelamento das gravações
+-----------------------------------------
 
-At the beginning of the maintenance window, stop call and web writers on the
-old server. Keep MariaDB running long enough to create the final dump.
+No começo da janela de manutenção, pare tudo o que grava no servidor antigo
+(chamadas e web). Mantenha o MariaDB rodando o tempo suficiente para fazer o dump
+final.
 
-On Debian, the relevant units normally include:
+No Debian, os serviços normalmente são:
 
 ::
 
    systemctl stop asterisk apache2 cron
 
-On CentOS 7, they normally include:
+No CentOS 7, normalmente são:
 
 ::
 
    systemctl stop asterisk httpd crond
 
-Create a new full dump after the services stop, verify its checksum, and
-transfer it to the new server. Do not allow both servers to process production
-traffic at the same time.
+Faça um dump completo novo depois de parar os serviços, confira o checksum e
+transfira para o servidor novo. Não deixe os dois servidores processarem tráfego de
+produção ao mesmo tempo.
 
-Restore and migrate the database
---------------------------------
+Restaure e migre o banco
+------------------------
 
-On the new server, stop writers:
+No servidor novo, pare tudo o que grava:
 
 ::
 
    systemctl stop asterisk apache2 cron
 
-Preserve a dump of the clean MagnusBilling 8 database, then replace it:
+Guarde um dump do banco limpo do MagnusBilling 8 e depois o substitua:
 
 ::
 
@@ -196,34 +202,34 @@ Preserve a dump of the clean MagnusBilling 8 database, then replace it:
    gunzip -c /root/mbilling7-full.sql.gz \
      | mariadb --protocol=socket mbilling
 
-Run the MagnusBilling database migrator:
+Rode o migrador de banco do MagnusBilling:
 
 ::
 
    php /var/www/html/mbilling/cron.php UpdateMysql
 
-The command must finish without an SQL error and report a MagnusBilling 8
-version. Do not start production services if the migration command fails.
+O comando precisa terminar sem erro de SQL e informar uma versão do MagnusBilling 8.
+Não inicie os serviços de produção se o comando de migração falhar.
 
-PJSIP conversion
-----------------
+Conversão para PJSIP
+--------------------
 
-The database migrator changes compatible trunk technology values from ``sip``
-to ``pjsip``. It also converts legacy technology tokens in
-``pkg_did_destination.destination`` and ``pkg_campaign.forward_number``. The
-legacy free-text ``pkg_sip.sip_config`` field is converted only for explicit
-``SIP/`` dial tokens; SIP URI schemes, usernames, and unrelated text are not
-renamed. ``pkg_sip`` remains the database table name in MagnusBilling 8; there
-is no ``pkg_sip`` technology column.
+O migrador de banco muda os valores de tecnologia compatíveis dos troncos de ``sip``
+para ``pjsip``. Ele também converte os tokens de tecnologia legados em
+``pkg_did_destination.destination`` e ``pkg_campaign.forward_number``. O campo de
+texto livre legado ``pkg_sip.sip_config`` só é convertido nos tokens de discagem
+``SIP/`` explícitos; esquemas de URI SIP, nomes de usuário e textos sem relação não
+são renomeados. ``pkg_sip`` continua sendo o nome da tabela no MagnusBilling 8; não
+existe coluna de tecnologia em ``pkg_sip``.
 
-The migrator cannot translate every custom ``chan_sip`` option or manual
-``sip.conf`` change.
+O migrador não consegue traduzir todas as opções personalizadas do ``chan_sip`` nem
+as mudanças manuais do ``sip.conf``.
 
-Manually review authentication, registration, IP matching, NAT, codecs,
-``fromuser``, ``fromdomain``, DTMF, headers, qualify settings, and contact
-limits for every trunk and endpoint.
+Revise manualmente, em cada tronco e endpoint, a autenticação, o registro, a
+identificação por IP, o NAT, os codecs, o ``fromuser``, o ``fromdomain``, o DTMF, os
+cabeçalhos, o qualify e os limites de contatos.
 
-Use the Asterisk CLI to inspect the converted configuration:
+Use a CLI do Asterisk para inspecionar a configuração convertida:
 
 ::
 
@@ -231,58 +237,58 @@ Use the Asterisk CLI to inspect the converted configuration:
    asterisk -rx "pjsip show registrations"
    asterisk -rx "pjsip show contacts"
 
-Devices and providers may need new PJSIP-specific settings even when they
-continue to use UDP port 5060.
+Aparelhos e provedores podem precisar de configurações próprias do PJSIP mesmo
+continuando na porta UDP 5060.
 
-Private app_mbilling add-on
----------------------------
+Complemento privado app_mbilling
+--------------------------------
 
-``app_mbilling`` is a private commercial add-on and is not included in the
-public MagnusBilling 8 repository. Customers who have contracted the add-on
-must contact MagnusSolution before the migration and request the MB8/Asterisk
-20 compatible package and installation service.
+O ``app_mbilling`` é um complemento comercial privado e não está no repositório
+público do MagnusBilling 8. Os clientes que contrataram o complemento precisam falar
+com a MagnusSolution antes da migração e pedir o pacote compatível com MB8/Asterisk 20
+e o serviço de instalação.
 
-Do not copy the old version 7 add-on to the new server. The vendor must perform
-the reinstallation and confirm the contracted support scope. No source code,
-implementation details, or private distribution instructions are published in
-this guide.
+Não copie o complemento antigo da versão 7 para o servidor novo. O fornecedor precisa
+fazer a reinstalação e confirmar o escopo de suporte contratado. Este guia não
+publica código-fonte, detalhes de implementação nem instruções privadas de
+distribuição.
 
-Acceptance tests
-----------------
+Testes de aceitação
+-------------------
 
-Complete all applicable tests before moving production traffic:
+Faça todos os testes que se aplicam antes de passar o tráfego de produção:
 
-* administrator login and application version;
-* customer, plan, rate, trunk, DID, and balance record counts;
-* PJSIP endpoint registration and provider registration;
-* inbound and outbound calls;
-* expected sell and buy prices on test calls;
-* CDR creation and background processing;
-* caller ID, DTMF, audio in both directions, and hangup;
-* IVR, queue, campaign, recording, and callback behavior;
-* cron jobs, backups, e-mail, API, and external integrations;
-* ``app_mbilling`` behavior when installed.
+* login do administrador e versão da aplicação;
+* quantidades de clientes, planos, tarifas, troncos, DIDs e saldos;
+* registro dos endpoints PJSIP e registro nos provedores;
+* chamadas recebidas e feitas;
+* preços de venda e de compra esperados nas chamadas de teste;
+* criação de CDR e processamento em segundo plano;
+* CallerID, DTMF, áudio nos dois sentidos e desligamento;
+* comportamento de URA, fila, campanha, gravação e callback;
+* tarefas do cron, backups, e-mail, API e integrações externas;
+* comportamento do ``app_mbilling``, se estiver instalado.
 
-Cutover
+Virada
+------
+
+#. Aponte as rotas dos provedores, as regras de IP público/NAT e os registros DNS para
+   o servidor novo.
+#. Inicie o MariaDB, o Apache, o cron e o Asterisk no servidor novo.
+#. Repita os testes críticos de entrada, saída e tarifação com as rotas de produção.
+#. Acompanhe os logs do Asterisk, do MariaDB, do Apache e do MagnusBilling.
+#. Mantenha o servidor antigo parado, isolado e sem mudanças.
+
+Retorno
 -------
 
-#. Point provider routes, public IP/NAT rules, and DNS records to the new
-   server.
-#. Start MariaDB, Apache, cron, and Asterisk on the new server.
-#. Repeat critical inbound, outbound, and billing tests with production routes.
-#. Monitor the Asterisk, MariaDB, Apache, and MagnusBilling logs.
-#. Keep the old server stopped, isolated, and unchanged.
+Se um teste de aceitação crítico falhar:
 
-Rollback
---------
+#. Pare o Asterisk, o Apache e o cron no servidor novo.
+#. Devolva as rotas dos provedores, o NAT e o DNS para o servidor antigo.
+#. Inicie os serviços antigos.
+#. Registre a falha e corrija antes de uma nova tentativa de migração.
 
-If a critical acceptance test fails:
-
-#. Stop Asterisk, Apache, and cron on the new server.
-#. Return provider routes, NAT, and DNS to the old server.
-#. Start the old services.
-#. Record the failure and correct it before another migration attempt.
-
-Do not import a database that has received MagnusBilling 8 writes back into
-MagnusBilling 7. The migration is not reversible. Rollback depends on the
-frozen version 7 server and database.
+Não importe de volta no MagnusBilling 7 um banco que já recebeu gravações do
+MagnusBilling 8. A migração não é reversível. O retorno depende do servidor e do
+banco da versão 7 congelados.

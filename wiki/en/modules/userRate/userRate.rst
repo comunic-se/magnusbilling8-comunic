@@ -1,50 +1,50 @@
 
 .. _userRate-id-prefix:
 
-Destination
------------
+Destino
+-------
 
-| Select the prefix that you want to subscribe.
+| Selecione o prefixo que você quer personalizar.
 
 
 
 
 .. _userRate-rateinitial:
 
-Sell price
-----------
+Preço de venda
+--------------
 
-| New sell price for this prefix.
+| Novo preço de venda para este prefixo.
 
 
 
 
 .. _userRate-initblock:
 
-Initial block
+Bloco inicial
 -------------
 
-| Minimum sell price.
+| Preço de venda mínimo.
 
 
 
 
 .. _userRate-billingblock:
 
-Billing block
--------------
+Bloco de cobrança
+-----------------
 
-| Sell block.
+| Bloco de venda.
 
 
 
 
 .. _userRate-id-user:
 
-Username
---------
+Usuário
+-------
 
-| User that owns this custom rate.
+| Usuário dono desta tarifa personalizada.
 
 
 

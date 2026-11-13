@@ -3,11 +3,11 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to MagnusBilling 8 wiki.
-================================
+Bem-vindo à wiki do MagnusBilling 8
+===================================
 
 .. meta::
-   :description lang=en: getstart using magnusbilling. Reading our wiki.
+   :description lang=pt: primeiros passos com o MagnusBilling. Leia a nossa wiki.
 
 
 
@@ -18,7 +18,7 @@ Welcome to MagnusBilling 8 wiki.
 
 
 .. toctree::
-   :caption: First Steps
+   :caption: Primeiros passos
    :maxdepth: 2
 
    get_started/quick_install.rst
@@ -30,21 +30,21 @@ Welcome to MagnusBilling 8 wiki.
    get_started/reset_root_password.rst
 
 .. toctree::
-   :caption: What's new in MBilling 8
+   :caption: Novidades do MBilling 8
    :maxdepth: 1
 
    whats_new_mb8.rst
    lifecycle.rst
 
 .. toctree::
-   :caption: Paid modules
+   :caption: Módulos pagos
    :glob:
    :maxdepth: 2
 
    paid_modules/*
 
 .. toctree::
-   :caption: Technical Information
+   :caption: Informações técnicas
    :maxdepth: 1
 
    price_calculation.rst
@@ -57,26 +57,26 @@ Welcome to MagnusBilling 8 wiki.
    config.rst
 
 .. toctree::
-   :caption: Asterisk option
+   :caption: Opções do Asterisk
    :maxdepth: 1
 
    asterisk_options/directmedia.rst
 
 .. toctree::
    :maxdepth: 1
-   :caption: Technical Documentation
+   :caption: Documentação técnica
 
    ai_codebase_guide.rst
 
 .. toctree::
    :maxdepth: 1
-   :caption: Module overview
+   :caption: Visão geral dos módulos
 
    module_overview.rst
 
 .. toctree::
    :maxdepth: 1
-   :caption: Security
+   :caption: Segurança
    :name: sec-Security
 
    security/iptables.rst
@@ -85,7 +85,7 @@ Welcome to MagnusBilling 8 wiki.
    security/stir_shaken_opensips.rst
 
 .. toctree::
-   :caption: Administration
+   :caption: Administração
    :glob:
    :maxdepth: 2
 
@@ -98,8 +98,8 @@ Welcome to MagnusBilling 8 wiki.
    modules/index.rst
 
 
-Indices and tables
-==================
+Índices e tabelas
+=================
 
 * :ref:`genindex`
 * :ref:`search`

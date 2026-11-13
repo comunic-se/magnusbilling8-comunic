@@ -1,30 +1,30 @@
 
 .. _api-id-user:
 
-Username
---------
+Usuário
+-------
 
-| User allowed to access the MagnusBilling API. Use the MagnusBilling API PHP project from https://github.com/magnussolution/magnusbilling-api-php.
+| Usuário autorizado a acessar a API do MagnusBilling. Use o projeto MagnusBilling API PHP em https://github.com/magnussolution/magnusbilling-api-php.
 
 
 
 
 .. _api-api-key:
 
-Api key
--------
+Chave da API
+------------
 
-| API key required to authenticate API requests.
+| Chave da API exigida para autenticar as requisições.
 
 
 
 
 .. _api-api-secret:
 
-Api secret
-----------
+Segredo da API
+--------------
 
-| API secret required to authenticate API requests.
+| Segredo da API exigido para autenticar as requisições.
 
 
 
@@ -34,27 +34,27 @@ Api secret
 Status
 ------
 
-| Enable or disable this API access.
+| Ativa ou desativa este acesso à API.
 
 
 
 
 .. _api-action:
 
-Permissions
------------
+Permissões
+----------
 
-| Actions that this API user is allowed to execute.
+| Ações que este usuário da API pode executar.
 
 
 
 
 .. _api-api-restriction-ips:
 
-Restriction IPs
----------------
+IPs permitidos
+--------------
 
-| IP addresses allowed to access this API. Leave blank to allow any IP. It is strongly recommended to allow only trusted IP addresses.
+| Endereços IP que podem acessar esta API. Deixe em branco para permitir qualquer IP. É fortemente recomendado permitir só endereços IP confiáveis.
 
 
 

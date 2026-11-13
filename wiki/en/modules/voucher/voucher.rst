@@ -1,60 +1,60 @@
 
 .. _voucher-credit:
 
-Credit
-------
+Crédito
+-------
 
-| Voucher price. You can see more details at the link `https://wiki.magnusbilling.org/en/source/how_to_use_voucher.html.  <https://wiki.magnusbilling.org/en/source/how_to_use_voucher.html.>`_.
+| Valor do voucher. Veja mais detalhes no link `https://wiki.magnusbilling.org/en/source/how_to_use_voucher.html.  <https://wiki.magnusbilling.org/en/source/how_to_use_voucher.html.>`_.
 
 
 
 
 .. _voucher-id-plan:
 
-Plan
-----
+Plano
+-----
 
-| Plan that will be linked to the client that will use this VOUCHER.
+| Plano que será vinculado ao cliente que usar este VOUCHER.
 
 
 
 
 .. _voucher-language:
 
-Language
---------
+Idioma
+------
 
-| Language that will be used.
+| Idioma que será usado.
 
 
 
 
 .. _voucher-prefix-local:
 
-Prefix rules
-------------
+Regras de prefixo
+-----------------
 
-| Rule that will be used in the "prefix rule" field
+| Regra que será usada no campo "regra de prefixo".
 
 
 
 
 .. _voucher-quantity:
 
-Quantity
---------
+Quantidade
+----------
 
-| The amount of VOUCHERS to be generated.
+| Quantidade de VOUCHERS a gerar.
 
 
 
 
 .. _voucher-tag:
 
-Description
------------
+Descrição
+---------
 
-| Description to the calendar, only for self control.
+| Descrição, apenas para controle interno.
 
 
 
@@ -64,7 +64,7 @@ Description
 Voucher
 -------
 
-| VOUCHER number.
+| Número do VOUCHER.
 
 
 

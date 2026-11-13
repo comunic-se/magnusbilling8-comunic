@@ -1,31 +1,31 @@
 .. _find-rate:
 
-Tariff Search
-==============
+Busca de tarifa
+===============
 
-How does MagnusBilling select the rate to be used?
---------------------------------------------------
+Como o MagnusBilling escolhe a tarifa a usar?
+---------------------------------------------
 
-When a customer makes an external call, to a landline or cell phone, a verification routine is triggered which consists of:
+Quando um cliente faz uma chamada externa, para fixo ou celular, é disparada uma rotina de verificação que consiste em:
 
-1. Check the username and password.
-2. Checks whether the client is active.
-3. Checks if the number dialed is a DID.
-4. Check if the dialed number is a SIP Account.
-5. Check the customer's plan.
-6. Search within the plan's tariffs which fare best fits the number dialed.
-7. Search for the trunks that belong to the trunk group of the tariff found.
-8. Sends the call to the first trunk, and if it fails it sends to the next.
-9. When the call is finished, the purchase and sale price is calculated.
-10. Added the call in the CDR report.
-11. Discounting the value of the call in the customer's credit.
-  
+1. Conferir o usuário e a senha.
+2. Conferir se o cliente está ativo.
+3. Conferir se o número discado é um DID.
+4. Conferir se o número discado é uma conta SIP.
+5. Conferir o plano do cliente.
+6. Procurar, entre as tarifas do plano, a que melhor se encaixa no número discado.
+7. Procurar os troncos que pertencem ao grupo de troncos da tarifa encontrada.
+8. Mandar a chamada para o primeiro tronco e, se falhar, para o próximo.
+9. Ao terminar a chamada, calcular o preço de compra e de venda.
+10. Acrescentar a chamada ao relatório de CDR.
+11. Descontar o valor da chamada do crédito do cliente.
 
-Rather, how does step 6 work?
 
-It is carried out as follows. Let's say customer XXXXX called 551140045678
+E como funciona o passo 6?
 
-In step 5, the system takes the customer's plan, and then in step 6 a "SELECT" is made on the tariff table like this.
+Funciona assim. Digamos que o cliente XXXXX ligou para 551140045678.
+
+No passo 5, o sistema pega o plano do cliente e, no passo 6, faz um "SELECT" na tabela de tarifas assim:
 
 
 ::
@@ -37,21 +37,21 @@ In step 5, the system takes the customer's plan, and then in step 6 a "SELECT" i
  AND $ MAGNUS-> prefixclause ORDER BY LENGTH (prefix) DESC LIMIT 1 ";
 
 
-The $ MAGNUS-> id_plan variable is the customer's plan id, and the $ MAGNUS-> prefixclause variable is the filter used to find the tariff.
+A variável $ MAGNUS-> id_plan é o id do plano do cliente, e a variável $ MAGNUS-> prefixclause é o filtro usado para achar a tarifa.
 
-To facilitate understanding we will explain it in another way.
+Para facilitar, vamos explicar de outro jeito.
 
-As the customer called 551140045678, the system will search as follows.
+Como o cliente ligou para 551140045678, o sistema procura assim:
 
-Is there a tariff for the prefix 551140045678?
+Existe tarifa para o prefixo 551140045678?
 
-* If yes, we use this rate
+* Se sim, usa essa tarifa.
 
-* If not, we will search again by removing the last number, in this case 55114004567 and so on until we reach only number 5. If we do not find any rate, the system will return an error and will not continue the call.
-  
+* Se não, procura de novo tirando o último dígito, neste caso 55114004567, e assim por diante até sobrar só o número 5. Se não achar nenhuma tarifa, o sistema devolve um erro e não continua a chamada.
 
 
-Going back to "SELECT" it would look like this.
+
+Voltando ao "SELECT", ele fica assim:
 
 ::
 
@@ -74,15 +74,15 @@ Going back to "SELECT" it would look like this.
  ORDER BY LENGTH (prefix) DESC LIMIT 1 ";
 
 
-Let’s say you have the following 3 tariffs in your customer’s plan
+Digamos que o plano do cliente tenha estas 3 tarifas:
 
 55, Brasil Fixo Geral
-55119, Brazil SP Celular
-5511, Brazil SP Fixed
+55119, Brasil SP Celular
+5511, Brasil SP Fixo
 
 
-In this example, "SELECT" would return tariff 5511, Brasil SP Fixo.
+Neste exemplo, o "SELECT" devolveria a tarifa 5511, Brasil SP Fixo.
 
 
 
-But you may be wondering if the customer calls 5511988551234, the "SELECT" would find the prefix 55119 and 5511 and then which one would use? I would use 55119, because in "SELECT" there is the parameter ORDER BY LENGTH (prefix) DESC and also the parameter LIMIT 1. That is, it will order the results by placing first the prefix that has the largest number of digits.
+Mas e se o cliente ligar para 5511988551234? O "SELECT" acharia os prefixos 55119 e 5511; qual seria usado? O 55119, porque o "SELECT" tem o parâmetro ORDER BY LENGTH (prefix) DESC e também o parâmetro LIMIT 1. Ou seja, ordena os resultados colocando primeiro o prefixo com mais dígitos.

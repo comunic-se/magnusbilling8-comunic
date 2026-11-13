@@ -4,32 +4,32 @@
 IP
 --
 
-| IP Address.
+| Endereço IP.
 
 
 
 
 .. _firewall-action:
 
-Action
-------
+Ação
+----
 
-| With this option set to YES, the IP will be added to the fail2ban ip-blacklist and will remain blocked permanently.
-| The NO option blocks the IP temporarily according to the parameters in /etc/fail2ban/jail.local.
-|     
-|     By default, the IP stays blocked for 10 minutes.
+| Com esta opção em SIM, o IP é colocado na lista de bloqueio (ip-blacklist) do fail2ban e fica bloqueado permanentemente.
+| A opção NÃO bloqueia o IP temporariamente, de acordo com os parâmetros do /etc/fail2ban/jail.local.
+|
+|     Por padrão, o IP fica bloqueado por 10 minutos.
 
 
 
 
 .. _firewall-description:
 
-Description
------------
+Descrição
+---------
 
-| This information is captured from the log file /var/log/fail2ban.log.
-| You can follow this log with the command 
-|     
+| Esta informação é lida do arquivo de log /var/log/fail2ban.log.
+| Você pode acompanhar este log com o comando
+|
 |     tail -f /var/log/fail2ban.log
 
 

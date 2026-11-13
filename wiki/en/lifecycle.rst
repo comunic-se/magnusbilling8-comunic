@@ -1,53 +1,53 @@
-MagnusBilling release lifecycle
-===============================
+Ciclo de vida das versões do MagnusBilling
+==========================================
 
-Current release
----------------
+Versão atual
+------------
 
-MagnusBilling 8 is the active development release. New features are developed
-only for version 8.
+O MagnusBilling 8 é a versão em desenvolvimento ativo. Funcionalidades novas são
+desenvolvidas só para a versão 8.
 
-MagnusBilling 8 uses Asterisk 20 and PJSIP. The supported installation path is
-a new server with a minimal Debian installation. Ubuntu support is planned but
-must not be treated as supported until it is explicitly announced and covered
-by the installer and release tests.
+O MagnusBilling 8 usa Asterisk 20 e PJSIP. O caminho de instalação suportado é um
+servidor novo com instalação mínima do Debian. O suporte ao Ubuntu está planejado,
+mas não deve ser considerado suportado até ser anunciado explicitamente e coberto
+pelos testes do instalador e das versões.
 
 MagnusBilling 7
 ---------------
 
-MagnusBilling 7 entered maintenance mode on July 18, 2026.
+O MagnusBilling 7 entrou em modo de manutenção em 18 de julho de 2026.
 
-* No new features are added to MagnusBilling 7.
-* Critical bug, security, and compatibility fixes are provided through
-  December 31, 2026.
-* Regular maintenance ends on January 1, 2027.
-* Existing installations may continue to run after that date, but they are no
-  longer covered by regular maintenance.
+* Nenhuma funcionalidade nova é acrescentada ao MagnusBilling 7.
+* Correções críticas de erros, de segurança e de compatibilidade são feitas até
+  31 de dezembro de 2026.
+* A manutenção regular termina em 1º de janeiro de 2027.
+* As instalações existentes podem continuar funcionando depois dessa data, mas não
+  terão mais manutenção regular.
 
-MagnusBilling 7 uses Asterisk 13 and ``chan_sip``. Migrating to MagnusBilling 8
-requires a new Debian server, Asterisk 20, PJSIP, and a database migration.
-An in-place operating system or application upgrade is not supported.
+O MagnusBilling 7 usa Asterisk 13 e ``chan_sip``. Migrar para o MagnusBilling 8
+exige um servidor Debian novo, Asterisk 20, PJSIP e a migração do banco. Atualizar
+o sistema operacional ou a aplicação no mesmo servidor não é suportado.
 
 CentOS 7
 --------
 
-CentOS Linux 7 reached end of life on June 30, 2024. MagnusBilling 7
-installations still running on CentOS 7 are considered unsupported and should
-be migrated to a new Debian server.
+O CentOS Linux 7 chegou ao fim da vida em 30 de junho de 2024. As instalações do
+MagnusBilling 7 que ainda rodam no CentOS 7 são consideradas sem suporte e devem
+ser migradas para um servidor Debian novo.
 
-Do not attempt to upgrade CentOS 7 in place as part of the MagnusBilling
-migration. Preserve the old server for rollback, install MagnusBilling 8 on a
-new Debian server, restore a full database dump, and run the MagnusBilling 8
-database migrator.
+Não tente atualizar o CentOS 7 no mesmo servidor como parte da migração do
+MagnusBilling. Preserve o servidor antigo para poder voltar, instale o MagnusBilling 8
+num servidor Debian novo, restaure um dump completo do banco e rode o migrador de
+banco do MagnusBilling 8.
 
-Compatibility summary
----------------------
+Resumo de compatibilidade
+-------------------------
 
-* **MagnusBilling 7 / Debian 11 or 12 / Asterisk 13 / chan_sip:** maintenance
-  through December 31, 2026.
-* **MagnusBilling 7 legacy / CentOS 7 / Asterisk 13 / chan_sip:** unsupported;
-  migrate to a new Debian server.
-* **MagnusBilling 8 / Debian or Ubuntu / Asterisk 20 / PJSIP:** active development.
+* **MagnusBilling 7 / Debian 11 ou 12 / Asterisk 13 / chan_sip:** manutenção até
+  31 de dezembro de 2026.
+* **MagnusBilling 7 legado / CentOS 7 / Asterisk 13 / chan_sip:** sem suporte;
+  migre para um servidor Debian novo.
+* **MagnusBilling 8 / Debian ou Ubuntu / Asterisk 20 / PJSIP:** desenvolvimento ativo.
 
-See :doc:`Migrating from MagnusBilling 7 <get_started/migrate_from_mb7>` for
-the supported migration procedure.
+Veja :doc:`Migração a partir do MagnusBilling 7 <get_started/migrate_from_mb7>` para o
+procedimento de migração suportado.

@@ -1,10 +1,10 @@
 
 .. _phoneBook-name:
 
-Name
+Nome
 ----
 
-| Phonebook name.
+| Nome da agenda.
 
 
 
@@ -14,17 +14,14 @@ Name
 Status
 ------
 
-| Phonebook status.
+| Status da agenda.
 
 
 
 
 .. _phoneBook-description:
 
-Description
------------
+Descrição
+---------
 
-| Phonebook description, personal control only.
-
-
-
+| Descrição da agenda, apenas para controle interno.

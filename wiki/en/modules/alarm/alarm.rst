@@ -1,40 +1,40 @@
 
 .. _alarm-type:
 
-Type
+Tipo
 ----
 
-| Type of event that MagnusBilling will monitor before sending this alarm.
+| Tipo de evento que o MagnusBilling monitora antes de enviar este alarme.
 
 
 
 
 .. _alarm-period:
 
-Period
-------
+Período
+-------
 
-| Time interval used to check the alarm condition.
+| Intervalo de tempo usado para conferir a condição do alarme.
 
 
 
 
 .. _alarm-condition:
 
-Condition
----------
+Condição
+--------
 
-| Comparison rule used by the alarm, for example greater than, less than, or equal to the configured amount.
+| Regra de comparação usada pelo alarme, por exemplo maior que, menor que ou igual ao valor configurado.
 
 
 
 
 .. _alarm-amount:
 
-Amount
-------
+Valor
+-----
 
-| Reference value used together with the condition to decide when the alarm must be sent.
+| Valor de referência usado junto com a condição para decidir quando o alarme deve ser enviado.
 
 
 
@@ -44,37 +44,37 @@ Amount
 Status
 ------
 
-| Enable or disable this alarm without deleting its configuration.
+| Ativa ou desativa este alarme sem apagar a configuração.
 
 
 
 
 .. _alarm-email:
 
-Email
------
+E-mail
+------
 
-| Email address that will receive the alarm notification.
+| Endereço de e-mail que receberá a notificação do alarme.
 
 
 
 
 .. _alarm-subject:
 
-Subject
+Assunto
 -------
 
-| Subject used in the alarm notification email.
+| Assunto usado no e-mail de notificação do alarme.
 
 
 
 
 .. _alarm-message:
 
-Message
--------
+Mensagem
+--------
 
-| Message body sent when the alarm condition is reached.
+| Corpo da mensagem enviada quando a condição do alarme é atingida.
 
 
 

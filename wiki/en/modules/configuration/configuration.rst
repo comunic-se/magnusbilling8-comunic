@@ -1,20 +1,17 @@
 
 .. _configuration-config-value:
 
-Value
+Valor
 -----
 
-| Value. You can see more details at the link `https://wiki.magnusbilling.org/en/source/config.html.  <https://wiki.magnusbilling.org/en/source/config.html.>`_.
+| Valor. Veja mais detalhes no link `https://wiki.magnusbilling.org/en/source/config.html.  <https://wiki.magnusbilling.org/en/source/config.html.>`_.
 
 
 
 
 .. _configuration-config-description:
 
-Description
------------
+Descrição
+---------
 
-| Description. You can see more details at the link `https://wiki.magnusbilling.org/en/source/config.html  <https://wiki.magnusbilling.org/en/source/config.html>`_.
-
-
-
+| Descrição. Veja mais detalhes no link `https://wiki.magnusbilling.org/en/source/config.html  <https://wiki.magnusbilling.org/en/source/config.html>`_.

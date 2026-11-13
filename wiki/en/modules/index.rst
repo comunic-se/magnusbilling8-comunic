@@ -4,40 +4,40 @@
 
 .. _user-menu-list:
 
-Menu Clientes Module
-====================
+Menu Clientes
+=============
 
 
-This is the list of all fields with their description of the menu  Clientes Module
+Esta é a lista de todos os campos, com a descrição, do menu Clientes.
 
-Users
-+++++
+Usuários
+++++++++
 
-This menu has the following fields
+Este menu tem os seguintes campos:
 
-:doc:`Users <user/user>`
-
-
-SIP Users
-+++++++++
-
-This menu has the following fields
-
-:doc:`SIP Users <sip/sip>`
+:doc:`Usuários <user/user>`
 
 
-Calls Online
+Usuários SIP
 ++++++++++++
 
-This menu has the following fields
+Este menu tem os seguintes campos:
 
-:doc:`Calls Online <callOnLine/callOnLine>`
+:doc:`Usuários SIP <sip/sip>`
+
+
+Chamadas online
++++++++++++++++
+
+Este menu tem os seguintes campos:
+
+:doc:`Chamadas online <callOnLine/callOnLine>`
 
 
 CallerID
 ++++++++
 
-This menu has the following fields
+Este menu tem os seguintes campos:
 
 :doc:`CallerID <callerid/callerid>`
 
@@ -45,41 +45,41 @@ This menu has the following fields
 ATA Linksys
 +++++++++++
 
-This menu has the following fields
+Este menu tem os seguintes campos:
 
 :doc:`ATA Linksys <sipuras/sipuras>`
 
 
-Restricted Number
+Números restritos
 +++++++++++++++++
 
-This menu has the following fields
+Este menu tem os seguintes campos:
 
-:doc:`Restricted Number <restrictedPhonenumber/restrictedPhonenumber>`
+:doc:`Números restritos <restrictedPhonenumber/restrictedPhonenumber>`
 
 
 Callback
 ++++++++
 
-This menu has the following fields
+Este menu tem os seguintes campos:
 
 :doc:`Callback <callBack/callBack>`
 
 
-Iax
+IAX
 +++
 
-This menu has the following fields
+Este menu tem os seguintes campos:
 
-:doc:`Iax <iax/iax>`
+:doc:`IAX <iax/iax>`
 
 
-User History
-++++++++++++
+Histórico do usuário
+++++++++++++++++++++
 
-This menu has the following fields
+Este menu tem os seguintes campos:
 
-:doc:`User History <userHistory/userHistory>`
+:doc:`Histórico do usuário <userHistory/userHistory>`
 
 
 
@@ -88,42 +88,42 @@ This menu has the following fields
 
 .. _refill-menu-list:
 
-Menu Billing
-============
+Menu Faturamento
+================
 
 
-This is the list of all fields with their description of the menu  Billing
+Esta é a lista de todos os campos, com a descrição, do menu Faturamento.
 
-Refills
-+++++++
+Recargas
+++++++++
 
-This menu has the following fields
+Este menu tem os seguintes campos:
 
-:doc:`Refills <refill/refill>`
+:doc:`Recargas <refill/refill>`
 
 
-Payment Methods
-+++++++++++++++
+Formas de pagamento
++++++++++++++++++++
 
-This menu has the following fields
+Este menu tem os seguintes campos:
 
-:doc:`Payment Methods <methodPay/methodPay>`
+:doc:`Formas de pagamento <methodPay/methodPay>`
 
 
 Voucher
 +++++++
 
-This menu has the following fields
+Este menu tem os seguintes campos:
 
 :doc:`Voucher <voucher/voucher>`
 
 
-Refill Providers
-++++++++++++++++
+Recargas de provedores
+++++++++++++++++++++++
 
-This menu has the following fields
+Este menu tem os seguintes campos:
 
-:doc:`Refill Providers <refillprovider/refillprovider>`
+:doc:`Recargas de provedores <refillprovider/refillprovider>`
 
 
 
@@ -136,70 +136,70 @@ Menu DIDs
 =========
 
 
-This is the list of all fields with their description of the menu  DIDs
+Esta é a lista de todos os campos, com a descrição, do menu DIDs.
 
 DIDs
 ++++
 
-This menu has the following fields
+Este menu tem os seguintes campos:
 
 :doc:`DIDs <did/did>`
 
 
-DID Destination
+Destinos de DID
 +++++++++++++++
 
-This menu has the following fields
+Este menu tem os seguintes campos:
 
-:doc:`DID Destination <diddestination/diddestination>`
-
-
-DIDs Use
-++++++++
-
-This menu has the following fields
-
-:doc:`DIDs Use <didUse/didUse>`
+:doc:`Destinos de DID <diddestination/diddestination>`
 
 
-IVRs
-++++
-
-This menu has the following fields
-
-:doc:`IVRs <ivr/ivr>`
-
-
-Queues
-++++++
-
-This menu has the following fields
-
-:doc:`Queues <queue/queue>`
-
-
-Queues Members
-++++++++++++++
-
-This menu has the following fields
-
-:doc:`Queues Members <queueMember/queueMember>`
-
-
-Holidays
-++++++++
-
-This menu has the following fields
-
-:doc:`Holidays <holidays/holidays>`
-
-
-DID History
+Uso de DIDs
 +++++++++++
 
-This menu has the following fields
+Este menu tem os seguintes campos:
 
-:doc:`DID History <didHistory/didHistory>`
+:doc:`Uso de DIDs <didUse/didUse>`
+
+
+URAs
+++++
+
+Este menu tem os seguintes campos:
+
+:doc:`URAs <ivr/ivr>`
+
+
+Filas
++++++
+
+Este menu tem os seguintes campos:
+
+:doc:`Filas <queue/queue>`
+
+
+Membros das filas
++++++++++++++++++
+
+Este menu tem os seguintes campos:
+
+:doc:`Membros das filas <queueMember/queueMember>`
+
+
+Feriados
+++++++++
+
+Este menu tem os seguintes campos:
+
+:doc:`Feriados <holidays/holidays>`
+
+
+Histórico de DIDs
++++++++++++++++++
+
+Este menu tem os seguintes campos:
+
+:doc:`Histórico de DIDs <didHistory/didHistory>`
 
 
 
@@ -208,66 +208,66 @@ This menu has the following fields
 
 .. _plan-menu-list:
 
-Menu Rates
-==========
+Menu Tarifas
+============
 
 
-This is the list of all fields with their description of the menu  Rates
+Esta é a lista de todos os campos, com a descrição, do menu Tarifas.
 
-Plans
-+++++
-
-This menu has the following fields
-
-:doc:`Plans <Plan/Plan>`
-
-
-Tariffs
-+++++++
-
-This menu has the following fields
-
-:doc:`Tariffs <rate/rate>`
-
-
-Prefixes
-++++++++
-
-This menu has the following fields
-
-:doc:`Prefixes <prefix/prefix>`
-
-
-User Custom Rates
-+++++++++++++++++
-
-This menu has the following fields
-
-:doc:`User Custom Rates <userRate/userRate>`
-
-
-Offers
+Planos
 ++++++
 
-This menu has the following fields
+Este menu tem os seguintes campos:
 
-:doc:`Offers <offer/offer>`
-
-
-Offer CDR
-+++++++++
-
-This menu has the following fields
-
-:doc:`Offer CDR <offerCdr/offerCdr>`
+:doc:`Planos <Plan/Plan>`
 
 
-Offer Use
-+++++++++
+Tarifas
++++++++
 
-This menu has the following fields
+Este menu tem os seguintes campos:
 
-:doc:`Offer Use <offerUse/offerUse>`
+:doc:`Tarifas <rate/rate>`
+
+
+Prefixos
+++++++++
+
+Este menu tem os seguintes campos:
+
+:doc:`Prefixos <prefix/prefix>`
+
+
+Tarifas personalizadas do usuário
++++++++++++++++++++++++++++++++++
+
+Este menu tem os seguintes campos:
+
+:doc:`Tarifas personalizadas do usuário <userRate/userRate>`
+
+
+Ofertas
++++++++
+
+Este menu tem os seguintes campos:
+
+:doc:`Ofertas <offer/offer>`
+
+
+CDR de ofertas
+++++++++++++++
+
+Este menu tem os seguintes campos:
+
+:doc:`CDR de ofertas <offerCdr/offerCdr>`
+
+
+Uso de ofertas
+++++++++++++++
+
+Este menu tem os seguintes campos:
+
+:doc:`Uso de ofertas <offerUse/offerUse>`
 
 
 
@@ -276,114 +276,114 @@ This menu has the following fields
 
 .. _call-menu-list:
 
-Menu Reports
-============
+Menu Relatórios
+===============
 
 
-This is the list of all fields with their description of the menu  Reports
+Esta é a lista de todos os campos, com a descrição, do menu Relatórios.
 
 CDR
 +++
 
-This menu has the following fields
+Este menu tem os seguintes campos:
 
 :doc:`CDR <call/call>`
 
 
-Summary per Day
-+++++++++++++++
+Resumo por dia
+++++++++++++++
 
-This menu has the following fields
+Este menu tem os seguintes campos:
 
-:doc:`Summary per Day <callSummaryPerDay/callSummaryPerDay>`
-
-
-Summary Day User
-++++++++++++++++
-
-This menu has the following fields
-
-:doc:`Summary Day User <callSummaryDayUser/callSummaryDayUser>`
+:doc:`Resumo por dia <callSummaryPerDay/callSummaryPerDay>`
 
 
-Summary Day Trunk
-+++++++++++++++++
+Resumo diário por usuário
++++++++++++++++++++++++++
 
-This menu has the following fields
+Este menu tem os seguintes campos:
 
-:doc:`Summary Day Trunk <callSummaryDayTrunk/callSummaryDayTrunk>`
-
-
-Summary Day Agent
-+++++++++++++++++
-
-This menu has the following fields
-
-:doc:`Summary Day Agent <callSummaryDayAgent/callSummaryDayAgent>`
+:doc:`Resumo diário por usuário <callSummaryDayUser/callSummaryDayUser>`
 
 
-Summary per Month
-+++++++++++++++++
+Resumo diário por tronco
+++++++++++++++++++++++++
 
-This menu has the following fields
+Este menu tem os seguintes campos:
 
-:doc:`Summary per Month <callSummaryPerMonth/callSummaryPerMonth>`
+:doc:`Resumo diário por tronco <callSummaryDayTrunk/callSummaryDayTrunk>`
 
 
-Summary Month User
+Resumo diário por revenda
++++++++++++++++++++++++++
+
+Este menu tem os seguintes campos:
+
+:doc:`Resumo diário por revenda <callSummaryDayAgent/callSummaryDayAgent>`
+
+
+Resumo por mês
+++++++++++++++
+
+Este menu tem os seguintes campos:
+
+:doc:`Resumo por mês <callSummaryPerMonth/callSummaryPerMonth>`
+
+
+Resumo mensal por usuário
++++++++++++++++++++++++++
+
+Este menu tem os seguintes campos:
+
+:doc:`Resumo mensal por usuário <callSummaryMonthUser/callSummaryMonthUser>`
+
+
+Resumo mensal por tronco
+++++++++++++++++++++++++
+
+Este menu tem os seguintes campos:
+
+:doc:`Resumo mensal por tronco <callSummaryMonthTrunk/callSummaryMonthTrunk>`
+
+
+Resumo por usuário
 ++++++++++++++++++
 
-This menu has the following fields
+Este menu tem os seguintes campos:
 
-:doc:`Summary Month User <callSummaryMonthUser/callSummaryMonthUser>`
-
-
-Summary Month Trunk
-+++++++++++++++++++
-
-This menu has the following fields
-
-:doc:`Summary Month Trunk <callSummaryMonthTrunk/callSummaryMonthTrunk>`
+:doc:`Resumo por usuário <callSummaryPerUser/callSummaryPerUser>`
 
 
-Summary per User
-++++++++++++++++
-
-This menu has the following fields
-
-:doc:`Summary per User <callSummaryPerUser/callSummaryPerUser>`
-
-
-Summary per Trunk
+Resumo por tronco
 +++++++++++++++++
 
-This menu has the following fields
+Este menu tem os seguintes campos:
 
-:doc:`Summary per Trunk <callSummaryPerTrunk/callSummaryPerTrunk>`
-
-
-Call Archive
-++++++++++++
-
-This menu has the following fields
-
-:doc:`Call Archive <callArchive/callArchive>`
+:doc:`Resumo por tronco <callSummaryPerTrunk/callSummaryPerTrunk>`
 
 
-Send Credit Summary
+Arquivo de chamadas
 +++++++++++++++++++
 
-This menu has the following fields
+Este menu tem os seguintes campos:
 
-:doc:`Send Credit Summary <sendCreditSummary/sendCreditSummary>`
+:doc:`Arquivo de chamadas <callArchive/callArchive>`
 
 
-Summary Month DID
-+++++++++++++++++
+Resumo de envio de crédito
+++++++++++++++++++++++++++
 
-This menu has the following fields
+Este menu tem os seguintes campos:
 
-:doc:`Summary Month DID <callSummaryMonthDid/callSummaryMonthDid>`
+:doc:`Resumo de envio de crédito <sendCreditSummary/sendCreditSummary>`
+
+
+Resumo mensal por DID
++++++++++++++++++++++
+
+Este menu tem os seguintes campos:
+
+:doc:`Resumo mensal por DID <callSummaryMonthDid/callSummaryMonthDid>`
 
 
 
@@ -392,72 +392,72 @@ This menu has the following fields
 
 .. _trunk-menu-list:
 
-Menu Routes
-===========
+Menu Rotas
+==========
 
 
-This is the list of all fields with their description of the menu  Routes
+Esta é a lista de todos os campos, com a descrição, do menu Rotas.
 
-Providers
-+++++++++
+Provedores
+++++++++++
 
-This menu has the following fields
+Este menu tem os seguintes campos:
 
-:doc:`Providers <provider/provider>`
-
-
-Trunks
-++++++
-
-This menu has the following fields
-
-:doc:`Trunks <trunk/trunk>`
+:doc:`Provedores <provider/provider>`
 
 
-Trunk Groups
-++++++++++++
-
-This menu has the following fields
-
-:doc:`Trunk Groups <trunkGroup/trunkGroup>`
-
-
-Provider Rates
-++++++++++++++
-
-This menu has the following fields
-
-:doc:`Provider Rates <rateProvider/rateProvider>`
-
-
-Servers
+Troncos
 +++++++
 
-This menu has the following fields
+Este menu tem os seguintes campos:
 
-:doc:`Servers <servers/servers>`
-
-
-Trunk Errors
-++++++++++++
-
-This menu has the following fields
-
-:doc:`Trunk Errors <trunkSipCodes/trunkSipCodes>`
+:doc:`Troncos <trunk/trunk>`
 
 
-Provider CNL
-++++++++++++
+Grupos de troncos
++++++++++++++++++
 
-This menu has the following fields
+Este menu tem os seguintes campos:
 
-:doc:`Provider CNL <providerCNL/providerCNL>`
+:doc:`Grupos de troncos <trunkGroup/trunkGroup>`
+
+
+Tarifas de provedores
++++++++++++++++++++++
+
+Este menu tem os seguintes campos:
+
+:doc:`Tarifas de provedores <rateProvider/rateProvider>`
+
+
+Servidores
+++++++++++
+
+Este menu tem os seguintes campos:
+
+:doc:`Servidores <servers/servers>`
+
+
+Erros dos troncos
++++++++++++++++++
+
+Este menu tem os seguintes campos:
+
+:doc:`Erros dos troncos <trunkSipCodes/trunkSipCodes>`
+
+
+CNL do provedor
++++++++++++++++
+
+Este menu tem os seguintes campos:
+
+:doc:`CNL do provedor <providerCNL/providerCNL>`
 
 
 Sip Trace
 +++++++++
 
-This menu has the following fields
+Este menu tem os seguintes campos:
 
 :doc:`Sip Trace <sipTrace/sipTrace>`
 
@@ -468,56 +468,56 @@ This menu has the following fields
 
 .. _configuration-menu-list:
 
-Menu Settings
-=============
+Menu Configurações
+==================
 
 
-This is the list of all fields with their description of the menu  Settings
+Esta é a lista de todos os campos, com a descrição, do menu Configurações.
 
 Menus
 +++++
 
-This menu has the following fields
+Este menu tem os seguintes campos:
 
 :doc:`Menus <module/module>`
 
 
-Group Users
-+++++++++++
+Grupos de usuários
+++++++++++++++++++
 
-This menu has the following fields
+Este menu tem os seguintes campos:
 
-:doc:`Group Users <groupUser/groupUser>`
-
-
-Configuration
-+++++++++++++
-
-This menu has the following fields
-
-:doc:`Configuration <configuration/configuration>`
+:doc:`Grupos de usuários <groupUser/groupUser>`
 
 
-Emails Templates
-++++++++++++++++
+Configuração
+++++++++++++
 
-This menu has the following fields
+Este menu tem os seguintes campos:
 
-:doc:`Emails Templates <templateMail/templateMail>`
+:doc:`Configuração <configuration/configuration>`
 
 
-Log Users
-+++++++++
+Modelos de e-mail
++++++++++++++++++
 
-This menu has the following fields
+Este menu tem os seguintes campos:
 
-:doc:`Log Users <logUsers/logUsers>`
+:doc:`Modelos de e-mail <templateMail/templateMail>`
+
+
+Log de usuários
++++++++++++++++
+
+Este menu tem os seguintes campos:
+
+:doc:`Log de usuários <logUsers/logUsers>`
 
 
 SMTP
 ++++
 
-This menu has the following fields
+Este menu tem os seguintes campos:
 
 :doc:`SMTP <smtps/smtps>`
 
@@ -525,39 +525,39 @@ This menu has the following fields
 API
 +++
 
-This menu has the following fields
+Este menu tem os seguintes campos:
 
 :doc:`API <api/api>`
 
 
-Call per Minutes
-++++++++++++++++
+Chamadas por minuto
++++++++++++++++++++
 
-This menu has the following fields
+Este menu tem os seguintes campos:
 
-:doc:`Call per Minutes <campaignLog/campaignLog>`
-
-
-Group to Admins
-+++++++++++++++
-
-This menu has the following fields
-
-:doc:`Group to Admins <groupUserGroup/groupUserGroup>`
+:doc:`Chamadas por minuto <campaignLog/campaignLog>`
 
 
-Alarms
-++++++
+Grupos para administradores
++++++++++++++++++++++++++++
 
-This menu has the following fields
+Este menu tem os seguintes campos:
 
-:doc:`Alarms <alarm/alarm>`
+:doc:`Grupos para administradores <groupUserGroup/groupUserGroup>`
+
+
+Alarmes
++++++++
+
+Este menu tem os seguintes campos:
+
+:doc:`Alarmes <alarm/alarm>`
 
 
 Fail2ban
 ++++++++
 
-This menu has the following fields
+Este menu tem os seguintes campos:
 
 :doc:`Fail2ban <firewall/firewall>`
 
@@ -568,82 +568,82 @@ This menu has the following fields
 
 .. _campaign-menu-list:
 
-Menu Voice Broadcasting
-=======================
+Menu Torpedo de voz
+===================
 
 
-This is the list of all fields with their description of the menu  Voice Broadcasting
+Esta é a lista de todos os campos, com a descrição, do menu Torpedo de voz.
 
-Campaigns
+Campanhas
 +++++++++
 
-This menu has the following fields
+Este menu tem os seguintes campos:
 
-:doc:`Campaigns <campaign/campaign>`
-
-
-Phonebooks
-++++++++++
-
-This menu has the following fields
-
-:doc:`Phonebooks <phoneBook/phoneBook>`
+:doc:`Campanhas <campaign/campaign>`
 
 
-Phonenumbers
-++++++++++++
+Agendas
++++++++
 
-This menu has the following fields
+Este menu tem os seguintes campos:
 
-:doc:`Phonenumbers <phoneNumber/phoneNumber>`
-
-
-Polls
-+++++
-
-This menu has the following fields
-
-:doc:`Polls <campaignPoll/campaignPoll>`
+:doc:`Agendas <phoneBook/phoneBook>`
 
 
-Polls Reports
-+++++++++++++
+Números
++++++++
 
-This menu has the following fields
+Este menu tem os seguintes campos:
 
-:doc:`Polls Reports <campaignPollInfo/campaignPollInfo>`
+:doc:`Números <phoneNumber/phoneNumber>`
 
 
-Restrict Phone
-++++++++++++++
+Pesquisas
++++++++++
 
-This menu has the following fields
+Este menu tem os seguintes campos:
 
-:doc:`Restrict Phone <campaignRestrictPhone/campaignRestrictPhone>`
+:doc:`Pesquisas <campaignPoll/campaignPoll>`
+
+
+Relatórios de pesquisas
++++++++++++++++++++++++
+
+Este menu tem os seguintes campos:
+
+:doc:`Relatórios de pesquisas <campaignPollInfo/campaignPollInfo>`
+
+
+Números bloqueados
+++++++++++++++++++
+
+Este menu tem os seguintes campos:
+
+:doc:`Números bloqueados <campaignRestrictPhone/campaignRestrictPhone>`
 
 
 SMS
 +++
 
-This menu has the following fields
+Este menu tem os seguintes campos:
 
 :doc:`SMS <sms/sms>`
 
 
-Campaigns DashBoard
+Painel de campanhas
 +++++++++++++++++++
 
-This menu has the following fields
+Este menu tem os seguintes campos:
 
-:doc:`Campaigns DashBoard <campaignDashboard/campaignDashboard>`
+:doc:`Painel de campanhas <campaignDashboard/campaignDashboard>`
 
 
-Campaign Report
-+++++++++++++++
+Relatório de campanhas
+++++++++++++++++++++++
 
-This menu has the following fields
+Este menu tem os seguintes campos:
 
-:doc:`Campaign Report <campaignReport/campaignReport>`
+:doc:`Relatório de campanhas <campaignReport/campaignReport>`
 
 
 
@@ -656,30 +656,30 @@ Menu CallShop
 =============
 
 
-This is the list of all fields with their description of the menu  CallShop
+Esta é a lista de todos os campos, com a descrição, do menu CallShop.
 
-Booths Report
-+++++++++++++
+Relatório das cabines
++++++++++++++++++++++
 
-This menu has the following fields
+Este menu tem os seguintes campos:
 
-:doc:`Booths Report <callShopCdr/callShopCdr>`
+:doc:`Relatório das cabines <callShopCdr/callShopCdr>`
 
 
-Booths Tariffs
+Tarifas das cabines
++++++++++++++++++++
+
+Este menu tem os seguintes campos:
+
+:doc:`Tarifas das cabines <rateCallshop/rateCallshop>`
+
+
+Resumo por dia
 ++++++++++++++
 
-This menu has the following fields
+Este menu tem os seguintes campos:
 
-:doc:`Booths Tariffs <rateCallshop/rateCallshop>`
-
-
-Summary per Day
-+++++++++++++++
-
-This menu has the following fields
-
-:doc:`Summary per Day <callSummaryCallShop/callSummaryCallShop>`
+:doc:`Resumo por dia <callSummaryCallShop/callSummaryCallShop>`
 
 
 
@@ -688,26 +688,26 @@ This menu has the following fields
 
 .. _services-menu-list:
 
-Menu Services
+Menu Serviços
 =============
 
 
-This is the list of all fields with their description of the menu  Services
+Esta é a lista de todos os campos, com a descrição, do menu Serviços.
 
-Services
+Serviços
 ++++++++
 
-This menu has the following fields
+Este menu tem os seguintes campos:
 
-:doc:`Services <services/services>`
+:doc:`Serviços <services/services>`
 
 
-Services Use
-++++++++++++
+Uso de serviços
++++++++++++++++
 
-This menu has the following fields
+Este menu tem os seguintes campos:
 
-:doc:`Services Use <servicesUse/servicesUse>`
+:doc:`Uso de serviços <servicesUse/servicesUse>`
 
 
 

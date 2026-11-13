@@ -2,10 +2,10 @@
 Iptables
 *****************
 
-Applicable Iptables rules in the installation.
+Regras de Iptables aplicadas na instalação.
 
-Basic Rules
-^^^^^^^^^^^^
+Regras básicas
+^^^^^^^^^^^^^^
 
 ::
      
@@ -22,7 +22,7 @@ Basic Rules
 	iptablesA INPUT -p udp -m udp --dport 10000:20000 -j ACCEPT
 	iptablesA INPUT -p tcp -m tcp --dport 80 -j ACCEPT
 
-Optional Rules
+Regras opcionais
 ^^^^^^^^^^^^^^^^
 
 | OPENVPN: ``iptables -A INPUT -p udp --dport 1194 -j ACCEPT`` 
@@ -33,7 +33,7 @@ Optional Rules
 Friendly Scanner
 ^^^^^^^^^^^^^^^^^
 
-Rules to block not so friendly scanner
+Regras para bloquear o "friendly scanner", que não é nada amigável
 
 ::
      
@@ -42,7 +42,7 @@ Rules to block not so friendly scanner
 	iptables -I INPUT -j DROP -p udp --dport 5060 -m string --string "friendly-scanner" --algo bm
 	iptables -I INPUT -j DROP -p udp --dport 5080 -m string --string "friendly-scanner" --algo bm
 
-| *Optional*
+| *Opcional*
 
 
 ::
@@ -53,37 +53,37 @@ Rules to block not so friendly scanner
 	iptables -I INPUT -j DROP -p tcp --dport 5080 -m string --string "VaxIPUserAgent" --algo bm
 
 
-Show iptable rules
-^^^^^^^^^^^^^^^^^^^
+Mostrar as regras do iptables
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 ::
      
   sudo iptables -L -v
 
-Show line numbers
-^^^^^^^^^^^^^^^^^^
+Mostrar os números das linhas
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ::
      
   iptables -L -v --line-numbers
 
-Delete a line
-^^^^^^^^^^^^^^
+Apagar uma linha
+^^^^^^^^^^^^^^^^
 
-Delete line 2
+Apagar a linha 2
 
 ::
      
   iptables -D INPUT 2
 
-Block IP address
-^^^^^^^^^^^^^^^^^
+Bloquear um endereço IP
+^^^^^^^^^^^^^^^^^^^^^^^
 
 ::
      
   iptables -I INPUT -s 62.210.245.132 -j DROP
 
-Save Changes
-^^^^^^^^^^^^^
+Gravar as mudanças
+^^^^^^^^^^^^^^^^^^
      
 	apt-get install iptables-persistent
 	service iptables-persistent save

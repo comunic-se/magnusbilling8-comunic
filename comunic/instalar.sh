@@ -10,7 +10,7 @@
 #
 # Uso (como root):
 #   apt install -y git
-#   git clone git@github.com:77uccena/mb8.git /opt/mb8-comunic
+#   git clone git@github.com:comunic-se/magnusbilling8-comunic.git /opt/mb8-comunic
 #   cd /opt/mb8-comunic && bash comunic/instalar.sh [--fuso America/Sao_Paulo]
 #
 # --fuso ZONA  ajusta o fuso do sistema ANTES de instalar (o PHP herda o fuso do sistema
@@ -38,7 +38,7 @@ if [ -f "$MB/index.php" ]; then
     exit 1
 fi
 case "$REPO" in
-    $MB|$MB/*) echo "Nao clone o repositorio dentro de $MB (use /opt/mb8-comunic)."; exit 1 ;;
+    "$MB"|"$MB"/*) echo "Nao clone o repositorio dentro de $MB (use /opt/mb8-comunic)."; exit 1 ;;
 esac
 
 . /etc/os-release 2>/dev/null

@@ -1,31 +1,31 @@
 
 .. _callSummaryMonthUser-sumsessiontime:
 
-Duration
---------
+Duração
+-------
 
-| Sum of call minutes.
-| It is possible to use filters, such as recent months or a specific user. This summary only shows data that matches the selected filters.
+| Soma dos minutos das chamadas.
+| É possível usar filtros, como os últimos meses ou um usuário específico. Este resumo mostra só os dados que atendem aos filtros selecionados.
 
 
 
 
 .. _callSummaryMonthUser-sumlucro:
 
-Markup
-------
+Lucro
+-----
 
-| Sum of the earnings.
+| Soma dos ganhos.
 
 
 
 
 .. _callSummaryMonthUser-sumnbcall:
 
-Total calls
------------
+Total de chamadas
+-----------------
 
-| Total of calls.
+| Total de chamadas.
 
 
 

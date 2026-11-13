@@ -1,50 +1,50 @@
 
 .. _callSummaryCallShop-sumsessiontime:
 
-Duration
---------
+Duração
+-------
 
-| Sum of call minutes.
+| Soma dos minutos das chamadas.
 
 
 
 
 .. _callSummaryCallShop-sumprice:
 
-Sell price
-----------
+Preço de venda
+--------------
 
-| Total value.
+| Valor total.
 
 
 
 
 .. _callSummaryCallShop-sumlucro:
 
-Markup
-------
+Lucro
+-----
 
-| Sum of the earnings.
+| Soma dos ganhos.
 
 
 
 
 .. _callSummaryCallShop-sumbuycost:
 
-Buy price
----------
+Preço de compra
+---------------
 
-| Sum of the buy cost.
+| Soma do custo de compra.
 
 
 
 
 .. _callSummaryCallShop-sumnbcall:
 
-Total calls
------------
+Total de chamadas
+-----------------
 
-| Total of calls.
+| Total de chamadas.
 
 
 

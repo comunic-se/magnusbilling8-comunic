@@ -1,40 +1,39 @@
 .. _intro:
 
-Introduction
-============
+Introdução
+==========
 
 
-`MagnusBilling`_ is an open source tool written in PHP and JAVASCRIPT, using the EXTJS 6 and YII FRAMEWORK frameworks, aimed at IP telephony providers. MagnusBilling provides a complete and powerful system for anyone to start an IP telephony provider in a matter of minutes. MagnusBilling uses `Asterisk`_ for connection between customers and providers.
+O `MagnusBilling`_ é uma ferramenta de código aberto escrita em PHP e JAVASCRIPT, com os frameworks EXTJS 6 e YII FRAMEWORK, voltada a provedores de telefonia IP. O MagnusBilling oferece um sistema completo e poderoso para qualquer pessoa abrir um provedor de telefonia IP em poucos minutos. O MagnusBilling usa o `Asterisk`_ para a conexão entre clientes e provedores.
 
-* MagnusBilling can be installed on Linux, Debian.
+* O MagnusBilling pode ser instalado no Linux Debian.
 
-* MagnusBilling has a modern and robust interface that makes the administration of all functions very easy to understand.
+* O MagnusBilling tem uma interface moderna e robusta, que torna a administração de todas as funções muito fácil de entender.
 
-* MagnusBilling has everything that a small, medium and large companies need to start a robust IP PBX system `Youtube Channel`.
+* O MagnusBilling tem tudo o que empresas pequenas, médias e grandes precisam para começar um sistema de PBX IP robusto. Veja o `Canal youtube`_.
 
 
-Functions
-=========
+Funções
+=======
 
-* The system has a lot of functionality to make your server incredibly robust.
-* Makes Asterisk easier to manage, and allows you to work without prior Asterisk knowledge, everything is done by the WEB panel.
-* Complete WEB panel for the administrator, reseller and customers.
+* O sistema tem muitas funcionalidades que tornam o servidor muito robusto.
+* Facilita a gestão do Asterisk e permite trabalhar sem conhecimento prévio do Asterisk; tudo é feito pelo painel WEB.
+* Painel WEB completo para administrador, revenda e clientes.
 
-Supported functions
-===================
+Funções suportadas
+==================
 
 +-------------------------+-----------------------+-----------------------+----------------------+
-| SoftSwitch 4 & 4        | CallBack              | Packages offer        | Paypal               |
+| SoftSwitch 4 & 4        | CallBack              | Ofertas de pacotes    | Paypal               |
 +-------------------------+-----------------------+-----------------------+----------------------+
-| Queus                   | CallShop              | Pre and pos           | Pagseguro            |
+| Filas                   | CallShop              | Pré e pós-pago        | Pagseguro            |
 +-------------------------+-----------------------+-----------------------+----------------------+
-| CallingCard             | CidCallBack           | Services              |    Ivr               |
+| CallingCard             | CidCallBack           | Serviços              |    URA               |
 +-------------------------+-----------------------+-----------------------+----------------------+
-|  DID numbers            | SIP & IAX             | and more...           |                      |
+|  Números DID            | SIP & IAX             | e mais...             |                      |
 +-------------------------+-----------------------+-----------------------+----------------------+
 
 
 .. _Asterisk: http://www.asterisk.org
 .. _Canal youtube: https://www.youtube.com/channel/UCish_6Lxfkh29n4CLVEd90Q
 .. _MagnusBilling: https://www.magnusbilling.org
-

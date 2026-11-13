@@ -1,100 +1,100 @@
 
 .. _rate-id-plan:
 
-Plan
-----
+Plano
+-----
 
-| The plan that you want to create a tariff for.
+| Plano para o qual você quer criar a tarifa.
 
 
 
 
 .. _rate-id-prefix:
 
-Destination
------------
+Destino
+-------
 
-| The prefix that you want create a tariff for.
+| Prefixo para o qual você quer criar a tarifa.
 
 
 
 
 .. _rate-id-trunk-group:
 
-Trunk groups
-------------
+Grupos de troncos
+-----------------
 
-| The group of trunks that will be used to send this call.
+| Grupo de troncos usado para enviar esta chamada.
 
 
 
 
 .. _rate-rateinitial:
 
-Sell price
-----------
+Preço de venda
+--------------
 
-| The amount that you want to charge per minute.
+| Valor que você quer cobrar por minuto.
 
 
 
 
 .. _rate-initblock:
 
-Initial block
+Bloco inicial
 -------------
 
-| Minimum time in seconds to buy. E.g., if set to 30s and the call duration is 21s, will be charged for 30s.
+| Tempo mínimo em segundos a cobrar. Ex.: se estiver em 30 s e a chamada durar 21 s, são cobrados 30 s.
 
 
 
 
 .. _rate-billingblock:
 
-Billing block
--------------
+Bloco de cobrança
+-----------------
 
-| This defines how the time is incremented after the minimum. E.g, if set to 6s and call duration is 32s, will becharged for 36.
+| Define como o tempo é incrementado depois do mínimo. Ex.: se estiver em 6 s e a chamada durar 32 s, são cobrados 36 s.
 
 
 
 
 .. _rate-minimal-time-charge:
 
-Minimum time to charge
-----------------------
+Tempo mínimo de cobrança
+------------------------
 
-| Minimun time to tariff. If it's set to 3, will only tariff calls when the time is equal or more than 3 seconds.
+| Tempo mínimo para tarifar. Se estiver em 3, só são tarifadas as chamadas com 3 segundos ou mais.
 
 
 
 
 .. _rate-additional-grace:
 
-Additional time
+Tempo adicional
 ---------------
 
-| Aditional time to add to all call duration. If it's set to 10, will be added 10 seconds to all call time duration, this affects tarrifs.
+| Tempo adicional somado à duração de todas as chamadas. Se estiver em 10, são somados 10 segundos à duração de cada chamada, o que afeta a tarifação.
 
 
 
 
 .. _rate-connectcharge:
 
-Connection charge
------------------
+Taxa de conexão
+---------------
 
-| Fixed amount charged once when the call is answered, in addition to the per-minute rate.
+| Valor fixo cobrado uma vez quando a chamada é atendida, além da tarifa por minuto.
 
 
 
 
 .. _rate-package-offer:
 
-Include in offer
-----------------
+Incluir na oferta
+-----------------
 
-| Set to yes if you want to include this tariff to a package offer.
+| Coloque sim se quiser incluir esta tarifa num pacote de oferta.
 
 
 
@@ -104,7 +104,7 @@ Include in offer
 Status
 ------
 
-| Deactivating Tariffs, MagnusBilling will completely disregard this tariff. Therefore, deleting or deactivating will have the same effect.
+| Com a tarifa desativada, o MagnusBilling a ignora por completo. Apagar ou desativar tem o mesmo efeito.
 
 
 

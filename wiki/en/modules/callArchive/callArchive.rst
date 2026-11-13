@@ -1,50 +1,50 @@
 
 .. _callArchive-calledstation:
 
-Number
+Número
 ------
 
-| Number dialed by the client.
+| Número discado pelo cliente.
 
 
 
 
 .. _callArchive-sessiontime:
 
-Duration
---------
+Duração
+-------
 
-| Duration of the call in seconds.
+| Duração da chamada em segundos.
 
 
 
 
 .. _callArchive-buycost:
 
-Buy price
----------
+Preço de compra
+---------------
 
-| Buy cost. You can see more details at the link `https://wiki.magnusbilling.org/en/source/price_calculation.html  <https://wiki.magnusbilling.org/en/source/price_calculation.html>`_.
+| Custo de compra. Veja mais detalhes no link `https://wiki.magnusbilling.org/en/source/price_calculation.html  <https://wiki.magnusbilling.org/en/source/price_calculation.html>`_.
 
 
 
 
 .. _callArchive-sessionbill:
 
-Sell price
-----------
+Preço de venda
+--------------
 
-| Buy cost. You can see more details at the link `https://wiki.magnusbilling.org/en/source/price_calculation.html  <https://wiki.magnusbilling.org/en/source/price_calculation.html>`_.
+| Preço de venda. Veja mais detalhes no link `https://wiki.magnusbilling.org/en/source/price_calculation.html  <https://wiki.magnusbilling.org/en/source/price_calculation.html>`_.
 
 
 
 
 .. _callArchive-agent-bill:
 
-Sell price
-----------
+Preço de venda
+--------------
 
-| Buy cost. You can see more details at the link `https://wiki.magnusbilling.org/en/source/price_calculation.html  <https://wiki.magnusbilling.org/en/source/price_calculation.html>`_.
+| Preço de venda da revenda. Veja mais detalhes no link `https://wiki.magnusbilling.org/en/source/price_calculation.html  <https://wiki.magnusbilling.org/en/source/price_calculation.html>`_.
 
 
 

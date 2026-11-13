@@ -1,31 +1,31 @@
 
 .. _groupUserGroup-name:
 
-Group
+Grupo
 -----
 
-| Group name
+| Nome do grupo.
 
 
 
 
 .. _groupUserGroup-user-prefix:
 
-User prefix
------------
+Prefixo do usuário
+------------------
 
-| Filling this field, all users created by an administrator that uses this group will be initialized with this prefix.
+| Se preenchido, todos os usuários criados por um administrador deste grupo começam com este prefixo.
 
 
 
 
 .. _groupUserGroup-id-group:
 
-Group
+Grupo
 -----
 
-| Which client groups will the administrator group have access.
-|  When an administrator that belongs to this group login, only the administrator will see the client data of the selected groups
+| A quais grupos de clientes o grupo de administradores terá acesso.
+|  Quando um administrador deste grupo entra no painel, ele só vê os dados dos clientes dos grupos selecionados.
 
 
 

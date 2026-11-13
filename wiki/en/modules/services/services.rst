@@ -1,80 +1,80 @@
 
 .. _services-type:
 
-Type
+Tipo
 ----
 
-| Service type.
+| Tipo de serviço.
 
 
 
 
 .. _services-name:
 
-Name
+Nome
 ----
 
-| Service name.
+| Nome do serviço.
 
 
 
 
 .. _services-calllimit:
 
-Call limit
-----------
+Limite de chamadas
+------------------
 
-| Limit of simultaneos calls..
+| Limite de chamadas simultâneas.
 
 
 
 
 .. _services-disk-space:
 
-Disk space
-----------
+Espaço em disco
+---------------
 
-| Insert total disk space in GB.
+| Informe o espaço total em disco, em GB.
 
 
 
 
 .. _services-sipaccountlimit:
 
-SIP account limit
------------------
+Limite de contas SIP
+--------------------
 
-| Maximum value of SIP users that this client can create.
+| Quantidade máxima de usuários SIP que este cliente pode criar.
 
 
 
 
 .. _services-price:
 
-Price
+Preço
 -----
 
-| Monthly cost to charge the client that activates this service.
+| Custo mensal cobrado do cliente que ativar este serviço.
 
 
 
 
 .. _services-return-credit:
 
-Return credit
--------------
+Devolver crédito
+----------------
 
-| If this service is cancelled before the expiry date, and if this option is set to "yes", will be refunded the proporcional value of not used days to the client.
+| Se o serviço for cancelado antes do vencimento e esta opção estiver em "sim", o valor proporcional dos dias não usados é devolvido ao cliente.
 
 
 
 
 .. _services-description:
 
-Description
------------
+Descrição
+---------
 
-| Used for internal control.
+| Usado para controle interno.
 
 
 

@@ -1,193 +1,192 @@
 
 .. _campaignPoll-id-campaign:
 
-Campaign
+Campanha
 --------
 
-| Choose the campaign that will execute this poll.
+| Escolha a campanha que vai executar esta pesquisa.
 
 
 
 
 .. _campaignPoll-name:
 
-Name
+Nome
 ----
 
-| Name of the poll. This name is seen on your end only.
+| Nome da pesquisa. Este nome só aparece para você.
 
 
 
 
 .. _campaignPoll-repeat:
 
-Repeat if press invalid option
-------------------------------
+Repetir se digitar opção inválida
+---------------------------------
 
-| How many times should MagnusBilling repeat the poll audio if the client didn't press any valid option.
-| You may check what are the options under the option tab.
+| Quantas vezes o MagnusBilling repete o áudio da pesquisa se o cliente não digitar nenhuma opção válida.
+| Veja as opções na aba de opções.
 
 
 
 
 .. _campaignPoll-request-authorize:
 
-Request authorization
----------------------
+Pedir autorização
+-----------------
 
-| In some cases, you will need to request for compliance in order to execute the poll. If that's the case, select Yes.
+| Em alguns casos é preciso pedir consentimento para executar a pesquisa. Se for o caso, selecione Sim.
 
 
 
 
 .. _campaignPoll-digit-authorize:
 
-Number for authorize
---------------------
+Dígito para autorizar
+---------------------
 
-| Digit to authorize the excution of the poll.
+| Dígito que autoriza a execução da pesquisa.
 
 
 
 
 .. _campaignPoll-arq-audio:
 
-Audio
+Áudio
 -----
 
-| Audio file. Please use a GSM or WAV 8khz mono audio file.
+| Arquivo de áudio. Use um arquivo GSM ou WAV 8 kHz mono.
 
 
 
 
 .. _campaignPoll-description:
 
-Description
------------
+Descrição
+---------
 
-| Description of the poll.
+| Descrição da pesquisa.
 
 
 
 
 .. _campaignPoll-option0:
 
-Option 0
---------
+Opção 0
+-------
 
-| Describe the option
-| Example poll:
-|     Who will you vote for?
-|     Press 1 for option one
-|     Press 2 for option two
-|     Press 3 for option three
-|     
+| Descreva a opção.
+| Exemplo de pesquisa:
+|     Em quem você vai votar?
+|     Digite 1 para a opção um
+|     Digite 2 para a opção dois
+|     Digite 3 para a opção três
+|
 |     .. image:: ../../img/poll_options.png
-   :scale: 100% 
-
-|     These settings will be useful when reading the poll summary.
-| 
-|     
+   :scale: 100%
+|     Estas configurações ajudam na leitura do resumo da pesquisa.
+|
+|
 
 
 
 
 .. _campaignPoll-option1:
 
-Option 1
---------
+Opção 1
+-------
 
-| Describe the option. Read the description of option 0.
+| Descreva a opção. Leia a descrição da opção 0.
 
 
 
 
 .. _campaignPoll-option2:
 
-Option 2
---------
+Opção 2
+-------
 
-| Describe the option. Read the description of option 0.
+| Descreva a opção. Leia a descrição da opção 0.
 
 
 
 
 .. _campaignPoll-option3:
 
-Option 3
---------
+Opção 3
+-------
 
-| Describe the option. Read the description of option 0.
+| Descreva a opção. Leia a descrição da opção 0.
 
 
 
 
 .. _campaignPoll-option4:
 
-Option 4
---------
+Opção 4
+-------
 
-| Describe the option. Read the description of option 0.
+| Descreva a opção. Leia a descrição da opção 0.
 
 
 
 
 .. _campaignPoll-option5:
 
-Option 5
---------
+Opção 5
+-------
 
-| Describe the option. Read the description of option 0.
+| Descreva a opção. Leia a descrição da opção 0.
 
 
 
 
 .. _campaignPoll-option6:
 
-Option 6
---------
+Opção 6
+-------
 
-| Describe the option. Read the description of option 0.
+| Descreva a opção. Leia a descrição da opção 0.
 
 
 
 
 .. _campaignPoll-option7:
 
-Option 7
---------
+Opção 7
+-------
 
-| Describe the option. Read the description of option 0.
+| Descreva a opção. Leia a descrição da opção 0.
 
 
 
 
 .. _campaignPoll-option8:
 
-Option 8
---------
+Opção 8
+-------
 
-| Describe the option. Read the description of option 0.
+| Descreva a opção. Leia a descrição da opção 0.
 
 
 
 
 .. _campaignPoll-option9:
 
-Option 9
---------
+Opção 9
+-------
 
-| Describe the option. Read the description of option 0.
+| Descreva a opção. Leia a descrição da opção 0.
 
 
 
 
 .. _campaignPoll-option10:
 
-Option 10
----------
+Opção 10
+--------
 
-| Audio option played when the callee presses digit 10 in the poll.
+| Opção de áudio tocada quando a pessoa digita 10 na pesquisa.
 
 
 

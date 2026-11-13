@@ -19,6 +19,7 @@
 # Se a conferencia final falhar, NAO desfaz sozinho: manda alerta com os comandos para voltar.
 #
 set -u
+set -o pipefail   # falha no mariadb-dump nao pode ser escondida pelo gzip
 COM="$(cd "$(dirname "$0")" && pwd)"
 . "$COM/lib/comum.sh"
 MODO=interativo; SILENCIOSO=0; IGNJANELA=0; LOCAL=""
@@ -157,7 +158,14 @@ crontab -l > "$BKP/crontab-root.txt" 2>/dev/null
 ANTES=$(versao_banco)
 
 cp "$PAC" "$MB/MagnusBilling8-current.tar.gz"
-(cd "$MB" && tar xzf MagnusBilling8-current.tar.gz) || { r "ERRO ao extrair o pacote."; }
+if ! (cd "$MB" && tar xzf MagnusBilling8-current.tar.gz); then
+    r "ERRO ao extrair o pacote. A migracao do banco NAO foi executada."
+    r "Os arquivos podem ter ficado pela metade. Para voltar:"
+    r "  tar xzf $BKP/mbilling-arquivos.tar.gz -C /var/www/html"
+    registrar ERRO "atualizar-mb8: falha ao extrair o pacote"
+    alertar "URGENTE MagnusBilling: atualizacao interrompida (pacote nao extraido)" "$REL"
+    exit 1
+fi
 if [ -f "$MB/protected/commands/updateCommand.sh" ]; then
     (cd "$MB" && bash protected/commands/updateCommand.sh) >> "$REL" 2>&1; RCU=$?
 else

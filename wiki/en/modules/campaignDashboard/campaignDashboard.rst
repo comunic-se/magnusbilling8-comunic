@@ -1,10 +1,7 @@
 
 .. _campaignDashboard-name:
 
-Name
+Nome
 ----
 
-| Name of the campaign.
-
-
-
+| Nome da campanha.

@@ -1,22 +1,22 @@
 
-Paid modules
-============
+Módulos pagos
+=============
 
-This section contains documentation for optional MagnusBilling modules. Module
-availability depends on the installed version, license, and enabled group
-permissions. Confirm that an optional module is available for the target server
-before planning an operational workflow around it.
+Esta seção traz a documentação dos módulos opcionais do MagnusBilling. A
+disponibilidade de cada módulo depende da versão instalada, da licença e das
+permissões de grupo ativadas. Confirme que um módulo opcional está disponível no
+servidor antes de planejar um fluxo de trabalho que dependa dele.
 
 
 SIPTrace
 ++++++++
 
-The SIPTrace module allows you to capture and analyze SIP packets directly from the MagnusBilling interface.
+O módulo SIPTrace permite capturar e analisar pacotes SIP direto na interface do MagnusBilling.
 
-Use SIP traces only for authorized diagnostics. Captures may contain telephone
-numbers, network addresses, authentication metadata, and other sensitive
-signaling information. Limit access, retain captures only as long as necessary,
-and remove secrets before sharing a trace with support.
+Use capturas SIP só para diagnósticos autorizados. As capturas podem conter números
+de telefone, endereços de rede, metadados de autenticação e outras informações de
+sinalização sensíveis. Limite o acesso, guarde as capturas só pelo tempo necessário
+e retire os segredos antes de compartilhar uma captura com o suporte.
 
 :doc:`SIPTrace <siptrace/siptrace>`
 

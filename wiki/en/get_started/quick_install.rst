@@ -1,78 +1,84 @@
-Installation
-============
+Instalação
+==========
 
-MagnusBilling 8 requires a server running a minimal Debian installation. Use a
-dedicated server or virtual machine and make a backup before reinstalling or
-upgrading an existing system.
+O MagnusBilling 8 exige um servidor com instalação mínima do Debian. Use um servidor
+dedicado ou uma máquina virtual e faça backup antes de reinstalar ou atualizar um
+sistema existente.
 
-Run the installer
------------------
+Rodar o instalador
+------------------
 
-Connect to the server through SSH as ``root``, then download and run the
-installation script:
+Conecte-se ao servidor por SSH como ``root`` e então baixe e rode o script de
+instalação:
 
 ::
 
    wget https://raw.githubusercontent.com/magnussolution/magnusbilling/source/script/install.sh
    bash install.sh
 
-The installer prepares MagnusBilling and its main dependencies, including
-Asterisk 20, PJSIP, the web server, PHP, the database service, Fail2ban, and
-firewall rules. Follow the prompts displayed in the terminal. The server may
-restart when installation is complete.
+O instalador prepara o MagnusBilling e suas principais dependências, incluindo
+Asterisk 20, PJSIP, o servidor web, PHP, o banco de dados, Fail2ban e as regras de
+firewall. Siga as perguntas mostradas no terminal. O servidor pode reiniciar ao
+final da instalação.
 
-First login
------------
+.. note::
 
-After the restart, open the server IP address in a browser:
+   Para instalar com as customizações da Comunic, use ``comunic/instalar.sh`` deste
+   repositório (veja ``comunic/README.md``). Ele roda o instalador oficial e depois
+   aplica as customizações.
+
+Primeiro acesso
+---------------
+
+Depois de reiniciar, abra o IP do servidor no navegador:
 
 ::
 
-   http://SERVER_IP
+   http://IP_DO_SERVIDOR
 
-Use the initial credentials displayed by the installer. A standard new
-installation uses the following panel credentials:
+Use as credenciais iniciais mostradas pelo instalador. Uma instalação nova padrão
+usa estas credenciais no painel:
 
 ::
 
-   Username: root
-   Password: magnus
+   Usuário: root
+   Senha: magnus
 
 .. warning::
 
-   Change the default panel password immediately. Restrict administrative and
-   SSH access to trusted networks whenever possible.
+   Troque a senha padrão do painel imediatamente. Restrinja o acesso administrativo
+   e o SSH a redes confiáveis sempre que possível.
 
 .. image:: ../img/ilogin.png
    :scale: 80%
-   :alt: MagnusBilling login page
+   :alt: Tela de login do MagnusBilling
 
-Verify the installation
------------------------
+Conferir a instalação
+---------------------
 
-Before adding production traffic, verify that:
+Antes de colocar tráfego de produção, confira se:
 
-* the web panel opens and the administrator can sign in;
-* the database service is running;
-* Asterisk starts and reports version 20;
-* PJSIP transports and endpoints load without configuration errors;
-* scheduled MagnusBilling commands are present;
-* the server firewall allows only the services required by the deployment.
+* o painel web abre e o administrador consegue entrar;
+* o banco de dados está rodando;
+* o Asterisk inicia e informa a versão 20;
+* os transportes e endpoints PJSIP carregam sem erros de configuração;
+* os comandos agendados do MagnusBilling estão presentes;
+* o firewall do servidor libera só os serviços necessários.
 
-The console configuration reads the database connection from
-``/etc/asterisk/res_config_mysql.conf``. If the web panel, scheduled commands,
-or AGI calls cannot connect to the database, verify that file before changing
-application code.
+A configuração de console lê a conexão com o banco em
+``/etc/asterisk/res_config_mysql.conf``. Se o painel web, os comandos agendados ou
+as chamadas AGI não conseguirem se conectar ao banco, confira esse arquivo antes de
+mexer no código da aplicação.
 
-Important runtime entrypoints
+Pontos de entrada importantes
 -----------------------------
 
-* ``index.php`` starts the Yii web panel.
-* ``cron.php`` runs Yii console commands.
-* ``resources/asterisk/mbilling.php`` handles Asterisk AGI call execution.
-* ``protected/config/main.php`` contains the web application configuration.
-* ``protected/config/cron.php`` contains the console configuration.
-* ``script/database.sql`` contains the base database structure.
+* ``index.php`` inicia o painel web Yii.
+* ``cron.php`` roda os comandos de console Yii.
+* ``resources/asterisk/mbilling.php`` cuida da execução das chamadas pelo AGI do Asterisk.
+* ``protected/config/main.php`` contém a configuração da aplicação web.
+* ``protected/config/cron.php`` contém a configuração de console.
+* ``script/database.sql`` contém a estrutura base do banco.
 
-Continue with :doc:`Making your first call <first_call>` after the installation
-checks pass.
+Continue com :doc:`Fazendo a primeira chamada <first_call>` depois que as
+conferências da instalação passarem.

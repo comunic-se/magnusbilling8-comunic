@@ -1,54 +1,61 @@
-# MagnusBilling IA Docs (RAG-Ready)
+# IA Docs do MagnusBilling (prontos para RAG)
 
-This folder is a machine-oriented knowledge base for AI assistants.
-It is intentionally separated from the human documentation under wiki/.
+Esta pasta é uma base de conhecimento voltada a máquinas, para assistentes de IA.
+Ela fica separada de propósito da documentação para pessoas em wiki/.
 
-## Goals
+> Neste fork, este README foi traduzido para o português. Os documentos de
+> `domains/`, `playbooks/` e `sources/` e os índices gerados continuam em inglês,
+> porque são o corpus de recuperação (RAG) e trazem perguntas de avaliação e FAQs em
+> inglês geradas pelos scripts de `tools/`. Os trechos gerados a partir de `wiki/en`
+> já estão em português.
 
-- Fast retrieval for technical Q&A.
-- Stable document IDs for indexing and embedding refresh.
-- Explicit source mapping (code and video transcripts).
-- Video-explanation logic transformed into FAQ-style chunks for user-support questions.
-- Answer protocol that enforces evidence-first responses.
+## Objetivos
 
-## Structure
+- Recuperação rápida para perguntas e respostas técnicas.
+- IDs de documento estáveis para indexação e atualização de embeddings.
+- Mapeamento explícito das fontes (código e transcrições de vídeo).
+- Lógica das explicações em vídeo transformada em trechos no estilo FAQ para perguntas de suporte.
+- Protocolo de resposta que exige evidências antes da resposta.
 
-- domains/: domain-centered technical truth (auth, billing, did, etc).
-- playbooks/: response and investigation workflows.
-- sources/: source inventories and traceability maps.
-- indexes/: machine-readable manifests for ingestion.
+## Estrutura
 
-## Audience Layers
+- domains/: verdade técnica organizada por domínio (autenticação, tarifação, DID etc.).
+- playbooks/: fluxos de resposta e de investigação.
+- sources/: inventários de fontes e mapas de rastreabilidade.
+- indexes/: manifestos legíveis por máquina para ingestão.
 
-- user-support: answer with panel menus, visible fields, and practical checks.
-- operator: include Asterisk, cron, logs, services, and production side effects.
-- developer: trace code entrypoints, models, controllers, AGI, commands, and tables.
-- ai-agent: include doc IDs and retrieval paths for another assistant.
+## Camadas de público
 
-## Human Wiki vs IA Docs
+- user-support: responder com menus do painel, campos visíveis e conferências práticas.
+- operator: incluir Asterisk, cron, logs, serviços e efeitos colaterais em produção.
+- developer: rastrear pontos de entrada no código, models, controllers, AGI, comandos e tabelas.
+- ai-agent: incluir IDs de documento e caminhos de recuperação para outro assistente.
 
-- `wiki/` is the user-facing documentation published with Sphinx/Read the Docs.
-- `ia-docs/` is the machine-oriented documentation used by AI assistants.
-- Field descriptions are shared by the public Wiki and the in-panel help icons.
-  Their source is `resources/help/help_{LANG}.js`; generated `.rst` files should
-  not be treated as the first edit point for field help.
+## Wiki para pessoas x IA Docs
 
-## Retrieval Ranking Hints
+- `wiki/` é a documentação para usuários publicada com Sphinx/Read the Docs.
+- `ia-docs/` é a documentação voltada a máquinas, usada por assistentes de IA.
+- As descrições dos campos são compartilhadas entre a wiki pública e os ícones de
+  ajuda do painel. A fonte delas é `resources/help/help_{LANG}.js`; os arquivos `.rst`
+  gerados não devem ser o primeiro lugar a editar a ajuda de um campo.
 
-The chunk index includes ranking metadata optimized for support Q&A retrieval:
+## Dicas de ordenação na recuperação
 
-- priority_tier: faq, core, transcript, or context.
-- priority_score: normalized weight from 0.4 to 1.0.
-- rank_features: extra retrieval hints such as has_video_logic and has_resolution_steps.
-- query intents include intent_priority and doc_weights for domain-aware retrieval.
+O índice de trechos traz metadados de ordenação otimizados para recuperação em
+perguntas de suporte:
 
-Expected preference order during retrieval:
+- priority_tier: faq, core, transcript ou context.
+- priority_score: peso normalizado de 0,4 a 1,0.
+- rank_features: dicas extras de recuperação, como has_video_logic e has_resolution_steps.
+- as intenções de consulta incluem intent_priority e doc_weights para recuperação por domínio.
 
-1. FAQ chunks generated from video logic.
-2. Core curated chunks from playbooks/domains.
-3. Raw transcript chunks as supporting context.
+Ordem de preferência esperada na recuperação:
 
-## Recommended RAG Ingestion Order
+1. Trechos de FAQ gerados a partir da lógica dos vídeos.
+2. Trechos principais curados dos playbooks/domínios.
+3. Trechos brutos de transcrição como contexto de apoio.
+
+## Ordem recomendada de ingestão no RAG
 
 1. indexes/rag_manifest.json
 2. playbooks/qa_protocol.md
@@ -62,36 +69,36 @@ Expected preference order during retrieval:
 10. sources/user_wiki_sources.md
 11. sources/video_transcripts.md
 
-## Documentation Audit
+## Auditoria da documentação
 
-The latest repository documentation audit is stored at:
+A auditoria mais recente da documentação do repositório está em:
 
 - indexes/documentation_audit_report.md
 
-Use it before expanding docs. It lists outdated pages, missing pages,
-code/documentation inconsistencies, and the remaining coverage gaps found by
-comparing `wiki/`, `ia-docs/`, and current source code.
+Use-a antes de ampliar a documentação. Ela lista páginas desatualizadas, páginas
+faltando, inconsistências entre código e documentação e as lacunas de cobertura
+restantes, encontradas comparando `wiki/`, `ia-docs/` e o código atual.
 
-## Source Priority Policy
+## Política de prioridade das fontes
 
-1. Current code in repository is authoritative.
-2. Curated `ia-docs` documents provide AI response structure and routing.
-3. User Wiki pages provide user-facing context and terminology.
-4. Videos/transcripts are contextual and operational guidance.
-5. If any documentation conflicts with code, answer with current code behavior.
+1. O código atual do repositório é a referência oficial.
+2. Os documentos curados do `ia-docs` dão a estrutura e o roteamento das respostas da IA.
+3. As páginas da wiki de usuários dão o contexto e a terminologia para o usuário.
+4. Vídeos/transcrições são orientação contextual e operacional.
+5. Se alguma documentação contradisser o código, responda com o comportamento atual do código.
 
-## Rebuild Indexes
+## Reconstruir os índices
 
-Run the index builder to regenerate manifest, chunks, and intents:
+Rode o gerador de índices para gerar de novo o manifesto, os trechos e as intenções:
 
 python3 ia-docs/tools/build_rag_indexes.py
 
-Regenerate code-derived catalogs before rebuilding indexes when controllers,
-models, schema, Forms, or field help changed:
+Gere de novo os catálogos derivados do código antes de reconstruir os índices quando
+controllers, models, esquema, formulários ou ajuda de campos mudarem:
 
 python3 ia-docs/tools/build_code_catalogs.py
 
-Generated files:
+Arquivos gerados:
 
 - ia-docs/indexes/rag_manifest.json
 - ia-docs/indexes/rag_chunks.jsonl
@@ -100,6 +107,7 @@ Generated files:
 - ia-docs/sources/module_catalog.md
 - ia-docs/sources/database_table_index.md
 
-The index builder also creates supporting chunks from `wiki/en` user
-documentation. These chunks are lower priority than curated `ia-docs` chunks
-and should be used as user-facing context, not as the final authority over code.
+O gerador de índices também cria trechos de apoio a partir da documentação de
+usuários em `wiki/en`. Esses trechos têm prioridade menor que os trechos curados do
+`ia-docs` e devem ser usados como contexto para o usuário, não como autoridade final
+sobre o código.

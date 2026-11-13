@@ -1,12 +1,12 @@
-********************
-Update MagnusBilling
-********************
+**************************
+Atualizar o MagnusBilling
+**************************
 
-Our team works daily to add new functions and solve problems. You can see the changes made in the link https://github.com/magnussolution/magnusbilling/commits/source.
+Nossa equipe trabalha todos os dias para acrescentar funções e resolver problemas. Você pode ver as mudanças feitas no link https://github.com/magnussolution/magnusbilling/commits/source.
 
-Therefore, our team recommends that you keep your server up to date.
+Por isso, nossa equipe recomenda manter o servidor atualizado.
 
-To update run the following command.
+Para atualizar, rode o comando abaixo.
 
 
 ::
@@ -15,22 +15,29 @@ To update run the following command.
 
 .. warning::
 
-   This command updates an existing MagnusBilling 8 installation. It does not
-   convert a MagnusBilling 7 server into MagnusBilling 8. Version 7 installations
-   must use the :doc:`side-by-side migration procedure <migrate_from_mb7>`.
+   Este comando atualiza uma instalação existente do MagnusBilling 8. Ele não
+   converte um servidor MagnusBilling 7 em MagnusBilling 8. As instalações da
+   versão 7 precisam usar o :doc:`procedimento de migração lado a lado <migrate_from_mb7>`.
+
+.. note::
+
+   Nos servidores com as customizações da Comunic, a atualização automática
+   oficial fica desligada. Use ``bash /opt/mb8-comunic/comunic/atualizar-mb8.sh``,
+   que confere a compatibilidade, faz backup e reaplica as customizações
+   (veja ``comunic/README.md``).
 
 
-Post update checks
-==================
+Conferências depois da atualização
+==================================
 
-After updating, verify the main runtime areas that can be affected by source
-changes:
+Depois de atualizar, confira as principais áreas que podem ser afetadas por mudanças
+no código:
 
-* Web panel bootstrap: ``index.php`` and ``protected/config/main.php``.
-* Console commands: ``cron.php`` and ``protected/config/cron.php``.
-* Database migrations and structure changes: ``protected/commands/UpdateMysqlCommand.php`` and ``script/database.sql``.
-* Asterisk AGI behavior: ``resources/asterisk/mbilling.php`` and the related ``*Agi.php`` files.
-* Frontend assets and module files: ``app/`` and ``classic/src/view/``.
+* Inicialização do painel web: ``index.php`` e ``protected/config/main.php``.
+* Comandos de console: ``cron.php`` e ``protected/config/cron.php``.
+* Migrações e mudanças de estrutura do banco: ``protected/commands/UpdateMysqlCommand.php`` e ``script/database.sql``.
+* Comportamento do AGI do Asterisk: ``resources/asterisk/mbilling.php`` e os arquivos ``*Agi.php`` relacionados.
+* Arquivos do frontend e dos módulos: ``app/`` e ``classic/src/view/``.
 
-If a module appears in the source code but not in the web panel, also verify
-the group permissions in the menu and group module settings.
+Se um módulo aparece no código-fonte mas não no painel web, confira também as
+permissões do grupo nas configurações de menu e de módulos do grupo.

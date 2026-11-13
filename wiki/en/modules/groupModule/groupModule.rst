@@ -1,20 +1,17 @@
 
 .. _groupModule-id-group:
 
-Group
+Grupo
 -----
 
-| User group
+| Grupo de usuários.
 
 
 
 
 .. _groupModule-id-module:
 
-Module
+Módulo
 ------
 
-| Menu
-
-
-
+| Menu.

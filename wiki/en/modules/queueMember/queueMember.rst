@@ -1,30 +1,30 @@
 
 .. _queueMember-queue-name:
 
-Queue name
-----------
+Nome da fila
+------------
 
-| Queue that wants to add SIP user.
+| Fila à qual se quer adicionar o usuário SIP.
 
 
 
 
 .. _queueMember-interface:
 
-Sip user
---------
+Usuário SIP
+-----------
 
-| SIP user to add like a agent to the queue.
+| Usuário SIP a adicionar como agente da fila.
 
 
 
 
 .. _queueMember-paused:
 
-Paused
-------
+Pausado
+-------
 
-| Paused agents won't get calls, is possible to pause and unpause dialing \*180 to pause, and \*181 to unpause.
+| Agentes pausados não recebem chamadas. É possível pausar discando \*180 e tirar da pausa discando \*181.
 
 
 

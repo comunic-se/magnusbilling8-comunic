@@ -1,40 +1,40 @@
 
 .. _Plan-name:
 
-Name
+Nome
 ----
 
-| Plan name
+| Nome do plano.
 
 
 
 
 .. _Plan-signup:
 
-Use on signup
--------------
+Usar no cadastro
+----------------
 
-| Making available this plan in the signup form. If only has 1 plan, the clients that register will use this plan, if there is more than 1 plan, then the client will be able to choose. It's necessary to have at least 1 plan with this option activated to make the registers work.
+| Disponibiliza este plano no formulário de cadastro. Se houver só 1 plano, os clientes que se cadastrarem usam esse plano; se houver mais de 1, o cliente pode escolher. É preciso ter pelo menos 1 plano com esta opção ativada para o cadastro funcionar.
 
 
 
 
 .. _Plan-ini-credit:
 
-Initial credit to new users
----------------------------
+Crédito inicial para novos usuários
+-----------------------------------
 
-| The amount of credit you want to give to the clients whom registered through signup form.
+| Valor de crédito que você quer dar aos clientes que se cadastrarem pelo formulário de cadastro.
 
 
 
 
 .. _Plan-play-audio:
 
-Notices with audio
-------------------
+Avisos com áudio
+----------------
 
-| Execute audios to the client from this plan or just send the error only? For example, the audios that there is no more credit.
+| Tocar áudios para o cliente deste plano ou só devolver o erro? Por exemplo, o áudio avisando que não há mais crédito.
 
 
 
@@ -44,7 +44,7 @@ Notices with audio
 Tech prefix
 -----------
 
-| Techprefix is like a password to the client, that allows the use of more plans.
+| O techprefix funciona como uma senha do cliente que permite usar mais de um plano.
 
 
 
@@ -54,7 +54,7 @@ Tech prefix
 id_services
 -----------
 
-| Select here the services that will be available to the users of this plan.
+| Selecione aqui os serviços que ficarão disponíveis para os usuários deste plano.
 
 
 

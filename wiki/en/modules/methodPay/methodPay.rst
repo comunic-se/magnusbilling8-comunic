@@ -1,70 +1,70 @@
 
 .. _methodPay-show-name:
 
-Show name
----------
+Nome exibido
+------------
 
-| The name that is shown in the client panel.
+| Nome mostrado no painel do cliente.
 
 
 
 
 .. _methodPay-id-user:
 
-Username
---------
+Usuário
+-------
 
-| The user payment method. You can create payment methods for administrators or resellers. 
+| Usuário dono da forma de pagamento. Você pode criar formas de pagamento para administradores ou revendas.
 
 
 
 
 .. _methodPay-country:
 
-Country
--------
+País
+----
 
-| Only for reference.
+| Apenas para referência.
 
 
 
 
 .. _methodPay-active:
 
-Active
-------
+Ativo
+-----
 
-| Activate this if you want to be available for the clients.
+| Ative se quiser que fique disponível para os clientes.
 
 
 
 
 .. _methodPay-min:
 
-Min amount
-----------
+Valor mínimo
+------------
 
-| Mininum accepted value.
+| Valor mínimo aceito.
 
 
 
 
 .. _methodPay-max:
 
-Max amount
-----------
+Valor máximo
+------------
 
-| Maximun accepted value.
+| Valor máximo aceito.
 
 
 
 
 .. _methodPay-username:
 
-Username
---------
+Usuário
+-------
 
-| User payment method
+| Usuário da forma de pagamento.
 
 
 
@@ -74,17 +74,17 @@ Username
 URL
 ---
 
-| Payment method URL, in the most cases the methods this URL is already preconfigured.
+| URL da forma de pagamento; na maioria dos casos, já vem configurada.
 
 
 
 
 .. _methodPay-fee:
 
-Discount fee
-------------
+Taxa de desconto
+----------------
 
-| Payment method fee.
+| Taxa da forma de pagamento.
 
 
 
@@ -94,7 +94,7 @@ Discount fee
 TOKEN
 -----
 
-| Payment method TOKEN
+| TOKEN da forma de pagamento.
 
 
 
@@ -104,7 +104,7 @@ TOKEN
 P2P CustomerSiteID
 ------------------
 
-| This field is exclusive for some payments methods.
+| Campo exclusivo de algumas formas de pagamento.
 
 
 
@@ -114,7 +114,7 @@ P2P CustomerSiteID
 P2P KeyID
 ---------
 
-| This field is exclusive for some payments methods.
+| Campo exclusivo de algumas formas de pagamento.
 
 
 
@@ -124,7 +124,7 @@ P2P KeyID
 P2P Passphrase
 --------------
 
-| This field is exclusive for some payments methods.
+| Campo exclusivo de algumas formas de pagamento.
 
 
 
@@ -134,7 +134,7 @@ P2P Passphrase
 P2P RecipientKeyID
 ------------------
 
-| This field is exclusive for some payments methods.
+| Campo exclusivo de algumas formas de pagamento.
 
 
 
@@ -144,7 +144,7 @@ P2P RecipientKeyID
 P2P Tax Amount
 --------------
 
-| This field is exclusive for some payments methods.
+| Campo exclusivo de algumas formas de pagamento.
 
 
 
@@ -154,7 +154,7 @@ P2P Tax Amount
 Client id
 ---------
 
-| This field is exclusive for some payments methods.
+| Campo exclusivo de algumas formas de pagamento.
 
 
 
@@ -164,17 +164,17 @@ Client id
 Client secret
 -------------
 
-| This field is exclusive for some payments methods.
+| Campo exclusivo de algumas formas de pagamento.
 
 
 
 
 .. _methodPay-payment-method:
 
-Payment methods
----------------
+Formas de pagamento
+-------------------
 
-| Payment method made available to users for adding credit or paying invoices.
+| Forma de pagamento disponibilizada aos usuários para adicionar crédito ou pagar faturas.
 
 
 

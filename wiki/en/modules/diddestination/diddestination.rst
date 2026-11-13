@@ -4,17 +4,17 @@
 DID
 ---
 
-| Select the DID that you want create new destination for.
+| Selecione o DID para o qual quer criar um destino novo.
 
 
 
 
 .. _diddestination-id-user:
 
-Username
---------
+Usuário
+-------
 
-| User that will be the owner of this DID.
+| Usuário que será o dono deste DID.
 
 
 
@@ -24,96 +24,96 @@ Username
 Status
 ------
 
-| Only active destinations will be used.
+| Só os destinos ativos são usados.
 
 
 
 
 .. _diddestination-priority:
 
-Priority
---------
+Prioridade
+----------
 
-| You can create up to 5 destinations for your DID. If a try is made and a error is received, MagnusBilling will try to send the call to the next destination priority available. Only works with the "SIP call" type.
+| Você pode criar até 5 destinos para o DID. Se uma tentativa der erro, o MagnusBilling tenta mandar a chamada para o próximo destino disponível pela prioridade. Só funciona com o tipo "Chamada SIP".
 
 
 
 
 .. _diddestination-voip-call:
 
-Type
+Tipo
 ----
 
-| Type of destination.
+| Tipo de destino.
 
 
 
 
 .. _diddestination-destination:
 
-Destination
------------
+Destino
+-------
 
-| Set here the destination!
+| Informe aqui o destino.
 
 
 
 
 .. _diddestination-id-ivr:
 
-IVR
+URA
 ---
 
-| Select a IVR to send the call to. The IVR needs to belong to the owner of the DID aswell.
+| Selecione uma URA para onde mandar a chamada. A URA também precisa pertencer ao dono do DID.
 
 
 
 
 .. _diddestination-id-queue:
 
-Queue
------
+Fila
+----
 
-| Select a Queue  to send the call to. The Queue needs to belong to the owner of the DID aswell.
+| Selecione uma fila para onde mandar a chamada. A fila também precisa pertencer ao dono do DID.
 
 
 
 
 .. _diddestination-id-sip:
 
-Sip user
---------
+Usuário SIP
+-----------
 
-| Select a SIP user to send the call to. The SIP user needs to belong to the owner of the DID aswell.
+| Selecione um usuário SIP para onde mandar a chamada. O usuário SIP também precisa pertencer ao dono do DID.
 
 
 
 
 .. _diddestination-context:
 
-Context
--------
+Contexto
+--------
 
-| In this field you may use a context in the format supported by Asterisk
-| Example:
-|     
+| Neste campo você pode usar um contexto no formato aceito pelo Asterisk.
+| Exemplo:
+|
 | _X. => 1,Dial(SIP/sipaccount,45)
 | same => n,Goto(s-\${DIALSTATUS},1)
-| 
-| 
+|
+|
 | exten => s-NOANSWER,1,Hangup
 | exten => s-CONGESTION,1,Congestion
 | exten => s-CANCEL,1,Hangup
 | exten => s-BUSY,1,Busy
 | exten => s-CHANUNAVAIL,1,SetCallerId(4545454545)
 | exten => s-CHANUNAVAIL,2,Dial(SIP/sipaccount2,,T)
-| 
-| 
-| You should NOT set a name for the context because the name will be set automatically as [did-number-of-the-did]
-| 
-| You may take a look at the context at /etc/asterisk/extensions_magnus_did.conf
-|     
-|     
+|
+|
+| NÃO dê nome ao contexto, porque o nome é definido automaticamente como [did-numero-do-did].
+|
+| Você pode ver o contexto em /etc/asterisk/extensions_magnus_did.conf.
+|
+|
 
 
 

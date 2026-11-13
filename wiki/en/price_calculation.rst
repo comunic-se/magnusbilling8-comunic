@@ -1,64 +1,64 @@
 .. _price-calculation:
 
-Call Price Calculation
+Cálculo do preço da chamada
 ===========================
 
 
 
-This value is calculated based on the adjusted price for the provider which trunk was used to complete this call.
+Este valor é calculado com base no preço ajustado para o provedor cujo tronco foi usado para completar a chamada.
 
-The price is calculated using 4 values. 
+O preço é calculado com 4 valores:
 
-* Call dutarion;
-* Purchase price;
-* Initial block;
-* Increment.
+* duração da chamada;
+* preço de compra;
+* bloco inicial;
+* incremento.
 
-Example.
+Exemplo.
 
-The client calls to the number 5511988443300 and spoke for 45 seconds. 
-And exist one tariff on the Providers Tariff menu for the 55119 prefix, with:
+O cliente liga para o número 5511988443300 e fala por 45 segundos.
+E existe uma tarifa no menu Tarifas de provedores para o prefixo 55119, com:
 
-* Purchase price = 0.05
-* Initial block = 30
-* Increment = 6 
+* Preço de compra = 0,05
+* Bloco inicial = 30
+* Incremento = 6
 
-The calculation formula is:
+A fórmula de cálculo é:
 
-If the call durations is inferior than the Initial block value the formula will be
-
-::
-     
-  (Purchase price / 60 seconds) * Initial block
-
-
-If the call durations is higher than the Initial block value the formula will be
-
+Se a duração da chamada for menor que o bloco inicial, a fórmula é
 
 ::
-     
-  (Purchase price / 60 seconds) * Call duration
+
+  (Preço de compra / 60 segundos) * Bloco inicial
 
 
-When the call duration is higher than the Initial block, the Increment is calculated as well.
+Se a duração da chamada for maior que o bloco inicial, a fórmula é
 
-In the last example, the duration was 45 seconds, and the Increment is 6, so the formula become
 
 ::
-     
-  (Call duration / Increment ) the result is 7, with 3 as remainder. Then we need to add up 3 to the rest, the result is 48. Therefore in this example will be calculated
+
+  (Preço de compra / 60 segundos) * Duração da chamada
+
+
+Quando a duração da chamada é maior que o bloco inicial, o incremento também entra no cálculo.
+
+No exemplo, a duração foi de 45 segundos e o incremento é 6, então a fórmula fica
 
 ::
-     
-  (0.05 / 60) * 48 = 0.04
+
+  (Duração da chamada / Incremento): o resultado é 7, com resto 3. Então somamos 3 para completar o bloco, e o resultado é 48. Neste exemplo, o cálculo fica
+
+::
+
+  (0,05 / 60) * 48 = 0,04
 
 
 
-The code below is used for the calculus.
+O código abaixo é o usado no cálculo.
 
 .. code-block:: php
 
-   $cost = 0;  
+   $cost = 0;
    if ($callduration < $initblock) {
        $callduration = $initblock;
    }
@@ -72,9 +72,6 @@ The code below is used for the calculus.
    $cost += ($callduration / 60) * $rateinitial;
 
 
-The variable $callduration is the call duration;
-The variable $initblock is the Initial block;
-The variable $billingblock is the Increment.
-
-
-
+A variável $callduration é a duração da chamada;
+a variável $initblock é o bloco inicial;
+a variável $billingblock é o incremento.

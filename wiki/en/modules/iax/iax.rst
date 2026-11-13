@@ -1,30 +1,30 @@
 
 .. _iax-id-user:
 
-Username
---------
+Usuário
+-------
 
-| The user whose IAX account will belong
+| Usuário dono da conta IAX.
 
 
 
 
 .. _iax-username:
 
-IAX user
---------
+Usuário IAX
+-----------
 
-| The user that will be used to authenticate in the softphone
+| Usuário usado para autenticar no softphone.
 
 
 
 
 .. _iax-secret:
 
-IAX password
-------------
+Senha IAX
+---------
 
-| The Password that will be used to authenticate in the softphone
+| Senha usada para autenticar no softphone.
 
 
 
@@ -34,7 +34,7 @@ IAX password
 CallerID
 --------
 
-| This is the CallerID that will be shown in their destination, in external calls the provider will need to permit CLI to be correctly identified in their destination.
+| CallerID mostrado no destino. Em chamadas externas, o provedor precisa permitir o CLI para a identificação aparecer corretamente no destino.
 
 
 
@@ -44,7 +44,7 @@ CallerID
 Disallow
 --------
 
-| In this option will be possible to deactivate codecs. To deactivate all the codecs and letting available to the user only what you select below, use "Use all"
+| Permite desativar codecs. Para desativar todos e deixar disponíveis ao usuário só os selecionados abaixo, use "Usar todos".
 
 
 
@@ -54,7 +54,7 @@ Disallow
 Codec
 -----
 
-| Codecs that will be accepted.
+| Codecs aceitos.
 
 
 
@@ -64,7 +64,7 @@ Codec
 Host
 ----
 
-| "Dynamic" allows the user to register this account from any IP address. To authenticate by IP, enter the client IP here, leave the password blank, and set insecure to port/invite in the Additional Information tab.
+| "Dynamic" permite registrar esta conta a partir de qualquer IP. Para autenticar por IP, informe aqui o IP do cliente, deixe a senha em branco e coloque insecure em port/invite na aba Informações adicionais.
 
 
 
@@ -74,17 +74,17 @@ Host
 NAT
 ---
 
-| The client is behind NAT. You can see more details at the link `https://www.voip-info.org/asterisk-sip-nat/.  <https://www.voip-info.org/asterisk-sip-nat/.>`_.
+| O cliente está atrás de NAT. Veja mais detalhes no link `https://www.voip-info.org/asterisk-sip-nat/.  <https://www.voip-info.org/asterisk-sip-nat/.>`_.
 
 
 
 
 .. _iax-context:
 
-Context
--------
+Contexto
+--------
 
-| Asterisk context where calls from this account will be processed. The default is "billing". Change this only if you understand the Asterisk dialplan.
+| Contexto do Asterisk onde as chamadas desta conta são processadas. O padrão é "billing". Só altere se você entender o dialplan do Asterisk.
 
 
 
@@ -94,17 +94,17 @@ Context
 Qualify
 -------
 
-| Sends SIP OPTIONS packets to verify whether the peer is online.
-| Syntax:
-|     
+| Envia pacotes SIP OPTIONS para conferir se o peer está online.
+| Sintaxe:
+|
 | qualify = xxx \| no \| yes
-|     
-| XXX is the number of milliseconds used as the timeout. If the value is "yes", Asterisk uses the time configured in sip.conf. The common default is 2 seconds.
-| 
-| When qualify is enabled, Asterisk sends OPTIONS packets regularly to verify whether the device is still online.
-| If the device does not answer within the configured time, Asterisk considers the device offline for future calls.
-| 
-| This status can be verified with the "sip show peer XXXX" command. Asterisk only shows qualify status when the peer has qualify enabled.
+|
+| XXX é o número de milissegundos usado como tempo limite. Se o valor for "yes", o Asterisk usa o tempo configurado no sip.conf. O padrão comum é 2 segundos.
+|
+| Com o qualify ativado, o Asterisk envia pacotes OPTIONS regularmente para conferir se o aparelho continua online.
+| Se o aparelho não responder no tempo configurado, o Asterisk o considera offline para as próximas chamadas.
+|
+| Esse status pode ser conferido com o comando "sip show peer XXXX". O Asterisk só mostra o status do qualify quando o peer tem qualify ativado.
 
 
 
@@ -114,7 +114,7 @@ Qualify
 Dtmfmode
 --------
 
-| DTMF mode used by this account. You can see more details at the link `https://www.voip-info.org/asterisk-sip-dtmfmode/.  <https://www.voip-info.org/asterisk-sip-dtmfmode/.>`_.
+| Modo DTMF usado por esta conta. Veja mais detalhes no link `https://www.voip-info.org/asterisk-sip-dtmfmode/.  <https://www.voip-info.org/asterisk-sip-dtmfmode/.>`_.
 
 
 
@@ -124,27 +124,27 @@ Dtmfmode
 Insecure
 --------
 
-| If the host is dynamic, this option must be set to no. For IP authentication, use port. You can see more details at the link `https://www.voip-info.org/asterisk-sip-insecure/.  <https://www.voip-info.org/asterisk-sip-insecure/.>`_.
+| Se o host for dinâmico, esta opção precisa estar em no. Para autenticação por IP, use port. Veja mais detalhes no link `https://www.voip-info.org/asterisk-sip-insecure/.  <https://www.voip-info.org/asterisk-sip-insecure/.>`_.
 
 
 
 
 .. _iax-type:
 
-Type
+Tipo
 ----
 
-| Default type is "friend", which allows the account to make and receive calls. You can see more details at the link `https://www.voip-info.org/asterisk-sip-type/.  <https://www.voip-info.org/asterisk-sip-type/.>`_.
+| O tipo padrão é "friend", que permite à conta fazer e receber chamadas. Veja mais detalhes no link `https://www.voip-info.org/asterisk-sip-type/.  <https://www.voip-info.org/asterisk-sip-type/.>`_.
 
 
 
 
 .. _iax-calllimit:
 
-Call limit
-----------
+Limite de chamadas
+------------------
 
-| Total of simultaneous calls allowed for this IAX account.
+| Total de chamadas simultâneas permitidas para esta conta IAX.
 
 
 

@@ -402,9 +402,9 @@ class RecurringCreditCommand extends ConsoleCommand
             $sumCredit += (float) $u['credit'];
             $sumRefill += $refill;
             $csv .= $this->csvLine([
-                $u['username'],
-                $name,
-                $u['group_name'],
+                PlanConsumption::csvText($u['username']),
+                PlanConsumption::csvText($name),
+                PlanConsumption::csvText($u['group_name']),
                 isset($status[(int) $u['active']]) ? $status[(int) $u['active']] : $u['active'],
                 (int) $u['typepaid'] === 1 ? 'Pós-pago' : 'Pré-pago',
                 $m($u['creditlimit']),
