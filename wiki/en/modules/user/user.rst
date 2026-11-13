@@ -1,280 +1,280 @@
 
 .. _user-username:
 
-Username
---------
+Usuário
+-------
 
-| Username used to login into the panel.
+| Usuário usado para entrar no painel.
 
 
 
 
 .. _user-password:
 
-Password
---------
+Senha
+-----
 
-| Password used to login into the panel.
+| Senha usada para entrar no painel.
 
 
 
 
 .. _user-id-group:
 
-Group
+Grupo
 -----
 
-| There are 3 groups: admin, agent and client. You can create more or edit any of these groups. Each group can have specific permissions. Check the menu Configuration->User Group.
+| Há 3 grupos: administrador, revenda e cliente. Você pode criar mais ou editar qualquer um deles. Cada grupo pode ter permissões próprias. Veja o menu Configurações -> Grupo de usuários.
 
 
 
 
 .. _user-id-group-agent:
 
-Group for agent users
----------------------
+Grupo para os usuários da revenda
+---------------------------------
 
-| Select the group that the clients of this retailer used.
+| Selecione o grupo usado pelos clientes desta revenda.
 
 
 
 
 .. _user-id-plan:
 
-Plan
-----
+Plano
+-----
 
-| Plan that will be used to charge the clients.
+| Plano usado para cobrar os clientes.
 
 
 
 
 .. _user-language:
 
-Language
---------
+Idioma
+------
 
-| Language. This languague is used for some system function, but not for the panel language.
+| Idioma. É usado em algumas funções do sistema, mas não define o idioma do painel.
 
 
 
 
 .. _user-prefix-local:
 
-Prefix rules
-------------
+Regras de prefixo
+-----------------
 
-| Prefix rules. You can see more details at the link `https://www.magnusbilling.org/local_prefix  <https://www.magnusbilling.org/local_prefix>`_.
+| Regras de prefixo. Veja mais detalhes no link `https://www.magnusbilling.org/local_prefix  <https://www.magnusbilling.org/local_prefix>`_.
 
 
 
 
 .. _user-active:
 
-Active
-------
+Ativo
+-----
 
-| Only active users can login into the panel and make calls
+| Só usuários ativos conseguem entrar no painel e fazer chamadas.
 
 
 
 
 .. _user-country:
 
-Country
--------
+País
+----
 
-| Used to CID Callback. The country prefix code will be added before the CID to convert the CID to E164
+| Usado no CallBack por CID. O código do país é colocado antes do CID para convertê-lo para E164.
 
 
 
 
 .. _user-id-offer:
 
-Activate offer
---------------
+Ativar oferta
+-------------
 
-| Used to give free minutes. It's necessary to inform the tariffs that will belongs to the free packages.
+| Usado para dar minutos grátis. É preciso informar as tarifas que pertencem aos pacotes gratuitos.
 
 
 
 
 .. _user-cpslimit:
 
-CPS Limit
----------
+Limite de CPS
+-------------
 
-| CPS(calls per second) limit to this client. The calls that exceed this limit will be send CONGESTION.
+| Limite de CPS (chamadas por segundo) deste cliente. As chamadas acima do limite recebem CONGESTION.
 
 
 
 
 .. _user-description:
 
-Description
------------
+Descrição
+---------
 
-| Optional notes about this user, visible only to administrators and resellers with access.
+| Observações opcionais sobre este usuário, visíveis só para administradores e revendas com acesso.
 
 
 
 
 .. _user-company-website:
 
-Company website
+Site da empresa
 ---------------
 
-| Company website.\|Also used to agent panel customization. To agent, set the domain without http or wwww.
+| Site da empresa.\|Também é usado para personalizar o painel da revenda. Para revenda, informe o domínio sem http nem www.
 
 
 
 
 .. _user-company-name:
 
-Company name
-------------
+Nome da empresa
+---------------
 
-| Company name. Also used to agent panel customization.\|Whether is a agent this name will be used on the login panel. Need set the compnay website and use the agent domain to working the customization
+| Nome da empresa. Também é usado para personalizar o painel da revenda.\|Se for revenda, este nome aparece na tela de login. Para a personalização funcionar, é preciso informar o site da empresa e acessar pelo domínio da revenda.
 
 
 
 
 .. _user-commercial-name:
 
-Commercial name
----------------
+Nome comercial
+--------------
 
-| Brand name.
+| Nome fantasia.
 
 
 
 
 .. _user-state-number:
 
-State number
-------------
+Inscrição estadual
+------------------
 
-| State number.
+| Inscrição estadual.
 
 
 
 
 .. _user-lastname:
 
-Last name
+Sobrenome
 ---------
 
-| Lastname.
+| Sobrenome.
 
 
 
 
 .. _user-firstname:
 
-First name
-----------
+Nome
+----
 
-| Firstname.
+| Nome.
 
 
 
 
 .. _user-city:
 
-City
-----
+Cidade
+------
 
-| City.
+| Cidade.
 
 
 
 
 .. _user-state:
 
-State
------
+Estado
+------
 
-| State.
+| Estado.
 
 
 
 
 .. _user-address:
 
-Address
--------
+Endereço
+--------
 
-| Address.
+| Endereço.
 
 
 
 
 .. _user-neighborhood:
 
-Neighborhood
-------------
+Bairro
+------
 
-| Neighborhood.
+| Bairro.
 
 
 
 
 .. _user-zipcode:
 
-Zip code
---------
+CEP
+---
 
-| Zipcode.
+| CEP.
 
 
 
 
 .. _user-phone:
 
-Phone
------
+Telefone
+--------
 
-| Landline phone.
+| Telefone fixo.
 
 
 
 
 .. _user-mobile:
 
-Mobile
-------
+Celular
+-------
 
-| Mobile phone.
+| Celular.
 
 
 
 
 .. _user-email:
 
-Email
------
+E-mail
+------
 
-| Email, it's necessary to send system notifications.
+| E-mail; necessário para enviar as notificações do sistema.
 
 
 
 
 .. _user-email2:
 
-Email
------
+E-mail
+------
 
-| Secondary email address for this user.
+| E-mail secundário deste usuário.
 
 
 
 
 .. _user-doc:
 
-DOC
----
+Documento
+---------
 
-| Client document.
+| Documento do cliente (CPF/CNPJ).
 
 
 
@@ -284,17 +284,17 @@ DOC
 VAT
 ---
 
-| Used in some payment methods.
+| Usado em algumas formas de pagamento.
 
 
 
 
 .. _user-contract-value:
 
-Contract value
---------------
+Valor do contrato
+-----------------
 
-| Monthly contract value or fixed amount associated with this user.
+| Valor mensal do contrato ou valor fixo associado a este usuário.
 
 
 
@@ -304,117 +304,117 @@ Contract value
 DIST
 ----
 
-| DIST code used for Brazilian billing or numbering integrations.
+| Código DIST usado em integrações brasileiras de cobrança ou numeração.
 
 
 
 
 .. _user-typepaid:
 
-Type paid
----------
+Tipo de pagamento
+-----------------
 
-| Pos-paid clients can stay with negative balance until the credit limit informed in the field below.
+| Clientes pós-pagos podem ficar com saldo negativo até o limite de crédito informado no campo abaixo.
 
 
 
 
 .. _user-credit-notification-daily:
 
-Credit notification daily
--------------------------
+Notificação diária de crédito
+-----------------------------
 
-| Enable this option to customer receive daily balance notification Email. You can customize the email on Configuration menu, submenu Email Templates
+| Ative para o cliente receber por e-mail a notificação diária do saldo. Você pode personalizar o e-mail no menu Configurações, submenu Modelos de e-mail.
 
 
 
 
 .. _user-creditlimit:
 
-Credit limit
-------------
+Limite de crédito
+-----------------
 
-| If the user is Post-paid, the user will be able to make calls until he reaches this limit.
+| Se o usuário for pós-pago, poderá fazer chamadas até atingir este limite.
 
 
 
 
 .. _user-credit-notification:
 
-Credit notification
--------------------
+Aviso de crédito
+----------------
 
-| If the client credit get lower than this field value, MagnusBilling will send an email to the client warning that he is with low credits. IT'S NECESSARY HAVE A REGISTERED SMTP SERVER IN THE SETTINGS MENU.
+| Se o crédito do cliente ficar abaixo deste valor, o MagnusBilling manda um e-mail avisando que o crédito está baixo. É NECESSÁRIO TER UM SERVIDOR SMTP CADASTRADO NO MENU DE CONFIGURAÇÕES.
 
 
 
 
 .. _user-email-services:
 
-Services email notification
----------------------------
+E-mail de notificação de serviços
+---------------------------------
 
-| Email address used to send service notifications to this user.
+| Endereço de e-mail usado para enviar as notificações de serviços a este usuário.
 
 
 
 
 .. _user-email-did:
 
-DID email notification
-----------------------
+E-mail de notificação de DID
+----------------------------
 
-| Email address used to send DID reservation, renewal, and expiration notifications.
+| Endereço de e-mail usado para enviar as notificações de reserva, renovação e vencimento de DID.
 
 
 
 
 .. _user-enableexpire:
 
-Enable expire
--------------
+Ativar vencimento
+-----------------
 
-| Activate expire. It's necessary to inform the expiry date in the "Expiry date" field.
+| Ativa o vencimento. É preciso informar a data no campo "Data de vencimento".
 
 
 
 
 .. _user-expirationdate:
 
-Expiration date
----------------
+Data de vencimento
+------------------
 
-| The date that the user will not be able to make calls anymore.
+| Data a partir da qual o usuário não consegue mais fazer chamadas.
 
 
 
 
 .. _user-calllimit:
 
-Call limit
-----------
+Limite de chamadas
+------------------
 
-| The amount of  simultaneous calls allowed for this client.
+| Quantidade de chamadas simultâneas permitidas para este cliente.
 
 
 
 
 .. _user-inbound-call-limit:
 
-Inbound Call Limit
-------------------
+Limite de chamadas recebidas
+----------------------------
 
-| Maximum number of simultaneous inbound calls allowed for this user.
+| Número máximo de chamadas recebidas simultâneas permitidas para este usuário.
 
 
 
 
 .. _user-mix-monitor-format:
 
-Record call format
-------------------
+Formato da gravação
+-------------------
 
-| Format used to record calls.
+| Formato usado para gravar as chamadas.
 
 
 
@@ -424,117 +424,117 @@ Record call format
 Callshop
 --------
 
-| Activate the CallShop module. Only active if you really are going to use it. It's necessary give permition to the selected group.
+| Ativa o módulo CallShop. Só ative se realmente for usar. É preciso dar permissão ao grupo selecionado.
 
 
 
 
 .. _user-disk-space:
 
-Disk space
-----------
+Espaço em disco
+---------------
 
-| Insert the amount disk space available to record, in GB. Use -1 to save it without limit. It's necessary to add in the cron the following php command /var/www/html/mbilling/cron.php UserDiskSpace .
+| Informe o espaço em disco disponível para gravações, em GB. Use -1 para não ter limite. É preciso colocar no cron o comando php /var/www/html/mbilling/cron.php UserDiskSpace.
 
 
 
 
 .. _user-sipaccountlimit:
 
-SIP account limit
------------------
+Limite de contas SIP
+--------------------
 
-| The amount of VoIP accounts allowed by this user. Will be necessary give permission to the group to create VoIP accounts.
+| Quantidade de contas VoIP permitidas para este usuário. É preciso dar permissão ao grupo para criar contas VoIP.
 
 
 
 
 .. _user-callingcard-pin:
 
-CallingCard PIN
----------------
+PIN do CallingCard
+------------------
 
-| Used to authenticate the CallingCard.
+| Usado para autenticar no CallingCard.
 
 
 
 
 .. _user-restriction:
 
-Restriction
------------
+Restrição
+---------
 
-| Used to restrict dialing. Add the numbers in the menu: Users->Restricted numbers.
+| Usado para restringir a discagem. Cadastre os números no menu Usuários -> Números restritos.
 
 
 
 
 .. _user-restriction-use:
 
-Use
----
+Usar
+----
 
-| Which number will be used to check the restriction. This option is valid only to outbound calls.
+| Qual número é usado para conferir a restrição. Vale só para chamadas de saída.
 
 
 
 
 .. _user-transfer-international-profit:
 
-Profit
-------
+Lucro
+-----
 
-| This function is not available in Brazil. It's only used to mobile refills in some countries.
+| Função não disponível no Brasil. É usada só para recargas de celular em alguns países.
 
 
 
 
 .. _user-transfer-flexiload-profit:
 
-Profit
-------
+Lucro
+-----
 
-| This function is not available in Brazil. It's only used to mobile refills in some countries.
+| Função não disponível no Brasil. É usada só para recargas de celular em alguns países.
 
 
 
 
 .. _user-transfer-bkash-profit:
 
-Profit
-------
+Lucro
+-----
 
-| This function is not available in Brazil. It's only used to mobile refills in some countries.
+| Função não disponível no Brasil. É usada só para recargas de celular em alguns países.
 
 
 
 
 .. _user-transfer-dbbl-rocket:
 
-Enable DBBL/Rocket
+Ativar DBBL/Rocket
 ------------------
 
-| This function is not available in Brazil. It's only used to mobile refills in some countries.
+| Função não disponível no Brasil. É usada só para recargas de celular em alguns países.
 
 
 
 
 .. _user-transfer-dbbl-rocket-profit:
 
-Profit
-------
+Lucro
+-----
 
-| This function is not available in Brazil. It's only used to mobile refills in some countries.
+| Função não disponível no Brasil. É usada só para recargas de celular em alguns países.
 
 
 
 
 .. _user-transfer-show-selling-price:
 
-Show selling price
-------------------
+Mostrar preço de venda
+----------------------
 
-| This function is not available in Brazil. It's only used to mobile refills in some countries.
+| Função não disponível no Brasil. É usada só para recargas de celular em alguns países.
 
 
 

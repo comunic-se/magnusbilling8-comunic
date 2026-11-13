@@ -1,30 +1,30 @@
 
 .. _campaign-id-user:
 
-Username
---------
+Usuário
+-------
 
-| User that owns the campaign.
+| Usuário dono da campanha.
 
 
 
 
 .. _campaign-id-plan:
 
-Plan
-----
+Plano
+-----
 
-| What plan do you want to use to bill this campaign?
+| Plano usado para tarifar esta campanha.
 
 
 
 
 .. _campaign-name:
 
-Name
+Nome
 ----
 
-| Name of the campaign.
+| Nome da campanha.
 
 
 
@@ -34,7 +34,7 @@ Name
 CallerID
 --------
 
-| We did not write the description to this field.
+| Número de identificação (CallerID) enviado nas chamadas desta campanha.
 
 
 
@@ -44,355 +44,357 @@ CallerID
 Status
 ------
 
-| Status of the campaign.
+| Status da campanha.
 
 
 
 
 .. _campaign-startingdate:
 
-Starting date
--------------
+Data de início
+--------------
 
-| The campaign will start from this date.
+| A campanha começa a partir desta data.
 
 
 
 
 .. _campaign-expirationdate:
 
-Expiration date
+Data de término
 ---------------
 
-| The campaign will stop in this date.
+| A campanha para nesta data.
 
 
 
 
 .. _campaign-type:
 
-Type
+Tipo
 ----
 
-| Choose Voice, SMS, or WhatsApp.
-| For WhatsApp, MagnusBilling uses the official Meta WhatsApp Business Cloud API and sends an approved template configured in the Messages tab. MagnusBilling only provides the integration; Meta processes and delivers the message. The account owner is responsible for recipient consent, content, templates, charges, and compliance with all applicable laws and Meta/WhatsApp policies.
+| Escolha Voz, SMS ou WhatsApp.
+| No WhatsApp, o MagnusBilling usa a WhatsApp Business Cloud API oficial da Meta e envia um modelo aprovado configurado na aba Mensagens. O MagnusBilling só faz a integração; quem processa e entrega a mensagem é a Meta. O dono da conta é responsável pelo consentimento dos destinatários, pelo conteúdo, pelos modelos, pelas cobranças e pelo cumprimento de todas as leis aplicáveis e das políticas da Meta/WhatsApp.
 
 
 
 
 .. _campaign-whatsapp-template-name:
 
-WhatsApp template name
-----------------------
+Nome do modelo do WhatsApp
+--------------------------
 
-| Exact name of an approved WhatsApp template in WhatsApp Manager. The current integration sends templates without variable components, so use a template that does not require parameters.
+| Nome exato de um modelo aprovado no WhatsApp Manager. A integração atual envia modelos sem componentes variáveis; use um modelo que não exija parâmetros.
 
 
 
 
 .. _campaign-whatsapp-template-language:
 
-WhatsApp template language
---------------------------
+Idioma do modelo do WhatsApp
+----------------------------
 
-| Exact language code approved for the WhatsApp template, for example en_US or pt_BR. The name and language must match the template in WhatsApp Manager.
+| Código exato do idioma aprovado para o modelo do WhatsApp, por exemplo en_US ou pt_BR. O nome e o idioma precisam ser iguais aos do modelo no WhatsApp Manager.
 
 
 
 
 .. _campaign-audio:
 
-Audio
+Áudio
 -----
 
-| Available to massive calling. The audio needs to be compatible with Asterisk. The recomended format is GSM or WAV(8k hz mono).
+| Disponível para chamadas em massa. O áudio precisa ser compatível com o Asterisk. O formato recomendado é GSM ou WAV (8 kHz mono).
 
 
 
 
 .. _campaign-audio-2:
 
-Audio 2
+Áudio 2
 -------
 
-| If you use TTS, the name will be executed between Audio and Audio2.
+| Se você usar TTS, o nome é falado entre o Áudio e o Áudio 2.
 
 
 
 
 .. _campaign-restrict-phone:
 
-Restrict phone
---------------
+Restringir números
+------------------
 
-| Activating this option, MagnusBilling will check if the number that will be sent the call is registered in the Restrict Phone menu, if it has, the system will change the status of the number to blocked and will not send the call.
+| Com esta opção ativada, o MagnusBilling confere se o número de destino está cadastrado no menu Números restritos; se estiver, muda o status do número para bloqueado e não faz a chamada.
 
 
 
 
 .. _campaign-auto-reprocess:
 
-Auto reprocess
---------------
+Reprocessar automaticamente
+---------------------------
 
-| If there are no active numbers in this campaign phone book, reactivates all pending numbers.
+| Se não houver números ativos na agenda desta campanha, reativa todos os números pendentes.
 
 
 
 
 .. _campaign-id-phonebook:
 
+Agendas
+-------
 
-
-
-| Select one or more phonebooks to to be used.
+| Selecione uma ou mais agendas a usar.
 
 
 
 
 .. _campaign-digit-authorize:
 
-Number to forward
------------------
+Número para encaminhar
+----------------------
 
-| Do you want to forward the call after the audio?  E.g, if the callee presses 1, he gets sent to SIP user XXXX. Set Number to Forward = 1, Forward Type = SIP and select the SIP user to send the callee to. Set -1 to disable.
+| Quer encaminhar a chamada depois do áudio? Ex.: se a pessoa digitar 1, vai para o usuário SIP XXXX. Coloque Número para encaminhar = 1, Tipo de encaminhamento = SIP e selecione o usuário SIP de destino. Use -1 para desativar.
 
 
 
 
 .. _campaign-type-0:
 
-Forward type
-------------
+Tipo de encaminhamento
+----------------------
 
-| Choose the type of redirect. This will send the call to the chosen destination.
+| Escolha o tipo de redirecionamento. A chamada é enviada ao destino escolhido.
 
 
 
 
 .. _campaign-id-ivr-0:
 
-IVR
+URA
 ---
 
-| Choose a IVR to send the call to. The IVR needs to belong to the owner of the campaign.
+| Escolha uma URA para onde mandar a chamada. A URA precisa pertencer ao dono da campanha.
 
 
 
 
 .. _campaign-id-queue-0:
 
-Queue
------
+Fila
+----
 
-| Choose a Queue to send the call to. The Queue needs to belong to the owner of the campaign.
+| Escolha uma fila para onde mandar a chamada. A fila precisa pertencer ao dono da campanha.
 
 
 
 
 .. _campaign-id-sip-0:
 
-Sip user
---------
+Usuário SIP
+-----------
 
-| Choose a SIP user to send the call to. The SIP user needs to belong to the owner of the campaign.
+| Escolha um usuário SIP para onde mandar a chamada. O usuário SIP precisa pertencer ao dono da campanha.
 
 
 
 
 .. _campaign-extension-0:
 
-Destination
------------
+Destino
+-------
 
-| Click for more details
-| There are two options available.
-|     * Group: enter the group name exactly as it appears on the SIP users that should receive the calls.
-|     * Personalized: execute any valid option through Asterisk's Dial application, for example ``PJSIP/endpoint,45,tTr``.
+| Clique para mais detalhes.
+| Há duas opções.
+|     * Grupo: informe o nome do grupo exatamente como aparece nos usuários SIP que devem receber as chamadas.
+|     * Personalizado: executa qualquer opção válida pela aplicação Dial do Asterisk, por exemplo ``PJSIP/endpoint,45,tTr``.
 
 
 
 
 .. _campaign-record-call:
 
-Record call
------------
+Gravar chamada
+--------------
 
-| Record the calls of the campaign. They only will be recorded if the call is transferred.
+| Grava as chamadas da campanha. Só são gravadas se a chamada for transferida.
 
 
 
 
 .. _campaign-daily-start-time:
 
-Daily start time
-----------------
+Hora de início diária
+---------------------
 
-| Time that the campaign will start sending.
+| Hora em que a campanha começa a enviar.
 
 
 
 
 .. _campaign-daily-stop-time:
 
-Daily stop time
----------------
+Hora de término diária
+----------------------
 
-| Time that the campaign will stop sending.
+| Hora em que a campanha para de enviar.
 
 
 
 
 .. _campaign-monday:
 
-Monday
-------
+Segunda-feira
+-------------
 
-| Activating this option the system will send calls on Mondays.
+| Com esta opção ativada, o sistema faz chamadas às segundas-feiras.
 
 
 
 
 .. _campaign-tuesday:
 
-Tuesday
--------
+Terça-feira
+-----------
 
-| Activating this option the system will send calls on Tuesdays.
+| Com esta opção ativada, o sistema faz chamadas às terças-feiras.
 
 
 
 
 .. _campaign-wednesday:
 
-Wednesday
----------
+Quarta-feira
+------------
 
-| Activating this option the system will send calls on Wednesdays.
+| Com esta opção ativada, o sistema faz chamadas às quartas-feiras.
 
 
 
 
 .. _campaign-thursday:
 
-Thursday
---------
+Quinta-feira
+------------
 
-| Activating this option the system will send calls on Thursdays.
+| Com esta opção ativada, o sistema faz chamadas às quintas-feiras.
 
 
 
 
 .. _campaign-friday:
 
-Friday
-------
+Sexta-feira
+-----------
 
-| Activating this option the system will send calls on Fridays.
+| Com esta opção ativada, o sistema faz chamadas às sextas-feiras.
 
 
 
 
 .. _campaign-saturday:
 
-Saturday
---------
+Sábado
+------
 
-| Activating this option the system will send calls on Saturdays.
+| Com esta opção ativada, o sistema faz chamadas aos sábados.
 
 
 
 
 .. _campaign-sunday:
 
-Sunday
-------
+Domingo
+-------
 
-| Activating this option the system will send calls on Sundays.
+| Com esta opção ativada, o sistema faz chamadas aos domingos.
 
 
 
 
 .. _campaign-frequency:
 
-Call limit
-----------
+Limite de chamadas
+------------------
 
-| How many numbers will be processed per minute?
-| This value will be divided by 60 seconds and the calls will be sent every minute at the same time.
+| Quantos números serão processados por minuto?
+| O valor é dividido por 60 segundos e as chamadas são enviadas a cada minuto ao mesmo tempo.
 
 
 
 
 .. _campaign-max-frequency:
 
-Maximum call limit
-------------------
+Limite máximo de chamadas
+-------------------------
 
-| This is the maximum value that the client will be able to set. If you set it to 50 the user will be able to change to any value that is 50 or less than 50.
+| Valor máximo que o cliente pode configurar. Se for 50, o usuário pode usar qualquer valor de 50 para baixo.
 
 
 
 
 .. _campaign-nb-callmade:
 
-Audio duration
---------------
+Duração do áudio
+----------------
 
-| Used to control the max completed calls.
+| Usado para controlar o máximo de chamadas completadas.
 
 
 
 
 .. _campaign-enable-max-call:
 
-Toggle max completed calls
---------------------------
+Ativar máximo de chamadas completadas
+-------------------------------------
 
-| If activated MagnusBilling will check how many calls were already made and have a duration total bigger than the audios. If the quantity is equal or bigger than the value set in the field, the campaign will be deactivated.
+| Se ativado, o MagnusBilling confere quantas chamadas já foram feitas com duração maior que a dos áudios. Se a quantidade for igual ou maior que o valor do campo, a campanha é desativada.
 
 
 
 
 .. _campaign-secondusedreal:
 
-Max completed calls
--------------------
+Máximo de chamadas completadas
+------------------------------
 
-| Maximum amount of complete calls. You need to activate the field above to use this.
+| Quantidade máxima de chamadas completadas. É preciso ativar o campo acima para usar.
 
 
 
 
 .. _campaign-description:
 
-Description or SMS Text
------------------------
+Descrição ou texto do SMS
+-------------------------
 
-| This field has different uses if the campaign is sending Voice or SMS.
-| Uses:
-|     * Voice: This field is simply a description of the campaign.
-|     * SMS: The text in here is going to be sent to the numbers. You may use the var %name% where you want to use the name of the customer. Example:
-|     Hello %name%
+| Este campo tem usos diferentes conforme a campanha seja de voz ou de SMS.
+| Usos:
+|     * Voz: o campo é só uma descrição da campanha.
+|     * SMS: o texto daqui é enviado aos números. Você pode usar a variável %name% onde quiser o nome do cliente. Exemplo:
+|     Olá %name%
 
 
 
 
 .. _campaign-tts-audio:
 
-Audio 1 TTS
+Áudio 1 TTS
 -----------
 
-| With this setting the system will generate the audio 1 for the campaign via TTS.
-| In order for this to work, you will need to set the TTS URL under Settings, Configuration, TTS URL.
+| Com esta configuração, o sistema gera o áudio 1 da campanha por TTS.
+| Para funcionar, é preciso configurar a URL de TTS em Configurações, Configuração, TTS URL.
 
 
 
 
 .. _campaign-tts-audio2:
 
-Audio 2 TTS
+Áudio 2 TTS
 -----------
 
-| Same setting as the previous field but for audio 2. Keep in mind that in between audio 1 and 2, the TTS executes the name imported with the number.
+| Mesma configuração do campo anterior, para o áudio 2. Entre o áudio 1 e o 2, o TTS fala o nome importado com o número.
+
+
 
