@@ -1,37 +1,38 @@
 .. _prodigensms-campaign:
 
-Prodigensms campaigns
-=====================
+Campanhas com Prodigensms
+=========================
 
-This guide configures a voice campaign to send a Prodigensms template when the
-called contact presses the campaign authorization digit.
+Este guia configura uma campanha de voz para enviar um modelo da Prodigensms quando
+o contato chamado digita o dígito de autorização da campanha.
 
 .. important::
 
-   MagnusBilling does not deliver the SMS. It sends a template request to
-   Prodigensms. The account owner is responsible for recipient consent,
-   template content, opt-out handling, provider charges, and compliance with
-   all applicable privacy, telecommunications, and messaging rules.
+   O MagnusBilling não entrega o SMS. Ele envia um pedido de modelo à Prodigensms.
+   O dono da conta é responsável pelo consentimento dos destinatários, pelo
+   conteúdo do modelo, pelo tratamento dos descadastros, pelas cobranças do
+   provedor e pelo cumprimento de todas as regras de privacidade, telecomunicações
+   e mensagens aplicáveis.
 
-Requirements
-------------
+Requisitos
+----------
 
-Before starting, confirm that:
+Antes de começar, confirme que:
 
-* the server has outbound HTTPS access and the PHP cURL extension;
-* the Prodigensms account and API token are active;
-* the template and shortener already exist at the provider;
-* the landing URL is correct; and
-* the test contact is a valid Brazilian mobile number.
+* o servidor tem acesso HTTPS de saída e a extensão cURL do PHP;
+* a conta e o token de API da Prodigensms estão ativos;
+* o modelo e o encurtador já existem no provedor;
+* a URL de destino está correta; e
+* o contato de teste é um celular brasileiro válido.
 
-Keep credentials outside the web root. Never place the API token in a campaign
-URL, source file, database field, screenshot, ticket, or log.
+Mantenha as credenciais fora da raiz web. Nunca coloque o token de API numa URL de
+campanha, arquivo de código, campo do banco, captura de tela, chamado ou log.
 
-1. Configure the provider
--------------------------
+1. Configure o provedor
+-----------------------
 
-Copy ``resources/prodigensms/prodigensms.conf.example`` to
-``/etc/asterisk/prodigensms.conf`` and edit the copy:
+Copie ``resources/prodigensms/prodigensms.conf.example`` para
+``/etc/asterisk/prodigensms.conf`` e edite a cópia:
 
 .. code-block:: ini
 
@@ -41,7 +42,7 @@ Copy ``resources/prodigensms/prodigensms.conf.example`` to
    shortener_id = "689"
    original_url = "https://cadastro.example.com/"
 
-Generate a random webhook secret and protect the file:
+Gere um segredo aleatório para o webhook e proteja o arquivo:
 
 .. code-block:: console
 
@@ -49,33 +50,32 @@ Generate a random webhook secret and protect the file:
    chown root:www-data /etc/asterisk/prodigensms.conf
    chmod 0640 /etc/asterisk/prodigensms.conf
 
-The default path can be changed with the ``PRODIGENSMS_CONFIG`` environment
-variable.
+O caminho padrão pode ser mudado com a variável de ambiente ``PRODIGENSMS_CONFIG``.
 
-2. Configure the campaign
--------------------------
+2. Configure a campanha
+-----------------------
 
-#. Open **Voice Broadcasting > Campaigns**.
-#. Select the campaign and its test phonebook.
-#. Configure the authorization digit, for example ``2``.
-#. Configure the campaign prompts. ElevenLabs setup and ``%name%`` usage are
-   documented in :doc:`TTS configuration <tts>`.
-#. Set ``forward_number`` to:
+#. Abra **Torpedo de voz > Campanhas**.
+#. Selecione a campanha e a agenda de teste.
+#. Configure o dígito de autorização, por exemplo ``2``.
+#. Configure as mensagens da campanha. A configuração da ElevenLabs e o uso do
+   ``%name%`` estão em :doc:`Configuração de TTS <tts>`.
+#. Coloque em ``forward_number``:
 
    .. code-block:: text
 
       custom|http://127.0.0.1/mbilling/index.php/prodigensms/send?number=%number%&templateId=77&name=%name%&msg=campaign+SMS+test
 
-#. Replace ``77`` with the template ID approved for the provider account.
-#. Leave only the test contact active and start the campaign.
+#. Troque ``77`` pelo ID do modelo aprovado na conta do provedor.
+#. Deixe só o contato de teste ativo e inicie a campanha.
 
-When the contact presses the configured digit, MagnusBilling replaces
-``%number%`` and ``%name%`` and invokes the local callback.
+Quando o contato digita o dígito configurado, o MagnusBilling troca ``%number%`` e
+``%name%`` e chama o callback local.
 
-3. Understand the provider payload
-----------------------------------
+3. Entenda o que é enviado ao provedor
+--------------------------------------
 
-The controller sends a JSON request such as:
+O controller envia uma requisição JSON como esta:
 
 .. code-block:: json
 
@@ -84,122 +84,123 @@ The controller sends a JSON request such as:
      "templateId": 77,
      "shortenerId": 689,
      "originalUrl": "https://cadastro.example.com/",
-     "name": "Contact name",
+     "name": "Nome do contato",
      "msg": "campaign SMS test"
    }
 
-The parameters are handled as follows:
+Os parâmetros são tratados assim:
 
 ``number``
-   Becomes ``to`` and is normalized to a Brazilian mobile number.
+   Vira ``to`` e é normalizado para um celular brasileiro.
 
 ``templateId``
-   Is required in the campaign URL and must be a positive integer.
+   É obrigatório na URL da campanha e precisa ser um inteiro positivo.
 
-``shortenerId`` and ``originalUrl``
-   Use the server configuration defaults. Valid values in the callback URL
-   override those defaults.
+``shortenerId`` e ``originalUrl``
+   Usam os padrões da configuração do servidor. Valores válidos na URL do callback
+   substituem esses padrões.
 
-Other query parameters
-   Every other valid scalar parameter is forwarded to Prodigensms. This allows
-   ``name``, ``msg``, and additional variables supported by the selected
-   template. The controller accepts up to 30 extra parameters with validation
-   limits on names and values.
+Outros parâmetros da query
+   Todos os outros parâmetros escalares válidos são repassados à Prodigensms. Isso
+   permite ``name``, ``msg`` e variáveis adicionais aceitas pelo modelo escolhido. O
+   controller aceita até 30 parâmetros extras, com limites de validação nos nomes e
+   nos valores.
 
-The ``key``, ``number``, ``templateId``, and ``to`` parameters are reserved and
-are not forwarded as extra template variables.
+Os parâmetros ``key``, ``number``, ``templateId`` e ``to`` são reservados e não são
+repassados como variáveis extras do modelo.
 
-4. Callback security
---------------------
+4. Segurança do callback
+------------------------
 
-Use ``127.0.0.1`` when Asterisk and the MagnusBilling web application are on
-the same server. Loopback requests do not need the webhook key.
+Use ``127.0.0.1`` quando o Asterisk e a aplicação web do MagnusBilling estiverem no
+mesmo servidor. Requisições locais (loopback) não precisam da chave do webhook.
 
-An external request must use HTTPS and include the configured secret:
+Uma requisição externa precisa usar HTTPS e incluir o segredo configurado:
 
 .. code-block:: text
 
-   https://YOUR_HOST/mbilling/index.php/prodigensms/send?key=WEBHOOK_SECRET&number=5511999999999&templateId=77
+   https://SEU_HOST/mbilling/index.php/prodigensms/send?key=WEBHOOK_SECRET&number=5511999999999&templateId=77
 
-Do not expose the external callback unless it is necessary. Protect the host
-with the normal MagnusBilling firewall and access-control practices.
+Não exponha o callback externo se não for necessário. Proteja o servidor com as
+práticas normais de firewall e de controle de acesso do MagnusBilling.
 
-5. Test the callback
---------------------
+5. Teste o callback
+-------------------
 
-Always quote a shell URL containing ``&``:
+Sempre coloque entre aspas, no shell, uma URL que tenha ``&``:
 
 .. code-block:: console
 
    curl 'http://127.0.0.1/mbilling/index.php/prodigensms/send?number=5511999999999&templateId=77&name=Test'
 
-For spaces and special characters, use:
+Para espaços e caracteres especiais, use:
 
 .. code-block:: console
 
    curl --get 'http://127.0.0.1/mbilling/index.php/prodigensms/send' \
      --data-urlencode 'number=5511999999999' \
      --data-urlencode 'templateId=77' \
-     --data-urlencode 'name=Test contact' \
-     --data-urlencode 'msg=Campaign SMS test'
+     --data-urlencode 'name=Contato de teste' \
+     --data-urlencode 'msg=Teste de SMS da campanha'
 
-A successful callback returns:
+Um callback bem-sucedido devolve:
 
 .. code-block:: json
 
    {"success":true,"provider_status":200}
 
-If the URL is not quoted, the shell treats each ``&`` as a background-command
-separator. The server receives only the first parameter and normally returns
+Se a URL não estiver entre aspas, o shell trata cada ``&`` como separador de comando
+em segundo plano. O servidor recebe só o primeiro parâmetro e normalmente devolve
 ``invalid_template_id``.
 
-6. Test the complete campaign
------------------------------
+6. Teste a campanha completa
+----------------------------
 
-#. Leave only the test contact active.
-#. Confirm the prompts, authorization digit, template ID, and
+#. Deixe só o contato de teste ativo.
+#. Confira as mensagens, o dígito de autorização, o ID do modelo e o
    ``forward_number``.
-#. Start the campaign and answer the call.
-#. Confirm both prompts play and press the authorization digit.
-#. Confirm the SMS arrives.
-#. Check that the campaign report records the forward action.
+#. Inicie a campanha e atenda a chamada.
+#. Confirme que as duas mensagens tocam e digite o dígito de autorização.
+#. Confirme que o SMS chega.
+#. Confira se o relatório da campanha registra o encaminhamento.
 
-Monitor the Asterisk console during the test:
+Acompanhe o console do Asterisk durante o teste:
 
 .. code-block:: console
 
    asterisk -rvvvvv
 
-Common problems
----------------
+Problemas comuns
+----------------
 
 ``invalid_template_id``
-   Ensure ``templateId`` is numeric and present. Quote the entire cURL URL.
+   Confira se o ``templateId`` é numérico e está presente. Coloque a URL inteira do
+   cURL entre aspas.
 
 ``invalid_number``
-   The endpoint accepts Brazilian mobile destinations and normalizes them to
-   ``55 + DDD + 9-digit mobile number``.
+   O endpoint aceita celulares brasileiros e os normaliza para
+   ``55 + DDD + celular de 9 dígitos``.
 
 ``forbidden``
-   An external callback did not include the correct ``key``. Prefer the
-   loopback callback for a local campaign.
+   Um callback externo não trouxe a ``key`` correta. Prefira o callback local
+   (loopback) numa campanha local.
 
 ``provider_error``
-   Check the API token, template, shortener, account status, provider balance,
-   outbound HTTPS connectivity, and MagnusBilling application log.
+   Confira o token de API, o modelo, o encurtador, o status da conta, o saldo no
+   provedor, a conectividade HTTPS de saída e o log da aplicação MagnusBilling.
 
-The authorization digit does not send an SMS
-   Confirm that the campaign digit matches the pressed digit, the forward URL
-   begins with ``custom|``, the number remains active for the test, and the
-   campaign report records the DTMF result.
+O dígito de autorização não envia o SMS
+   Confirme que o dígito da campanha é o mesmo digitado, que a URL de encaminhamento
+   começa com ``custom|``, que o número continua ativo para o teste e que o relatório
+   da campanha registra o resultado do DTMF.
 
-Security and maintenance
-------------------------
+Segurança e manutenção
+----------------------
 
-Rotate any credential that was shared in chat, email, terminal history, or a
-support ticket. Use a restricted API token where available, protect backups
-containing ``/etc/asterisk``, and review provider usage and billing.
+Troque qualquer credencial compartilhada em chat, e-mail, histórico do terminal ou
+chamado de suporte. Use um token de API restrito quando houver, proteja os backups
+que contêm o ``/etc/asterisk`` e acompanhe o uso e a cobrança do provedor.
 
-Provider reference:
+Referência do provedor:
 
 * `Prodigensms <https://prodigensms.com/>`_
