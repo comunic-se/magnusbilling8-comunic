@@ -1,102 +1,111 @@
 .. _module-overview:
 
-MagnusBilling module overview
-=============================
+Visão geral dos módulos do MagnusBilling
+========================================
 
-This page groups the main MagnusBilling modules by operational purpose. It is
-intended to help administrators find the correct area of the panel before
-changing configuration.
+Esta página agrupa os principais módulos do MagnusBilling pela finalidade
+operacional. Ela ajuda os administradores a achar a área certa do painel antes de
+mudar uma configuração.
 
-Detailed field descriptions are displayed directly inside MagnusBilling. Open
-a form and use the help control beside a field to see its contextual
-description. Those field descriptions are maintained separately from this
-public Wiki so that the panel remains the authoritative reference for its
-current forms.
+As descrições detalhadas dos campos aparecem dentro do próprio MagnusBilling. Abra
+um formulário e use o botão de ajuda ao lado do campo para ver a descrição
+contextual. Essas descrições são mantidas à parte desta wiki pública, para que o
+painel continue sendo a referência oficial dos formulários atuais.
 
-Customer management
--------------------
+Gestão de clientes
+------------------
 
-* **Users** manages customer accounts, plans, balances, limits, and account
-  status.
-* **SIP Users** and **IAX Users** manage telephony endpoints and credentials.
-* **CallerID** controls caller identity entries associated with users.
-* **Calls Online** shows active calls and available real-time actions.
-* **Restricted Numbers** and **Callback** control number restrictions and
-  callback services.
+* **Usuários** gerencia as contas dos clientes, planos, saldos, limites e o status
+  da conta.
+* **Usuários SIP** e **Usuários IAX** gerenciam os endpoints de telefonia e as
+  credenciais.
+* **CallerID** controla as identidades de chamador associadas aos usuários.
+* **Chamadas online** mostra as chamadas ativas e as ações disponíveis em tempo real.
+* **Números restritos** e **Callback** controlam as restrições de números e os
+  serviços de callback.
 
-Billing and payments
---------------------
-
-* **Refills** records credit movements applied to customer accounts.
-* **Payment Methods** configures the payment options offered by the platform.
-* **Vouchers** creates prepaid codes that customers can redeem.
-* **Provider Refills** records payments and credit movements involving
-  providers.
-* **Send Credit** modules manage supported credit-transfer products and rates.
-
-Rates, plans, and offers
+Faturamento e pagamentos
 ------------------------
 
-* **Plans** groups the tariffs and services assigned to customers.
-* **Tariffs** defines customer selling prices and routing associations.
-* **Prefixes** identifies destinations used during tariff matching.
-* **Provider Rates** records provider costs for comparison and routing.
-* **User Custom Rates** overrides standard rates for specific customers.
-* **Offers** configures packages, allowances, and recurring benefits.
+* **Recargas** registra as movimentações de crédito nas contas dos clientes.
+* **Formas de pagamento** configura as opções de pagamento oferecidas pela plataforma.
+* **Vouchers** cria códigos pré-pagos que os clientes podem resgatar.
+* **Recargas de provedores** registra pagamentos e movimentações de crédito com os
+  provedores.
+* Os módulos de **Envio de crédito** gerenciam os produtos e as tarifas de
+  transferência de crédito suportados.
 
-For calculation details, see :doc:`Price calculation <price_calculation>` and :doc:`Tariff selection <find_rate>`.
+Tarifas, planos e ofertas
+-------------------------
 
-DIDs and inbound routing
-------------------------
+* **Planos** agrupa as tarifas e os serviços atribuídos aos clientes.
+* **Tarifas** define os preços de venda aos clientes e as associações de roteamento.
+* **Prefixos** identifica os destinos usados na busca de tarifa.
+* **Tarifas de provedores** registra os custos dos provedores para comparação e
+  roteamento.
+* **Tarifas personalizadas do usuário** substitui as tarifas padrão para clientes
+  específicos.
+* **Ofertas** configura pacotes, franquias e benefícios recorrentes.
 
-* **DIDs** manages inbound telephone numbers.
-* **DID Destination** defines where an inbound number is delivered.
-* **IVRs** builds interactive voice-response menus.
-* **Queues** and **Queue Members** configure contact-center distribution.
-* **Holidays** applies date-based routing behavior.
-* **DID History** and **DID Use** provide assignment and usage visibility.
+Para os detalhes de cálculo, veja :doc:`Cálculo do preço <price_calculation>` e :doc:`Seleção de tarifa <find_rate>`.
 
-Trunks and outbound routing
----------------------------
+DIDs e roteamento de entrada
+----------------------------
 
-* **Trunks** configures connections to voice providers.
-* **Trunk Groups** controls routing order and failover between trunks.
-* **Provider Rates** stores the cost associated with provider destinations.
-* **Trunk SIP Codes** maps provider responses used by routing and diagnostics.
+* **DIDs** gerencia os números de entrada.
+* **Destinos de DID** define para onde um número de entrada é entregue.
+* **URAs** monta os menus de atendimento eletrônico.
+* **Filas** e **Membros das filas** configuram a distribuição de central de
+  atendimento.
+* **Feriados** aplica o roteamento conforme a data.
+* **Histórico de DIDs** e **Uso de DIDs** mostram as atribuições e o uso.
 
-MBilling 8 uses PJSIP for new installations. Review :doc:`What's new in MBilling 8 <whats_new_mb8>` before migrating legacy ``chan_sip`` settings.
+Troncos e roteamento de saída
+-----------------------------
 
-Campaigns and messaging
------------------------
+* **Troncos** configura as conexões com os provedores de voz.
+* **Grupos de troncos** controla a ordem de roteamento e o failover entre troncos.
+* **Tarifas de provedores** guarda o custo associado aos destinos do provedor.
+* **Códigos SIP dos troncos** registra as respostas dos provedores usadas no
+  roteamento e no diagnóstico.
 
-* **Campaigns** schedules outbound voice, SMS, or WhatsApp operations.
-* **Phonebooks** and **Phone Numbers** organize campaign recipients.
-* **Campaign Polls** collects responses from supported campaign flows.
-* **Campaign Restrictions** blocks numbers that must not be contacted.
-* **Campaign Reports** and **Campaign Dashboard** show operational results.
+O MBilling 8 usa PJSIP nas instalações novas. Leia :doc:`Novidades do MBilling 8 <whats_new_mb8>` antes de migrar configurações legadas do ``chan_sip``.
 
-For business messaging setup and compliance requirements, see :doc:`WhatsApp campaigns <whatsapp_campaign>`.
-
-Reports and monitoring
-----------------------
-
-* **CDR** provides the detailed call record used for billing investigation.
-* **Summary** modules aggregate traffic by day, month, user, trunk, DID, agent,
-  or call shop.
-* **SIP Trace** captures signaling when the optional module is installed.
-* **Alarms** and **User Logs** support operational monitoring and auditing.
-
-System administration
+Campanhas e mensagens
 ---------------------
 
-* **Configuration** controls global platform behavior.
-* **Servers** describes the telephony servers managed by the installation.
-* **User Groups** and **Module Groups** control access to panel functions.
-* **API** manages credentials and permissions for external integrations.
-* **SMTP** and **Email Templates** control outgoing administrative email.
-* **Firewall** exposes supported access-control management.
-* **Services** manages recurring services assigned to customers.
+* **Campanhas** agenda operações de saída por voz, SMS ou WhatsApp.
+* **Agendas** e **Números** organizam os destinatários das campanhas.
+* **Pesquisas de campanha** coleta as respostas dos fluxos de campanha suportados.
+* **Restrições de campanha** bloqueia os números que não podem ser contatados.
+* **Relatórios de campanha** e **Painel de campanhas** mostram os resultados
+  operacionais.
 
-Use the module-specific field help before saving unfamiliar values. For system
-changes, back up the database and configuration and validate behavior on the
-actual server.
+Para a configuração de mensagens empresariais e os requisitos de conformidade, veja :doc:`Campanhas no WhatsApp <whatsapp_campaign>`.
+
+Relatórios e monitoramento
+--------------------------
+
+* **CDR** traz o registro detalhado das chamadas usado para investigar a tarifação.
+* Os módulos de **Resumo** agregam o tráfego por dia, mês, usuário, tronco, DID,
+  revenda ou call shop.
+* **SIP Trace** captura a sinalização quando o módulo opcional está instalado.
+* **Alarmes** e **Log de usuários** apoiam o monitoramento operacional e a auditoria.
+* **Consumo por Plano** (customização Comunic) mostra, por ciclo, o valor
+  recorrente, o saldo, a recarga e o valor a pagar de cada cliente com plano.
+
+Administração do sistema
+------------------------
+
+* **Configuração** controla o comportamento global da plataforma.
+* **Servidores** descreve os servidores de telefonia gerenciados pela instalação.
+* **Grupos de usuários** e **Grupos de módulos** controlam o acesso às funções do
+  painel.
+* **API** gerencia as credenciais e permissões das integrações externas.
+* **SMTP** e **Modelos de e-mail** controlam os e-mails administrativos enviados.
+* **Firewall** expõe a gestão de controle de acesso suportada.
+* **Serviços** gerencia os serviços recorrentes atribuídos aos clientes.
+
+Use a ajuda de campo de cada módulo antes de gravar valores que você não conhece.
+Para mudanças no sistema, faça backup do banco e da configuração e valide o
+comportamento no servidor real.
