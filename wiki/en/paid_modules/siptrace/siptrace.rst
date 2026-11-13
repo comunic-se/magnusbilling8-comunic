@@ -4,211 +4,211 @@
 SIPTrace
 ========
 
-The **SIPTrace** module allows you to capture SIP packets directly from the MagnusBilling interface to help diagnose calls, registrations, and trunk responses.
+O módulo **SIPTrace** permite capturar pacotes SIP direto na interface do MagnusBilling para ajudar a diagnosticar chamadas, registros e respostas dos troncos.
 
-This is a paid module. To purchase it, access:
+É um módulo pago. Para comprar, acesse:
 
 `https://magnussolution.com/services/high-availability/siptrace-en.html <https://magnussolution.com/services/high-availability/siptrace-en.html>`_
 
-The capture is requested by the user in the panel. A background process runs ``ngrep`` with the requested data and writes the result to:
+A captura é pedida pelo usuário no painel. Um processo em segundo plano roda o ``ngrep`` com os dados pedidos e grava o resultado em:
 
 ``/var/www/html/mbilling/resources/reports/siptrace.log``
 
-When the user refreshes the module, the system reads this file and displays the captured packets in the grid.
+Quando o usuário atualiza o módulo, o sistema lê esse arquivo e mostra os pacotes capturados na grade.
 
 .. image:: ../../img/paid_modules/siptrace-grid.png
-   :alt: SIPTrace module grid
+   :alt: Grade do módulo SIPTrace
 
 
-When to use
+Quando usar
 -----------
 
-Use SIPTrace to check, for example:
+Use o SIPTrace para conferir, por exemplo:
 
-* whether a call is reaching the server;
-* whether the server is sending the call to the trunk;
-* which SIP response was returned by the trunk, such as ``403``, ``404``, ``480``, ``486``, ``500`` or ``503``;
-* whether a ``REGISTER`` request is reaching the server;
-* whether there is a difference between the inbound leg and the outbound leg of the call;
-* whether a call Call-ID contains all expected packets.
+* se uma chamada está chegando ao servidor;
+* se o servidor está mandando a chamada para o tronco;
+* qual resposta SIP o tronco devolveu, como ``403``, ``404``, ``480``, ``486``, ``500`` ou ``503``;
+* se um pedido ``REGISTER`` está chegando ao servidor;
+* se há diferença entre a perna de entrada e a perna de saída da chamada;
+* se o Call-ID de uma chamada tem todos os pacotes esperados.
 
 
-Start a capture
----------------
+Iniciar uma captura
+-------------------
 
-1. Open the **SIPTrace** module.
-2. Click **Start capture**.
-3. Fill in the capture fields.
-4. Click **Start capture** again in the filter window.
-5. Wait for the configured time.
-6. Click **Refresh** in the grid to view the captured packets.
+1. Abra o módulo **SIPTrace**.
+2. Clique em **Iniciar captura**.
+3. Preencha os campos da captura.
+4. Clique de novo em **Iniciar captura** na janela de filtro.
+5. Espere o tempo configurado.
+6. Clique em **Atualizar** na grade para ver os pacotes capturados.
 
-While a capture is active, the system does not allow another capture to be started. Wait for the capture to finish or click **Stop capture**.
+Enquanto uma captura está ativa, o sistema não deixa iniciar outra. Espere a captura terminar ou clique em **Parar captura**.
 
 .. image:: ../../img/paid_modules/siptrace-start-capture.png
-   :alt: SIPTrace start capture window
+   :alt: Janela de início de captura do SIPTrace
 
 
-Capture fields
---------------
-
-Filter timeout
-~~~~~~~~~~~~~~
-
-Time, in seconds, that the capture will remain active.
-
-The value must be numeric. The minimum value is ``5`` and the maximum value is ``300``.
-
-
-Port
-~~~~
-
-SIP port that will be monitored.
-
-Usually the port is ``5060``. In installations using another SIP port, enter the corresponding port.
-
-The value must be numeric and must be between ``1`` and ``65535``.
-
-
-Filter
-~~~~~~
-
-Text used to filter the captured packets.
-
-Common examples:
-
-* customer IP;
-* trunk IP;
-* dialed number;
-* SIP account;
-* part of the Call-ID.
-
-Use specific filters whenever possible. The more generic the filter is, the larger the generated file will be and the harder it will be to analyze the result.
-
-
-Refresh the grid
-----------------
-
-After starting the capture, click **Refresh** to load the packets written to the ``siptrace.log`` file.
-
-The grid displays the main information for each packet:
-
-* **Method**: SIP method or SIP response, such as ``INVITE``, ``ACK``, ``BYE``, ``100 Trying``, ``180 Ringing`` or ``503 Service Unavailable``;
-* **Call ID**: SIP identifier of the call or transaction;
-* **SIP To**: destination shown in the ``To`` header;
-* **Source**: packet source;
-* **Destination**: packet destination;
-* **Head**: full SIP packet body, used internally and also for detailed analysis.
-
-
-Filter in the grid
-------------------
-
-The grid filters help you find specific packets inside the captured file.
-
-You can filter by:
-
-* SIP method or response;
-* Call-ID;
-* source IP;
-* destination IP;
-* ``To`` header.
-
-To analyze a call, the best filter is usually the **Call ID**, because all packets from the same call use the same identifier.
-
-
-View call details
+Campos da captura
 -----------------
 
-To open the detailed view:
+Tempo do filtro
+~~~~~~~~~~~~~~~
 
-1. Select one or more records in the grid.
-2. Click **Details**.
+Tempo, em segundos, em que a captura fica ativa.
 
-The system opens a window with the packets for the selected Call-ID in a view similar to ``sngrep``.
-
-You can select up to ``3`` records at a time. This allows you to compare calls or different legs without making the screen too heavy.
-
-In the details screen:
-
-* each row represents one SIP packet;
-* arrows indicate the packet direction between source and destination;
-* ``1xx`` and ``2xx`` responses indicate progress or success;
-* ``3xx``, ``4xx``, ``5xx`` and ``6xx`` responses indicate redirection, error or rejection;
-* packets with SDP show media information, such as codecs and audio IP/port;
-* when you click a packet, the full SIP message body is displayed.
+O valor precisa ser numérico. O mínimo é ``5`` e o máximo é ``300``.
 
 
-Export the log
+Porta
+~~~~~
+
+Porta SIP monitorada.
+
+Normalmente a porta é ``5060``. Em instalações que usam outra porta SIP, informe a porta correspondente.
+
+O valor precisa ser numérico e ficar entre ``1`` e ``65535``.
+
+
+Filtro
+~~~~~~
+
+Texto usado para filtrar os pacotes capturados.
+
+Exemplos comuns:
+
+* IP do cliente;
+* IP do tronco;
+* número discado;
+* conta SIP;
+* parte do Call-ID.
+
+Use filtros específicos sempre que possível. Quanto mais genérico o filtro, maior o arquivo gerado e mais difícil analisar o resultado.
+
+
+Atualizar a grade
+-----------------
+
+Depois de iniciar a captura, clique em **Atualizar** para carregar os pacotes gravados no arquivo ``siptrace.log``.
+
+A grade mostra as principais informações de cada pacote:
+
+* **Método**: método ou resposta SIP, como ``INVITE``, ``ACK``, ``BYE``, ``100 Trying``, ``180 Ringing`` ou ``503 Service Unavailable``;
+* **Call ID**: identificador SIP da chamada ou da transação;
+* **SIP To**: destino mostrado no cabeçalho ``To``;
+* **Origem**: origem do pacote;
+* **Destino**: destino do pacote;
+* **Head**: corpo completo do pacote SIP, usado internamente e também na análise detalhada.
+
+
+Filtrar na grade
+----------------
+
+Os filtros da grade ajudam a achar pacotes específicos dentro do arquivo capturado.
+
+Você pode filtrar por:
+
+* método ou resposta SIP;
+* Call-ID;
+* IP de origem;
+* IP de destino;
+* cabeçalho ``To``.
+
+Para analisar uma chamada, o melhor filtro costuma ser o **Call ID**, porque todos os pacotes da mesma chamada usam o mesmo identificador.
+
+
+Ver os detalhes da chamada
+--------------------------
+
+Para abrir a visão detalhada:
+
+1. Selecione um ou mais registros na grade.
+2. Clique em **Detalhes**.
+
+O sistema abre uma janela com os pacotes do Call-ID selecionado, numa visão parecida com a do ``sngrep``.
+
+Você pode selecionar até ``3`` registros de cada vez. Isso permite comparar chamadas ou pernas diferentes sem deixar a tela pesada demais.
+
+Na tela de detalhes:
+
+* cada linha é um pacote SIP;
+* as setas indicam o sentido do pacote entre origem e destino;
+* respostas ``1xx`` e ``2xx`` indicam andamento ou sucesso;
+* respostas ``3xx``, ``4xx``, ``5xx`` e ``6xx`` indicam redirecionamento, erro ou recusa;
+* pacotes com SDP mostram as informações de mídia, como codecs e IP/porta do áudio;
+* ao clicar num pacote, aparece o corpo completo da mensagem SIP.
+
+
+Exportar o log
 --------------
 
-Click **Export file** to download the ``siptrace.log`` file.
+Clique em **Exportar arquivo** para baixar o arquivo ``siptrace.log``.
 
-Use this option when you need to send the capture to support or analyze the content in another tool.
-
-
-Stop a capture
---------------
-
-Click **Stop capture** to interrupt the active capture request.
-
-Use this option when the filter is wrong or when you do not need to wait for the configured time.
+Use esta opção quando precisar mandar a captura ao suporte ou analisar o conteúdo em outra ferramenta.
 
 
-Delete the log
---------------
+Parar uma captura
+-----------------
 
-Click **Delete** to delete the SIPTrace log file.
+Clique em **Parar captura** para interromper o pedido de captura ativo.
 
-This action removes the previously captured content. Before deleting it, export the file if you need to keep the analysis.
+Use esta opção quando o filtro estiver errado ou quando não precisar esperar o tempo configurado.
 
 
-How to interpret common responses
----------------------------------
+Apagar o log
+------------
+
+Clique em **Apagar** para apagar o arquivo de log do SIPTrace.
+
+Esta ação remove o conteúdo capturado antes. Antes de apagar, exporte o arquivo se precisar guardar a análise.
+
+
+Como interpretar as respostas comuns
+------------------------------------
 
 ``100 Trying``
-    The equipment received the ``INVITE`` and started processing the call.
+    O equipamento recebeu o ``INVITE`` e começou a processar a chamada.
 
 ``180 Ringing``
-    The destination is ringing.
+    O destino está tocando.
 
 ``183 Session Progress``
-    The destination sent call progress. It may include SDP and early media.
+    O destino mandou andamento da chamada. Pode trazer SDP e early media.
 
 ``200 OK``
-    The request was accepted. In calls, it usually means the call was answered.
+    O pedido foi aceito. Em chamadas, normalmente significa que a chamada foi atendida.
 
 ``403 Forbidden``
-    The call was rejected due to permission, authentication, routing or provider policy.
+    A chamada foi recusada por permissão, autenticação, roteamento ou política do provedor.
 
 ``404 Not Found``
-    The destination or route was not found.
+    O destino ou a rota não foi encontrado.
 
 ``480 Temporarily Unavailable``
-    The destination is temporarily unavailable.
+    O destino está temporariamente indisponível.
 
 ``486 Busy Here``
-    The destination is busy.
+    O destino está ocupado.
 
 ``500 Server Internal Error``
-    Internal error on the server or provider side.
+    Erro interno no servidor ou no provedor.
 
 ``503 Service Unavailable``
-    The service or route is unavailable. It may indicate trunk failure, limit, unavailability or a temporary provider issue.
+    O serviço ou a rota está indisponível. Pode indicar falha no tronco, limite, indisponibilidade ou problema temporário no provedor.
 
 
-Best practices
---------------
+Boas práticas
+-------------
 
-* Always use the most specific filter possible.
-* Prefer short captures, between ``30`` and ``60`` seconds.
-* For calls, filter by the dialed number or by the customer/trunk IP.
-* After finding the packet in the grid, use **Details** to analyze the full Call-ID.
-* Compare the inbound leg and the outbound leg of the call.
-* Delete or export old logs to avoid very large files.
+* Use sempre o filtro mais específico possível.
+* Prefira capturas curtas, entre ``30`` e ``60`` segundos.
+* Em chamadas, filtre pelo número discado ou pelo IP do cliente/tronco.
+* Depois de achar o pacote na grade, use **Detalhes** para analisar o Call-ID completo.
+* Compare a perna de entrada e a perna de saída da chamada.
+* Apague ou exporte os logs antigos para evitar arquivos muito grandes.
 
 
-Limitations
------------
+Limitações
+----------
 
-SIPTrace only captures traffic that passes through the monitored interface and port. If the packet did not reach the server, it will not appear in the log.
+O SIPTrace só captura o tráfego que passa pela interface e pela porta monitoradas. Se o pacote não chegou ao servidor, ele não aparece no log.
