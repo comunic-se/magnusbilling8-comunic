@@ -1,8 +1,25 @@
-# Changelog
+# Histórico de mudanças
 
-This file records notable user-visible changes to the MagnusBilling 8 release
-line. The project is under active development; release tags and database
-migration instructions remain authoritative for deployment.
+Este arquivo registra as mudanças relevantes, visíveis ao usuário, da linha de versões
+do MagnusBilling 8 e das customizações da Comunic. O projeto está em desenvolvimento
+ativo; as tags de versão e as instruções de migração do banco continuam sendo a
+referência oficial para a implantação.
+
+## Comunic 1.3 (2026-11-13) — auditoria
+
+- Backups seguros: `migrar-dados.sh`, `importar-banco.sh`, `atualizar-mb8.sh` e
+  `importar-planos.sh` usam `set -o pipefail`; uma falha do `mariadb-dump` não fica mais
+  escondida pelo `gzip`, e o `importar-banco.sh` só apaga o banco depois de conferir o backup.
+- `atualizar-mb8.sh`: para se não conseguir extrair o pacote, em vez de seguir para a
+  migração do banco.
+- `aplicar.sh`: não regrava o crontab se a leitura falhar; os backups das execuções
+  automáticas (vigia) usam o prefixo `mb8-custom-backup-auto-` e não apagam mais os
+  backups das execuções manuais.
+- Consumo por Plano: nome, usuário e tipo de plano codificados em HTML na grade (XSS).
+- CSV do relatório e do backup: textos que começam com `=`, `+`, `-` ou `@` ganham um
+  apóstrofo (injeção de fórmula no Excel).
+- Endereço do repositório atualizado para `comunic-se/magnusbilling8-comunic`.
+- Documentação traduzida para o português. Relatório em `comunic/docs/AUDITORIA-2026-11.md`.
 
 ## Comunic 1.2 (2026-10-02)
 
@@ -80,23 +97,23 @@ Customizações Comunic integradas ao código-fonte (antes distribuídas como pa
   `comunic/aplicar.sh`, `comunic/atualizar-mb8.sh` (atualização manual; a automática
   das 01:30 fica desligada), testes em `comunic/testes/`.
 
-## Unreleased
+## Não lançado (oficial)
 
-### Documentation
+### Documentação
 
-- Reworked the repository introduction, installation, migration, development,
-  architecture, support, security, and contribution guidance.
-- Added the project mission, scope, engineering priorities, and roadmap.
-- Corrected the repository license description to LGPL-3.0.
+- Reescritas a apresentação do repositório e as orientações de instalação, migração,
+  desenvolvimento, arquitetura, suporte, segurança e contribuição.
+- Acrescentados a missão do projeto, o escopo, as prioridades de engenharia e o roadmap.
+- Corrigida a descrição da licença do repositório para LGPL-3.0.
 
 ## MagnusBilling 8
 
-### Changed
+### Mudanças
 
-- Moved the supported telephony baseline to Asterisk 20.
-- Replaced `chan_sip` with PJSIP for new installations.
-- Added a side-by-side MagnusBilling 7 to 8 migration path.
+- A base de telefonia suportada passou a ser o Asterisk 20.
+- O `chan_sip` foi substituído pelo PJSIP nas instalações novas.
+- Acrescentado um caminho de migração lado a lado do MagnusBilling 7 para o 8.
 
-For detailed version 8 behavior, see
-[What's new in MB8](wiki/en/whats_new_mb8.rst). For database-specific changes,
-review the update command and migration guidance before deployment.
+Para o comportamento detalhado da versão 8, veja
+[Novidades do MB8](wiki/en/whats_new_mb8.rst). Para as mudanças específicas do banco,
+revise o comando de atualização e as orientações de migração antes de implantar.

@@ -1,37 +1,37 @@
 ---
-name: Feature request
-about: Propose an improvement to MagnusBilling
-title: "[Feature] "
+name: Pedido de funcionalidade
+about: Proponha uma melhoria para o MagnusBilling
+title: "[Funcionalidade] "
 labels: enhancement
 assignees: ''
 ---
 
-## Operator problem
+## Problema do operador
 
-Describe the problem or limitation, who experiences it, and why it matters.
+Descreva o problema ou a limitação, quem é afetado e por que isso importa.
 
-## Desired outcome
+## Resultado desejado
 
-Describe observable behavior rather than only a proposed implementation.
+Descreva o comportamento esperado, e não apenas uma implementação proposta.
 
-## Example workflow
+## Exemplo de uso
 
-Show how an operator, reseller, customer, API client, or call would use it.
+Mostre como um operador, revenda, cliente, cliente da API ou chamada usaria a melhoria.
 
-## Alternatives considered
+## Alternativas consideradas
 
-Describe current workarounds and other approaches.
+Descreva as soluções provisórias atuais e outras abordagens.
 
-## Impact
+## Impacto
 
-- Billing or financial data:
-- Database or migration:
-- API compatibility:
+- Tarifação ou dados financeiros:
+- Banco ou migração:
+- Compatibilidade da API:
 - Asterisk/PJSIP:
-- Security and privacy:
-- User interface and translations:
+- Segurança e privacidade:
+- Interface e traduções:
 
-## Additional context
+## Contexto adicional
 
-Add sanitized examples, diagrams, or related issues. Do not include credentials
-or customer information.
+Acrescente exemplos sem dados sensíveis, diagramas ou issues relacionadas. Não inclua
+credenciais nem informações de clientes.

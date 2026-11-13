@@ -1,52 +1,56 @@
-# GitHub Wiki synchronization
+# Sincronização com a wiki do GitHub
 
-The English user-facing documentation under `wiki/en` is the source of truth.
-The GitHub Wiki is a generated Markdown publication target and must not be
-maintained independently.
+A documentação para usuários em `wiki/en` é a fonte oficial. A wiki do GitHub é um
+destino de publicação em Markdown gerado a partir dela e não deve ser mantida à parte.
 
-## Local export
+> Neste fork, o conteúdo de `wiki/en` foi traduzido para o português. O nome da pasta
+> (`en`) foi mantido para não quebrar o exportador, os links e as referências do
+> projeto oficial.
+
+## Exportação local
 
 ```bash
 python3 wiki/tools/export_github_wiki.py --output /tmp/magnusbilling8-wiki
 ```
 
-The exporter:
+O exportador:
 
-- converts all English RST pages to Markdown;
-- prefixes and flattens page names for GitHub Wiki compatibility;
-- converts Sphinx document links and copies referenced images;
-- turns Sphinx `toctree` and generated module references into navigable links;
-- fixes RST heading adornments for GitHub Markdown rendering;
-- creates `Home.md`, `_Sidebar.md`, and `_Footer.md`;
-- adds links back to the documentation index and editable RST source;
-- validates that generated internal page and asset links resolve.
+- converte todas as páginas RST para Markdown;
+- acrescenta um prefixo e achata os nomes das páginas para a wiki do GitHub;
+- converte os links entre documentos do Sphinx e copia as imagens referenciadas;
+- transforma os `toctree` do Sphinx e as referências de módulos gerados em links
+  navegáveis;
+- corrige os sublinhados de título do RST para o Markdown do GitHub;
+- cria o `Home.md`, o `_Sidebar.md` e o `_Footer.md`;
+- acrescenta links de volta para o índice da documentação e para o RST editável;
+- confere se os links internos de páginas e imagens gerados apontam para algo que existe.
 
-## Publication
+## Publicação
 
-GitHub stores the Wiki in a separate Git repository:
+O GitHub guarda a wiki num repositório Git separado:
 
 ```bash
 git clone https://github.com/magnussolution/magnusbilling.wiki.git
 ```
 
-The repository exists only after the first Wiki page has been created in the
-GitHub interface. The workflow in `.github/workflows/sync-github-wiki.yml`
-exports the documentation, replaces the generated Wiki checkout, and pushes a
-commit only when the result changed.
+Esse repositório só existe depois que a primeira página da wiki é criada pela
+interface do GitHub. O workflow `.github/workflows/sync-github-wiki.yml` exporta a
+documentação, substitui o checkout da wiki gerada e só faz commit quando o resultado
+muda. Ele roda em pushes no branch `source` (o branch do projeto oficial); neste fork,
+o branch principal é `main`, então ele só roda se for disparado manualmente.
 
-## Editing policy
+## Política de edição
 
-Edit `wiki/en`. When a generated module page comes from the durable field-help
-sources under `resources/help`, update the English help source and regenerate
-its RST page before committing. Application translations and localized panel
-help remain independent from the English-only public documentation. Direct
-edits in the GitHub Wiki may be overwritten by the next synchronization.
+Edite `wiki/en`. Quando uma página de módulo gerada vier das fontes de ajuda de campo
+em `resources/help`, atualize a fonte da ajuda e gere de novo a página RST antes do
+commit. As traduções da aplicação e a ajuda do painel são independentes da
+documentação pública. Edições feitas direto na wiki do GitHub podem ser sobrescritas
+pela próxima sincronização.
 
-The exporter is intentionally presentation-only. It does not publish or
-rewrite `wiki/en/modules/*` or `resources/help/help_en.js`, because that
-generated tree supplies the contextual help displayed beside fields in
-MagnusBilling. Public module documentation is maintained separately in
-`wiki/en/module_overview.rst`.
+O exportador cuida só da apresentação. Ele não publica nem reescreve
+`wiki/en/modules/*` nem `resources/help/help_en.js`, porque essa árvore gerada fornece a
+ajuda contextual mostrada ao lado dos campos no MagnusBilling. A documentação pública
+dos módulos é mantida à parte, em `wiki/en/module_overview.rst`.
 
-Do not publish `ia-docs` to the user Wiki. It is a machine-oriented RAG source
-with internal support and code-navigation material.
+Não publique o `ia-docs` na wiki de usuários. Ele é uma fonte de RAG voltada a máquinas,
+com material interno de suporte e de navegação pelo código.

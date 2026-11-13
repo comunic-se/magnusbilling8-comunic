@@ -11,179 +11,181 @@
 > ```
 
 
-Open-source billing, routing, and management platform for VoIP providers,
-call shops, and telephony services.
+Plataforma de código aberto de tarifação, roteamento e gestão para provedores de VoIP,
+call shops e serviços de telefonia.
 
-MagnusBilling 8 combines a web administration panel, a billing engine, and
-Asterisk integration. New installations use **Asterisk 20** and **PJSIP**.
+O MagnusBilling 8 reúne um painel web de administração, um motor de tarifação e a
+integração com o Asterisk. As instalações novas usam **Asterisk 20** e **PJSIP**.
 
 > [!IMPORTANT]
-> MagnusBilling 8 must be installed on a clean, dedicated server. Migrating
-> from MagnusBilling 7 is a side-by-side migration, not an in-place upgrade.
+> O MagnusBilling 8 deve ser instalado num servidor limpo e dedicado. A migração a
+> partir do MagnusBilling 7 é feita lado a lado, em outro servidor, e não como
+> atualização no mesmo servidor.
 
-## What MagnusBilling provides
+## O que o MagnusBilling oferece
 
-- prepaid and postpaid customer billing;
-- rates, rate plans, trunks, providers, and call routing;
-- SIP/PJSIP accounts, DIDs, IVRs, queues, callbacks, and calling cards;
-- call detail records, reports, invoices, refills, and vouchers;
-- campaigns, call-shop operation, and reseller administration;
-- payment, messaging, and external-system integrations;
-- a web API and scheduled background processing.
+- tarifação de clientes pré-pagos e pós-pagos;
+- tarifas, planos de tarifas, troncos, provedores e roteamento de chamadas;
+- contas SIP/PJSIP, DIDs, URAs, filas, callbacks e cartões telefônicos;
+- registros de chamadas (CDR), relatórios, faturas, recargas e vouchers;
+- campanhas, operação de call shop e administração de revendas;
+- integrações com pagamentos, mensagens e sistemas externos;
+- uma API web e processamento agendado em segundo plano.
 
-The exact modules available depend on the installation, configuration, and
-licensed extensions.
+Os módulos disponíveis dependem da instalação, da configuração e das extensões
+licenciadas.
 
-## Supported platform
+## Plataformas suportadas
 
-The installer currently recognizes:
+O instalador reconhece hoje:
 
-- Debian 11, 12, and 13;
-- Ubuntu LTS 22.04, 24.04, and 26.04.
+- Debian 11, 12 e 13;
+- Ubuntu LTS 22.04, 24.04 e 26.04.
 
-The runtime includes PHP, MariaDB, Apache, Asterisk 20, PJSIP, Fail2ban, and
-host firewall configuration. A fresh virtual machine or dedicated server is
-strongly recommended.
+O ambiente inclui PHP, MariaDB, Apache, Asterisk 20, PJSIP, Fail2ban e a configuração
+do firewall do servidor. Recomenda-se fortemente uma máquina virtual ou um servidor
+dedicado recém-criado.
 
-## Install
+## Instalação
 
-Connect to the new server as `root`, then run:
+Conecte-se ao servidor novo como `root` e rode:
 
 ```bash
 curl -O https://raw.githubusercontent.com/magnussolution/magnusbilling/source/script/install.sh
 bash install.sh
 ```
 
-The server may restart when installation finishes. Open `http://SERVER_IP` and
-sign in with the initial credentials shown by the installer. A standard new
-installation starts with:
+O servidor pode reiniciar ao final da instalação. Abra `http://IP_DO_SERVIDOR` e entre
+com as credenciais iniciais mostradas pelo instalador. Uma instalação nova padrão
+começa com:
 
 ```text
-Username: root
-Password: magnus
+Usuário: root
+Senha: magnus
 ```
 
-Change this password immediately and limit panel and SSH access to trusted
-networks.
+Troque essa senha imediatamente e limite o acesso ao painel e ao SSH a redes
+confiáveis.
 
-For validation steps and troubleshooting, read the
-[installation guide](wiki/en/get_started/quick_install.rst).
+Para os passos de validação e a solução de problemas, leia o
+[guia de instalação](wiki/en/get_started/quick_install.rst).
 
-## Migrating from MagnusBilling 7
+## Migração a partir do MagnusBilling 7
 
-Do not install version 8 over a version 7 server. Provision a new supported
-server, take verified backups, migrate the database, and review every trunk and
-endpoint after conversion from `chan_sip` to PJSIP.
+Não instale a versão 8 por cima de um servidor com a versão 7. Prepare um servidor
+novo suportado, faça backups verificados, migre o banco de dados e revise cada tronco
+e cada endpoint depois da conversão de `chan_sip` para PJSIP.
 
-Follow the complete
-[MagnusBilling 7 to 8 migration guide](wiki/en/get_started/migrate_from_mb7.rst)
-and review the [release lifecycle](wiki/en/lifecycle.rst) before scheduling
-production downtime.
+Siga o
+[guia completo de migração do MagnusBilling 7 para o 8](wiki/en/get_started/migrate_from_mb7.rst)
+e leia o [ciclo de vida das versões](wiki/en/lifecycle.rst) antes de agendar a parada
+da produção.
 
-## Architecture
+## Arquitetura
 
 ```text
-Browser / API clients
+Navegador / clientes da API
         |
 Apache + PHP
         |
-Yii 1 web application ---- MariaDB
+Aplicação web Yii 1 ------ MariaDB
         |                     |
         +---- AMI / AGI ------+
                  |
           Asterisk 20 / PJSIP
                  |
-       carriers and SIP devices
+       operadoras e aparelhos SIP
 ```
 
-The administration interface is built with Ext JS 6. The PHP backend uses
-Yii 1, reads its database connection from
-`/etc/asterisk/res_config_mysql.conf`, and communicates with Asterisk through
-AMI, AGI, and generated configuration.
+A interface de administração é feita em Ext JS 6. O backend em PHP usa Yii 1, lê a
+conexão com o banco em `/etc/asterisk/res_config_mysql.conf` e se comunica com o
+Asterisk por AMI, AGI e arquivos de configuração gerados.
 
-See [ARCHITECTURE.md](ARCHITECTURE.md) for component boundaries and important
-entry points.
+Veja [ARCHITECTURE.md](ARCHITECTURE.md) para os limites entre os componentes e os
+principais pontos de entrada.
 
-## Repository map
+## Mapa do repositório
 
-| Path | Purpose |
+| Caminho | Finalidade |
 | --- | --- |
-| `app/`, `classic/`, `modern/` | Ext JS application, views, and themes |
-| `protected/controllers/` | HTTP and API controllers |
-| `protected/models/` | Yii models and domain persistence |
-| `protected/components/` | Billing, telephony, integration, and shared services |
-| `protected/commands/` | Scheduled and administrative console commands |
-| `resources/asterisk/` | AGI runtime and Asterisk integration |
-| `resources/locale/` | User-interface translations |
-| `script/` | installer, database schema, migration, and system configuration |
-| `protected/tests/` | PHP test suites |
-| `wiki/` | source for the project documentation and GitHub wiki |
+| `app/`, `classic/`, `modern/` | aplicação Ext JS, telas e temas |
+| `protected/controllers/` | controllers HTTP e da API |
+| `protected/models/` | models Yii e persistência do domínio |
+| `protected/components/` | serviços de tarifação, telefonia, integrações e compartilhados |
+| `protected/commands/` | comandos de console agendados e administrativos |
+| `resources/asterisk/` | AGI e integração com o Asterisk |
+| `resources/locale/` | traduções da interface |
+| `script/` | instalador, esquema do banco, migração e configuração do sistema |
+| `protected/tests/` | suítes de testes em PHP |
+| `wiki/` | fonte da documentação do projeto e da wiki do GitHub |
+| `comunic/`, `custom/` | customizações da Comunic (ver [comunic/README.md](comunic/README.md)) |
 
-## Development
+## Desenvolvimento
 
-This is a system-level application whose full runtime depends on Asterisk,
-MariaDB, Apache, and Linux configuration. Use an isolated development
-environment; never test installer or telephony changes on a production server.
+É uma aplicação de nível de sistema: para funcionar por completo depende de Asterisk,
+MariaDB, Apache e da configuração do Linux. Use um ambiente de desenvolvimento
+isolado; nunca teste mudanças no instalador ou na telefonia num servidor de produção.
 
-The Ext JS application is built with Sencha Cmd 6.2:
+A aplicação Ext JS é compilada com o Sencha Cmd 6.2:
 
 ```bash
 sencha app build development
 sencha app build production
 ```
 
-PHP unit tests use PHPUnit. When PHPUnit is available, run an individual suite
-from the repository root, for example:
+Os testes unitários em PHP usam PHPUnit. Com o PHPUnit disponível, rode uma suíte
+individual a partir da raiz do repositório, por exemplo:
 
 ```bash
 phpunit protected/tests/unit/PjsipIpAuthenticationProbeTest.php
 ```
 
-Test files under `protected/tests/` also include focused executable regression
-suites. Run the tests relevant to the code you change and describe any
-environment-dependent checks in the pull request.
+Os arquivos de teste em `protected/tests/` também incluem suítes de regressão
+executáveis e focadas. Rode os testes relacionados ao código que você alterar e
+descreva no pull request as verificações que dependem do ambiente.
 
-Detailed contributor setup, standards, and the pull-request checklist are in
-[CONTRIBUTING.md](CONTRIBUTING.md).
+A preparação do ambiente de quem contribui, os padrões e a lista de conferência do
+pull request estão em [CONTRIBUTING.md](CONTRIBUTING.md).
 
-## Documentation
+## Documentação
 
-- [Project definition and roadmap](PROJECT.md)
-- [Architecture](ARCHITECTURE.md)
-- [User and administrator wiki](wiki/en/index.rst)
-- [What's new in MB8](wiki/en/whats_new_mb8.rst)
-- [Support](SUPPORT.md)
-- [Security policy](SECURITY.md)
-- [Changelog](CHANGELOG.md)
+- [Definição do projeto e roadmap](PROJECT.md)
+- [Arquitetura](ARCHITECTURE.md)
+- [Wiki de usuários e administradores](wiki/en/index.rst)
+- [Novidades do MB8](wiki/en/whats_new_mb8.rst)
+- [Suporte](SUPPORT.md)
+- [Política de segurança](SECURITY.md)
+- [Histórico de mudanças](CHANGELOG.md)
+- [Customizações da Comunic](comunic/README.md)
 
-## Community and support
+## Comunidade e suporte
 
-Use [GitHub Issues](https://github.com/magnussolution/magnusbilling/issues) for
-reproducible bugs and feature proposals. Use the channels listed in
-[SUPPORT.md](SUPPORT.md) for installation and configuration questions.
+Use as [GitHub Issues](https://github.com/magnussolution/magnusbilling/issues) do
+projeto oficial para erros reproduzíveis e propostas de funcionalidades. Use os canais
+listados em [SUPPORT.md](SUPPORT.md) para dúvidas de instalação e configuração.
 
-Please follow the [Code of Conduct](CODE_OF_CONDUCT.md). Security
-vulnerabilities must be reported privately as described in
-[SECURITY.md](SECURITY.md), not in a public issue.
+Siga o [Código de Conduta](CODE_OF_CONDUCT.md). Vulnerabilidades de segurança devem
+ser comunicadas em particular, como descrito em [SECURITY.md](SECURITY.md), e não numa
+issue pública.
 
-## Contributing
+## Como contribuir
 
-Contributions are welcome. Before opening a pull request:
+Contribuições são bem-vindas. Antes de abrir um pull request:
 
-1. read [CONTRIBUTING.md](CONTRIBUTING.md);
-2. search existing issues and pull requests;
-3. keep changes focused and include tests or a verification procedure;
-4. update English documentation for user-visible behavior.
+1. leia o [CONTRIBUTING.md](CONTRIBUTING.md);
+2. procure issues e pull requests já existentes;
+3. mantenha as mudanças focadas e inclua testes ou um procedimento de verificação;
+4. atualize a documentação quando o comportamento visível ao usuário mudar.
 
-## License
+## Licença
 
-MagnusBilling is distributed under the
+O MagnusBilling é distribuído sob a
 [GNU Lesser General Public License v3.0](LICENSE).
 
-## Maintainer and acknowledgements
+## Mantenedor e agradecimentos
 
-MagnusBilling was created by
+O MagnusBilling foi criado por
 [Adilson Magnus](https://github.com/magnussolution) / MagnusSolution.
-See the repository
-[contributors](https://github.com/magnussolution/magnusbilling/contributors)
-for everyone who has helped improve the project.
+Veja os
+[colaboradores](https://github.com/magnussolution/magnusbilling/contributors)
+do repositório para conhecer todos que ajudaram a melhorar o projeto.

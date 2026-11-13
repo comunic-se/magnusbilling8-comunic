@@ -1,51 +1,52 @@
-# Security Policy
+# Política de segurança
 
-## Supported versions
+## Versões suportadas
 
-MagnusBilling 8 is the active development line and receives security fixes.
-MagnusBilling 7 follows the dates and limitations in the
-[lifecycle policy](wiki/en/lifecycle.rst). Older releases are unsupported.
+O MagnusBilling 8 é a linha ativa de desenvolvimento e recebe correções de segurança.
+O MagnusBilling 7 segue as datas e limitações da
+[política de ciclo de vida](wiki/en/lifecycle.rst). Versões mais antigas não são
+suportadas.
 
-Operators should remain on the latest available update for their supported
-release line. A supported application version does not replace security updates
-for Linux, PHP, MariaDB, Apache, Asterisk, or other dependencies.
+Os operadores devem manter a atualização mais recente da sua linha de versões
+suportada. Uma versão suportada da aplicação não substitui as atualizações de segurança
+do Linux, PHP, MariaDB, Apache, Asterisk e das demais dependências.
 
-## Reporting a vulnerability
+## Como comunicar uma vulnerabilidade
 
-Do **not** open a public issue, discussion, or pull request for a suspected
-vulnerability.
+**Não** abra issue, discussão ou pull request público para uma suspeita de
+vulnerabilidade.
 
-Report it privately to `info@magnussolution.com` with:
+Comunique em particular para `info@magnussolution.com` (código oficial do
+MagnusBilling) ou para a equipe técnica da Comunic (customizações das pastas
+`comunic/` e `custom/`), informando:
 
-- a clear description and affected component;
-- affected version or commit;
-- prerequisites and reproducible steps;
-- impact and a proof of concept, if safe to share;
-- suggested mitigation, if known;
-- your preferred contact and disclosure attribution.
+- uma descrição clara e o componente afetado;
+- a versão ou o commit afetado;
+- os pré-requisitos e os passos para reproduzir;
+- o impacto e uma prova de conceito, se for seguro compartilhar;
+- a mitigação sugerida, se você souber;
+- seu contato preferido e como deseja ser creditado na divulgação.
 
-Remove customer data, credentials, call records, and other unnecessary
-sensitive material. Encrypt especially sensitive details before sending and
-coordinate the transfer method with the maintainers.
+Retire dados de clientes, credenciais, registros de chamadas e qualquer outro material
+sensível desnecessário. Criptografe detalhes especialmente sensíveis antes de enviar e
+combine a forma de transferência com os mantenedores.
 
-## What to expect
+## O que esperar
 
-The maintainers will validate the report, assess affected releases, and
-coordinate remediation and disclosure according to severity and project
-capacity. Please allow time for analysis before publishing details. If the
-report is not a vulnerability, you may be directed to a support channel or
-public issue.
+Os mantenedores vão validar o relato, avaliar as versões afetadas e coordenar a
+correção e a divulgação de acordo com a gravidade e a capacidade do projeto. Dê tempo
+para a análise antes de publicar detalhes. Se o relato não for uma vulnerabilidade,
+você poderá ser direcionado a um canal de suporte ou a uma issue pública.
 
-## Operator responsibilities
+## Responsabilidades do operador
 
-- change all default credentials immediately;
-- restrict SSH, the administration panel, AMI, database, and SIP management
-  access to trusted networks;
-- use TLS where the deployment supports it;
-- apply operating-system and dependency security updates;
-- keep verified off-host backups and test restoration;
-- review accounts, permissions, firewall rules, Fail2ban, and logs regularly;
-- never expose database or Asterisk management credentials in public reports.
+- trocar todas as credenciais padrão imediatamente;
+- restringir o acesso ao SSH, ao painel de administração, ao AMI, ao banco e à gestão
+  SIP a redes confiáveis;
+- usar TLS onde a implantação permitir;
+- aplicar as atualizações de segurança do sistema operacional e das dependências;
+- manter backups verificados fora do servidor e testar a restauração;
+- revisar com frequência contas, permissões, regras de firewall, Fail2ban e logs;
+- nunca expor credenciais do banco ou da gestão do Asterisk em relatos públicos.
 
-Security-sensitive deployment guidance is also available under
-`wiki/en/security/`.
+Há orientações de implantação voltadas à segurança também em `wiki/en/security/`.

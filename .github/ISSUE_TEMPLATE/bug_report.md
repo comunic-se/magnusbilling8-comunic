@@ -1,50 +1,50 @@
 ---
-name: Bug report
-about: Report reproducible incorrect behavior
-title: "[Bug] "
+name: Relato de erro
+about: Relate um comportamento errado que possa ser reproduzido
+title: "[Erro] "
 labels: bug
 assignees: ''
 ---
 
 <!--
-For usage questions, read SUPPORT.md.
-For vulnerabilities, stop and follow SECURITY.md. Never disclose them here.
-Remove credentials, customer data, phone numbers, public IPs, and tokens.
+Para dúvidas de uso, leia o SUPPORT.md.
+Para vulnerabilidades, pare e siga o SECURITY.md. Nunca as divulgue aqui.
+Remova credenciais, dados de clientes, números de telefone, IPs públicos e tokens.
 -->
 
-## Summary
+## Resumo
 
-Describe the incorrect behavior and its operational impact.
+Descreva o comportamento errado e o impacto na operação.
 
-## Environment
+## Ambiente
 
-- MagnusBilling version or commit:
-- Linux distribution and version:
-- Asterisk version:
-- PHP and MariaDB versions:
-- New installation or migration from MB7:
-- Browser, if relevant:
+- Versão ou commit do MagnusBilling:
+- Distribuição Linux e versão:
+- Versão do Asterisk:
+- Versões do PHP e do MariaDB:
+- Instalação nova ou migrada do MB7:
+- Navegador, se for relevante:
 
-## Steps to reproduce
+## Passos para reproduzir
 
 1.
 2.
 3.
 
-## Expected behavior
+## Comportamento esperado
 
-What should have happened?
+O que deveria ter acontecido?
 
-## Actual behavior
+## Comportamento real
 
-What happened instead? Include the exact timestamp and timezone.
+O que aconteceu? Informe o horário exato e o fuso horário.
 
-## Sanitized evidence
+## Evidências sem dados sensíveis
 
-Add the smallest useful log excerpt, screenshot, or configuration. Do not
-include secrets, customer information, full database dumps, or unredacted CDRs.
+Acrescente o menor trecho útil de log, captura de tela ou configuração. Não inclua
+segredos, informações de clientes, dumps completos do banco nem CDRs sem tratamento.
 
-## Additional context
+## Contexto adicional
 
-Describe frequency, recent changes, workarounds, and whether the issue affects
-billing or live calls.
+Descreva a frequência, mudanças recentes, soluções provisórias e se o problema afeta a
+tarifação ou chamadas em curso.
