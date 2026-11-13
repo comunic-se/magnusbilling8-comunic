@@ -4,47 +4,47 @@
 DID
 ---
 
-| DID related to this history record.
+| DID relacionado a este registro do histórico.
 
 
 
 
 .. _didHistory-username:
 
-Username
---------
+Usuário
+-------
 
-| User that owned or reserved the DID in this history record.
+| Usuário que tinha ou reservou o DID neste registro do histórico.
 
 
 
 
 .. _didHistory-month-payed:
 
-Month payed
+Meses pagos
 -----------
 
-| Number of months paid for this DID reservation or renewal.
+| Número de meses pagos nesta reserva ou renovação do DID.
 
 
 
 
 .. _didHistory-reservationdate:
 
-Reservation date
-----------------
+Data da reserva
+---------------
 
-| Date when the DID was reserved or renewed.
+| Data em que o DID foi reservado ou renovado.
 
 
 
 
 .. _didHistory-description:
 
-Description
------------
+Descrição
+---------
 
-| Additional information recorded for this DID history entry.
+| Informações adicionais registradas neste item do histórico do DID.
 
 
 

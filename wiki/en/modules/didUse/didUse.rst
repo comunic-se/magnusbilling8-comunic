@@ -4,27 +4,24 @@
 DID
 ---
 
-| DID Number
+| Número do DID.
 
 
 
 
 .. _didUse-month-payed:
 
-Month payed
+Meses pagos
 -----------
 
-| The total month paid to this DID.
+| Total de meses pagos por este DID.
 
 
 
 
 .. _didUse-reservationdate:
 
-Reservation date
-----------------
+Data da reserva
+---------------
 
-| Day that the DID was reserved for the user.
-
-
-
+| Dia em que o DID foi reservado para o usuário.

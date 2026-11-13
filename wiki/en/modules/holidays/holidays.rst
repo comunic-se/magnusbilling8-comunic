@@ -1,20 +1,17 @@
 
 .. _holidays-name:
 
-Name
+Nome
 ----
 
-| Holiday name
+| Nome do feriado.
 
 
 
 
 .. _holidays-day:
 
-Date
+Data
 ----
 
-| Day of holiday
-
-
-
+| Dia do feriado.

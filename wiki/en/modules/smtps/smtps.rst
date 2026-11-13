@@ -4,48 +4,48 @@
 Host
 ----
 
-| SMST domain
-| You need to verify if the datacenter where the server will be hosted don't block the ports used by SMTP.
+| Domínio do SMTP.
+| Confira se o datacenter onde o servidor fica não bloqueia as portas usadas pelo SMTP.
 
 
 
 
 .. _smtps-username:
 
-Username
---------
+Usuário
+-------
 
-| Username used to authenticate the SMTP server.
+| Usuário usado para autenticar no servidor SMTP.
 
 
 
 
 .. _smtps-password:
 
-Password
---------
+Senha
+-----
 
-| Password used to authenticate the SMTP server.
+| Senha usada para autenticar no servidor SMTP.
 
 
 
 
 .. _smtps-port:
 
-Port
-----
+Porta
+-----
 
-| Port used by the SMTP server.
+| Porta usada pelo servidor SMTP.
 
 
 
 
 .. _smtps-encryption:
 
-Encryption
-----------
+Criptografia
+------------
 
-| Encryption type.
+| Tipo de criptografia.
 
 
 

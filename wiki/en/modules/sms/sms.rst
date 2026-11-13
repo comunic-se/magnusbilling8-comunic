@@ -1,20 +1,20 @@
 
 .. _sms-id-user:
 
-Username
---------
+Usuário
+-------
 
-| User that sent/received the SMS.
+| Usuário que enviou/recebeu o SMS.
 
 
 
 
 .. _sms-telephone:
 
-Number
+Número
 ------
 
-| Number in the E164 format.
+| Número no formato E164.
 
 
 
@@ -24,27 +24,27 @@ Number
 SMS
 ---
 
-| SMS text.
+| Texto do SMS.
 
 
 
 
 .. _sms-sms-from:
 
-From
-----
+Remetente
+---------
 
-| If your SMS provider accepts the submission of FROM, put it here. This value will be replaced for the variable %from% in the trunk URL.
+| Se o seu provedor de SMS aceitar o envio do remetente (FROM), informe aqui. Este valor substitui a variável %from% na URL do tronco.
 
 
 
 
 .. _sms-result:
 
-Provider result
----------------
+Resultado do provedor
+---------------------
 
-| Response returned by the SMS provider after MagnusBilling sent the message.
+| Resposta devolvida pelo provedor de SMS depois que o MagnusBilling enviou a mensagem.
 
 
 

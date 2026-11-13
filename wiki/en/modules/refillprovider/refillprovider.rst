@@ -1,40 +1,40 @@
 
 .. _refillprovider-id-provider:
 
-Provider
+Provedor
 --------
 
-| Providers name.
+| Nome do provedor.
 
 
 
 
 .. _refillprovider-credit:
 
-Credit
-------
+Crédito
+-------
 
-| Refill value.
+| Valor da recarga.
 
 
 
 
 .. _refillprovider-description:
 
-Description
------------
+Descrição
+---------
 
-| Used for internal control.
+| Usado para controle interno.
 
 
 
 
 .. _refillprovider-payment:
 
-Add payment
------------
+Adicionar pagamento
+-------------------
 
-| This option is to your control only. The credit authorized to the client even if it's set to "NO".
+| Esta opção serve apenas para o seu controle. O crédito é liberado ao cliente mesmo que esteja em "NÃO".
 
 
 

@@ -1,40 +1,37 @@
 
 .. _offerUse-id-user:
 
-Username
---------
+Usuário
+-------
 
-| User that made  the call.
+| Usuário que fez a chamada.
 
 
 
 
 .. _offerUse-id-offer:
 
-Offer
------
+Oferta
+------
 
-| Name of the offer.
+| Nome da oferta.
 
 
 
 
 .. _offerUse-month-payed:
 
-Month payed
+Meses pagos
 -----------
 
-| Paid months.
+| Meses pagos.
 
 
 
 
 .. _offerUse-reservationdate:
 
-Reservation date
-----------------
+Data da reserva
+---------------
 
-| Date and hour that the offer was canceled.
-
-
-
+| Data e hora em que a oferta foi cancelada.

@@ -4,17 +4,17 @@
 IP
 --
 
-| IP address that returned this SIP response code.
+| Endereço IP que devolveu este código de resposta SIP.
 
 
 
 
 .. _trunkSipCodes-code:
 
-Code
-----
+Código
+------
 
-| SIP response code returned by the trunk, such as 403, 404, 486, or 503.
+| Código de resposta SIP devolvido pelo tronco, como 403, 404, 486 ou 503.
 
 
 
@@ -24,7 +24,7 @@ Code
 Total
 -----
 
-| Total number of times this SIP response code was received.
+| Número total de vezes em que este código de resposta SIP foi recebido.
 
 
 

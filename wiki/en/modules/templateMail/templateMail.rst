@@ -1,30 +1,30 @@
 
 .. _templateMail-fromname:
 
-From name
----------
+Nome do remetente
+-----------------
 
-| This is the name that will be use with the fromname from the email.
+| Nome usado como remetente (fromname) do e-mail.
 
 
 
 
 .. _templateMail-fromemail:
 
-From email
-----------
+E-mail do remetente
+-------------------
 
-| Email used in the frommail, must be the same email used by the SMTP user.
+| E-mail usado como remetente (frommail); precisa ser o mesmo e-mail do usuário SMTP.
 
 
 
 
 .. _templateMail-subject:
 
-Subject
+Assunto
 -------
 
-| Email subject.
+| Assunto do e-mail.
 
 
 
@@ -34,17 +34,17 @@ Subject
 Status
 ------
 
-| This option let's you deactivate the exclusive mailings of this email.
+| Permite desativar os envios deste modelo de e-mail.
 
 
 
 
 .. _templateMail-messagehtml:
 
-Description
------------
+Descrição
+---------
 
-| Message. It's possible to variables, look at the variables tab to see the list of available variables.
+| Mensagem. É possível usar variáveis; veja a aba de variáveis para a lista das disponíveis.
 
 
 

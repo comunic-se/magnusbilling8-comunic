@@ -1,61 +1,61 @@
 
 .. _callSummaryPerDay-sumsessiontime:
 
-Duration
---------
+Duração
+-------
 
-| Sum of call minutes.
-| It is possible to use filters, such as the last few days. This summary only shows data that matches the selected filters.
+| Soma dos minutos das chamadas.
+| É possível usar filtros, como os últimos dias. Este resumo mostra só os dados que atendem aos filtros selecionados.
 
 
 
 
 .. _callSummaryPerDay-sumsessionbill:
 
-Sell price
-----------
+Preço de venda
+--------------
 
-| Sum of the sell price.
+| Soma do preço de venda.
 
 
 
 
 .. _callSummaryPerDay-sumbuycost:
 
-Buy price
----------
+Preço de compra
+---------------
 
-| Sum of the buy cost.
+| Soma do custo de compra.
 
 
 
 
 .. _callSummaryPerDay-sumlucro:
 
-Markup
-------
+Lucro
+-----
 
-| Sum of the earnings.
+| Soma dos ganhos.
 
 
 
 
 .. _callSummaryPerDay-sumnbcall:
 
-Answered calls
---------------
+Chamadas atendidas
+------------------
 
-| Total of calls.
+| Total de chamadas.
 
 
 
 
 .. _callSummaryPerDay-sumnbcallfail:
 
-Failed calls
-------------
+Chamadas com falha
+------------------
 
-| Total of calls that failed.
+| Total de chamadas que falharam.
 
 
 

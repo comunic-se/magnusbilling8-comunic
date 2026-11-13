@@ -1,20 +1,17 @@
 
 .. _campaignPollInfo-number:
 
-Number
+Número
 ------
 
-| Number of the person who voted.
+| Número da pessoa que votou.
 
 
 
 
 .. _campaignPollInfo-resposta:
 
-Result
-------
+Resultado
+---------
 
-| Option chosen.
-
-
-
+| Opção escolhida.

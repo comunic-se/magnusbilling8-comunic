@@ -1,61 +1,61 @@
 
 .. _callSummaryPerTrunk-sumsessiontime:
 
-Duration
---------
+Duração
+-------
 
-| Sum of call minutes.
-| It is possible to use filters, such as recent months or a specific trunk. This summary only shows data that matches the selected filters.
+| Soma dos minutos das chamadas.
+| É possível usar filtros, como os últimos meses ou um tronco específico. Este resumo mostra só os dados que atendem aos filtros selecionados.
 
 
 
 
 .. _callSummaryPerTrunk-sumsessionbill:
 
-Sell price
-----------
+Preço de venda
+--------------
 
-| Sum of the sell price.
+| Soma do preço de venda.
 
 
 
 
 .. _callSummaryPerTrunk-sumbuycost:
 
-Buy price
----------
+Preço de compra
+---------------
 
-| Sum of the buy cost.
+| Soma do custo de compra.
 
 
 
 
 .. _callSummaryPerTrunk-sumlucro:
 
-Markup
-------
+Lucro
+-----
 
-| Sum of the earnings.
+| Soma dos ganhos.
 
 
 
 
 .. _callSummaryPerTrunk-sumnbcall:
 
-Answered calls
---------------
+Chamadas atendidas
+------------------
 
-| Total of calls.
+| Total de chamadas.
 
 
 
 
 .. _callSummaryPerTrunk-sumnbcallfail:
 
-Failed calls
-------------
+Chamadas com falha
+------------------
 
-| Total of calls that failed.
+| Total de chamadas que falharam.
 
 
 

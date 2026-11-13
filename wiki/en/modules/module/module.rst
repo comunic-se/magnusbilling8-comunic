@@ -1,10 +1,10 @@
 
 .. _module-text:
 
-Text
-----
+Texto
+-----
 
-| Menu name 
+| Nome do menu.
 
 
 
@@ -14,27 +14,27 @@ Text
 IconCls
 -------
 
-| Icon, default font "awesome V4".
+| Ícone; a fonte padrão é a "awesome V4".
 
 
 
 
 .. _module-id-module:
 
-Main menu
----------
+Menu principal
+--------------
 
-| Menu which this menu belongs. In case the menu is blank, it's a main menu
+| Menu ao qual este menu pertence. Se ficar em branco, é um menu principal.
 
 
 
 
 .. _module-priority:
 
-Order
+Ordem
 -----
 
-| Order that the menu will be shown in the menu
+| Ordem em que o menu aparece.
 
 
 

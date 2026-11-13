@@ -1,10 +1,10 @@
 
 .. _callerid-id-user:
 
-Username
---------
+Usuário
+-------
 
-| Select user.
+| Selecione o usuário.
 
 
 
@@ -14,27 +14,27 @@ Username
 CallerID
 --------
 
-| The number to CID authenticate with CallingCard. Use the exact format that you received the CallerID from your DID provider.
+| Número usado para autenticar pelo CID no CallingCard. Use exatamente o formato em que você recebe o CallerID do seu provedor de DID.
 
 
 
 
 .. _callerid-name:
 
-Name
+Nome
 ----
 
-| Optional.
+| Opcional.
 
 
 
 
 .. _callerid-description:
 
-Description
------------
+Descrição
+---------
 
-| CallerID description.
+| Descrição do CallerID.
 
 
 
@@ -44,7 +44,7 @@ Description
 Status
 ------
 
-| Status of the CallerID.
+| Status do CallerID.
 
 
 

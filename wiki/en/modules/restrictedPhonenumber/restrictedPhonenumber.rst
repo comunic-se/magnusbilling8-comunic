@@ -1,30 +1,27 @@
 
 .. _restrictedPhonenumber-id-user:
 
-Username
---------
+Usuário
+-------
 
-| User that wants to register the number.
+| Usuário que quer cadastrar o número.
 
 
 
 
 .. _restrictedPhonenumber-number:
 
-Number
+Número
 ------
 
-| Number.
+| Número.
 
 
 
 
 .. _restrictedPhonenumber-direction:
 
-Direction
----------
+Direção
+-------
 
-| Calls ill be analysed according to the selected options.
-
-
-
+| As chamadas serão analisadas de acordo com as opções selecionadas.

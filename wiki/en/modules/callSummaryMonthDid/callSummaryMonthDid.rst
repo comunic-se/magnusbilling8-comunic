@@ -1,30 +1,30 @@
 
 .. _callSummaryMonthDid-sumsessionbill:
 
-Sell price
-----------
+Preço de venda
+--------------
 
-| Total sell price for calls received on this DID during the selected month.
+| Preço de venda total das chamadas recebidas neste DID no mês selecionado.
 
 
 
 
 .. _callSummaryMonthDid-sumsessiontime:
 
-Duration
---------
+Duração
+-------
 
-| Total call duration for this DID during the selected month.
+| Duração total das chamadas deste DID no mês selecionado.
 
 
 
 
 .. _callSummaryMonthDid-sumnbcall:
 
-Total calls
------------
+Total de chamadas
+-----------------
 
-| Total number of calls received on this DID during the selected month.
+| Número total de chamadas recebidas neste DID no mês selecionado.
 
 
 

@@ -1,40 +1,40 @@
 
 .. _groupUser-name:
 
-Name
+Nome
 ----
 
-| Name of the user group
+| Nome do grupo de usuários.
 
 
 
 
 .. _groupUser-id-user-type:
 
-User type
----------
+Tipo de usuário
+---------------
 
-| Group type.
+| Tipo do grupo.
 
 
 
 
 .. _groupUser-hidden-prices:
 
-Hide prices
------------
+Ocultar preços
+--------------
 
-| Hide all prices like, buy, sell and profit, to users that use this group.
+| Oculta todos os preços (compra, venda e lucro) para os usuários deste grupo.
 
 
 
 
 .. _groupUser-hidden-batch-update:
 
-Hide batch update button
-------------------------
+Ocultar o botão de atualização em lote
+--------------------------------------
 
-| Hide the bath update button in all menus to users that use this group.
+| Oculta o botão de atualização em lote em todos os menus para os usuários deste grupo.
 
 
 

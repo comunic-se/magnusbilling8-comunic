@@ -1,30 +1,27 @@
 
 .. _sendCreditRates-idProductcountry:
 
-Country
--------
+País
+----
 
-| Country.
+| País.
 
 
 
 
 .. _sendCreditRates-idProductoperator-name:
 
-Operator name
--------------
+Nome da operadora
+-----------------
 
-| Operator name.
+| Nome da operadora.
 
 
 
 
 .. _sendCreditRates-sell-price:
 
-Sell price
-----------
+Preço de venda
+--------------
 
-| Sales price.
-
-
-
+| Preço de venda.

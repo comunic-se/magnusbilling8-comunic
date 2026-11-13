@@ -1,10 +1,10 @@
 
 .. _providerCNL-id-provider:
 
-Provider
+Provedor
 --------
 
-| Provider that owns this CNL rule.
+| Provedor dono desta regra de CNL.
 
 
 
@@ -14,17 +14,17 @@ Provider
 CNL
 ---
 
-| CNL code used to identify the local area or tariff zone for Brazilian numbers.
+| Código CNL usado para identificar a área local ou a zona tarifária de números brasileiros.
 
 
 
 
 .. _providerCNL-zone:
 
-Zone
+Zona
 ----
 
-| Provider zone associated with this CNL code.
+| Zona do provedor associada a este código CNL.
 
 
 

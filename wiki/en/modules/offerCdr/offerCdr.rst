@@ -1,40 +1,37 @@
 
 .. _offerCdr-id-user:
 
-Username
---------
+Usuário
+-------
 
-| User of call.
+| Usuário da chamada.
 
 
 
 
 .. _offerCdr-id-offer:
 
-Offer
------
+Oferta
+------
 
-| Name of the offer.
+| Nome da oferta.
 
 
 
 
 .. _offerCdr-used-secondes:
 
-Duration
---------
+Duração
+-------
 
-| Call duration.
+| Duração da chamada.
 
 
 
 
 .. _offerCdr-date-consumption:
 
-Date
+Data
 ----
 
-| Date and hour of the call.
-
-
-
+| Data e hora da chamada.

@@ -1,20 +1,20 @@
 
 .. _logUsers-id-user:
 
-Username
---------
+Usuário
+-------
 
-| User that executed the action.
+| Usuário que executou a ação.
 
 
 
 
 .. _logUsers-id-log-actions:
 
-Action
-------
+Ação
+----
 
-| Type of action.
+| Tipo de ação.
 
 
 
@@ -24,17 +24,14 @@ Action
 IP
 --
 
-| IP utilized for the action.
+| IP usado na ação.
 
 
 
 
 .. _logUsers-description:
 
-Description
------------
+Descrição
+---------
 
-| What was done, normally is in JSON.
-
-
-
+| O que foi feito, normalmente em JSON.

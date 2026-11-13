@@ -1,41 +1,41 @@
 
 .. _callSummaryPerUser-sumsessiontime:
 
-Duration
---------
+Duração
+-------
 
-| Sum of call minutes.
-| It is possible to use filters, such as users that start with a specific letter or a specific user. This summary only shows data that matches the selected filters.
+| Soma dos minutos das chamadas.
+| É possível usar filtros, como usuários que começam com uma letra ou um usuário específico. Este resumo mostra só os dados que atendem aos filtros selecionados.
 
 
 
 
 .. _callSummaryPerUser-sumlucro:
 
-Markup
-------
+Lucro
+-----
 
-| Sum of the earnings.
+| Soma dos ganhos.
 
 
 
 
 .. _callSummaryPerUser-sumnbcall:
 
-Answered calls
---------------
+Chamadas atendidas
+------------------
 
-| Total of calls.
+| Total de chamadas.
 
 
 
 
 .. _callSummaryPerUser-sumnbcallfail:
 
-Failed calls
-------------
+Chamadas com falha
+------------------
 
-| Total of calls that failed.
+| Total de chamadas que falharam.
 
 
 

@@ -1,10 +1,7 @@
 
 .. _campaignReport-idCampaignname:
 
-Name
+Nome
 ----
 
-| Campaign used to filter the report results.
-
-
-
+| Campanha usada para filtrar os resultados do relatório.

@@ -1,30 +1,30 @@
 
 .. _sendCreditProducts-country:
 
-Country
--------
+País
+----
 
-| Country
+| País.
 
 
 
 
 .. _sendCreditProducts-operator-name:
 
-Operator name
--------------
+Nome da operadora
+-----------------
 
-| Operator name.
+| Nome da operadora.
 
 
 
 
 .. _sendCreditProducts-operator-id:
 
-Operator ID
------------
+ID da operadora
+---------------
 
-| Operator ID.
+| ID da operadora.
 
 
 
@@ -34,47 +34,47 @@ Operator ID
 SkuCode
 -------
 
-| SkuCode
+| SkuCode.
 
 
 
 
 .. _sendCreditProducts-product:
 
-Product
+Produto
 -------
 
-| Product
+| Produto.
 
 
 
 
 .. _sendCreditProducts-send-value:
 
-Send value
-----------
+Valor enviado
+-------------
 
-| Send value
+| Valor enviado.
 
 
 
 
 .. _sendCreditProducts-wholesale-price:
 
-Wholesale price
----------------
+Preço de atacado
+----------------
 
-| Sales price.
+| Preço de venda.
 
 
 
 
 .. _sendCreditProducts-provider:
 
-Provider
+Provedor
 --------
 
-| Provider.
+| Provedor.
 
 
 
@@ -91,30 +91,30 @@ Status
 
 .. _sendCreditProducts-info:
 
-Description
------------
+Descrição
+---------
 
-| Used for internal control.
+| Usado para controle interno.
 
 
 
 
 .. _sendCreditProducts-retail-price:
 
-Retail price
-------------
+Preço de varejo
+---------------
 
-| Retail price charged to the customer for this send credit product.
+| Preço de varejo cobrado do cliente por este produto de envio de crédito.
 
 
 
 
 .. _sendCreditProducts-method:
 
-Type
+Tipo
 ----
 
-| Method or provider used to send the credit to the destination.
+| Método ou provedor usado para enviar o crédito ao destino.
 
 
 

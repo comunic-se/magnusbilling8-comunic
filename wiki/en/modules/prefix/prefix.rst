@@ -1,20 +1,17 @@
 
 .. _prefix-prefix:
 
-Prefix
-------
+Prefixo
+-------
 
-| Prefix code. Prefix will be used to tariff and bill the calls.
+| Código do prefixo. O prefixo é usado para tarifar e cobrar as chamadas.
 
 
 
 
 .. _prefix-destination:
 
-Destination
------------
+Destino
+-------
 
-| Destination name.
-
-
-
+| Nome do destino.

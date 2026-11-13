@@ -1,10 +1,7 @@
 
 .. _sendCreditSummary-id-user:
 
-Username
---------
+Usuário
+-------
 
-| User.
-
-
-
+| Usuário.
