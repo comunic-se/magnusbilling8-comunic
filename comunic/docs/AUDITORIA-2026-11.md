@@ -215,6 +215,21 @@ Pontos fortes:
 Pontos a melhorar: P1 a P6 acima, além de testes automáticos para as regras da
 `PlanConsumption` (que hoje só existem como scripts de cenário para VM).
 
+## Tradução da documentação
+
+Traduzidos para o português: todos os `.md` da raiz, os modelos de issue e de pull
+request do GitHub, `wiki/GITHUB_WIKI_SYNC.md`, as 110 páginas de `wiki/en` (o nome da
+pasta foi mantido para não quebrar links e o exportador), os textos gerados pelo
+exportador da wiki (com o teste ajustado) e o `ia-docs/README.md`. O índice
+`ia-docs/indexes/rag_chunks.jsonl` foi gerado de novo com a wiki traduzida. A
+validação com docutils não mostrou nenhum aviso novo nas páginas RST.
+
+Ficaram em inglês, de propósito, os 40 documentos de `ia-docs/domains`, `playbooks` e
+`sources`: são o corpus de recuperação da IA, e as perguntas de avaliação e as FAQs
+geradas pelos scripts de `ia-docs/tools/` estão em inglês. Traduzir só os textos
+deixaria o corpus desalinhado das avaliações. Se for traduzir, traduza junto as FAQs
+de `build_rag_indexes.py` e gere os índices de novo.
+
 ## Comparação entre o GitHub e a pasta local
 
 A pasta `C:\Users\Pedro Lucena\Documents\Comunic\magnus billing 8 custom` não pôde ser
