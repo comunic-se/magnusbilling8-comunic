@@ -1,30 +1,30 @@
 
 .. _sip-id-user:
 
-Username
---------
+Usuário
+-------
 
-| User that this SIP user is associated with.
+| Usuário ao qual esta conta SIP está associada.
 
 
 
 
 .. _sip-defaultuser:
 
-SIP user
---------
+Usuário SIP
+-----------
 
-| Username used to login in a Softphone or any SIP device.
+| Usuário para entrar num softphone ou em qualquer aparelho SIP.
 
 
 
 
 .. _sip-secret:
 
-SIP password
-------------
+Senha SIP
+---------
 
-| Password to login in a Softphone or any SIP device.
+| Senha para entrar num softphone ou em qualquer aparelho SIP.
 
 
 
@@ -34,7 +34,7 @@ SIP password
 CallerID
 --------
 
-| The Caller ID number that will be shown in their destination. Your trunk needs to accept CLI.
+| Número de identificação (Caller ID) mostrado no destino. O tronco precisa aceitar CLI.
 
 
 
@@ -44,7 +44,7 @@ CallerID
 Alias
 -----
 
-| Alias to dial between sip accounts from the same AccountCode (company).
+| Apelido para discar entre contas SIP do mesmo AccountCode (empresa).
 
 
 
@@ -54,7 +54,7 @@ Alias
 Disallow
 --------
 
-| Disallow all codecs and then select the codecs available below to enable them to the user.
+| Desativa todos os codecs; depois selecione abaixo os codecs a liberar para o usuário.
 
 
 
@@ -64,7 +64,7 @@ Disallow
 Codec
 -----
 
-| Select the codecs that the trunk will accept.
+| Selecione os codecs aceitos.
 
 
 
@@ -74,21 +74,21 @@ Codec
 Host
 ----
 
-| Dynamic is an option that allows the user to register their account under any IP. If you want to authenticate the user via IP, put the client IP here, let the password field blank and set it to "insecure" to por/invite in the Aditional Informations tab.
+| "Dynamic" permite ao usuário registrar a conta a partir de qualquer IP. Para autenticar o usuário por IP, coloque aqui o IP do cliente, deixe a senha em branco e coloque "insecure" em port/invite na aba Informações adicionais.
 
 
 
 
 .. _sip-sip-group:
 
-Group
+Grupo
 -----
 
-| When sending an call from DID, or campaign to a group, will be called all SIP users that are in the group. You can create the groups with any name.
-| 
-| 
-| Is used as well to capture calls with \*8, need to configurate the option "pickupexten = \*8" in the file "feature.comf".
-| 
+| Quando uma chamada de DID ou de campanha é enviada a um grupo, todos os usuários SIP do grupo são chamados. Os grupos podem ter qualquer nome.
+|
+|
+| Também é usado para capturar chamadas com \*8; é preciso configurar a opção "pickupexten = \*8" no arquivo "features.conf".
+|
 
 
 
@@ -98,27 +98,27 @@ Group
 Videosupport
 ------------
 
-| Activate video calls.
+| Ativa chamadas de vídeo.
 
 
 
 
 .. _sip-block-call-reg:
 
-Block call regex
-----------------
+Bloquear chamadas por regex
+---------------------------
 
-| Block calls using REGEX. To block calls from phones, just put it ^55\\d\\d9. You can see more details at the link `https://regex101.com.  <https://regex101.com.>`_.
+| Bloqueia chamadas usando REGEX. Para bloquear chamadas para celulares, coloque ^55\\d\\d9. Veja mais detalhes no link `https://regex101.com.  <https://regex101.com.>`_.
 
 
 
 
 .. _sip-record-call:
 
-Record call
------------
+Gravar chamada
+--------------
 
-| Record calls of this SIP user.
+| Grava as chamadas deste usuário SIP.
 
 
 
@@ -128,27 +128,27 @@ Record call
 Tech prefix
 -----------
 
-| Useful option for when it's necessary to authenticate more than one client via IP that uses the same IP. Common in BBX multi tenant.
+| Útil quando é preciso autenticar por IP mais de um cliente que usa o mesmo IP. Comum em PBX multiempresa.
 
 
 
 
 .. _sip-cnl:
 
-CNL zone
+Zona CNL
 --------
 
-| CNL zone used for Brazilian numbering and routing rules for this SIP user.
+| Zona CNL usada nas regras brasileiras de numeração e roteamento deste usuário SIP.
 
 
 
 
 .. _sip-description:
 
-Description
------------
+Descrição
+---------
 
-| Optional description to identify this SIP user in reports and administration screens.
+| Descrição opcional para identificar este usuário SIP nos relatórios e nas telas de administração.
 
 
 
@@ -158,7 +158,7 @@ Description
 NAT
 ---
 
-| Nat. You can see more details at the link `https://www.voip-info.org/asterisk-sip-nat/  <https://www.voip-info.org/asterisk-sip-nat/>`_.
+| NAT. Veja mais detalhes no link `https://www.voip-info.org/asterisk-sip-nat/  <https://www.voip-info.org/asterisk-sip-nat/>`_.
 
 
 
@@ -168,7 +168,7 @@ NAT
 Directmedia
 -----------
 
-| If enabled, Asterisk tries to redirect the RTP media stream to go directly from the caller to the callee.
+| Se ativado, o Asterisk tenta redirecionar o fluxo de mídia RTP para ir direto de quem liga para quem recebe.
 
 
 
@@ -178,37 +178,37 @@ Directmedia
 Qualify
 -------
 
-| Sends SIP OPTIONS packets to verify whether the user is online.
-| Syntax:
-|     
+| Envia pacotes SIP OPTIONS para conferir se o usuário está online.
+| Sintaxe:
+|
 | qualify = xxx \| no \| yes
-|         
-| XXX is the number of milliseconds used as the timeout. If the value is "yes", Asterisk uses the time configured in sip.conf. The common default is 2 seconds.
-|     
-| When qualify is enabled, Asterisk sends OPTIONS packets regularly to verify whether the device is still online.
-| If the device does not answer within the configured time, Asterisk considers the device offline for future calls.
-|     
-| This status can be verified with the "sip show peer XXXX" command. Asterisk only shows qualify status when the peer has qualify enabled.
+|
+| XXX é o número de milissegundos usado como tempo limite. Se o valor for "yes", o Asterisk usa o tempo configurado no sip.conf. O padrão comum é 2 segundos.
+|
+| Com o qualify ativado, o Asterisk envia pacotes OPTIONS regularmente para conferir se o aparelho continua online.
+| Se o aparelho não responder no tempo configurado, o Asterisk o considera offline para as próximas chamadas.
+|
+| Esse status pode ser conferido com o comando "sip show peer XXXX". O Asterisk só mostra o status do qualify quando o peer tem qualify ativado.
 
 
 
 
 .. _sip-id-trunk-group:
 
-Trunk groups
-------------
+Grupos de troncos
+-----------------
 
-| :::::::WARNING::::::. By selecting a trunk group here, the trunk group will be ignored from tariffs and this trunk group will always be used. Only select a trunk group here if you really want all calls from this SIP user to be sent to this trunk group
+| :::::::ATENÇÃO::::::. Ao selecionar aqui um grupo de troncos, o grupo de troncos das tarifas é ignorado e este grupo é sempre usado. Só selecione um grupo aqui se quiser mesmo que todas as chamadas deste usuário SIP saiam por ele.
 
 
 
 
 .. _sip-context:
 
-Context
--------
+Contexto
+--------
 
-| This is the context that the call will be processed, "billing" is the standard option. Only change configuration if you have knowledge of Asterisk.
+| Contexto em que a chamada é processada; o padrão é "billing". Só altere se conhecer o Asterisk.
 
 
 
@@ -218,7 +218,7 @@ Context
 Dtmfmode
 --------
 
-| DTMF mode used by this SIP user. You can see more details at the link `https://www.voip-info.org/asterisk-sip-dtmfmode/.  <https://www.voip-info.org/asterisk-sip-dtmfmode/.>`_.
+| Modo DTMF usado por este usuário SIP. Veja mais detalhes no link `https://www.voip-info.org/asterisk-sip-dtmfmode/.  <https://www.voip-info.org/asterisk-sip-dtmfmode/.>`_.
 
 
 
@@ -228,7 +228,7 @@ Dtmfmode
 Insecure
 --------
 
-| This option must be "NO" when the host is dynamic. For IP authentication, change it to port,invite.
+| Precisa estar em "NO" quando o host é dinâmico. Para autenticação por IP, mude para port,invite.
 
 
 
@@ -238,7 +238,7 @@ Insecure
 Deny
 ----
 
-| You can limit SIP traffic of a determined IP or network.
+| Permite limitar o tráfego SIP de um IP ou de uma rede.
 
 
 
@@ -248,17 +248,17 @@ Deny
 Permit
 ------
 
-| You can allow SIP traffic of a determined IP or network.
+| Permite liberar o tráfego SIP de um IP ou de uma rede.
 
 
 
 
 .. _sip-type:
 
-Type
+Tipo
 ----
 
-| Default type is "friend", which allows the SIP user to make and receive calls. You can see more details at the link `https://www.voip-info.org/asterisk-sip-type/.  <https://www.voip-info.org/asterisk-sip-type/.>`_.
+| O tipo padrão é "friend", que permite ao usuário SIP fazer e receber chamadas. Veja mais detalhes no link `https://www.voip-info.org/asterisk-sip-type/.  <https://www.voip-info.org/asterisk-sip-type/.>`_.
 
 
 
@@ -268,27 +268,27 @@ Type
 Allowtransfer
 -------------
 
-| Allows this VoIP account to transfer calls. The transfer code is \*2 plus the extension. Asterisk must have atxfer => \*2 configured in features.conf.
+| Permite a esta conta VoIP transferir chamadas. O código de transferência é \*2 mais o ramal. O Asterisk precisa ter atxfer => \*2 configurado no features.conf.
 
 
 
 
 .. _sip-ringfalse:
 
-Fake Ring
----------
+Toque falso
+-----------
 
-| Activate false ring. Add rR of the "Dial" command.
+| Ativa o toque falso. Acrescenta rR ao comando "Dial".
 
 
 
 
 .. _sip-calllimit:
 
-Call limit
-----------
+Limite de chamadas
+------------------
 
-| Maximum simultaneous calls allowed for this SIP user.
+| Máximo de chamadas simultâneas permitidas para este usuário SIP.
 
 
 
@@ -298,15 +298,15 @@ Call limit
 MOH
 ---
 
-| Waiting music for this SIP user.
+| Música de espera deste usuário SIP.
 
 
 
 
 .. _sip-url-events:
 
-URL events notify
------------------
+URL de notificação de eventos
+-----------------------------
 
 | .
 
@@ -318,7 +318,7 @@ URL events notify
 Addparameter
 ------------
 
-| The parameters set in here will replace the system default parameters, as well of the trunks, if there's any.
+| Os parâmetros definidos aqui substituem os parâmetros padrão do sistema e também os dos troncos, se houver.
 
 
 
@@ -335,105 +335,105 @@ AMD
 
 .. _sip-type-forward:
 
-Forward type
-------------
+Tipo de desvio
+--------------
 
-| Resend destination type. This resend will not work in queues.
+| Tipo de destino do desvio. O desvio não funciona em filas.
 
 
 
 
 .. _sip-id-ivr:
 
-IVR
+URA
 ---
 
-| IVR that will receive the call if this SIP user does not answer.
+| URA que recebe a chamada se este usuário SIP não atender.
 
 
 
 
 .. _sip-id-queue:
 
-Queue
------
+Fila
+----
 
-| Queue that will receive the call if this SIP user does not answer.
+| Fila que recebe a chamada se este usuário SIP não atender.
 
 
 
 
 .. _sip-id-sip:
 
-Sip user
---------
+Usuário SIP
+-----------
 
-| SIP user that will receive the call if this SIP user does not answer.
+| Usuário SIP que recebe a chamada se este usuário SIP não atender.
 
 
 
 
 .. _sip-extension:
 
-Destination
------------
+Destino
+-------
 
-| Click for more details
-| We have 3 options, conform the selected type, group, number or custom.
-| 
-| \* Group, the group name set here, needs to be exactly the same group of SIP users that wants to receive the calls, is going to call all SIP users in the group.
-| \* Custom, it's possible to execute any valid option of the DIAL command of Asterisk, example: SIP/contaSIP,45,tTr
-| \* Number, can be a landline number or mobile number, needs to be in the 55 DDD format
+| Clique para mais detalhes.
+| Há 3 opções, conforme o tipo selecionado: grupo, número ou personalizado.
+|
+| \* Grupo: o nome do grupo informado aqui precisa ser exatamente o mesmo grupo dos usuários SIP que devem receber as chamadas; todos os usuários SIP do grupo são chamados.
+| \* Personalizado: executa qualquer opção válida do comando DIAL do Asterisk, por exemplo: SIP/contaSIP,45,tTr
+| \* Número: pode ser um fixo ou um celular, no formato 55 + DDD.
 
 
 
 
 .. _sip-dial-timeout:
 
-Dial timeout
-------------
+Tempo de discagem
+-----------------
 
-| Timeout in seconds to wait for the call to be picked-up. After the timeout will be execute the channeling if it's configured.
+| Tempo em segundos esperando a chamada ser atendida. Depois desse tempo, executa o desvio, se estiver configurado.
 
 
 
 
 .. _sip-voicemail:
 
-Enable voicemail
-----------------
+Ativar correio de voz
+---------------------
 
-| Activate voicemail. It's necessary the configuration of SMTP in Linux to receive the email with the message. You can see more details at the link `https://www.magnusbilling.org/br/blog-br/9-novidades/25-configurar-ssmtp-para-enviar-voicemail-no-asterisk.html.  <https://www.magnusbilling.org/br/blog-br/9-novidades/25-configurar-ssmtp-para-enviar-voicemail-no-asterisk.html.>`_.
+| Ativa o correio de voz. É preciso configurar o SMTP no Linux para receber o e-mail com a mensagem. Veja mais detalhes no link `https://www.magnusbilling.org/br/blog-br/9-novidades/25-configurar-ssmtp-para-enviar-voicemail-no-asterisk.html.  <https://www.magnusbilling.org/br/blog-br/9-novidades/25-configurar-ssmtp-para-enviar-voicemail-no-asterisk.html.>`_.
 
 
 
 
 .. _sip-voicemail-email:
 
-Email
------
+E-mail
+------
 
-| Email that will be send the email with the voicemail.
+| E-mail para onde é enviada a mensagem do correio de voz.
 
 
 
 
 .. _sip-voicemail-password:
 
-Password
---------
+Senha
+-----
 
-| Voicemail password. It's possible to enter in the Voicemail typing \*111
+| Senha do correio de voz. É possível entrar no correio de voz discando \*111.
 
 
 
 
 .. _sip-sip-config:
 
-Parameters
+Parâmetros
 ----------
 
-| Additional SIP parameters written for this account. Use only valid Asterisk SIP options.
+| Parâmetros SIP adicionais gravados para esta conta. Use só opções SIP válidas do Asterisk.
 
 
 
@@ -450,10 +450,10 @@ Peer
 
 .. _sip-forwardtype:
 
-Forward type
-------------
+Tipo de desvio
+--------------
 
-| Type of forwarding applied when this SIP user does not answer or is unavailable.
+| Tipo de desvio aplicado quando este usuário SIP não atende ou está indisponível.
 
 
 

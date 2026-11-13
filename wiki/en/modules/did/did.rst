@@ -4,27 +4,27 @@
 DID
 ---
 
-| The exact number coming from the context in Asterisk. We recommend you to always use the E164 format. Also you can create intervals. Example 13605040001-13605040009. In this example will be created the DIDs 13605040001 until  13605040009.
+| Número exato que chega do contexto no Asterisk. Recomendamos usar sempre o formato E164. Também é possível criar intervalos. Exemplo: 13605040001-13605040009 cria os DIDs de 13605040001 até 13605040009.
 
 
 
 
 .. _did-country:
 
-Country
--------
+País
+----
 
-| Country associated with the DID, used to identify and organize the number.
+| País associado ao DID, usado para identificar e organizar o número.
 
 
 
 
 .. _did-record-call:
 
-Record call
------------
+Gravar chamada
+--------------
 
-| Record calls for this DID. Recorded regardless of destination.
+| Grava as chamadas deste DID, qualquer que seja o destino.
 
 
 
@@ -34,315 +34,314 @@ Record call
 Status
 ------
 
-| Only active numbers can receive calls.
+| Só números ativos recebem chamadas.
 
 
 
 
 .. _did-callerid:
 
-Callerid name
--------------
+Nome do CallerID
+----------------
 
-| Use this field to set a CallerID name or leave it blank to use the received CallerID from the DID provider.
+| Use este campo para definir o nome do CallerID ou deixe em branco para usar o CallerID recebido do provedor do DID.
 
 
 
 
 .. _did-connection-charge:
 
-Setup price
------------
+Preço de ativação
+-----------------
 
-| Activation cost. This value will be deducted from the client the moment that the DID is associated with the user.
+| Custo de ativação. Este valor é descontado do cliente no momento em que o DID é associado ao usuário.
 
 
 
 
 .. _did-fixrate:
 
-Monthly price
--------------
+Preço mensal
+------------
 
-| Monthly price. This value will be deducted automatically every month from the user's balance. If the client doesn't have enough credit the DID will be cancelled automatically.
+| Preço mensal. Este valor é descontado automaticamente todo mês do saldo do usuário. Se o cliente não tiver crédito suficiente, o DID é cancelado automaticamente.
 
 
 
 
 .. _did-connection-sell:
 
-Connection charge
------------------
+Taxa de conexão
+---------------
 
-| This is the value that will be charged for each call. Simply by picking up the call, this value will be deducted.
+| Valor cobrado em cada chamada. Basta atender a chamada para este valor ser descontado.
 
 
 
 
 .. _did-minimal-time-buy:
 
-Minimum time to charge
-----------------------
+Tempo mínimo de cobrança
+------------------------
 
-| Minimum call duration charged by the provider for this DID.
+| Duração mínima de chamada cobrada pelo provedor para este DID.
 
 
 
 
 .. _did-buyrateinitblock:
 
-Buy price initblock
--------------------
+Bloco inicial de compra
+-----------------------
 
-| Initial billing block used to calculate the provider cost for inbound calls on this DID.
+| Bloco inicial de cobrança usado para calcular o custo do provedor nas chamadas recebidas neste DID.
 
 
 
 
 .. _did-buyrateincrement:
 
-Buy price increment
--------------------
+Incremento de compra
+--------------------
 
-| Billing increment used after the initial block to calculate the provider cost for this DID.
+| Incremento de cobrança usado depois do bloco inicial para calcular o custo do provedor deste DID.
 
 
 
 
 .. _did-minimal-time-charge:
 
-Minimum time to charge
-----------------------
+Tempo mínimo de cobrança
+------------------------
 
-| Minimum time to tariff the DID. If you set it to 3 any call that with lower duration will not be charged for.
+| Tempo mínimo para tarifar o DID. Se estiver em 3, chamadas mais curtas não são cobradas.
 
 
 
 
 .. _did-initblock:
 
-Initial block
+Bloco inicial
 -------------
 
-| Minimum time in seconds to buy. If you set it to 30 and the call duration is 10, the call will be billed as 30.
+| Tempo mínimo em segundos a cobrar. Se estiver em 30 e a chamada durar 10, é cobrada como 30.
 
 
 
 
 .. _did-increment:
 
-Billing block
--------------
+Bloco de cobrança
+-----------------
 
-| This defines the block in which the call billing time will be incremented, in seconds. If set to 6 and call duration is 32, the call will be billed as 36.
+| Define o bloco, em segundos, em que o tempo cobrado é incrementado. Se estiver em 6 e a chamada durar 32, é cobrada como 36.
 
 
 
 
 .. _did-charge-of:
 
-Charge who
-----------
+Cobrar de
+---------
 
-| The user that will be charged for the DID cost.
+| Usuário que paga o custo do DID.
 
 
 
 
 .. _did-calllimit:
 
-Channel limit
--------------
+Limite de canais
+----------------
 
-| Maximum simultaneous calls for this DID.
+| Máximo de chamadas simultâneas neste DID.
 
 
 
 
 .. _did-id-server:
 
-Server
-------
+Servidor
+--------
 
-| Server that will receive and process calls for this DID.
+| Servidor que recebe e processa as chamadas deste DID.
 
 
 
 
 .. _did-description:
 
-Description
------------
+Descrição
+---------
 
-| Set here the destination!
+| Informe aqui o destino.
 
 
 
 
 .. _did-expression-1:
 
-Regular expression
-------------------
+Expressão regular
+-----------------
 
-| This is a regular expression to tariff the DID depending on who is calling it.
-| Lets analyze a real example:
-|     Suppose we want to charge 0.10 when we receive a call from a landline, charge 0.20 when it is a mobile phone, and block any other format.
-|     In this example we will create rules to identify the CallerID in the format 0 + area code + number, area code + number, or 55 + area code + number.
-| 
-|     Take a look at the following image on what the result would look like:
-|     
+| Expressão regular para tarifar o DID conforme quem liga.
+| Vamos analisar um exemplo real:
+|     Suponha que queremos cobrar 0,10 quando a chamada vier de um fixo, 0,20 quando vier de um celular e bloquear qualquer outro formato.
+|     Neste exemplo, criamos regras para identificar o CallerID no formato 0 + DDD + número, DDD + número ou 55 + DDD + número.
+|
+|     Veja na imagem como fica o resultado:
+|
 |     .. image:: ../../img/did_regex.png
-   :scale: 100% 
-
-| 
-|     Regular expression for mobile
+   :scale: 100%
+|
+|     Expressão regular para celular
 |     ^[1-9][0-9]9\\d{8}$\|^0[1-9][0-9]9\\d{8}$\|^55[1-9][0-9]9\\d{8}$
-| 
-|     Regular expression for landline
+|
+|     Expressão regular para fixo
 |     ^[1-9][0-9]\\d{8}$\|^0[1-9][0-9]\\d{8}$\|^55[1-9][0-9]\\d{8}$
-| 
-| 
-|     
+|
+|
+|
 
 
 
 
 .. _did-buy-rate-1:
 
-Buy price per min
------------------
+Preço de compra por minuto
+--------------------------
 
-| Provider buy price per minute for the first inbound billing interval of this DID.
+| Preço de compra por minuto do provedor no primeiro intervalo de cobrança das chamadas recebidas neste DID.
 
 
 
 
 .. _did-selling-rate-1:
 
-Sell price per min
-------------------
+Preço de venda por minuto
+-------------------------
 
-| Price per minute if the number matches the above regular expression.
+| Preço por minuto se o número atender à expressão regular acima.
 
 
 
 
 .. _did-block-expression-1:
 
-Block calls from this expression
---------------------------------
+Bloquear chamadas desta expressão
+---------------------------------
 
-| Set to yes to block calls that matches with the above regular expression.
+| Coloque sim para bloquear as chamadas que atendem à expressão regular acima.
 
 
 
 
 .. _did-send-to-callback-1:
 
-Send the call to callback
--------------------------
+Mandar a chamada para o callback
+--------------------------------
 
-| Send this call to CallBack if it matches with the above regular expression.
+| Manda esta chamada para o CallBack se ela atender à expressão regular acima.
 
 
 
 
 .. _did-expression-2:
 
-Regular expression
-------------------
+Expressão regular
+-----------------
 
-| Same as the first expression. You can see more details at the link `https://wiki.magnusbilling.org/en/source/modules/did/did.html#did-expression-1.  <https://wiki.magnusbilling.org/en/source/modules/did/did.html#did-expression-1.>`_.
+| Igual à primeira expressão. Veja mais detalhes no link `https://wiki.magnusbilling.org/en/source/modules/did/did.html#did-expression-1.  <https://wiki.magnusbilling.org/en/source/modules/did/did.html#did-expression-1.>`_.
 
 
 
 
 .. _did-buy-rate-2:
 
-Buy price per min
------------------
+Preço de compra por minuto
+--------------------------
 
-| Provider buy price per minute for the second inbound billing interval of this DID.
+| Preço de compra por minuto do provedor no segundo intervalo de cobrança das chamadas recebidas neste DID.
 
 
 
 
 .. _did-selling-rate-2:
 
-Sell price per min
-------------------
+Preço de venda por minuto
+-------------------------
 
-| Price per minute if the number matches the above regular expression.
+| Preço por minuto se o número atender à expressão regular acima.
 
 
 
 
 .. _did-block-expression-2:
 
-Block calls from this expression
---------------------------------
+Bloquear chamadas desta expressão
+---------------------------------
 
-| Set to yes to block calls that matches with the above regular expression.
+| Coloque sim para bloquear as chamadas que atendem à expressão regular acima.
 
 
 
 
 .. _did-send-to-callback-2:
 
-Send the call to callback
--------------------------
+Mandar a chamada para o callback
+--------------------------------
 
-| Send this call to CallBack if it matches with the above regular expression.
+| Manda esta chamada para o CallBack se ela atender à expressão regular acima.
 
 
 
 
 .. _did-expression-3:
 
-Regular expression
-------------------
+Expressão regular
+-----------------
 
-| Same as the first expression. You can see more details at the link `https://wiki.magnusbilling.org/en/source/modules/did/did.html#did-expression-1.  <https://wiki.magnusbilling.org/en/source/modules/did/did.html#did-expression-1.>`_.
+| Igual à primeira expressão. Veja mais detalhes no link `https://wiki.magnusbilling.org/en/source/modules/did/did.html#did-expression-1.  <https://wiki.magnusbilling.org/en/source/modules/did/did.html#did-expression-1.>`_.
 
 
 
 
 .. _did-buy-rate-3:
 
-Buy price per min
------------------
+Preço de compra por minuto
+--------------------------
 
-| Provider buy price per minute for the third inbound billing interval of this DID.
+| Preço de compra por minuto do provedor no terceiro intervalo de cobrança das chamadas recebidas neste DID.
 
 
 
 
 .. _did-selling-rate-3:
 
-Sell price per min
-------------------
+Preço de venda por minuto
+-------------------------
 
-| Price per minute if the number matches the above regular expression.
+| Preço por minuto se o número atender à expressão regular acima.
 
 
 
 
 .. _did-block-expression-3:
 
-Block calls from this expression
---------------------------------
+Bloquear chamadas desta expressão
+---------------------------------
 
-| Set to yes to block calls that matches with the above regular expression.
+| Coloque sim para bloquear as chamadas que atendem à expressão regular acima.
 
 
 
 
 .. _did-send-to-callback-3:
 
-Send the call to callback
--------------------------
+Mandar a chamada para o callback
+--------------------------------
 
-| Send this call to CallBack if it matches with the above regular expression.
+| Manda esta chamada para o CallBack se ela atender à expressão regular acima.
 
 
 
@@ -352,37 +351,37 @@ Send the call to callback
 CallBack pro
 ------------
 
-| Enables CallBack Pro.
+| Ativa o CallBack Pro.
 
 
 
 
 .. _did-cbr-ua:
 
-Use audio
----------
+Usar áudio
+----------
 
-| Execute an audio.
+| Toca um áudio.
 
 
 
 
 .. _did-cbr-total-try:
 
-Maximum trying
---------------
+Máximo de tentativas
+--------------------
 
-| How many times will the system try to return the call?
+| Quantas vezes o sistema tenta retornar a chamada.
 
 
 
 
 .. _did-cbr-time-try:
 
-Interval between trying
------------------------
+Intervalo entre tentativas
+--------------------------
 
-| Time interval between each try, in minutes.
+| Intervalo entre as tentativas, em minutos.
 
 
 
@@ -392,87 +391,87 @@ Interval between trying
 Early media
 -----------
 
-| Execute an audio before the call is answered. Your DID provider needs to allow early media.
+| Toca um áudio antes de a chamada ser atendida. O provedor do DID precisa permitir early media.
 
 
 
 
 .. _did-TimeOfDay-monFri:
 
-Mon-Fri
+Seg-Sex
 -------
 
-| Example: if your company only callbacks to the callee if the call was placed in between 09:00-12:00 and 14:00-18:00 MON-FRY, between this time interval the workaudio is going to be played and then callback to the callee. You can use multiple time intervals separated by \|.
+| Exemplo: se a sua empresa só retorna a chamada quando ela chega entre 09:00-12:00 e 14:00-18:00 de segunda a sexta, nesse intervalo toca o áudio do expediente e depois a chamada é retornada. Você pode usar vários intervalos separados por \|.
 
 
 
 
 .. _did-TimeOfDay-sat:
 
-Sat
+Sáb
 ---
 
-| The same but for Saturday.
+| O mesmo, para sábado.
 
 
 
 
 .. _did-TimeOfDay-sun:
 
-Sun
+Dom
 ---
 
-| The same but for Sunday.
+| O mesmo, para domingo.
 
 
 
 
 .. _did-workaudio:
 
-Work audio
-----------
+Áudio do expediente
+-------------------
 
-| Audio that will be executed when a call is received at the time interval.
+| Áudio tocado quando uma chamada chega dentro do intervalo.
 
 
 
 
 .. _did-noworkaudio:
 
-Out work audio
---------------
+Áudio fora do expediente
+------------------------
 
-| Audio that will be executed when a call is received out of the time interval.
+| Áudio tocado quando uma chamada chega fora do intervalo.
 
 
 
 
 .. _did-agent-client-rate-2:
 
-Sell price per min
-------------------
+Preço de venda por minuto
+-------------------------
 
-| Sell price per minute charged to the reseller client for the second inbound billing interval of this DID.
+| Preço de venda por minuto cobrado do cliente da revenda no segundo intervalo de cobrança das chamadas recebidas neste DID.
 
 
 
 
 .. _did-agent-client-rate-3:
 
-Sell price per min
-------------------
+Preço de venda por minuto
+-------------------------
 
-| Sell price per minute charged to the reseller client for the third inbound billing interval of this DID.
+| Preço de venda por minuto cobrado do cliente da revenda no terceiro intervalo de cobrança das chamadas recebidas neste DID.
 
 
 
 
 .. _did-agent-client-rate-1:
 
-Sell price per min
-------------------
+Preço de venda por minuto
+-------------------------
 
-| Sell price per minute charged to the reseller client for the first inbound billing interval of this DID.
+| Preço de venda por minuto cobrado do cliente da revenda no primeiro intervalo de cobrança das chamadas recebidas neste DID.
 
 
 
