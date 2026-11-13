@@ -42,13 +42,14 @@ class GitHubWikiExportTest(unittest.TestCase):
             module_overview = (output / "EN--module_overview.md").read_text(encoding="utf-8")
             installation = (output / "EN--get_started--quick_install.md").read_text(encoding="utf-8")
 
-            self.assertIn("## Start here", home)
-            self.assertIn("## First Steps", index)
+            self.assertIn("## Comece por aqui", home)
+            self.assertIn("## Primeiros passos", index)
             self.assertIn("EN--get_started--quick_install", index)
-            self.assertIn("## Customer management", module_overview)
+            self.assertIn("## Gestão de clientes", module_overview)
             self.assertFalse(any(output.glob("EN--modules--*.md")))
             self.assertNotIn("*************", installation)
-            self.assertIn("[Edit this page]", installation)
+            self.assertIn("[Editar esta página]", installation)
+            self.assertNotIn("Índices e tabelas", index)
 
 
 if __name__ == "__main__":

@@ -402,7 +402,7 @@ def rst_to_markdown(
     markdown = "\n".join(cleaned) + "\n"
     if relative.as_posix() == "index.rst":
         markdown = re.sub(
-            r"\n# Indices and tables\n\n\* genindex\n\* search\n?",
+            r"\n# (?:Indices and tables|Índices e tabelas)\n\n\* genindex\n\* search\n?",
             "\n",
             markdown,
         )
@@ -414,9 +414,9 @@ def append_page_navigation(markdown: str, language: str, relative: Path) -> str:
     edit_url = f"{REPOSITORY_URL}/edit/source/{source_path}"
     navigation = (
         "\n---\n\n"
-        "[Documentation home](Home) · "
-        "[Documentation index](EN--index) · "
-        f"[Edit this page]({edit_url})\n"
+        "[Início da documentação](Home) · "
+        "[Índice da documentação](EN--index) · "
+        f"[Editar esta página]({edit_url})\n"
     )
     return markdown.rstrip() + "\n" + navigation
 
@@ -434,97 +434,97 @@ def write_navigation(output: Path, pages: dict[tuple[str, str], str]) -> None:
             link for label, key in items if (link := available_link(pages, label, key))
         )
 
-    home = f"""# MagnusBilling 8 Documentation
+    home = f"""# Documentação do MagnusBilling 8
 
-MagnusBilling is an open-source billing and management platform for IP
-telephony providers. This Wiki documents installation, daily operation,
-billing, Asterisk 20, PJSIP, campaigns, and integrations.
+O MagnusBilling é uma plataforma de código aberto de tarifação e gestão para
+provedores de telefonia IP. Esta wiki documenta a instalação, a operação diária,
+a tarifação, o Asterisk 20, o PJSIP, as campanhas e as integrações.
 
-## Start here
-
-{links([
-    ("Introduction and supported functions", "intro"),
-    ("Install MagnusBilling 8", "get_started/quick_install"),
-    ("Place the first call", "get_started/first_call"),
-    ("Understand the web interface", "get_started/interface"),
-    ("Update an installation", "get_started/update"),
-    ("Back up the system", "get_started/backup"),
-])}
-
-## MBilling 8 platform
+## Comece por aqui
 
 {links([
-    ("What's new: Asterisk 20, PJSIP, and WhatsApp Business", "whats_new_mb8"),
-    ("Configure WhatsApp Business campaigns", "whatsapp_campaign"),
-    ("Understand Direct Media in Asterisk", "asterisk_options/directmedia"),
-    ("Review system configuration", "config"),
+    ("Introdução e funções suportadas", "intro"),
+    ("Instalar o MagnusBilling 8", "get_started/quick_install"),
+    ("Fazer a primeira chamada", "get_started/first_call"),
+    ("Entender a interface web", "get_started/interface"),
+    ("Atualizar uma instalação", "get_started/update"),
+    ("Fazer backup do sistema", "get_started/backup"),
 ])}
 
-## Billing and routing
+## Plataforma MBilling 8
 
 {links([
-    ("How prices are calculated", "price_calculation"),
-    ("How MagnusBilling selects a tariff", "find_rate"),
-    ("Offers and packages", "offer"),
-    ("Using vouchers", "how_to_use_voucher"),
+    ("Novidades: Asterisk 20, PJSIP e WhatsApp Business", "whats_new_mb8"),
+    ("Configurar campanhas no WhatsApp Business", "whatsapp_campaign"),
+    ("Entender o Direct Media no Asterisk", "asterisk_options/directmedia"),
+    ("Revisar a configuração do sistema", "config"),
 ])}
 
-## Administration and troubleshooting
+## Tarifação e roteamento
 
 {links([
-    ("Module overview", "module_overview"),
-    ("Troubleshoot calls without audio", "admin_guide/troubleshooting_no_audio"),
-    ("Troubleshoot errors when saving", "admin_guide/troubleshooting_save_errors"),
-    ("Firewall and security", "security/iptables"),
-    ("Configure STIR/SHAKEN on OpenSIPS 3.6", "security/stir_shaken_opensips"),
-    ("Technical architecture guide", "ai_codebase_guide"),
+    ("Como os preços são calculados", "price_calculation"),
+    ("Como o MagnusBilling escolhe a tarifa", "find_rate"),
+    ("Ofertas e pacotes", "offer"),
+    ("Usando vouchers", "how_to_use_voucher"),
 ])}
 
-## Need help or want to contribute?
+## Administração e solução de problemas
 
-- [Report a documentation problem]({REPOSITORY_URL}/issues/new)
-- [View the documentation source]({REPOSITORY_URL}/tree/source/wiki/en)
-- [Open the complete documentation index](EN--index)
+{links([
+    ("Visão geral dos módulos", "module_overview"),
+    ("Resolver chamadas sem áudio", "admin_guide/troubleshooting_no_audio"),
+    ("Resolver erros ao salvar", "admin_guide/troubleshooting_save_errors"),
+    ("Firewall e segurança", "security/iptables"),
+    ("Configurar STIR/SHAKEN no OpenSIPS 3.6", "security/stir_shaken_opensips"),
+    ("Guia de arquitetura técnica", "ai_codebase_guide"),
+])}
 
-> **Documentation policy:** The public Wiki is maintained in English. These
-> pages are generated from the RST sources in the main repository. Direct edits
-> in the GitHub Wiki may be replaced by the next synchronization.
+## Precisa de ajuda ou quer contribuir?
+
+- [Relatar um problema na documentação]({REPOSITORY_URL}/issues/new)
+- [Ver a fonte da documentação]({REPOSITORY_URL}/tree/source/wiki/en)
+- [Abrir o índice completo da documentação](EN--index)
+
+> **Política da documentação:** neste fork a wiki é mantida em português. Estas
+> páginas são geradas a partir das fontes RST do repositório principal. Edições
+> feitas direto na wiki do GitHub podem ser substituídas na próxima sincronização.
 """
     (output / "Home.md").write_text(home, encoding="utf-8")
 
     sections = [
-        ("Getting started", [
-            ("Installation", "get_started/quick_install"),
-            ("First call", "get_started/first_call"),
-            ("Web interface", "get_started/interface"),
-            ("Update", "get_started/update"),
+        ("Primeiros passos", [
+            ("Instalação", "get_started/quick_install"),
+            ("Primeira chamada", "get_started/first_call"),
+            ("Interface web", "get_started/interface"),
+            ("Atualização", "get_started/update"),
             ("Backup", "get_started/backup"),
         ]),
         ("MBilling 8", [
-            ("What's new", "whats_new_mb8"),
+            ("Novidades", "whats_new_mb8"),
             ("WhatsApp Business", "whatsapp_campaign"),
             ("Asterisk Direct Media", "asterisk_options/directmedia"),
         ]),
-        ("Operations", [
-            ("Configuration", "config"),
-            ("No-audio troubleshooting", "admin_guide/troubleshooting_no_audio"),
-            ("Save-error troubleshooting", "admin_guide/troubleshooting_save_errors"),
-            ("Security", "security/iptables"),
+        ("Operação", [
+            ("Configuração", "config"),
+            ("Chamadas sem áudio", "admin_guide/troubleshooting_no_audio"),
+            ("Erros ao salvar", "admin_guide/troubleshooting_save_errors"),
+            ("Segurança", "security/iptables"),
             ("STIR/SHAKEN", "security/stir_shaken_opensips"),
         ]),
-        ("Billing", [
-            ("Price calculation", "price_calculation"),
-            ("Tariff selection", "find_rate"),
-            ("Offers", "offer"),
+        ("Tarifação", [
+            ("Cálculo do preço", "price_calculation"),
+            ("Seleção de tarifa", "find_rate"),
+            ("Ofertas", "offer"),
             ("Vouchers", "how_to_use_voucher"),
         ]),
-        ("Reference", [
-            ("Module overview", "module_overview"),
-            ("Technical architecture", "ai_codebase_guide"),
-            ("Complete index", "index"),
+        ("Referência", [
+            ("Visão geral dos módulos", "module_overview"),
+            ("Arquitetura técnica", "ai_codebase_guide"),
+            ("Índice completo", "index"),
         ]),
     ]
-    sidebar = ["## MagnusBilling 8", "", "- [Home](Home)"]
+    sidebar = ["## MagnusBilling 8", "", "- [Início](Home)"]
     for heading, items in sections:
         section_links = [
             link for label, key in items if (link := available_link(pages, label, key))
@@ -533,9 +533,9 @@ billing, Asterisk 20, PJSIP, campaigns, and integrations.
             sidebar.extend(["", f"### {heading}", "", *section_links])
     (output / "_Sidebar.md").write_text("\n".join(sidebar) + "\n", encoding="utf-8")
     footer = (
-        f"[Documentation source]({REPOSITORY_URL}/tree/source/wiki/en) · "
-        f"[Report an issue]({REPOSITORY_URL}/issues) · "
-        "English documentation generated from the MagnusBilling 8 RST sources.\n"
+        f"[Fonte da documentação]({REPOSITORY_URL}/tree/source/wiki/en) · "
+        f"[Relatar um problema]({REPOSITORY_URL}/issues) · "
+        "Documentação gerada a partir das fontes RST do MagnusBilling 8.\n"
     )
     (output / "_Footer.md").write_text(footer, encoding="utf-8")
 
