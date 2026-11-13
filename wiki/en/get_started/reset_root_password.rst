@@ -1,13 +1,13 @@
-******************************
-Recover Magnusbilling password
-******************************
+***************************************
+Recuperar a senha do MagnusBilling
+***************************************
 
-Recover MagnusBilling root password. To recover or change your root password with MagnusBilling, we will basically make some modifications directly to the MagnusBilling MySQL / MariaDB database. You can do this through the console as in this tutorial or through phpMyAdmin (in this case, you can use the same MySQL commands presented in the last steps of this tutorial).
+Recuperar a senha do root do MagnusBilling. Para recuperar ou trocar a senha do root no MagnusBilling, basicamente fazemos algumas alterações direto no banco MySQL / MariaDB do MagnusBilling. Você pode fazer isso pelo console, como neste tutorial, ou pelo phpMyAdmin (nesse caso, use os mesmos comandos MySQL mostrados nos últimos passos deste tutorial).
 
-    
-**1.** JOIN AS ROOT IN THE SSH OF THE MAGNUSBILLING SERVER..
 
-Using an SSH client, for example Putty, we enter the terminal or shell of the MagnusBilling server. We must put the IP or domain of the server and then enter root as user and its password. If you use a user other than root, login with your username, and using the sudo command, log in as root
+**1.** ENTRE COMO ROOT NO SSH DO SERVIDOR MAGNUSBILLING.
+
+Com um cliente SSH, por exemplo o Putty, entramos no terminal (shell) do servidor MagnusBilling. Informe o IP ou o domínio do servidor e depois entre com o usuário root e a senha dele. Se você usa outro usuário, entre com ele e passe para root com o comando sudo.
 
 .. image:: ../img/putty.png
         :scale: 80%
@@ -16,19 +16,19 @@ Using an SSH client, for example Putty, we enter the terminal or shell of the Ma
         :scale: 80%
 
 
-**2.** ENTER AS ROOT IN MYSQL DATABASE.
+**2.** ENTRE COMO ROOT NO BANCO MYSQL.
 
-Now we enter the following command:
+Agora rode o comando:
 
 ::
-     
+
   mysql –u root –p mbilling
 
 
-By default the MagnusBilling install script saves the mysql root password in the /root/passwordMysql.log file, so you can see the mysql root password with the command
+Por padrão, o script de instalação do MagnusBilling guarda a senha de root do MySQL no arquivo /root/passwordMysql.log, então você pode ver essa senha com o comando
 
 ::
-     
+
   cat /root/passwordMysql.log
 
 .. image:: ../img/access-mysql-magnusbilling.png
@@ -36,19 +36,19 @@ By default the MagnusBilling install script saves the mysql root password in the
 
 
 
-**3.** MODIFY THE PASSWORD DIRECTLY IN THE DATABASE.
+**3.** ALTERE A SENHA DIRETO NO BANCO.
 
-After entering the password, we find the MySQL monitor, where we will place the commands to change the password from the MagnusBilling admin panel and regain access. Alternatively, you can run these commands in phpMyAdmin if you have this tool on your server.
+Depois de digitar a senha, aparece o monitor do MySQL, onde colocamos os comandos para trocar a senha do painel de administração do MagnusBilling e recuperar o acesso. Se você tiver o phpMyAdmin no servidor, também pode rodar estes comandos por ele.
 
-Note that MagnusBilling uses the SHA1 algorithm to encrypt the password of administrator users.
+O MagnusBilling usa o algoritmo SHA1 para criptografar a senha dos usuários administradores.
 
-To enter a new password, since we won't know the current one as it is encrypted, we do the following.
-In this example we will reset it to the default password that comes with a new installation of MagnusBilling, which is magnus. But instead, you can put whatever you want, including numbers, letters, symbols.
+Como não sabemos a senha atual (ela está criptografada), definimos uma senha nova assim.
+Neste exemplo, voltamos para a senha padrão de uma instalação nova do MagnusBilling, que é magnus. Mas você pode usar a senha que quiser, com números, letras e símbolos.
 
 
 ::
-     
+
   UPDATE pkg_user SET password = SHA1("magnus") WHERE username = "root";
 
 
-After running this command, your MagnusBilling admin password is reset, and you can log in to your dashboard normally.
+Depois de rodar este comando, a senha de administrador do MagnusBilling está redefinida e você pode entrar no painel normalmente. Troque essa senha logo em seguida.
