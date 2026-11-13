@@ -1,182 +1,182 @@
 .. _whatsapp-campaign:
 
-WhatsApp campaigns
-==================
+Campanhas no WhatsApp
+=====================
 
-This guide explains how to connect MagnusBilling to the official Meta WhatsApp Business Platform, send approved templates from a campaign, and receive replies through a webhook.
+Este guia explica como ligar o MagnusBilling à WhatsApp Business Platform oficial da Meta, enviar modelos aprovados a partir de uma campanha e receber respostas por um webhook.
 
 .. important::
 
-   MagnusBilling is not a WhatsApp messaging provider and does not deliver messages. It only integrates your MagnusBilling installation with the official Meta WhatsApp Business Cloud API. Meta processes delivery and applies its own approval, pricing, quality, messaging-limit, and enforcement rules.
+   O MagnusBilling não é um provedor de mensagens do WhatsApp e não entrega mensagens. Ele só integra a sua instalação do MagnusBilling com a WhatsApp Business Cloud API oficial da Meta. Quem processa a entrega é a Meta, que aplica as próprias regras de aprovação, preço, qualidade, limite de mensagens e fiscalização.
 
-Responsibility and acceptable use
----------------------------------
+Responsabilidade e uso aceitável
+--------------------------------
 
-The person or organization that owns and operates the Meta and MagnusBilling accounts is solely responsible for:
+A pessoa ou organização dona e operadora das contas da Meta e do MagnusBilling é a única responsável por:
 
-* obtaining valid recipient opt-in before sending a message;
-* keeping evidence of consent and providing a clear opt-out method;
-* selecting the recipients, content, templates, languages, dates, times, and sending frequency;
-* complying with the WhatsApp Business Messaging Policy, WhatsApp Business Terms, commerce rules, privacy and data-protection requirements, telecommunications rules, consumer-protection rules, and every law applicable in the sender's and recipient's jurisdictions;
-* all Meta fees, taxes, account verification, payment methods, quality ratings, messaging limits, template decisions, blocks, suspensions, and other restrictions;
-* protecting access tokens, app secrets, personal data, and access to the MagnusBilling server.
+* obter o consentimento válido (opt-in) dos destinatários antes de enviar uma mensagem;
+* guardar as provas do consentimento e oferecer uma forma clara de descadastro;
+* escolher os destinatários, o conteúdo, os modelos, os idiomas, as datas, os horários e a frequência de envio;
+* cumprir a WhatsApp Business Messaging Policy, os WhatsApp Business Terms, as regras de comércio, os requisitos de privacidade e proteção de dados (como a LGPD), as regras de telecomunicações, as regras de defesa do consumidor e todas as leis aplicáveis nas jurisdições de quem envia e de quem recebe;
+* todas as taxas da Meta, impostos, verificação da conta, formas de pagamento, classificação de qualidade, limites de mensagens, decisões sobre modelos, bloqueios, suspensões e outras restrições;
+* proteger os tokens de acesso, os segredos do app, os dados pessoais e o acesso ao servidor MagnusBilling.
 
-Do not use campaigns for unsolicited messaging, purchased lists without valid consent, deception, harassment, illegal content, or prohibited/restricted goods and services. A technically successful API request does not prove that a message is lawful, compliant, accepted, or delivered.
+Não use campanhas para mensagens não solicitadas, listas compradas sem consentimento válido, enganação, assédio, conteúdo ilegal ou produtos e serviços proibidos/restritos. Uma requisição à API aceita tecnicamente não comprova que a mensagem é lícita, está em conformidade, foi aceita ou foi entregue.
 
-Meta can change its interfaces, prices, limits, and policies at any time. Always review the current `WhatsApp Business Messaging Policy <https://business.whatsapp.com/policy>`_, `WhatsApp Business Terms <https://www.whatsapp.com/legal/business-terms/>`_, `opt-in guidance <https://developers.facebook.com/docs/whatsapp/overview/getting-opt-in>`_, and `platform pricing <https://business.whatsapp.com/products/platform-pricing>`_ before using a campaign. These official rules prevail over this guide.
+A Meta pode mudar suas interfaces, preços, limites e políticas a qualquer momento. Leia sempre as versões atuais da `WhatsApp Business Messaging Policy <https://business.whatsapp.com/policy>`_, dos `WhatsApp Business Terms <https://www.whatsapp.com/legal/business-terms/>`_, das `orientações sobre opt-in <https://developers.facebook.com/docs/whatsapp/overview/getting-opt-in>`_ e dos `preços da plataforma <https://business.whatsapp.com/products/platform-pricing>`_ antes de usar uma campanha. Essas regras oficiais prevalecem sobre este guia.
 
-Requirements
-------------
+Requisitos
+----------
 
-Before starting, make sure that you have:
+Antes de começar, confirme que você tem:
 
-* MagnusBilling 8 updated through database version 8.0.0.4;
-* a public HTTPS URL with a valid certificate if replies will be received;
-* a Meta developer account and a Meta business portfolio;
-* a business app with the WhatsApp product;
-* a WhatsApp Business Account (WABA) and a phone number accepted by Meta;
-* an approved message template;
-* recipient phone numbers with valid opt-in, saved in international format with country code;
-* an active MagnusBilling user with credit and a phonebook containing active numbers.
+* o MagnusBilling 8 atualizado até a versão de banco 8.0.0.4;
+* uma URL HTTPS pública com certificado válido, se for receber respostas;
+* uma conta de desenvolvedor da Meta e um portfólio empresarial na Meta;
+* um app empresarial com o produto WhatsApp;
+* uma WhatsApp Business Account (WABA) e um número de telefone aceito pela Meta;
+* um modelo de mensagem aprovado;
+* números de destinatários com opt-in válido, gravados no formato internacional com código do país;
+* um usuário ativo no MagnusBilling com crédito e uma agenda com números ativos.
 
-The Meta dashboard changes occasionally. If a label differs, follow the current `Cloud API getting-started guide <https://developers.facebook.com/docs/whatsapp/cloud-api/get-started>`_.
+O painel da Meta muda de vez em quando. Se algum nome estiver diferente, siga o `guia inicial da Cloud API <https://developers.facebook.com/docs/whatsapp/cloud-api/get-started>`_ atual.
 
-1. Create the Meta app and WhatsApp account
---------------------------------------------
+1. Crie o app na Meta e a conta do WhatsApp
+-------------------------------------------
 
-#. Sign in to `Meta for Developers <https://developers.facebook.com/>`_ and open **My Apps**.
-#. Create an app intended for business use and associate it with the correct business portfolio.
-#. Add the **WhatsApp** product to the app.
-#. Open the WhatsApp API setup area.
-#. Select or create the WhatsApp Business Account.
-#. Add the sending phone number and complete the verification and display-name steps requested by Meta.
-#. Add a valid payment method when Meta requires it for production use.
-#. Record the **Phone Number ID** and **WhatsApp Business Account ID**. MagnusBilling sending currently needs the Phone Number ID; the WABA ID remains useful for administration in Meta.
+#. Entre em `Meta for Developers <https://developers.facebook.com/>`_ e abra **My Apps**.
+#. Crie um app para uso empresarial e associe-o ao portfólio empresarial correto.
+#. Acrescente o produto **WhatsApp** ao app.
+#. Abra a área de configuração da API do WhatsApp.
+#. Selecione ou crie a WhatsApp Business Account.
+#. Acrescente o número remetente e conclua as etapas de verificação e de nome de exibição pedidas pela Meta.
+#. Acrescente uma forma de pagamento válida quando a Meta exigir para uso em produção.
+#. Anote o **Phone Number ID** e o **WhatsApp Business Account ID**. Hoje o envio pelo MagnusBilling precisa do Phone Number ID; o ID da WABA continua útil para a administração na Meta.
 
-A Meta test number and temporary token can be used during initial setup, but they are not appropriate production credentials.
+Um número de teste e um token temporário da Meta podem ser usados na configuração inicial, mas não são credenciais adequadas para produção.
 
-2. Create a production access token
-------------------------------------
+2. Crie um token de acesso de produção
+--------------------------------------
 
-Use Meta Business Settings to create or select a system user for the integration. Assign the app and the required WhatsApp account assets to that system user, then generate a production access token with the permissions required by the current Cloud API, normally including:
+Use as Configurações do Negócio da Meta para criar ou escolher um usuário do sistema para a integração. Atribua a esse usuário do sistema o app e os ativos do WhatsApp necessários e gere um token de acesso de produção com as permissões exigidas pela Cloud API atual, normalmente incluindo:
 
 * ``whatsapp_business_messaging``;
 * ``whatsapp_business_management``.
 
-Copy the token only once and store it securely. Never place it in screenshots, tickets, chat messages, source control, or public documentation. Use the minimum necessary permissions, restrict administrative access, and rotate the token immediately if it may have been exposed. Meta controls token validity and can revoke it.
+Copie o token uma única vez e guarde-o com segurança. Nunca o coloque em capturas de tela, chamados, mensagens de chat, controle de versão ou documentação pública. Use as permissões mínimas necessárias, restrinja o acesso administrativo e troque o token na hora se ele puder ter vazado. A Meta controla a validade do token e pode revogá-lo.
 
-3. Configure MagnusBilling
---------------------------
+3. Configure o MagnusBilling
+----------------------------
 
-Run the MagnusBilling database update before configuring the integration. In **Settings > Configuration**, set:
+Rode a atualização do banco do MagnusBilling antes de configurar a integração. Em **Configurações > Configuração**, preencha:
 
 ``WhatsApp Phone Number ID``
-   The Phone Number ID shown in the Meta WhatsApp API setup.
+   O Phone Number ID mostrado na configuração da API do WhatsApp na Meta.
 
 ``WhatsApp Access Token``
-   The production token created for the integration. Do not use a temporary test token in production.
+   O token de produção criado para a integração. Não use um token temporário de teste em produção.
 
 ``WhatsApp API Version``
-   The Graph API version used by MagnusBilling. Keep the installed default unless the integration is being upgraded and validated for another version.
+   A versão da Graph API usada pelo MagnusBilling. Mantenha o padrão instalado, a menos que a integração esteja sendo atualizada e validada para outra versão.
 
 ``WhatsApp API Timeout``
-   Maximum time, in seconds, for an API request.
+   Tempo máximo, em segundos, de uma requisição à API.
 
-The token is sensitive. Limit access to the Configuration menu and to server backups containing the database.
+O token é sensível. Limite o acesso ao menu Configuração e aos backups do servidor que contêm o banco.
 
-4. Create and approve a template
---------------------------------
+4. Crie e aprove um modelo
+--------------------------
 
-#. Open WhatsApp Manager in Meta Business tools.
-#. Create a message template with the correct category, name, language, body, and any required examples.
-#. Submit it to Meta and wait until its status is approved before activating the campaign.
-#. Copy the template name and language code exactly as shown by Meta. They are case-sensitive integration values.
+#. Abra o WhatsApp Manager nas ferramentas empresariais da Meta.
+#. Crie um modelo de mensagem com a categoria, o nome, o idioma, o corpo e os exemplos exigidos.
+#. Envie para a Meta e espere o status ficar aprovado antes de ativar a campanha.
+#. Copie o nome do modelo e o código do idioma exatamente como a Meta mostra. São valores da integração que diferenciam maiúsculas de minúsculas.
 
-Read Meta's current `message-template guidelines <https://developers.facebook.com/docs/whatsapp/message-templates/guidelines>`_ and `template sending guide <https://developers.facebook.com/docs/whatsapp/cloud-api/guides/send-message-templates>`_. Meta may reject, pause, or disable a template based on content, feedback, or policy compliance.
+Leia as `diretrizes de modelos de mensagem <https://developers.facebook.com/docs/whatsapp/message-templates/guidelines>`_ e o `guia de envio de modelos <https://developers.facebook.com/docs/whatsapp/cloud-api/guides/send-message-templates>`_ atuais da Meta. A Meta pode recusar, pausar ou desativar um modelo por causa do conteúdo, do retorno dos usuários ou do cumprimento das políticas.
 
 .. warning::
 
-   The current MagnusBilling campaign integration sends the template name and language only. It does not send header, body, button, or variable components. Use a template that requires no parameters. A template containing placeholders such as ``{{1}}`` will not work until component support is implemented.
+   A integração atual de campanhas do MagnusBilling envia só o nome e o idioma do modelo. Ela não envia componentes de cabeçalho, corpo, botões ou variáveis. Use um modelo que não exija parâmetros. Um modelo com marcadores como ``{{1}}`` não vai funcionar até o suporte a componentes ser implementado.
 
-5. Prepare the phonebook
--------------------------
+5. Prepare a agenda
+-------------------
 
-#. Open **Voice Broadcasting > Phonebooks** and create or select a phonebook owned by the campaign user.
-#. Import the recipients in international format: country code, area code, and number. Digits-only format is recommended.
-#. Confirm that the numbers have active status and that every recipient has provided valid WhatsApp opt-in.
-#. Remove opted-out, invalid, blocked, or otherwise ineligible recipients before every campaign.
+#. Abra **Torpedo de voz > Agendas** e crie ou escolha uma agenda do usuário da campanha.
+#. Importe os destinatários no formato internacional: código do país, DDD e número. Recomenda-se usar só dígitos.
+#. Confirme que os números estão com status ativo e que todos os destinatários deram opt-in válido para o WhatsApp.
+#. Retire, antes de cada campanha, os destinatários descadastrados, inválidos, bloqueados ou que por outro motivo não podem receber.
 
-The fact that a number has a WhatsApp account is not consent to receive marketing or automated messages.
+O fato de um número ter conta no WhatsApp não é consentimento para receber mensagens de marketing ou automáticas.
 
-6. Create the WhatsApp campaign
--------------------------------
+6. Crie a campanha de WhatsApp
+------------------------------
 
-#. Open **Voice Broadcasting > Campaigns** and create a campaign.
-#. Select the user that owns the phonebook and has available credit.
-#. Set **Type** to **WhatsApp**.
-#. Enter a name and configure the starting date, expiration date, enabled weekdays, daily start time, and daily stop time.
-#. Set **Frequency** to the maximum number of contacts MagnusBilling should attempt per minute. Meta's own throughput and messaging limits still apply.
-#. Select one or more phonebooks.
-#. In the **Messages** tab, set **WhatsApp template name** and **WhatsApp template language** exactly as approved by Meta.
-#. Enable **Restrict phone** if the local restricted-number list must be applied.
-#. Save the campaign with active status.
+#. Abra **Torpedo de voz > Campanhas** e crie uma campanha.
+#. Selecione o usuário dono da agenda e com crédito disponível.
+#. Em **Tipo**, escolha **WhatsApp**.
+#. Informe um nome e configure a data de início, a data de término, os dias da semana, a hora de início diária e a hora de término diária.
+#. Em **Frequência**, coloque o número máximo de contatos que o MagnusBilling deve tentar por minuto. Os limites de vazão e de mensagens da própria Meta continuam valendo.
+#. Selecione uma ou mais agendas.
+#. Na aba **Mensagens**, preencha **Nome do modelo do WhatsApp** e **Idioma do modelo do WhatsApp** exatamente como aprovados pela Meta.
+#. Ative **Restringir números** se a lista local de números restritos precisar ser aplicada.
+#. Salve a campanha com status ativo.
 
-The WhatsApp campaign process runs every minute. It selects active phonebook numbers that are eligible for the campaign schedule. A successful Cloud API acceptance is recorded in the message history with the Meta message ID. Acceptance is not the same as final delivery.
+O processo de campanhas do WhatsApp roda a cada minuto. Ele escolhe os números ativos das agendas que estão dentro do horário da campanha. Uma aceitação pela Cloud API é registrada no histórico de mensagens com o ID da mensagem na Meta. Aceitação não é o mesmo que entrega final.
 
-7. Receive replies
-------------------
+7. Receba respostas
+-------------------
 
-Replies require a public HTTPS webhook.
+As respostas exigem um webhook HTTPS público.
 
-#. In **Settings > Configuration**, create a strong random value for **WhatsApp Webhook Verify Token**. This is a secret chosen by you; it is not the access token.
-#. Copy the Meta application's **App Secret** into **WhatsApp App Secret**.
-#. In the Meta app's WhatsApp webhook configuration, use this callback URL, replacing the host and installation directory as required::
+#. Em **Configurações > Configuração**, crie um valor aleatório forte para **WhatsApp Webhook Verify Token**. É um segredo escolhido por você; não é o token de acesso.
+#. Copie o **App Secret** do app da Meta para **WhatsApp App Secret**.
+#. Na configuração de webhook do WhatsApp no app da Meta, use esta URL de callback, trocando o host e o diretório de instalação conforme for preciso::
 
-      https://YOUR_HOST/mbilling/index.php/whatsappWebhook/index
+      https://SEU_HOST/mbilling/index.php/whatsappWebhook/index
 
-#. Enter the same verify token configured in MagnusBilling.
-#. Complete Meta's webhook verification.
-#. Subscribe the WhatsApp Business Account webhook to the ``messages`` field. Follow Meta's current `webhook setup guide <https://developers.facebook.com/docs/whatsapp/cloud-api/guides/set-up-webhooks>`_.
+#. Informe o mesmo verify token configurado no MagnusBilling.
+#. Conclua a verificação do webhook na Meta.
+#. Assine o webhook da WhatsApp Business Account no campo ``messages``. Siga o `guia de configuração de webhooks <https://developers.facebook.com/docs/whatsapp/cloud-api/guides/set-up-webhooks>`_ atual da Meta.
 
-Incoming requests are accepted only when their ``X-Hub-Signature-256`` matches the configured App Secret. Received messages are stored in **Voice Broadcasting > Received Messages** with channel ``whatsapp`` and status **Received**.
+As requisições recebidas só são aceitas quando o ``X-Hub-Signature-256`` confere com o App Secret configurado. As mensagens recebidas ficam em **Torpedo de voz > Mensagens recebidas**, com canal ``whatsapp`` e status **Recebida**.
 
-MagnusBilling associates a reply with the most recent logged WhatsApp send to that number. For older sends, it also tries to locate the number in a WhatsApp campaign phonebook. A reply that cannot be associated with a MagnusBilling user is logged on the server and is not shown in the menu.
+O MagnusBilling associa a resposta ao envio de WhatsApp mais recente registrado para aquele número. Para envios mais antigos, ele também tenta localizar o número numa agenda de campanha de WhatsApp. Uma resposta que não pode ser associada a um usuário do MagnusBilling é registrada no log do servidor e não aparece no menu.
 
-Operational checklist
----------------------
+Lista de conferência operacional
+--------------------------------
 
-Before activating a campaign, confirm all of the following:
+Antes de ativar uma campanha, confirme tudo isto:
 
-* the database version is at least 8.0.0.4;
-* the Phone Number ID and production access token belong to the same Meta setup;
-* the template is approved, enabled, parameter-free, and matches the configured name and language;
-* the campaign owner has credit;
-* the campaign is active and currently inside its date, weekday, and daily-time window;
-* its phonebooks contain active, correctly formatted, opted-in numbers;
-* Frequency is compatible with Meta limits and the desired sending rate;
-* the campaign cron process is running;
-* account quality, messaging limits, billing, and phone-number status are healthy in WhatsApp Manager;
-* the restricted-number and opt-out lists are current.
+* a versão do banco é pelo menos 8.0.0.4;
+* o Phone Number ID e o token de acesso de produção são da mesma configuração na Meta;
+* o modelo está aprovado, ativo, sem parâmetros e com o mesmo nome e idioma configurados;
+* o dono da campanha tem crédito;
+* a campanha está ativa e dentro da janela de data, dia da semana e horário;
+* as agendas têm números ativos, no formato certo e com opt-in;
+* a frequência é compatível com os limites da Meta e com a taxa de envio desejada;
+* o processo do cron de campanhas está rodando;
+* a qualidade da conta, os limites de mensagens, a cobrança e o status do número estão saudáveis no WhatsApp Manager;
+* as listas de números restritos e de descadastro estão atualizadas.
 
-Common problems
----------------
+Problemas comuns
+----------------
 
-No messages are sent
-   Check the token, Phone Number ID, approved template name/language, user credit, campaign schedule, active phonebook numbers, cron process, Meta billing, quality rating, messaging limits, and account restrictions.
+Nenhuma mensagem é enviada
+   Confira o token, o Phone Number ID, o nome/idioma do modelo aprovado, o crédito do usuário, o horário da campanha, os números ativos nas agendas, o processo do cron, a cobrança na Meta, a classificação de qualidade, os limites de mensagens e as restrições da conta.
 
-Meta reports missing template parameters
-   The selected template requires components or variables. Use a parameter-free approved template with the current integration.
+A Meta informa que faltam parâmetros do modelo
+   O modelo escolhido exige componentes ou variáveis. Use um modelo aprovado sem parâmetros com a integração atual.
 
-The API accepts the message but the recipient does not receive it
-   API acceptance is not delivery. Review message status and diagnostics in Meta, recipient eligibility, opt-in, quality, limits, template status, and the destination number.
+A API aceita a mensagem, mas o destinatário não recebe
+   Aceitação pela API não é entrega. Confira o status e o diagnóstico da mensagem na Meta, a elegibilidade do destinatário, o opt-in, a qualidade, os limites, o status do modelo e o número de destino.
 
-Replies do not appear
-   Confirm HTTPS availability, webhook verification, subscription to ``messages``, the App Secret, the signature header, and that the sender number exists in a logged WhatsApp send or campaign phonebook.
+As respostas não aparecem
+   Confirme a disponibilidade do HTTPS, a verificação do webhook, a assinatura do campo ``messages``, o App Secret, o cabeçalho de assinatura e se o número que respondeu existe num envio de WhatsApp registrado ou numa agenda de campanha.
 
-The integration suddenly stops
-   Check whether Meta revoked the token, changed asset permissions, disabled the template, restricted the account or phone number, changed an API requirement, or retired the configured Graph API version.
+A integração para de repente
+   Confira se a Meta revogou o token, mudou as permissões dos ativos, desativou o modelo, restringiu a conta ou o número, mudou algum requisito da API ou aposentou a versão da Graph API configurada.
 
-No warranty of delivery
+Sem garantia de entrega
 -----------------------
 
-MagnusBilling does not control Meta's network, approvals, delivery, pricing, recipient devices, blocks, quality systems, or enforcement decisions. The integration does not guarantee acceptance, delivery, reading, replies, uninterrupted service, or continued availability of any Meta feature. The user assumes all responsibility and risk arising from the configuration and use of WhatsApp campaigns. This guide is operational information and is not legal advice.
+O MagnusBilling não controla a rede, as aprovações, a entrega, os preços, os aparelhos dos destinatários, os bloqueios, os sistemas de qualidade nem as decisões de fiscalização da Meta. A integração não garante aceitação, entrega, leitura, respostas, serviço ininterrupto nem a continuidade de qualquer recurso da Meta. O usuário assume toda a responsabilidade e o risco da configuração e do uso das campanhas no WhatsApp. Este guia é uma informação operacional e não é aconselhamento jurídico.
