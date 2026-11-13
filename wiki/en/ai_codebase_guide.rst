@@ -1,83 +1,83 @@
-AI Codebase Understanding Guide
-===============================
+Guia do código para IA
+======================
 
-This guide helps AI assistants and maintainers quickly navigate MagnusBilling 8
-and answer technical questions with traceable evidence.
+Este guia ajuda assistentes de IA e mantenedores a navegar rápido pelo MagnusBilling 8
+e a responder perguntas técnicas com evidências rastreáveis.
 
-Goal
-====
+Objetivo
+========
 
-Answer questions such as:
+Responder perguntas como:
 
-- Where a feature is implemented.
-- Which runtime flow executes for each call type.
-- Which tables/models/controllers are involved in an operation.
-- Which files should be changed for a specific enhancement.
+- Onde uma funcionalidade é implementada.
+- Qual fluxo de execução roda para cada tipo de chamada.
+- Quais tabelas/models/controllers participam de uma operação.
+- Quais arquivos devem ser alterados para uma melhoria específica.
 
-High-Level Architecture
-=======================
+Arquitetura geral
+=================
 
-MagnusBilling combines three core layers:
+O MagnusBilling combina três camadas principais:
 
-1. Yii 1.1 backend (PHP)
-2. ExtJS 6.2 admin frontend
-3. Asterisk AGI call engine
+1. Backend Yii 1.1 (PHP)
+2. Frontend de administração em ExtJS 6.2
+3. Motor de chamadas via AGI do Asterisk
 
-Simplified flow:
+Fluxo simplificado:
 
 ::
 
-    Browser (ExtJS)
+    Navegador (ExtJS)
       -> index.php/<controller>/<action>
-      -> Yii Controller
+      -> Controller Yii
       -> Model (ActiveRecord)
       -> MySQL/MariaDB
 
-    Asterisk Dialplan
+    Dialplan do Asterisk
       -> resources/asterisk/mbilling.php
-      -> *Agi.php classes
-      -> user/rate/trunk/CDR tables
+      -> classes *Agi.php
+      -> tabelas de usuário/tarifa/tronco/CDR
 
-Real Entry Points
-=================
+Pontos de entrada reais
+=======================
 
-Web backend
+Backend web
 -----------
 
-- index.php: Yii bootstrap and application run.
-- protected/config/main.php: model/component imports and DB connection.
+- index.php: inicialização do Yii e execução da aplicação.
+- protected/config/main.php: imports de models/componentes e conexão com o banco.
 
 Frontend
 --------
 
-- app.js: creates ExtJS app (Ext.application).
-- classic/src/Application.js: MBilling.Application startup, session check,
-  initial views/stores load, and global CSRF behavior.
+- app.js: cria a aplicação ExtJS (Ext.application).
+- classic/src/Application.js: inicialização do MBilling.Application, conferência
+  da sessão, carga das telas/stores iniciais e comportamento global de CSRF.
 
 AGI
 ---
 
-- resources/asterisk/mbilling.php: AGI entrypoint, routes special commands,
-  detects DID, SIP calls, queue, callback, and standard outbound flow.
+- resources/asterisk/mbilling.php: ponto de entrada do AGI; trata comandos
+  especiais e detecta DID, chamadas SIP, fila, callback e o fluxo de saída padrão.
 
-Critical Directory Map
-======================
+Mapa dos diretórios críticos
+============================
 
 ::
 
     protected/
-      controllers/   # HTTP endpoints (actionList/actionCreate/actionUpdate...)
-      models/        # ActiveRecord for pkg_* tables
-      components/    # BaseController, auth, utilities, integrations
-      config/        # main.php, permissions, cron
+      controllers/   # endpoints HTTP (actionList/actionCreate/actionUpdate...)
+      models/        # ActiveRecord das tabelas pkg_*
+      components/    # BaseController, autenticação, utilitários, integrações
+      config/        # main.php, permissões, cron
 
     app/
-      store/         # ExtJS data layer (ajax proxy)
-      model/         # UI data definitions
-      helper/        # utility helpers
+      store/         # camada de dados ExtJS (proxy ajax)
+      model/         # definições de dados da interface
+      helper/        # funções utilitárias
 
     classic/src/
-      Application.js # UI bootstrap and session/menu orchestration
+      Application.js # inicialização da interface e orquestração de sessão/menu
 
     resources/asterisk/
       mbilling.php
@@ -92,238 +92,248 @@ Critical Directory Map
       SearchTariff.php
 
     script/
-      install.sh     # server installation script
-      database.sql   # base database schema
+      install.sh     # script de instalação do servidor
+      database.sql   # esquema base do banco
 
-Question Router (AI Playbook)
-==============================
+    comunic/, custom/  # customizações da Comunic (ver comunic/README.md)
 
-Use this routing table to choose the first file to inspect.
+Roteador de perguntas (manual da IA)
+====================================
 
-* Login, session, permission, menu:
-  start at ``protected/controllers/AuthenticationController.php``.
-  Support files are ``protected/components/BaseController.php`` and
+Use esta tabela para escolher o primeiro arquivo a inspecionar.
+
+* Login, sessão, permissão, menu:
+  comece por ``protected/controllers/AuthenticationController.php``.
+  Arquivos de apoio: ``protected/components/BaseController.php`` e
   ``protected/components/Controller.php``.
 
-* Panel CRUD (user, sip, trunk, rate, did, queue):
-  start at ``protected/controllers/<Entity>Controller.php``.
-  Support files are ``protected/models/<Entity>.php`` and
-  ``app/store/<Entity>.js``.
+* CRUD do painel (usuário, sip, tronco, tarifa, did, fila):
+  comece por ``protected/controllers/<Entidade>Controller.php``.
+  Arquivos de apoio: ``protected/models/<Entidade>.php`` e
+  ``app/store/<Entidade>.js``.
 
-* Outbound call, billing, timeout, trunk selection:
-  start at ``resources/asterisk/StandardCallAgi.php``.
-  Support files are ``resources/asterisk/CalcAgi.php``,
-  ``resources/asterisk/SearchTariff.php``, and
+* Chamada de saída, tarifação, timeout, escolha de tronco:
+  comece por ``resources/asterisk/StandardCallAgi.php``.
+  Arquivos de apoio: ``resources/asterisk/CalcAgi.php``,
+  ``resources/asterisk/SearchTariff.php`` e
   ``resources/asterisk/AuthenticateAgi.php``.
 
-* DID inbound, queue, IVR, destination routing:
-  start at ``resources/asterisk/DidAgi.php``.
-  Support files are ``resources/asterisk/IvrAgi.php``,
-  ``resources/asterisk/QueueAgi.php``, Did/Diddestination models, and
-  ``pkg_did`` / ``pkg_did_destination`` tables.
+* DID de entrada, fila, URA, roteamento de destino:
+  comece por ``resources/asterisk/DidAgi.php``.
+  Arquivos de apoio: ``resources/asterisk/IvrAgi.php``,
+  ``resources/asterisk/QueueAgi.php``, os models Did/Diddestination e as tabelas
+  ``pkg_did`` / ``pkg_did_destination``.
 
-* Special commands (``*120`` voucher, ``*7`` pickup, queue pause):
-  start at ``resources/asterisk/mbilling.php``.
+* Comandos especiais (voucher ``*120``, captura ``*7``, pausa na fila):
+  comece por ``resources/asterisk/mbilling.php``.
 
-* Global runtime settings (language, version, timeout, currency):
-  start at ``pkg_configuration`` through the Configuration model.
-  Support file is ``protected/components/LoadConfig.php``.
+* Configurações globais (idioma, versão, timeout, moeda):
+  comece pela ``pkg_configuration``, pelo model Configuration.
+  Arquivo de apoio: ``protected/components/LoadConfig.php``.
 
-* UI issue after login/session check:
-  start at ``classic/src/Application.js``.
-  Support endpoint is ``index.php/authentication/check``.
+* Problema na interface depois do login/conferência de sessão:
+  comece por ``classic/src/Application.js``.
+  Endpoint de apoio: ``index.php/authentication/check``.
 
-* Payment, buy credit, gateway callback, refill side effect:
-  start at ``protected/controllers/BuyCreditController.php`` or
+* Pagamento, compra de crédito, retorno de gateway, efeitos da recarga:
+  comece por ``protected/controllers/BuyCreditController.php`` ou
   ``protected/controllers/<Gateway>Controller.php``.
-  Support files are ``protected/models/Refill.php``,
-  ``protected/models/BuyCredit.php``, and ``protected/models/Methodpay.php``.
+  Arquivos de apoio: ``protected/models/Refill.php``,
+  ``protected/models/BuyCredit.php`` e ``protected/models/Methodpay.php``.
 
-* Install, update, migration, cron operation:
-  start at ``script/install.sh``, ``cron.php``,
-  ``protected/config/cron.php``, and
+* Instalação, atualização, migração, cron:
+  comece por ``script/install.sh``, ``cron.php``,
+  ``protected/config/cron.php`` e
   ``protected/commands/UpdateMysqlCommand.php``.
-  Support files are ``protected/commands/*.php`` and ``script/database.sql``.
+  Arquivos de apoio: ``protected/commands/*.php`` e ``script/database.sql``.
 
-Frontend-to-Backend Mental Model
-================================
+* Recarga recorrente, tipo de plano, Consumo por Plano (Comunic):
+  comece por ``protected/commands/RecurringCreditCommand.php`` e
+  ``protected/models/PlanConsumption.php``.
+  Arquivos de apoio: ``protected/models/overrides/UserOR.php`` e ``comunic/README.md``.
 
-Repeated pattern:
+Modelo mental frontend-backend
+==============================
 
-1. ExtJS Store calls endpoint ``index.php/<controller>/<action>``
-2. Yii Controller applies filters/permissions
-3. ActiveRecord Model handles persistence
-4. Controller returns JSON to grid/form
+Padrão que se repete:
 
-Recommended tracing sequence:
+1. A Store ExtJS chama o endpoint ``index.php/<controller>/<action>``
+2. O controller Yii aplica filtros/permissões
+3. O model ActiveRecord cuida da persistência
+4. O controller devolve JSON para a grade/formulário
 
-- Identify called endpoint in frontend (store or Ext.Ajax.request)
-- Open matching controller under protected/controllers/
-- Identify the model being used
-- Validate fields and rules in model
-- Confirm impacted table (pkg_* naming)
+Sequência de rastreamento recomendada:
 
-Public callbacks are different from authenticated ExtJS module calls. Payment,
-SMS, WHMCS, Joomla, signup, and similar integration controllers may expose
-provider-specific actions that do not follow the normal grid/form CRUD pattern.
+- Identifique o endpoint chamado no frontend (store ou Ext.Ajax.request)
+- Abra o controller correspondente em protected/controllers/
+- Identifique o model usado
+- Confira os campos e as regras do model
+- Confirme a tabela afetada (nomes pkg_*)
 
-Call Flow Summary
-=================
+Callbacks públicos são diferentes das chamadas autenticadas dos módulos ExtJS.
+Controllers de integração como pagamento, SMS, WHMCS, Joomla e cadastro podem expor
+ações específicas do provedor que não seguem o padrão CRUD normal de grade/formulário.
 
-Outbound
---------
+Resumo do fluxo de chamadas
+===========================
 
-1. Dialplan invokes AGI in resources/asterisk/mbilling.php
-2. User authentication (AuthenticateAgi)
-3. Number and restriction checks
-4. Rate lookup (SearchTariff)
-5. Timeout/cost calculation (CalcAgi)
-6. Trunk selection and dial
-7. CDR persistence and credit debit
+Saída
+-----
 
-Inbound DID
------------
+1. O dialplan chama o AGI em resources/asterisk/mbilling.php
+2. Autenticação do usuário (AuthenticateAgi)
+3. Conferência do número e das restrições
+4. Busca da tarifa (SearchTariff)
+5. Cálculo de timeout/custo (CalcAgi)
+6. Escolha do tronco e discagem
+7. Gravação do CDR e débito do crédito
 
-1. mbilling.php detects DID call
-2. DidAgi locates DID and destinations
-3. Routes to SIP/Queue/IVR/external number
-4. Updates inbound CDR and related costs
+DID de entrada
+--------------
 
-Confidence Checklist for AI Answers
+1. O mbilling.php detecta a chamada de DID
+2. O DidAgi localiza o DID e os destinos
+3. Encaminha para SIP/fila/URA/número externo
+4. Atualiza o CDR de entrada e os custos relacionados
+
+Lista de confiança para respostas da IA
+=======================================
+
+Antes de responder uma pergunta técnica, confira:
+
+1. O arquivo de entrada correto da funcionalidade.
+2. O mapeamento correto controller/model/tabela (fluxo web).
+3. O mapeamento correto das classes AGI (fluxo de telefonia).
+4. O comportamento conforme o perfil (administrador/revenda/cliente).
+5. O impacto das configurações globais no comportamento.
+
+Se as evidências do primeiro arquivo estiverem incompletas, siga as chamadas até
+chegar a um destes pontos:
+
+- acesso SQL/tabela
+- método de model/controller com efeito colateral
+- execução do AGI ou ponto de decisão do DIAL
+
+Riscos comuns de interpretação
+==============================
+
+- Nomes de módulos parecidos podem confundir (por exemplo campaign* x callSummary*).
+  Confira sempre o caminho exato do arquivo.
+- O Application.js carrega muitos módulos; não assuma que um está ativo sem
+  conferir o menu e as permissões.
+- As conferências de sessão/segurança no BaseController::init() podem bloquear ações.
+- O caminho de execução do AGI muda conforme as variáveis de canal do Asterisk.
+
+Arquivos de referência recomendados
 ===================================
-
-Before answering a technical question, validate:
-
-1. Correct entry file for the feature.
-2. Correct controller/model/table mapping (web flow).
-3. Correct AGI class mapping (telephony flow).
-4. Role-dependent behavior (admin/agent/client).
-5. Global config impact on behavior.
-
-If evidence is incomplete in the first file, follow calls until one of:
-
-- SQL/table access
-- model/controller method with side effects
-- AGI execution or DIAL decision point
-
-Common Interpretation Risks
-===========================
-
-- Similar module names can mislead (for example campaign* vs callSummary*).
-  Always validate exact file path.
-- Application.js loads many modules; do not assume one is active without
-  checking menu/permissions.
-- Session/security checks in BaseController::init() may block actions.
-- AGI execution path changes based on Asterisk channel variables.
-
-Recommended Reference Files
-===========================
 
 - ``wiki/en/ai_codebase_guide.rst``
 - ``wiki/en/lifecycle.rst``
 - ``wiki/en/module_overview.rst``
 - ``wiki/GITHUB_WIKI_SYNC.md``
 
-Durable Maintenance Conventions
-================================
+Convenções permanentes de manutenção
+====================================
 
-Documentation
--------------
+Documentação
+------------
 
-* ``wiki/en`` is the source of truth for public English documentation.
-* The GitHub Wiki is generated from ``wiki/en`` and must not be edited as an
-  independent source.
-* Keep project documentation inside ``wiki`` and follow the GitHub Wiki
-  publication workflow described in ``wiki/GITHUB_WIKI_SYNC.md``.
-* ``ia-docs`` is internal, machine-oriented material and must not be published
-  as user documentation.
-* Database installation and upgrade changes belong in
-  ``protected/commands/UpdateMysqlCommand.php``.
+* ``wiki/en`` é a fonte oficial da documentação pública (traduzida para o
+  português neste fork; o nome da pasta foi mantido).
+* A wiki do GitHub é gerada a partir de ``wiki/en`` e não deve ser editada como uma
+  fonte independente.
+* Mantenha a documentação do projeto dentro de ``wiki`` e siga o fluxo de publicação
+  da wiki do GitHub descrito em ``wiki/GITHUB_WIKI_SYNC.md``.
+* ``ia-docs`` é material interno, voltado a máquinas, e não deve ser publicado como
+  documentação de usuário.
+* As mudanças de instalação e atualização do banco ficam em
+  ``protected/commands/UpdateMysqlCommand.php`` (no código oficial). As mudanças de
+  banco da Comunic ficam em ``protected/commands/PlanConsumptionSetupCommand.php``.
 
-Call diagnostics
-----------------
+Diagnóstico de chamadas
+-----------------------
 
-* Diagnostics must execute the production AGI decision flow instead of
-  reimplementing routing rules in a web service.
-* The supported CLI diagnostic entrypoint is
-  ``php resources/asterisk/mbilling.php debug NUMBER MB_ACC CALLERID``.
-* Debug mode is a dry-run. It may read configuration and database records, but
-  must not execute ``Dial``, ``Queue``, audio or channel commands, create CDRs,
-  charge accounts, update operational tables, call external integrations, or
-  leave database writes committed.
-* The dry-run must stop at ``Magnus::run_dial()`` before dialing, CDR creation,
-  or charging. Every new AGI path used by diagnostics must preserve this
-  boundary.
-* Do not bypass validations that occur before a channel operation. IVR
-  schedules, holidays, audio compatibility, IVR options, Queue existence and
-  membership, DID destinations, SIP groups, rates, offers, and trunk
-  eligibility must be evaluated by their real AGI paths.
-* Missing optional media or Queue agents may be warnings when the production
-  flow can continue. Missing required routing objects or an empty selected
-  destination is a blocking error.
-* Fixed-IP SIP accounts are IP-only when ``insecure`` contains ``invite`` or
-  no password is stored. Their generated endpoint uses ``identify_by=ip`` and
-  has no inbound ``auth=``. Dynamic and explicitly credentialed accounts retain
-  username/password authentication.
-* AGI result serialization must produce exactly one ``MBILLING_RESULT`` line,
-  substitute invalid UTF-8, and return a minimal valid JSON error contract if
-  normal encoding fails.
-* Technical details exposed by the web diagnostic are administrator-only and
-  must never contain SIP passwords, trunk credentials, API keys, DSNs, or
-  other secrets.
+* O diagnóstico precisa executar o fluxo de decisão do AGI de produção, em vez de
+  reimplementar as regras de roteamento num serviço web.
+* O ponto de entrada de diagnóstico suportado na CLI é
+  ``php resources/asterisk/mbilling.php debug NUMERO MB_ACC CALLERID``.
+* O modo debug é uma simulação (dry-run). Ele pode ler configurações e registros do
+  banco, mas não pode executar ``Dial``, ``Queue``, áudios ou comandos de canal, criar
+  CDRs, cobrar contas, atualizar tabelas operacionais, chamar integrações externas
+  nem deixar gravações no banco confirmadas.
+* A simulação precisa parar em ``Magnus::run_dial()``, antes da discagem, da criação do
+  CDR ou da cobrança. Todo caminho novo do AGI usado pelo diagnóstico precisa
+  preservar esse limite.
+* Não pule validações que acontecem antes de uma operação de canal. Horários de URA,
+  feriados, compatibilidade de áudio, opções de URA, existência e membros da fila,
+  destinos de DID, grupos SIP, tarifas, ofertas e elegibilidade de troncos precisam
+  ser avaliados pelos caminhos reais do AGI.
+* Mídia opcional ou agentes de fila faltando podem ser avisos quando o fluxo de
+  produção consegue continuar. Objetos de roteamento obrigatórios faltando ou um
+  destino selecionado vazio são erros bloqueantes.
+* Contas SIP de IP fixo são só por IP quando ``insecure`` contém ``invite`` ou quando
+  não há senha guardada. O endpoint gerado usa ``identify_by=ip`` e não tem ``auth=``
+  de entrada. Contas dinâmicas e com credenciais explícitas mantêm a autenticação por
+  usuário e senha.
+* A serialização do resultado do AGI precisa produzir exatamente uma linha
+  ``MBILLING_RESULT``, substituir UTF-8 inválido e devolver um contrato de erro JSON
+  mínimo e válido se a codificação normal falhar.
+* Os detalhes técnicos expostos pelo diagnóstico web são só para administradores e
+  nunca podem conter senhas SIP, credenciais de troncos, chaves de API, DSNs ou
+  outros segredos.
 
-AGI logging
+Logs do AGI
 -----------
 
-* Use ``AGI::verboseEvent()`` for validated routing decisions that the
-  diagnostic must interpret.
-* Event codes are stable identifiers used by tests, translations, and the web
-  formatter.
-* Verbose levels follow the project convention:
+* Use ``AGI::verboseEvent()`` para as decisões de roteamento validadas que o
+  diagnóstico precisa interpretar.
+* Os códigos de evento são identificadores estáveis usados por testes, traduções e
+  pelo formatador web.
+* Os níveis de verbose seguem a convenção do projeto:
 
-  * level 1: blocking error;
-  * level 2: warning or skipped candidate;
-  * level 3: routing decision;
-  * level 4: operational detail;
-  * level 25: SQL or deep technical trace.
+  * nível 1: erro bloqueante;
+  * nível 2: aviso ou candidato ignorado;
+  * nível 3: decisão de roteamento;
+  * nível 4: detalhe operacional;
+  * nível 25: SQL ou rastreamento técnico profundo.
 
-* The normal initial Asterisk log level is 5. Messages visible at normal levels
-  must be concise, actionable, and understandable without reading SQL.
+* O nível de log inicial normal do Asterisk é 5. As mensagens visíveis nos níveis
+  normais precisam ser curtas, acionáveis e compreensíveis sem ler SQL.
 
-Translations and presentation
------------------------------
+Traduções e apresentação
+------------------------
 
-* Backend user-facing messages use ``Yii::t('zii', 'English source text')``.
-* Add each new key to
-  ``resources/locale/php/LANG/zii.php`` for every supported language.
-* Web diagnostics follow the language selected in the active UI session, not
-  the default language stored in ``pkg_configuration``.
-* Preserve established technical terms such as ``Techprefix``; do not replace
-  them with an invented localized term.
-* Monetary values displayed by diagnostics use
+* As mensagens do backend para o usuário usam ``Yii::t('zii', 'Texto original em inglês')``.
+* Acrescente cada chave nova em ``resources/locale/php/IDIOMA/zii.php`` para todos os
+  idiomas suportados.
+* O diagnóstico web segue o idioma escolhido na sessão ativa da interface, e não o
+  idioma padrão guardado em ``pkg_configuration``.
+* Preserve os termos técnicos consagrados, como ``Techprefix``; não os troque por um
+  termo traduzido inventado.
+* Os valores monetários mostrados pelo diagnóstico usam
   ``Yii::app()->session['currency']``.
-* DID destination type names must match the values in
+* Os nomes dos tipos de destino de DID precisam ser iguais aos valores de
   ``classic/src/view/diddestination/Combo.js``.
 
-Diagnostic user interface
--------------------------
+Interface do diagnóstico
+------------------------
 
-* ``Check User`` belongs to ``classic/src/view/sip/Form.js`` and ``Check DID``
-  belongs to ``classic/src/view/did/Form.js``. Both use the form
-  ``extraButtons`` convention.
-* Diagnostic actions and technical details are available exclusively to
-  administrators.
-* Diagnostic text must remain selectable so an administrator can copy either
-  the complete result or only the relevant passage.
+* ``Check User`` fica em ``classic/src/view/sip/Form.js`` e ``Check DID`` fica em
+  ``classic/src/view/did/Form.js``. Os dois usam a convenção ``extraButtons`` do
+  formulário.
+* As ações de diagnóstico e os detalhes técnicos estão disponíveis só para
+  administradores.
+* O texto do diagnóstico precisa continuar selecionável, para o administrador copiar
+  o resultado inteiro ou só o trecho relevante.
 
-Maintenance Notes
-=================
+Notas de manutenção
+===================
 
-Update this guide whenever there is:
+Atualize este guia sempre que houver:
 
-- a new entrypoint (web or AGI)
-- a login/auth flow change
-- a new central module (controller/model/AGI class)
-- a structural change in core tables
-- a change to the diagnostic dry-run safety boundary
-- a change to translation, currency, permission, or documentation conventions
+- um novo ponto de entrada (web ou AGI)
+- uma mudança no fluxo de login/autenticação
+- um novo módulo central (controller/model/classe AGI)
+- uma mudança estrutural nas tabelas principais
+- uma mudança no limite de segurança da simulação do diagnóstico
+- uma mudança nas convenções de tradução, moeda, permissão ou documentação
