@@ -21,6 +21,8 @@
 #   --reusar                nao carrega o dump de novo (usa o banco mbilling_mb7novos ja carregado)
 #   --desde AAAA-MM-DD      so clientes criados no MB7 a partir desta data
 #   --excluir U1,U2         nao traz estes logins (nem as contas SIP / DIDs deles)
+#   --grupo "NOME=ID"       grupo de usuario do MB7 com nome diferente no MB8: NOME no MB7 =
+#                           id do grupo no MB8 (ex.: --grupo "Cliente=3"); pode repetir
 #   --zerar-saldo-novos     clientes novos entram com saldo 0 (padrao: saldo que tinham no MB7)
 #   --sem-recargas          nao traz o historico de recargas dos clientes novos
 #
@@ -35,13 +37,14 @@ COM="$(cd "$(dirname "$0")" && pwd)"
 . "$COM/lib/comum.sh"
 
 ORIG=mbilling_mb7novos
-DUMP=""; APLICAR=0; REUSAR=0; DESDE=""; EXCLUIR=""; ZERAR=0; RECARGAS=1
+DUMP=""; APLICAR=0; REUSAR=0; DESDE=""; EXCLUIR=""; ZERAR=0; RECARGAS=1; GRUPOS=()
 while [ $# -gt 0 ]; do
     case "$1" in
         --aplicar) APLICAR=1 ;;
         --reusar) REUSAR=1 ;;
         --desde) DESDE=$(echo "${2:-}" | tr -cd '0-9-'); shift ;;
         --excluir) EXCLUIR="${2:-}"; shift ;;
+        --grupo) GRUPOS+=("${2:-}"); shift ;;
         --zerar-saldo-novos) ZERAR=1 ;;
         --sem-recargas) RECARGAS=0 ;;
         -*) echo "Opcao desconhecida: $1"; exit 2 ;;
@@ -108,6 +111,15 @@ INSERT INTO _md SELECT o.id, (SELECT IFNULL(MAX(id),0) FROM mbilling.pkg_did) + 
     FROM pkg_did o LEFT JOIN mbilling.pkg_did d ON d.did=o.did
     WHERE d.id IS NULL AND (IFNULL(o.id_user,0)=0 OR o.id_user IN (SELECT old_id FROM _mu));
 " || { echo "ERRO ao montar os mapas."; exit 1; }
+for G in "${GRUPOS[@]}"; do
+    GN="${G%=*}"; GI=$(echo "${G##*=}" | tr -cd '0-9')
+    [ -n "$GN" ] && [ -n "$GI" ] && [ "$GN" != "$G" ] || { echo "ERRO: use --grupo \"NOME_NO_MB7=ID_NO_MB8\""; exit 1; }
+    GD=$(q "SELECT name FROM mbilling.pkg_group_user WHERE id=$GI")
+    [ -n "$GD" ] || { echo "ERRO: grupo id $GI nao existe no MB8"; exit 1; }
+    [ -n "$(qo "SELECT 1 FROM _mg WHERE name='$(esc "$GN")'")" ] || { echo "ERRO: grupo '$GN' nao existe no MB7"; exit 1; }
+    qo "UPDATE _mg SET new_id=$GI WHERE name='$(esc "$GN")'"
+    echo "Grupo do MB7 '$GN' -> grupo do MB8 '$GD' (id $GI)"
+done
 
 NU=$(qo "SELECT COUNT(*) FROM _mu WHERE novo=1")
 NS=$(qo "SELECT COUNT(*) FROM _ms WHERE novo=1")
@@ -121,7 +133,7 @@ tabela() { mariadb "$ORIG" -t -e "$1"; }
 echo
 echo "== Clientes novos: $NU"
 [ "$NU" -gt 0 ] && tabela "SELECT o.username login, LEFT(CONCAT_WS(' ', NULLIF(o.company_name,''), NULLIF(CONCAT_WS(' ',o.firstname,o.lastname),' ')),40) nome,
-       DATE(o.creationdate) criado, g.name grupo, IFNULL(p.name,'-') plano, ROUND(o.credit,2) saldo_mb7, IF(o.active=1,'sim','nao') ativo
+       DATE(o.creationdate) criado, CONCAT(g.name,' -> ',IFNULL((SELECT name FROM mbilling.pkg_group_user x WHERE x.id=g.new_id),'?')) grupo_mb7_mb8, IFNULL(p.name,'-') plano, ROUND(o.credit,2) saldo_mb7, IF(o.active=1,'sim','nao') ativo
     FROM _mu u JOIN pkg_user o ON o.id=u.old_id LEFT JOIN _mg g ON g.old_id=o.id_group LEFT JOIN _mp p ON p.old_id=o.id_plan
     WHERE u.novo=1 ORDER BY o.creationdate, o.username"
 ANTIGOS=$(qo "SELECT GROUP_CONCAT(o.username SEPARATOR ', ') FROM _mu u JOIN pkg_user o ON o.id=u.old_id
